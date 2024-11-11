@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 
-namespace BackgroundModule
+namespace SpaceShooter.Background
 {
-    public class BackgroundScroller
+    public sealed class BackgroundController
     {
         private float _scrollSpeed;
-        private Material _material;
-        private const string MAP_KEY = "_BaseMap";
         private float _offset;
+        
+        private readonly IBackgroundView _backgroundView;
+
+        public BackgroundController(IBackgroundView backgroundView)
+        {
+            _backgroundView = backgroundView;
+        }
 
         private void CalculateScrollSpeed(float deltaTime)
         {
@@ -18,16 +23,11 @@ namespace BackgroundModule
         {
             _scrollSpeed = value;
         }
-
-        public void SetMaterial(Material material)
-        {
-            _material = material;
-        }
-
+        
         public void OnUpdate(float deltaTime)
         {
             CalculateScrollSpeed(deltaTime);
-            _material.SetTextureOffset(MAP_KEY, new Vector2(0, _offset));
+            _backgroundView.ScrollBackground(new Vector2(0, _offset));
         }
     }
 }

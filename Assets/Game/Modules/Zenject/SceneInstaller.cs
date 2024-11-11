@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using BackgroundModule;
+﻿using SpaceShooter.Background;
 using SpaceShooter;
 
 namespace Zenject
@@ -8,8 +7,8 @@ namespace Zenject
     {
         public override void InstallBindings()
         {
-            Container.Bind<BackgroundScroller>().AsSingle().NonLazy();
-            Container.Bind<BackgroundView>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<BackgroundController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BackgroundView>().FromComponentInHierarchy().AsSingle().NonLazy();
             Container.Bind<SettingsManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
