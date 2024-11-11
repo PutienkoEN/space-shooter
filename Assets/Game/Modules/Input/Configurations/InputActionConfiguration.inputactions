@@ -1,0 +1,54 @@
+{
+    "name": "InputActionConfiguration",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "f592b4ca-4af8-4ef9-8d72-63676bfcf9fc",
+            "actions": [
+                {
+                    "name": "TouchStartPosition",
+                    "type": "Button",
+                    "id": "e1b95d3e-ed1c-4d52-ae27-9959fd755c7f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchHoldPosition",
+                    "type": "Value",
+                    "id": "a7917bf4-8c76-41ce-92b8-0650688ccc1b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bf721b8f-2dff-4559-93a7-3c52be183e4b",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchHoldPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b77dc8ef-dde2-4ac9-bfe5-3a5be39cd6f6",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchStartPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
