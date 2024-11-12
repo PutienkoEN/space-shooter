@@ -6,8 +6,6 @@ namespace SpaceShooter
 {
     public sealed class SettingsManager : MonoBehaviour
     {
-        [SerializeField] private float scrollSpeed;
-        
         private BackgroundController _backgroundController;
 
         [Inject]
@@ -17,7 +15,6 @@ namespace SpaceShooter
         }
         private void Update()
         {
-            _backgroundController.SetScrollSpeed(scrollSpeed);
             _backgroundController.OnUpdate(Time.deltaTime);
         }
     }

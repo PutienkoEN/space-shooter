@@ -7,6 +7,7 @@ namespace Zenject
         public override void InstallBindings()
         {
             Container.Bind<BackgroundController>().AsSingle().NonLazy();
+            Container.Bind<BackgroundInstantiator>().FromComponentInHierarchy().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<BackgroundView>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }

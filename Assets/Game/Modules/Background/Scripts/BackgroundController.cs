@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace SpaceShooter.Background
 {
@@ -6,28 +7,34 @@ namespace SpaceShooter.Background
     {
         private float _scrollSpeed;
         private float _offset;
-        
-        private readonly IBackgroundView _backgroundView;
 
-        public BackgroundController(IBackgroundView backgroundView)
+        private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
+
+        // public BackgroundController(IBackgroundView backgroundView)
+        // {
+        //     _backgroundView = backgroundView;
+        // }
+
+        public void AddToList(IBackgroundPresenter presenter)
         {
-            _backgroundView = backgroundView;
+            _backgroundPresenters.Add(presenter);
         }
 
-        private void CalculateScrollSpeed(float deltaTime)
+        private void CalculateAndScroll(float deltaTime)
         {
-            _offset += (deltaTime * _scrollSpeed *-1) / 10f;
-        }
-
-        public void SetScrollSpeed(float value)
-        {
-            _scrollSpeed = value;
+            foreach (var presenter in _backgroundPresenters)
+            {
+                float speed = presenter.GetSpeed();
+                float offset = presenter.UpdateOffset((deltaTime * speed *-1) / 10f);
+                presenter.GetView().ScrollBackground(new Vector2(0, offset));
+            }
+            
         }
         
         public void OnUpdate(float deltaTime)
         {
-            CalculateScrollSpeed(deltaTime);
-            _backgroundView.ScrollBackground(new Vector2(0, _offset));
+            CalculateAndScroll(deltaTime);
+            // _backgroundPresenters.ScrollBackground(new Vector2(0, _offset));
         }
     }
 }

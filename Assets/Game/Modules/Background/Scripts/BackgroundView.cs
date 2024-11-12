@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace SpaceShooter.Background
 {
-    [RequireComponent(typeof(Renderer))]
     public sealed class BackgroundView : MonoBehaviour, IBackgroundView
     {
         private Material _backgroundMaterial;

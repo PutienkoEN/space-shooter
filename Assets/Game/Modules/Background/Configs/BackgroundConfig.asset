@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d75d22c90048bb871b88d8a9707e63, type: 3}
+  m_Name: BackgroundConfig
+  m_EditorClassIdentifier: 
+  configs:
+  - speed: 1
+    zDistance: 14
+    prefab: {fileID: 4573535862103539403, guid: 4dacd0c0cc0bcea498f42054901859f5, type: 3}
+  - speed: 0.5
+    zDistance: 12
+    prefab: {fileID: 3779429668162958280, guid: 35bb163dd6a65db45acababb514e37cb, type: 3}
+  - speed: 0.2
+    zDistance: 13
+    prefab: {fileID: 3854049198321371776, guid: a23b23b17253da7418fd04831186bbd7, type: 3}
