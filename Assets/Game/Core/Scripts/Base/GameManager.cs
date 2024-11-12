@@ -14,7 +14,7 @@ namespace SpaceShooter.Game.Core.Base
     internal sealed class GameManager : IGameManager
     {
         private GameState _gameState = GameState.OFF;
-        GameState IGameManagerState.State => _gameState;
+        public GameState State => _gameState;
 
         private readonly List<IGameListener> _gameListenersList = new();
 
@@ -24,17 +24,17 @@ namespace SpaceShooter.Game.Core.Base
             Debug.Log("[GameManager] Constructor");
         }
 
-        void IGameManagerListeners.AddListener(IGameListener gameListener)
+        public void AddListener(IGameListener gameListener)
         {
             _gameListenersList.Add(gameListener);
         }
 
-        void IGameManagerListeners.RemoveListener(IGameListener gameListener)
+        public void RemoveListener(IGameListener gameListener)
         {
             _gameListenersList.Remove(gameListener);
         }
 
-        void IGameManagerState.StartGame()
+        public void StartGame()
         {
             if (_gameState != GameState.OFF)
                 return;
@@ -50,7 +50,7 @@ namespace SpaceShooter.Game.Core.Base
             Debug.Log("[GameManager] StartGame");
         }
 
-        void IGameManagerState.PauseGame()
+        public void PauseGame()
         {
             if (_gameState != GameState.PLAY)
                 return;
@@ -66,7 +66,7 @@ namespace SpaceShooter.Game.Core.Base
             Debug.Log("[GameManager] PauseGame");
         }
 
-        void IGameManagerState.ResumeGame()
+        public void ResumeGame()
         {
             if (_gameState != GameState.PAUSE)
                 return;
@@ -82,7 +82,7 @@ namespace SpaceShooter.Game.Core.Base
             Debug.Log("[GameManager] ResumeGame");
         }
 
-        void IGameManagerState.FinishGame()
+        public void FinishGame()
         {
             if (_gameState != GameState.PLAY)
                 return;

@@ -30,7 +30,7 @@ namespace SpaceShooter.Game.Core.Base
             _gameManager.AddListener(this);
         }
 
-        void IGameStartListener.OnGameStart()
+        public void OnGameStart()
         {
             foreach (var it in _gameListeners)
             {
@@ -41,7 +41,7 @@ namespace SpaceShooter.Game.Core.Base
             }
         }
 
-        void IGamePauseListener.OnGamePause()
+        public void OnGamePause()
         {
             foreach (var it in _gameListeners)
             {
@@ -52,7 +52,7 @@ namespace SpaceShooter.Game.Core.Base
             }
         }
 
-        void IGameResumeListener.OnGameResume()
+        public void OnGameResume()
         {
             foreach (var it in _gameListeners)
             {
@@ -63,7 +63,7 @@ namespace SpaceShooter.Game.Core.Base
             }
         }
 
-        void IGameFinishListener.OnGameFinish()
+        public void OnGameFinish()
         {
             foreach (var it in _gameListeners)
             {
