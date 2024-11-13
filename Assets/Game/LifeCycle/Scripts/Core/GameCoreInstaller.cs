@@ -7,7 +7,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Game.Core.Base
+namespace SpaceShooter.Game.LifeCycle.Core
 {
     [CreateAssetMenu(
         fileName = "GameCoreInstaller",

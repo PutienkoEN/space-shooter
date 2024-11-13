@@ -1,13 +1,16 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
 // <created>: 2024-11-12
-// <file>: IGameManager.cs
+// <file>: GameState.cs
 // ------------------------------------------------------------------------------
 
-namespace SpaceShooter.Game.Core.Common
+namespace SpaceShooter.Game.LifeCycle.Common
 {
-    public interface IGameManager : IGameManagerState, IGameManagerListeners
+    public enum GameState
     {
-        
+        OFF,
+        PLAY,
+        PAUSE,
+        FINISH
     }
 }

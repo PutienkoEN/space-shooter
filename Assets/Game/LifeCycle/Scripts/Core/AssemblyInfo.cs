@@ -6,4 +6,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Core.Tests.Editor")]
+[assembly: InternalsVisibleTo("Game.LifeCycle.Tests.Editor")]

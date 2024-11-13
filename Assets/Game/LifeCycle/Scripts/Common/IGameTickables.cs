@@ -4,7 +4,7 @@
 // <file>: IGameTickables.cs
 // ------------------------------------------------------------------------------
 
-namespace SpaceShooter.Game.Core.Common
+namespace SpaceShooter.Game.LifeCycle.Common
 {
     public interface IGameTickable
     {

@@ -4,7 +4,7 @@
 // <file>: IGameListener.cs
 // ------------------------------------------------------------------------------
 
-namespace SpaceShooter.Game.Core.Common
+namespace SpaceShooter.Game.LifeCycle.Common
 {
     public interface IGameListener { }
 

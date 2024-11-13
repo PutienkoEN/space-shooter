@@ -6,10 +6,10 @@
 
 using Moq;
 using NUnit.Framework;
-using SpaceShooter.Game.Core.Base;
-using SpaceShooter.Game.Core.Common;
+using SpaceShooter.Game.LifeCycle.Common;
+using SpaceShooter.Game.LifeCycle.Core;
 
-namespace SpaceShooter.Game.Core.Tests.Editor
+namespace SpaceShooter.Game.LifeCycle.Tests.Editor
 {
     public sealed class GameManagerTests
     {

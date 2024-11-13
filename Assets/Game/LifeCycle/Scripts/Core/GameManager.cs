@@ -5,11 +5,11 @@
 // ------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using SpaceShooter.Game.Core.Common;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Game.Core.Base
+namespace SpaceShooter.Game.LifeCycle.Core
 {
     internal sealed class GameManager : IGameManager
     {
