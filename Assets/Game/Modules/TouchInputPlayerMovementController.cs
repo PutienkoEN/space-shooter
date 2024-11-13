@@ -46,15 +46,15 @@ namespace Input
             _touchInputHandler.OnTouchPositionChange -= MovePlayer;
         }
 
-        private void InitializeMovement(Vector2 playerInput)
+        private void InitializeMovement(Vector2 touchPosition)
         {
-            var playerInputWorldPosition = _worldUtility.ToWorldPositionWithoutZ(playerInput);
+            var touchWorldPosition = _worldUtility.ToWorldPositionWithoutZ(touchPosition);
+            var playerWorldPosition = _player.transform.position;
 
-            var playerPosition = _player.transform.position;
-            var positionWithOffsetX = playerInputWorldPosition.x - playerPosition.x;
-            var positionWithOffsetY = playerInputWorldPosition.y - playerPosition.y;
+            var xOffsetWorldPosition = touchWorldPosition.x - playerWorldPosition.x;
+            var yOffsetWorldPosition = touchWorldPosition.y - playerWorldPosition.y;
 
-            _deltaBetweenInitialPositionInput = new Vector2(positionWithOffsetX, positionWithOffsetY);
+            _deltaBetweenInitialPositionInput = new Vector2(xOffsetWorldPosition, yOffsetWorldPosition);
         }
 
         private void StopMovement()
@@ -62,18 +62,17 @@ namespace Input
             _deltaBetweenInitialPositionInput = Vector2.negativeInfinity;
         }
 
-        private void MovePlayer(Vector2 targetPosition)
+        private void MovePlayer(Vector2 touchPosition)
         {
             if (_deltaBetweenInitialPositionInput.Equals(Vector2.negativeInfinity))
             {
                 return;
             }
 
-            var targetWorldPosition = _worldUtility.ToWorldPositionWithoutZ(targetPosition);
-            var targetWithOffset = GetTargetPositionWithOffset(targetWorldPosition);
-            var targetClamped = _worldUtility.ClampPosition(targetWithOffset);
+            var touchWorldPosition = _worldUtility.ToWorldPositionWithoutZ(touchPosition);
+            var targetWorldPositionWithOffset = GetTargetPositionWithOffset(touchWorldPosition);
 
-            _player.Move(targetClamped);
+            MovePlayerToCoordinates(targetWorldPositionWithOffset);
         }
 
         private Vector2 GetTargetPositionWithOffset(Vector3 playerInputWorldPosition)
@@ -82,6 +81,15 @@ namespace Input
             var newPlayerPositionY = playerInputWorldPosition.y - _deltaBetweenInitialPositionInput.y;
 
             return new Vector2(newPlayerPositionX, newPlayerPositionY);
+        }
+
+        private void MovePlayerToCoordinates(Vector2 targetWorldPosition)
+        {
+            var playerSizes = _player.GetSize();
+            var clampedTargetWorldPosition =
+                _worldUtility.ClampPosition(targetWorldPosition, playerSizes.x, playerSizes.y);
+
+            _player.Move(clampedTargetWorldPosition);
         }
     }
 }

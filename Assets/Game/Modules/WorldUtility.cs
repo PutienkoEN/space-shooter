@@ -24,10 +24,13 @@ namespace Input
             _worldMaxY = _camera.ViewportToWorldPoint(Vector3.up).y;
         }
 
-        public Vector3 ClampPosition(Vector3 position)
+        public Vector3 ClampPosition(Vector3 position, float objectWidth, float objectHeight)
         {
-            var clampX = Mathf.Clamp(position.x, _worldMinX, _worldMaxX);
-            var clampY = Mathf.Clamp(position.y, _worldMinY, _worldMaxY);
+            var halfOfWidth = objectWidth / 2;
+            var clampX = Mathf.Clamp(position.x, _worldMinX + halfOfWidth, _worldMaxX - halfOfWidth);
+
+            var halfOfHeight = objectHeight / 2;
+            var clampY = Mathf.Clamp(position.y, _worldMinY + halfOfHeight, _worldMaxY - halfOfHeight);
 
             return new Vector3(clampX, clampY, position.z);
         }
