@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SpaceShooter.Background
 {
     [Serializable]
-    public class BackgroundConfig
+    public sealed class BackgroundConfig
     {
         public float speed;
         public int zDistance;
