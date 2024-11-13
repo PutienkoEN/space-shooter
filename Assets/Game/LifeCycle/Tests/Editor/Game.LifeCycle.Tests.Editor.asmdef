@@ -1,0 +1,19 @@
+{
+    "name": "Game.LifeCycle.Tests.Editor",
+    "rootNamespace": "SpaceShooter.Game.LifeCycle.Tests.Editor",
+    "references": [
+        "GUID:efdd616bd324540bab8c316dbfba7c02",
+        "GUID:02caff948d6249b8958ae7f20e6b0fbb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
