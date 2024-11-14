@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace SpaceShooter.Input
+namespace SpaceShooter.Game.Input
 {
     public class InputInstaller : MonoInstaller
     {

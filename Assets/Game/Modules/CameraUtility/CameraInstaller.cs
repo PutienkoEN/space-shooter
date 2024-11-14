@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Input
+namespace SpaceShooter.Game.CameraUtility
 {
     public class CameraInstaller : MonoInstaller
     {
@@ -15,7 +15,7 @@ namespace SpaceShooter.Input
                 .AsSingle();
 
             Container
-                .Bind<CameraUtility>()
+                .Bind<WorldCoordinates>()
                 .AsSingle();
         }
     }

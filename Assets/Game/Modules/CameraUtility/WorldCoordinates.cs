@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Input
+namespace SpaceShooter.Game.CameraUtility
 {
     /*
      * Utility class to store generic helper methods of world data.
      */
-    public sealed class CameraUtility
+    public sealed class WorldCoordinates
     {
         private readonly Camera _camera;
-        
+
         private readonly float _worldMinX, _worldMaxX, _worldMinY, _worldMaxY;
 
         [Inject]
-        public CameraUtility(Camera camera)
+        public WorldCoordinates(Camera camera)
         {
             _camera = camera;
 

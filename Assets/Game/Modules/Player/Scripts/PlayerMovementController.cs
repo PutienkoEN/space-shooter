@@ -1,10 +1,11 @@
 ﻿using System;
-using SpaceShooter.Input;
-using SpaceShooter.Movement;
+using SpaceShooter.Game.CameraUtility;
+using SpaceShooter.Game.Components;
+using SpaceShooter.Game.Input;
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Player
+namespace SpaceShooter.Game.Player
 {
     public class PlayerMovementController : IInitializable, IDisposable
     {
@@ -12,19 +13,19 @@ namespace SpaceShooter.Player
         private readonly ColliderComponent _colliderComponent;
 
         private readonly ITouchInputMovementHandler _touchInputMovementHandler;
-        private readonly CameraUtility _cameraUtility;
+        private readonly WorldCoordinates _worldCoordinates;
 
         [Inject]
         public PlayerMovementController(
             MoveComponent moveComponent,
             ColliderComponent colliderComponent,
             ITouchInputMovementHandler touchInputMovementHandler,
-            CameraUtility cameraUtility)
+            WorldCoordinates worldCoordinates)
         {
             _moveComponent = moveComponent;
             _colliderComponent = colliderComponent;
             _touchInputMovementHandler = touchInputMovementHandler;
-            _cameraUtility = cameraUtility;
+            _worldCoordinates = worldCoordinates;
         }
 
         public void Initialize()
@@ -41,7 +42,7 @@ namespace SpaceShooter.Player
         {
             var newPosition = GetNewPosition(target);
             var newPositionClamped = ClampPosition(newPosition);
-            
+
             _moveComponent.Move(newPositionClamped);
         }
 
@@ -58,7 +59,7 @@ namespace SpaceShooter.Player
         private Vector3 ClampPosition(Vector2 newPosition)
         {
             var size = _colliderComponent.GetSize();
-            return _cameraUtility.ClampToScreen(newPosition, size.x, size.y);
+            return _worldCoordinates.ClampToScreen(newPosition, size.x, size.y);
         }
     }
 }

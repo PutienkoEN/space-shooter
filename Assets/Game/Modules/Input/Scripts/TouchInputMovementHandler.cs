@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Input
+namespace SpaceShooter.Game.Input
 {
     public sealed class TouchInputMovementHandler : ITouchInputMovementHandler, IInitializable, IDisposable
     {

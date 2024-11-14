@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Movement
+namespace SpaceShooter.Game.Components
 {
     [Serializable]
     public class MoveComponent
@@ -19,7 +19,6 @@ namespace SpaceShooter.Movement
 
         public void Move(Vector3 target)
         {
-            Debug.Log(target);
             var moveTowards = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             transform.position = moveTowards;
         }

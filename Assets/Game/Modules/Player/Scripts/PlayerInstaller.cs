@@ -1,17 +1,20 @@
-﻿using SpaceShooter.Movement;
+﻿using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Player
+namespace SpaceShooter.Game.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
+        [SerializeField] private Transform worldContainer;
+        [SerializeField] private Transform spawnPosition;
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private float speed;
 
         public override void InstallBindings()
         {
-            var player = Container.InstantiatePrefab(playerPrefab, transform);
+            var player = Container
+                .InstantiatePrefab(playerPrefab, spawnPosition.position, Quaternion.identity, worldContainer);
 
             Container
                 .Bind<MoveComponent>()

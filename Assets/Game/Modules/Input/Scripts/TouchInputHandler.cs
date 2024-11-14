@@ -1,9 +1,10 @@
 ﻿using System;
+using SpaceShooter.Game.CameraUtility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace SpaceShooter.Input
+namespace SpaceShooter.Game.Input
 {
     public sealed class TouchInputHandler : ITouchInputHandler, IInitializable, IDisposable
     {
@@ -24,16 +25,16 @@ namespace SpaceShooter.Input
          */
         private readonly InputAction _touchMoveAction;
 
-        private readonly CameraUtility _cameraUtility;
+        private readonly WorldCoordinates _worldCoordinates;
 
 
         [Inject]
-        public TouchInputHandler(PlayerInput playerInput, CameraUtility cameraUtility)
+        public TouchInputHandler(PlayerInput playerInput, WorldCoordinates worldCoordinates)
         {
             _touchStartAction = playerInput.actions.FindAction("TouchStartPosition");
             _touchMoveAction = playerInput.actions.FindAction("TouchHoldPosition");
 
-            _cameraUtility = cameraUtility;
+            _worldCoordinates = worldCoordinates;
         }
 
         public void Initialize()
@@ -55,14 +56,14 @@ namespace SpaceShooter.Input
         private void TouchPositionUpdated(InputAction.CallbackContext context)
         {
             var touchPositionScreen = context.ReadValue<Vector2>();
-            var touchPositionWorld = _cameraUtility.ToWorldPosition(touchPositionScreen);
+            var touchPositionWorld = _worldCoordinates.ToWorldPosition(touchPositionScreen);
             OnTouchPositionChange?.Invoke(touchPositionWorld);
         }
 
         private void TouchStarted(InputAction.CallbackContext context)
         {
             var touchPositionScreen = _touchMoveAction.ReadValue<Vector2>();
-            var touchPositionWorld = _cameraUtility.ToWorldPosition(touchPositionScreen);
+            var touchPositionWorld = _worldCoordinates.ToWorldPosition(touchPositionScreen);
             OnTouchStarted?.Invoke(touchPositionWorld);
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SpaceShooter.Input
+namespace SpaceShooter.Game.Input
 {
     public interface ITouchInputMovementHandler
     {

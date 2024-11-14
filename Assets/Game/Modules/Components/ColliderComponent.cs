@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Movement
+namespace SpaceShooter.Game.Components
 {
     [Serializable]
     public class ColliderComponent
