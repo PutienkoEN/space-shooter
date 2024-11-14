@@ -6,11 +6,12 @@ namespace SpaceShooter.Background
     {
         private float _offset;
         private readonly float _speed;
-        private readonly IBackgroundView _backgroundView;
+        private readonly Material _backgroundMaterial;
+        private const string MAP_KEY = "_BaseMap";
 
-        public BackgroundPresenter(IBackgroundView backgroundView, float speed)
+        public BackgroundPresenter(Material backgroundMaterial, float speed)
         {
-            _backgroundView = backgroundView;
+            _backgroundMaterial = backgroundMaterial;
             _speed = speed;
         }
 
@@ -28,7 +29,8 @@ namespace SpaceShooter.Background
 
         public void ScrollBackground(float deltaTime)
         {
-            _backgroundView.ScrollBackground(new Vector2(0, CalculateOffset(deltaTime)));
+            // _backgroundView.ScrollBackground(new Vector2(0, CalculateOffset(deltaTime)));
+            _backgroundMaterial.SetTextureOffset(MAP_KEY, new Vector2(0f, CalculateOffset(deltaTime)));
         }
     }
 }

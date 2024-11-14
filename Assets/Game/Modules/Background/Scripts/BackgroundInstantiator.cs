@@ -31,10 +31,11 @@ namespace SpaceShooter.Background
             }
             foreach (var backgroundConfig in configBackgrounds.configs)
             {
-                BackgroundView backgroundView = Instantiate(backgroundConfig.prefab, parent).GetComponent<BackgroundView>();
-                backgroundView.transform.position = new Vector3(0, 0, backgroundConfig.zDistance);
+                GameObject obj = Instantiate(backgroundConfig.prefab, parent);
+                obj.transform.position = new Vector3(0, 0, backgroundConfig.zDistance);
+                Material backgroundMaterial = obj.GetComponent<Renderer>().material;
                 BackgroundPresenter presenter = new BackgroundPresenter(
-                    backgroundView,
+                    backgroundMaterial,
                     backgroundConfig.speed);
                 _backgroundController.AddToList(presenter);
             }
