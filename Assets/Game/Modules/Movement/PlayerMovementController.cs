@@ -1,10 +1,9 @@
 ﻿using System;
-using Game.Modules.Character.Scripts;
 using SpaceShooter.Input;
 using UnityEngine;
 using Zenject;
 
-namespace Input
+namespace SpaceShooter.Movement
 {
     public class PlayerMovementController : IInitializable, IDisposable
     {

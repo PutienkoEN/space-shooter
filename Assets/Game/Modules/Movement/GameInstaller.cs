@@ -1,5 +1,5 @@
-﻿using Game.Modules.Character.Scripts;
-using SpaceShooter.Input;
+﻿using SpaceShooter.Input;
+using SpaceShooter.Movement;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +16,7 @@ namespace Input
                 .Bind<Camera>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            
+
             Container
                 .Bind<MoveComponent>()
                 .AsSingle()

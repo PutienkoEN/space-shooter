@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Input
+namespace SpaceShooter.Movement
 {
     [Serializable]
     public class MoveComponent
