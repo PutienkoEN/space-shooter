@@ -4,7 +4,6 @@
 // <file>: GameCoreInstaller.cs
 // ------------------------------------------------------------------------------
 
-using SpaceShooter.Input;
 using UnityEngine;
 using Zenject;
 
@@ -20,9 +19,6 @@ namespace SpaceShooter.Game.LifeCycle.Core
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<GameManager>().AsSingle();
-
-            Container.Bind<Camera>().FromInstance(camera).AsSingle();
-            Container.Bind<CameraUtility>().AsSingle();
         }
     }
 }

@@ -77,5 +77,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec8f91531d044dcba5b1ee66f396318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 919132149155446097, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
+  playerPrefab: {fileID: 673412501714728181, guid: 5560186514018f04d8dcb85616c73e75, type: 3}
   speed: 25

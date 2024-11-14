@@ -10,13 +10,14 @@ namespace SpaceShooter.Input
 
         public override void InstallBindings()
         {
-            var instantiatePrefabForComponent = Container
-                .InstantiatePrefabForComponent<PlayerInput>(playerInput, transform);
+            Container
+                .Bind<PlayerInput>()
+                .FromInstance(playerInput)
+                .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<TouchInputHandler>()
-                .AsSingle()
-                .WithArguments(instantiatePrefabForComponent);
+                .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<TouchInputMovementHandler>()

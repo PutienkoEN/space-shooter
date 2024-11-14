@@ -11,14 +11,14 @@ namespace SpaceShooter.Player
 
         public override void InstallBindings()
         {
-            var instantiatePrefab = Container.InstantiatePrefab(playerPrefab, transform);
+            var player = Container.InstantiatePrefab(playerPrefab, transform);
 
             Container
                 .Bind<MoveComponent>()
                 .AsSingle()
-                .WithArguments(playerPrefab.transform, speed);
+                .WithArguments(player.transform, speed);
 
-            var component = playerPrefab.GetComponent<Collider>();
+            var component = player.GetComponentInChildren<Collider>();
             Container
                 .Bind<ColliderComponent>()
                 .AsSingle()

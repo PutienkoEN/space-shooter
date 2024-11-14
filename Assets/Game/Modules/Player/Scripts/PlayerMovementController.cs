@@ -41,7 +41,7 @@ namespace SpaceShooter.Player
         {
             var newPosition = GetNewPosition(target);
             var newPositionClamped = ClampPosition(newPosition);
-
+            
             _moveComponent.Move(newPositionClamped);
         }
 
