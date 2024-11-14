@@ -19,10 +19,5 @@ namespace SpaceShooter.Game.Components
         {
             return collider.bounds.size;
         }
-
-        public Vector3 GetPosition()
-        {
-            return collider.transform.position;
-        }
     }
 }

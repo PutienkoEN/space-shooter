@@ -48,7 +48,7 @@ namespace SpaceShooter.Game.Player
 
         private Vector2 GetNewPosition(Vector2 targetWorldPosition)
         {
-            var currentPosition = _colliderComponent.GetPosition();
+            var currentPosition = _moveComponent.GetPosition();
 
             var newPositionX = currentPosition.x + targetWorldPosition.x;
             var newPositionY = currentPosition.y + targetWorldPosition.y;

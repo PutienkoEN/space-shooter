@@ -22,5 +22,10 @@ namespace SpaceShooter.Game.Components
             var moveTowards = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             transform.position = moveTowards;
         }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
     }
 }
