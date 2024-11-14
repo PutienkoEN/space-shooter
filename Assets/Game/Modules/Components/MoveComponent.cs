@@ -17,9 +17,9 @@ namespace SpaceShooter.Game.Components
             this.speed = speed;
         }
 
-        public void Move(Vector3 target)
+        public void Move(Vector3 target, float deltaTime)
         {
-            var moveTowards = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            var moveTowards = Vector3.MoveTowards(transform.position, target, speed * deltaTime);
             transform.position = moveTowards;
         }
 
