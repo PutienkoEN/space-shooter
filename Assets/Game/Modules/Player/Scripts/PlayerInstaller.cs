@@ -1,22 +1,16 @@
-﻿using SpaceShooter.Input;
-using SpaceShooter.Movement;
+﻿using SpaceShooter.Movement;
 using UnityEngine;
 using Zenject;
 
-namespace Input
+namespace SpaceShooter.Player
 {
-    public class GameInstaller : MonoInstaller
+    public class PlayerInstaller : MonoInstaller
     {
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private float speed;
 
         public override void InstallBindings()
         {
-            Container
-                .Bind<Camera>()
-                .FromComponentInHierarchy()
-                .AsSingle();
-
             Container
                 .Bind<MoveComponent>()
                 .AsSingle()
@@ -27,10 +21,6 @@ namespace Input
                 .Bind<ColliderComponent>()
                 .AsSingle()
                 .WithArguments(component);
-
-            Container
-                .Bind<WorldUtility>()
-                .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<PlayerMovementController>()

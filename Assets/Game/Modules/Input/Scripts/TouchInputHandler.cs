@@ -24,16 +24,16 @@ namespace SpaceShooter.Input
          */
         private readonly InputAction _touchMoveAction;
 
-        private readonly WorldUtility _worldUtility;
+        private readonly CameraUtility _cameraUtility;
 
 
         [Inject]
-        public TouchInputHandler(PlayerInput playerInput, WorldUtility worldUtility)
+        public TouchInputHandler(PlayerInput playerInput, CameraUtility cameraUtility)
         {
             _touchStartAction = playerInput.actions.FindAction("TouchStartPosition");
             _touchMoveAction = playerInput.actions.FindAction("TouchHoldPosition");
 
-            _worldUtility = worldUtility;
+            _cameraUtility = cameraUtility;
         }
 
         public void Initialize()
@@ -55,14 +55,14 @@ namespace SpaceShooter.Input
         private void TouchPositionUpdated(InputAction.CallbackContext context)
         {
             var touchPositionScreen = context.ReadValue<Vector2>();
-            var touchPositionWorld = _worldUtility.ToWorldPosition(touchPositionScreen);
+            var touchPositionWorld = _cameraUtility.ToWorldPosition(touchPositionScreen);
             OnTouchPositionChange?.Invoke(touchPositionWorld);
         }
 
         private void TouchStarted(InputAction.CallbackContext context)
         {
             var touchPositionScreen = _touchMoveAction.ReadValue<Vector2>();
-            var touchPositionWorld = _worldUtility.ToWorldPosition(touchPositionScreen);
+            var touchPositionWorld = _cameraUtility.ToWorldPosition(touchPositionScreen);
             OnTouchStarted?.Invoke(touchPositionWorld);
         }
 

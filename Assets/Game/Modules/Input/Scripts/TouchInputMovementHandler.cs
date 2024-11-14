@@ -62,8 +62,7 @@ namespace SpaceShooter.Input
             var vectorXPosition = touchPosition.x - _previousPosition.x;
             var vectorYPosition = touchPosition.y - _previousPosition.y;
 
-            var vectorToMove = new Vector2(vectorXPosition, vectorYPosition);
-            return vectorToMove;
+            return new Vector2(vectorXPosition, vectorYPosition);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using SpaceShooter.Input;
+using SpaceShooter.Movement;
 using UnityEngine;
 using Zenject;
 
-namespace SpaceShooter.Movement
+namespace SpaceShooter.Player
 {
     public class PlayerMovementController : IInitializable, IDisposable
     {
@@ -11,19 +12,19 @@ namespace SpaceShooter.Movement
         private readonly ColliderComponent _colliderComponent;
 
         private readonly ITouchInputMovementHandler _touchInputMovementHandler;
-        private readonly WorldUtility _worldUtility;
+        private readonly CameraUtility _cameraUtility;
 
         [Inject]
         public PlayerMovementController(
             MoveComponent moveComponent,
             ColliderComponent colliderComponent,
             ITouchInputMovementHandler touchInputMovementHandler,
-            WorldUtility worldUtility)
+            CameraUtility cameraUtility)
         {
             _moveComponent = moveComponent;
             _colliderComponent = colliderComponent;
             _touchInputMovementHandler = touchInputMovementHandler;
-            _worldUtility = worldUtility;
+            _cameraUtility = cameraUtility;
         }
 
         public void Initialize()
@@ -57,7 +58,7 @@ namespace SpaceShooter.Movement
         private Vector3 ClampPosition(Vector2 newPosition)
         {
             var size = _colliderComponent.GetSize();
-            return _worldUtility.ClampToScreen(newPosition, size.x, size.y);
+            return _cameraUtility.ClampToScreen(newPosition, size.x, size.y);
         }
     }
 }

@@ -6,14 +6,14 @@ namespace SpaceShooter.Input
     /*
      * Utility class to store generic helper methods of world data.
      */
-    public sealed class WorldUtility
+    public sealed class CameraUtility
     {
         private readonly Camera _camera;
 
         private readonly float _worldMinX, _worldMaxX, _worldMinY, _worldMaxY;
 
         [Inject]
-        public WorldUtility(Camera camera)
+        public CameraUtility(Camera camera)
         {
             _camera = camera;
 
