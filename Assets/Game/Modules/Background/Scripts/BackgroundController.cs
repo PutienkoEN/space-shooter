@@ -13,7 +13,6 @@ namespace SpaceShooter.Background
 
         public BackgroundController(List<IBackgroundPresenter> backgroundPresenters)
         {
-            Debug.Log("background controller initialized");
             _backgroundPresenters = backgroundPresenters;
         }
         public void AddToList(IBackgroundPresenter presenter)
@@ -28,15 +27,9 @@ namespace SpaceShooter.Background
                 presenter.ScrollBackground(deltaTime);
             }
         }
-        
-        public void OnUpdate(float deltaTime)
-        {
-            
-        }
 
         public void Tick(float deltaTime)
         {
-            Debug.Log("tick");
             ScrollBackground(deltaTime);
         }
     }
