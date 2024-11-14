@@ -8,6 +8,7 @@ namespace SpaceShooter.Background
     {
         public float speed;
         public int zDistance;
+        public Material material;
         public GameObject prefab;
     }
 }

@@ -15,10 +15,13 @@ MonoBehaviour:
   configs:
   - speed: 1
     zDistance: 14
-    prefab: {fileID: 4573535862103539403, guid: 4dacd0c0cc0bcea498f42054901859f5, type: 3}
+    material: {fileID: 2100000, guid: 5d2013698b282584c90331cfe89436c5, type: 2}
+    prefab: {fileID: 3779429668162958280, guid: 060a0e0853700bf42b462fb1525e1236, type: 3}
   - speed: 0.5
     zDistance: 12
-    prefab: {fileID: 3779429668162958280, guid: 35bb163dd6a65db45acababb514e37cb, type: 3}
+    material: {fileID: 2100000, guid: 21fc6b28cd8b4c5489dbc1f5355759b5, type: 2}
+    prefab: {fileID: 3779429668162958280, guid: 060a0e0853700bf42b462fb1525e1236, type: 3}
   - speed: 0.2
     zDistance: 13
-    prefab: {fileID: 3854049198321371776, guid: a23b23b17253da7418fd04831186bbd7, type: 3}
+    material: {fileID: 2100000, guid: b02b7b2dd449fb24f9ab00b08404ebc6, type: 2}
+    prefab: {fileID: 3779429668162958280, guid: 060a0e0853700bf42b462fb1525e1236, type: 3}

@@ -1,15 +1,21 @@
 ﻿using System.Collections.Generic;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 
 namespace SpaceShooter.Background
 {
-    public sealed class BackgroundController
+    public sealed class BackgroundController : IGameListener, IGameTickable
     {
         private float _scrollSpeed;
         private float _offset;
 
-        private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
+        private readonly List<IBackgroundPresenter> _backgroundPresenters;
 
+        public BackgroundController(List<IBackgroundPresenter> backgroundPresenters)
+        {
+            Debug.Log("background controller initialized");
+            _backgroundPresenters = backgroundPresenters;
+        }
         public void AddToList(IBackgroundPresenter presenter)
         {
             _backgroundPresenters.Add(presenter);
@@ -25,6 +31,12 @@ namespace SpaceShooter.Background
         
         public void OnUpdate(float deltaTime)
         {
+            
+        }
+
+        public void Tick(float deltaTime)
+        {
+            Debug.Log("tick");
             ScrollBackground(deltaTime);
         }
     }
