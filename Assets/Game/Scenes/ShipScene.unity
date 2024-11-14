@@ -167,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 32575195}
   - {fileID: 32575194}
+  - {fileID: 32575195}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -210,7 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec8f91531d044dcba5b1ee66f396318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 559367896}
+  playerPrefab: {fileID: 559367894}
+  speed: 25
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,22 +480,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
   m_PrefabInstance: {fileID: 1222861256}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &559367896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559367894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64a6ecad93649fe8f8367fd33695cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterMoveComponent:
-    rigidbody: {fileID: 559367897}
-    speed: 25
-  collider: {fileID: 559367898}
 --- !u!54 &559367897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -573,7 +558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 845501163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &800692228
 MonoBehaviour:
@@ -683,6 +668,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 800692226}
   - {fileID: 32575192}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -700,7 +686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -6.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -753,9 +739,6 @@ PrefabInstance:
       addedObject: {fileID: 559367897}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 559367896}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 559367898}
   m_SourcePrefab: {fileID: 100100000, guid: 627eb0fd94e415d4e883e257b01b45c2, type: 3}
 --- !u!1 &2128989866
@@ -797,6 +780,5 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 800692226}
   - {fileID: 845501163}
   - {fileID: 2128989867}

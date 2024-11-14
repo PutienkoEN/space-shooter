@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Input
+namespace SpaceShooter.Input
 {
-    public sealed class TouchInputHandler : IInitializable, IDisposable
+    public sealed class TouchInputHandler : ITouchInputHandler, IInitializable, IDisposable
     {
         public event Action<Vector2> OnTouchStarted;
         public event Action OnTouchFinished;
@@ -24,11 +24,16 @@ namespace Input
          */
         private readonly InputAction _touchMoveAction;
 
+        private readonly WorldUtility _worldUtility;
+
+
         [Inject]
-        public TouchInputHandler(PlayerInput playerInput)
+        public TouchInputHandler(PlayerInput playerInput, WorldUtility worldUtility)
         {
             _touchStartAction = playerInput.actions.FindAction("TouchStartPosition");
             _touchMoveAction = playerInput.actions.FindAction("TouchHoldPosition");
+
+            _worldUtility = worldUtility;
         }
 
         public void Initialize()
@@ -49,14 +54,16 @@ namespace Input
 
         private void TouchPositionUpdated(InputAction.CallbackContext context)
         {
-            var touchPosition = context.ReadValue<Vector2>();
-            OnTouchPositionChange?.Invoke(touchPosition);
+            var touchPositionScreen = context.ReadValue<Vector2>();
+            var touchPositionWorld = _worldUtility.ToWorldPosition(touchPositionScreen);
+            OnTouchPositionChange?.Invoke(touchPositionWorld);
         }
 
         private void TouchStarted(InputAction.CallbackContext context)
         {
-            var touchPosition = _touchMoveAction.ReadValue<Vector2>();
-            OnTouchStarted?.Invoke(touchPosition);
+            var touchPositionScreen = _touchMoveAction.ReadValue<Vector2>();
+            var touchPositionWorld = _worldUtility.ToWorldPosition(touchPositionScreen);
+            OnTouchStarted?.Invoke(touchPositionWorld);
         }
 
         private void TouchFinished(InputAction.CallbackContext context)

@@ -1,7 +1,7 @@
 ﻿using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Input
+namespace SpaceShooter.Input
 {
     public class InputInstaller : MonoInstaller
     {
@@ -14,8 +14,11 @@ namespace Input
 
             Container
                 .BindInterfacesAndSelfTo<TouchInputHandler>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<TouchInputMovementHandler>()
+                .AsSingle();
         }
     }
 }

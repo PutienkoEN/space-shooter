@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace Input
+namespace SpaceShooter.Input
 {
     /*
      * Utility class to store generic helper methods of world data.
@@ -24,7 +24,7 @@ namespace Input
             _worldMaxY = _camera.ViewportToWorldPoint(Vector3.up).y;
         }
 
-        public Vector3 ClampPosition(Vector3 position, float objectWidth, float objectHeight)
+        public Vector3 ClampToScreen(Vector3 position, float objectWidth, float objectHeight)
         {
             var halfOfWidth = objectWidth / 2;
             var clampX = Mathf.Clamp(position.x, _worldMinX + halfOfWidth, _worldMaxX - halfOfWidth);
@@ -35,11 +35,9 @@ namespace Input
             return new Vector3(clampX, clampY, position.z);
         }
 
-        public Vector3 ToWorldPositionWithoutZ(Vector2 position)
+        public Vector3 ToWorldPosition(Vector2 position)
         {
-            var screenToWorldPoint = _camera.ScreenToWorldPoint(position);
-            screenToWorldPoint.z = 0;
-            return screenToWorldPoint;
+            return _camera.ScreenToWorldPoint(position);
         }
     }
 }
