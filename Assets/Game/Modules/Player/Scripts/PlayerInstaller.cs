@@ -11,6 +11,8 @@ namespace SpaceShooter.Player
 
         public override void InstallBindings()
         {
+            var instantiatePrefab = Container.InstantiatePrefab(playerPrefab, transform);
+
             Container
                 .Bind<MoveComponent>()
                 .AsSingle()

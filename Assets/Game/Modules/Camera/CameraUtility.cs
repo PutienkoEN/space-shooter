@@ -9,7 +9,7 @@ namespace SpaceShooter.Input
     public sealed class CameraUtility
     {
         private readonly Camera _camera;
-
+        
         private readonly float _worldMinX, _worldMaxX, _worldMinY, _worldMaxY;
 
         [Inject]
