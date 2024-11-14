@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Modules/Character/Prefabs.meta
 guid: 230cb7cc94753fb46ba92469b65ecaf2
+========
+guid: 7e42deb405d674363aedd784daa357d1
+>>>>>>>> dev:Assets/Game/LifeCycle.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
