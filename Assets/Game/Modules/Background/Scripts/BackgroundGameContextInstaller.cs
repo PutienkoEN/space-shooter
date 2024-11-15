@@ -13,7 +13,6 @@ namespace Zenject
 
         public override void InstallBindings()
         {
-            Container.Bind<BackgroundsPresenterInstantiator>().AsSingle().WithArguments(backgroundLayersConfig).NonLazy();
             Container.Bind<BackgroundsInstantiator>().AsSingle().WithArguments(backgroundLayersConfig, parent).NonLazy();
             Container.BindInterfacesAndSelfTo<BackgroundController>().AsSingle().NonLazy();
         }

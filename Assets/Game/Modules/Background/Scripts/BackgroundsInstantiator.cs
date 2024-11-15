@@ -1,21 +1,26 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
 using SpaceShooter.Background;
 using SpaceShooter.Background.ScriptableObjects;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Modules.Background.Scripts
 {
-    public class BackgroundsInstantiator
+    public sealed class BackgroundsInstantiator
     {
-
-        public BackgroundsInstantiator(DiContainer container, BackgroundLayersConfig backgroundLayersConfig, Transform parent)
+        private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
+        public BackgroundsInstantiator(
+            BackgroundLayersConfig backgroundLayersConfig,
+            Transform parent)
         {
-            InstantiateBackgrounds(container, backgroundLayersConfig, parent);
+            InstantiateBackgrounds(backgroundLayersConfig, parent);
+        }
+
+        public List<IBackgroundPresenter> GetPresentersList()
+        {
+            return _backgroundPresenters;
         }
 
         private void InstantiateBackgrounds(
-            DiContainer container, 
             BackgroundLayersConfig backgroundLayersConfig,
             Transform parent)
         {
@@ -24,14 +29,16 @@ namespace Game.Modules.Background.Scripts
                 Debug.LogError("Check if config and parent for backgrounds are added");
                 return;
             }
+
             foreach (var backgroundConfig in backgroundLayersConfig.configs)
             {
-                GameObject backgroundObj = container.InstantiatePrefab(backgroundConfig.prefab, parent);
+                GameObject backgroundObj = Object.Instantiate(backgroundConfig.prefab, parent);
                 if (backgroundObj == null)
                 {
                     Debug.LogError("Failed to instantiate background.");
                     return;
                 }
+
                 backgroundObj.transform.position = new Vector3(0, 0, backgroundConfig.zDistance);
                 if (backgroundObj.TryGetComponent(out Renderer rendererComponent))
                 {
@@ -41,8 +48,11 @@ namespace Game.Modules.Background.Scripts
                 {
                     Debug.LogError("Failed to get Renderer component on background prefab.");
                 }
+                
+                IBackgroundPresenter presenter = new BackgroundPresenter(backgroundConfig.material, backgroundConfig.speed);
+                _backgroundPresenters.Add(presenter);
             }
         }
-
     }
 }
+        

@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
+using Game.Modules.Background.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine;
-using Zenject;
 
 namespace SpaceShooter.Background
 {
     public sealed class BackgroundController : IGameListener, IGameTickable
     {
-        private readonly LazyInject<List<IBackgroundPresenter>> _backgroundPresenters;
+        private readonly List<IBackgroundPresenter> _backgroundPresenters;
 
-        public BackgroundController(LazyInject<List<IBackgroundPresenter>> backgroundPresenters)
+        public BackgroundController(BackgroundsInstantiator backgroundsInstantiator)
         {
-            _backgroundPresenters = backgroundPresenters;
+            _backgroundPresenters = backgroundsInstantiator.GetPresentersList();
         }
 
         public void Tick(float deltaTime)
@@ -21,7 +20,7 @@ namespace SpaceShooter.Background
         
         private void ScrollBackground(float deltaTime)
         {
-            foreach (var presenter in _backgroundPresenters.Value)
+            foreach (var presenter in _backgroundPresenters)
             {
                 presenter.ScrollBackground(deltaTime);
             }
