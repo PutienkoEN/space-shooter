@@ -11,10 +11,10 @@ namespace Game.Modules.Background.Scripts
         private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
         
         public BackgroundsInstantiator(
-            BackgroundLayersConfig backgroundLayersConfig,
+            BackgroundDataConfig backgroundDataConfig,
             Transform parent)
         {
-            InstantiateBackgrounds(backgroundLayersConfig, parent);
+            InstantiateBackgrounds(backgroundDataConfig, parent);
         }
 
         public IReadOnlyList<IBackgroundPresenter> GetPresentersList()
@@ -23,16 +23,16 @@ namespace Game.Modules.Background.Scripts
         }
 
         private void InstantiateBackgrounds(
-            BackgroundLayersConfig backgroundLayersConfig,
+            BackgroundDataConfig backgroundDataConfig,
             Transform parent)
         {
-            if (backgroundLayersConfig == null || parent == null)
+            if (backgroundDataConfig == null || parent == null)
             {
                 Debug.LogError("Check if config and parent for backgrounds are added");
                 return;
             }
 
-            foreach (var backgroundConfig in backgroundLayersConfig.configs)
+            foreach (var backgroundConfig in backgroundDataConfig.configs)
             {
                 if (backgroundConfig.prefab == null)
                 {

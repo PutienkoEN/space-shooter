@@ -8,12 +8,12 @@ namespace Zenject
 {
     public sealed class BackgroundGameContextInstaller : MonoInstaller
     {
-        [SerializeField] private BackgroundLayersConfig backgroundLayersConfig;
+        [FormerlySerializedAs("backgroundLayersConfig")] [SerializeField] private BackgroundDataConfig backgroundDataConfig;
         [SerializeField] private Transform parent;
 
         public override void InstallBindings()
         {
-            Container.Bind<BackgroundsInstantiator>().AsSingle().WithArguments(backgroundLayersConfig, parent).NonLazy();
+            Container.Bind<BackgroundsInstantiator>().AsSingle().WithArguments(backgroundDataConfig, parent).NonLazy();
             Container.BindInterfacesAndSelfTo<BackgroundController>().AsSingle().NonLazy();
         }
     }
