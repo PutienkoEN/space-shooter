@@ -16,12 +16,12 @@ MonoBehaviour:
   - speed: 1
     zDistance: 14
     material: {fileID: 2100000, guid: 5d2013698b282584c90331cfe89436c5, type: 2}
-    prefab: {fileID: 3779429668162958280, guid: 060a0e0853700bf42b462fb1525e1236, type: 3}
+    prefab: {fileID: 6301899331573159477, guid: 1864f194f34428748bbe262191f25ba2, type: 3}
   - speed: 0.5
     zDistance: 12
     material: {fileID: 2100000, guid: 21fc6b28cd8b4c5489dbc1f5355759b5, type: 2}
-    prefab: {fileID: 3779429668162958280, guid: 060a0e0853700bf42b462fb1525e1236, type: 3}
+    prefab: {fileID: 6301899331573159477, guid: 1864f194f34428748bbe262191f25ba2, type: 3}
   - speed: 0.2
     zDistance: 13
     material: {fileID: 2100000, guid: b02b7b2dd449fb24f9ab00b08404ebc6, type: 2}
-    prefab: {fileID: 3779429668162958280, guid: 060a0e0853700bf42b462fb1525e1236, type: 3}
+    prefab: {fileID: 6301899331573159477, guid: 1864f194f34428748bbe262191f25ba2, type: 3}

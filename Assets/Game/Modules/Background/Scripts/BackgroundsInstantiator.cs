@@ -9,7 +9,7 @@ namespace Game.Modules.Background.Scripts
     public sealed class BackgroundsInstantiator
     {
         private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
-        private IReadOnlyList<IBackgroundPresenter> BackgroundPresenters => _backgroundPresenters;
+        
         public BackgroundsInstantiator(
             BackgroundLayersConfig backgroundLayersConfig,
             Transform parent)
@@ -34,6 +34,11 @@ namespace Game.Modules.Background.Scripts
 
             foreach (var backgroundConfig in backgroundLayersConfig.configs)
             {
+                if (backgroundConfig.prefab == null)
+                {
+                    Debug.LogError("Background prefab is null");
+                    return;
+                }
                 var position = new Vector3(0, 0, backgroundConfig.zDistance);
                 GameObject backgroundObj = Object.Instantiate(
                     backgroundConfig.prefab, 
