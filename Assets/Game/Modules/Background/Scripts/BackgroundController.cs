@@ -6,8 +6,7 @@ namespace SpaceShooter.Background
 {
     public sealed class BackgroundController : IGameListener, IGameTickable
     {
-        private readonly List<IBackgroundPresenter> _backgroundPresenters;
-
+        private readonly IReadOnlyList<IBackgroundPresenter> _backgroundPresenters;
         public BackgroundController(BackgroundsInstantiator backgroundsInstantiator)
         {
             _backgroundPresenters = backgroundsInstantiator.GetPresentersList();

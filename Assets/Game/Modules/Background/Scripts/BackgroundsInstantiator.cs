@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SpaceShooter.Background;
 using SpaceShooter.Background.ScriptableObjects;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Game.Modules.Background.Scripts
     public sealed class BackgroundsInstantiator
     {
         private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
+        private IReadOnlyList<IBackgroundPresenter> BackgroundPresenters => _backgroundPresenters;
         public BackgroundsInstantiator(
             BackgroundLayersConfig backgroundLayersConfig,
             Transform parent)
@@ -15,7 +17,7 @@ namespace Game.Modules.Background.Scripts
             InstantiateBackgrounds(backgroundLayersConfig, parent);
         }
 
-        public List<IBackgroundPresenter> GetPresentersList()
+        public IReadOnlyList<IBackgroundPresenter> GetPresentersList()
         {
             return _backgroundPresenters;
         }
@@ -32,15 +34,21 @@ namespace Game.Modules.Background.Scripts
 
             foreach (var backgroundConfig in backgroundLayersConfig.configs)
             {
-                GameObject backgroundObj = Object.Instantiate(backgroundConfig.prefab, parent);
+                var position = new Vector3(0, 0, backgroundConfig.zDistance);
+                GameObject backgroundObj = Object.Instantiate(
+                    backgroundConfig.prefab, 
+                    position,
+                    Quaternion.identity,
+                    parent);
+                
                 if (backgroundObj == null)
                 {
                     Debug.LogError("Failed to instantiate background.");
                     return;
                 }
 
-                backgroundObj.transform.position = new Vector3(0, 0, backgroundConfig.zDistance);
-                if (backgroundObj.TryGetComponent(out Renderer rendererComponent))
+                var rendererComponent = backgroundObj.GetComponentInChildren<Renderer>();
+                if(rendererComponent != null)
                 {
                     rendererComponent.material = backgroundConfig.material;
                 }
