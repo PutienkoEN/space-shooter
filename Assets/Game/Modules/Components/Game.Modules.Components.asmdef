@@ -1,11 +1,7 @@
 {
-    "name": "Game.LifeCycle.Core",
-    "rootNamespace": "SpaceShooter.Game.LifeCycle.Core",
-    "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:efdd616bd324540bab8c316dbfba7c02",
-        "GUID:03d1cb4877a3f7b41baf3faeaeed9a85"
-    ],
+    "name": "Game.Modules.Components",
+    "rootNamespace": "",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
