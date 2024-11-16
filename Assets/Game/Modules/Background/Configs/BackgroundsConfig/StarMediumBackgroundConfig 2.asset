@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: StarMediumBackgroundConfig 2
   m_EditorClassIdentifier: 
   speed: 0.5
-  zDistance: 10
+  zDistance: 8
   material: {fileID: 2100000, guid: b02b7b2dd449fb24f9ab00b08404ebc6, type: 2}
   prefab: {fileID: 6301899331573159477, guid: 1864f194f34428748bbe262191f25ba2, type: 3}

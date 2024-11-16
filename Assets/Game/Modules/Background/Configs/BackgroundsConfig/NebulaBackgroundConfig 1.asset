@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NebulaBackgroundConfig 1
   m_EditorClassIdentifier: 
   speed: 1
-  zDistance: 14
+  zDistance: 12
   material: {fileID: 2100000, guid: 5d2013698b282584c90331cfe89436c5, type: 2}
   prefab: {fileID: 6301899331573159477, guid: 1864f194f34428748bbe262191f25ba2, type: 3}
