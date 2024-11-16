@@ -8,7 +8,7 @@ namespace Game.Modules.ShootingModule.Scripts
     public class Weapon : MonoBehaviour
     {
         public LayerMask targetLayer;
-        public Transform source;
+        public Transform[] projectileSource;
         public GameObject bulletPrefab;
         public float projectileSpeed;
         public float fireRate;
@@ -19,8 +19,11 @@ namespace Game.Modules.ShootingModule.Scripts
         private void LaunchBullet()
         {
             Debug.Log("launch bullet");
-            GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
-            bullet.GetComponent<Rigidbody>().linearVelocity = transform.up * projectileSpeed;
+            foreach (Transform source in projectileSource)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
+                bullet.GetComponent<Rigidbody>().linearVelocity = source.transform.up * projectileSpeed;
+            }
         }
         
         public void Fire()

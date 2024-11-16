@@ -1,45 +1,58 @@
 ﻿using System;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public class WeaponComponent : MonoBehaviour
+    public class WeaponComponent : IGameListener, IGameTickable
     {
-        public bool canShoot;
-        public GameObject defaultWeapon;
-        public Weapon activeWeapon;
-        public Transform weaponsParent;
+        public bool CanShoot { get; private set; }
+        private readonly GameObject _defaultWeapon;
+        private readonly Transform _weaponsParent;
+        private Weapon _activeWeapon;
 
-        public bool CanShoot => canShoot;
-        
-        void Awake()
+        public WeaponComponent(GameObject defaultWeapon, Transform weaponsParent)
         {
-            if(defaultWeapon == null)
+            _defaultWeapon = defaultWeapon;
+            _weaponsParent = weaponsParent;
+            SetDefaultWeapon();
+            SetCanShoot(true);
+        }
+        
+        public void SetCanShoot(bool value)
+        {
+            CanShoot = value;
+        }
+        
+        public void EquipWeapon(GameObject weaponPrefab)
+        {
+            Weapon weapon = Object.Instantiate(weaponPrefab, _weaponsParent).GetComponent<Weapon>();
+            weapon.transform.SetParent(_weaponsParent, false);
+            _activeWeapon = weapon;
+        }
+        
+        private void SetDefaultWeapon()
+        {
+            if(_defaultWeapon == null)
             {
                 Debug.LogError("Specify default weapon");
             }
             else
             {
-                Weapon weapon = Instantiate(defaultWeapon, this.transform).GetComponent<Weapon>();
-                EquipWeapon(weapon);
+                EquipWeapon(_defaultWeapon);
             }
         }
-
-        public void EquipWeapon(Weapon weapon)
-        {
-            weapon.transform.SetParent(weaponsParent, false);
-            activeWeapon = weapon;
-        }
         
-        public void SetIsFiring(bool value)
+        private void SetIsFiring(bool value)
         {
-            activeWeapon.isFiring = value;
+            _activeWeapon.isFiring = value;
         }
 
-        public void Update()
+        public void Tick(float deltaTime)
         {
-            SetIsFiring(canShoot);
-            activeWeapon.Fire();
+            SetIsFiring(CanShoot);
+            _activeWeapon.Fire();
         }
     }
 }

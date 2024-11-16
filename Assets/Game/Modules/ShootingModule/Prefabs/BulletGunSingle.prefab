@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2139743607266219363}
   - component: {fileID: 8896371635825738117}
   m_Layer: 0
-  m_Name: BulletGun
+  m_Name: BulletGunSingle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,10 +48,12 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  source: {fileID: 664928079140370715}
+  projectileSource:
+  - {fileID: 664928079140370715}
   bulletPrefab: {fileID: 6604108071514749578, guid: 24b722786cc1c714791133fadcd6300a, type: 3}
   projectileSpeed: 10
   fireRate: 2
+  isFiring: 0
 --- !u!1 &3839796118415443710
 GameObject:
   m_ObjectHideFlags: 0
