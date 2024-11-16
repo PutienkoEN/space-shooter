@@ -1,6 +1,8 @@
 ﻿using System;
+using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace Game.Modules.ShootingModule.Scripts
@@ -11,12 +13,19 @@ namespace Game.Modules.ShootingModule.Scripts
         private readonly GameObject _defaultWeapon;
         private readonly Transform _weaponsParent;
         private Weapon _activeWeapon;
+        private DiContainer _diContainer;
 
-        public WeaponComponent(GameObject defaultWeapon, Transform weaponsParent)
+        public WeaponComponent(
+            WeaponConfig defaultWeapon, 
+            Transform weaponsParent, 
+            DiContainer diContainer)
         {
-            _defaultWeapon = defaultWeapon;
+            Debug.Log("weapon component constructed");
+            WeaponData weaponData = defaultWeapon.GetWeaponData();
+            // _defaultWeapon = weaponData.WeaponPrefab;
             _weaponsParent = weaponsParent;
-            SetDefaultWeapon();
+            _diContainer = diContainer;
+            SetDefaultWeapon(diContainer, weaponData);
             SetCanShoot(true);
         }
         
@@ -25,34 +34,28 @@ namespace Game.Modules.ShootingModule.Scripts
             CanShoot = value;
         }
         
-        public void EquipWeapon(GameObject weaponPrefab)
+        public void EquipWeapon(Weapon weapon)
         {
-            Weapon weapon = Object.Instantiate(weaponPrefab, _weaponsParent).GetComponent<Weapon>();
-            weapon.transform.SetParent(_weaponsParent, false);
             _activeWeapon = weapon;
         }
         
-        private void SetDefaultWeapon()
+        private void SetDefaultWeapon(DiContainer container, WeaponData weaponData)
         {
-            if(_defaultWeapon == null)
-            {
-                Debug.LogError("Specify default weapon");
-            }
-            else
-            {
-                EquipWeapon(_defaultWeapon);
-            }
+            GameObject weaponObj = Object.Instantiate(weaponData.WeaponPrefab, _weaponsParent);
+            Weapon weapon = container.Instantiate<Weapon>(new object[] { weaponData, weaponObj });
+            EquipWeapon(weapon);
         }
         
         private void SetIsFiring(bool value)
         {
-            _activeWeapon.isFiring = value;
+            _activeWeapon.IsFiring = value;
         }
-
+        
         public void Tick(float deltaTime)
         {
-            SetIsFiring(CanShoot);
-            _activeWeapon.Fire();
+            Debug.Log("ticking");
+            //     SetIsFiring(true);
+            //     _activeWeapon.Fire();
         }
     }
 }

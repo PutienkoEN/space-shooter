@@ -1,47 +1,55 @@
-using System;
-using System.Collections;
-using System.Runtime.InteropServices;
+﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public class Weapon : MonoBehaviour
+    public class Weapon : IGameListener, IGameTickable
     {
-        public LayerMask targetLayer;
-        public Transform[] projectileSource;
-        public GameObject bulletPrefab;
-        public float projectileSpeed;
-        public float fireRate;
+        private LayerMask _targetLayer;
+        private GameObject _weaponObj;
+        private GameObject _bulletPrefab;
+        private float _projectileSpeed;
+        private float _fireRate;
 
-        private float timer;
-        public bool isFiring;
+        private float _timer;
+        public bool IsFiring;
+
+        public Weapon(WeaponData weaponData, GameObject weaponObj)
+        {
+            _targetLayer = weaponData.TargetLayer;
+            _weaponObj = weaponObj;
+            _bulletPrefab = weaponData.BulletPrefab;
+            _projectileSpeed = weaponData.ProjectileSpeed;
+            _fireRate = weaponData.FireRate;
+        }
 
         private void LaunchBullet()
         {
             Debug.Log("launch bullet");
-            foreach (Transform source in projectileSource)
+            foreach (Transform source in _weaponObj.transform)
             {
-                GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
-                bullet.GetComponent<Rigidbody>().linearVelocity = source.transform.up * projectileSpeed;
+                GameObject bullet = Object.Instantiate(_bulletPrefab, source.position, source.rotation);
+                bullet.GetComponent<Rigidbody>().linearVelocity = source.transform.up * _projectileSpeed;
             }
         }
         
         public void Fire()
         {
-            if (isFiring && timer <= 0)
+            Debug.Log("fire");
+            if (IsFiring && _timer <= 0)
             {
                 LaunchBullet();
-                timer = fireRate;
+                _timer = _fireRate;
             }
         }
 
-        public void Update()
+        public void Tick(float deltaTime)
         {
-            if (isFiring)
+            if (IsFiring)
             {
-                timer -= Time.deltaTime;
+                _timer -= Time.deltaTime;
             }
         }
-        
     }
 }
