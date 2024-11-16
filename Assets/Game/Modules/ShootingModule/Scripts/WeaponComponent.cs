@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
@@ -10,22 +9,19 @@ namespace Game.Modules.ShootingModule.Scripts
     public class WeaponComponent : IGameListener, IGameTickable
     {
         public bool CanShoot { get; private set; }
-        private readonly GameObject _defaultWeapon;
         private readonly Transform _weaponsParent;
         private Weapon _activeWeapon;
-        private DiContainer _diContainer;
+        private Weapon _weapon;
 
         public WeaponComponent(
             WeaponConfig defaultWeapon, 
             Transform weaponsParent, 
-            DiContainer diContainer)
+            Weapon weapon)
         {
-            Debug.Log("weapon component constructed");
             WeaponData weaponData = defaultWeapon.GetWeaponData();
-            // _defaultWeapon = weaponData.WeaponPrefab;
             _weaponsParent = weaponsParent;
-            _diContainer = diContainer;
-            SetDefaultWeapon(diContainer, weaponData);
+            _weapon = weapon;
+            EquipWeapon(weaponData);
             SetCanShoot(true);
         }
         
@@ -34,16 +30,21 @@ namespace Game.Modules.ShootingModule.Scripts
             CanShoot = value;
         }
         
-        public void EquipWeapon(Weapon weapon)
+        private void SetActiveWeapon(Weapon weapon)
         {
             _activeWeapon = weapon;
         }
         
-        private void SetDefaultWeapon(DiContainer container, WeaponData weaponData)
+        public void EquipWeapon(WeaponData weaponData)
         {
+            if (_weaponsParent.transform.childCount > 0)
+            {
+                GameObject currentWeapon = _weaponsParent.transform.GetChild(0).gameObject;
+                Object.Destroy(currentWeapon);
+            }
             GameObject weaponObj = Object.Instantiate(weaponData.WeaponPrefab, _weaponsParent);
-            Weapon weapon = container.Instantiate<Weapon>(new object[] { weaponData, weaponObj });
-            EquipWeapon(weapon);
+            _weapon.InitiateWeapon(weaponData, weaponObj);
+            SetActiveWeapon(_weapon);
         }
         
         private void SetIsFiring(bool value)
@@ -53,9 +54,8 @@ namespace Game.Modules.ShootingModule.Scripts
         
         public void Tick(float deltaTime)
         {
-            Debug.Log("ticking");
-            //     SetIsFiring(true);
-            //     _activeWeapon.Fire();
+            SetIsFiring(true);
+            _activeWeapon.Fire();
         }
     }
 }

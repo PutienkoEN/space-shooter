@@ -15,7 +15,7 @@ namespace Game.Modules.ShootingModule.Scripts
         private float _timer;
         public bool IsFiring;
 
-        public Weapon(WeaponData weaponData, GameObject weaponObj)
+        public void InitiateWeapon(WeaponData weaponData, GameObject weaponObj)
         {
             _targetLayer = weaponData.TargetLayer;
             _weaponObj = weaponObj;
@@ -36,7 +36,6 @@ namespace Game.Modules.ShootingModule.Scripts
         
         public void Fire()
         {
-            Debug.Log("fire");
             if (IsFiring && _timer <= 0)
             {
                 LaunchBullet();
@@ -48,7 +47,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             if (IsFiring)
             {
-                _timer -= Time.deltaTime;
+                _timer -= deltaTime;
             }
         }
     }

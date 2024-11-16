@@ -11,9 +11,10 @@ namespace Game.Modules.ShootingModule.Scripts
         [SerializeField] private Transform weaponParent;
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<Weapon>().AsSingle();
             Container.BindInterfacesAndSelfTo<WeaponComponent>().
                 AsSingle().
-                WithArguments(weaponConfig,weaponParent, Container).
+                WithArguments(weaponConfig,weaponParent).
                 NonLazy();
         }
     }
