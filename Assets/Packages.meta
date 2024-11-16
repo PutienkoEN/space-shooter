@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Modules/Input.meta
+guid: ca9fe32d791ebb34787f0fc05408de25
+========
 guid: 945653ec0caca4e9a8db10d3a082879a
+>>>>>>>> dev:Assets/Packages.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
