@@ -1,33 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Game.Modules.Background.Scripts;
+using SpaceShooter.Game.LifeCycle.Common;
 
 namespace SpaceShooter.Background
 {
-    public sealed class BackgroundController
+    public sealed class BackgroundController : IGameListener, IGameTickable
     {
-        private float _scrollSpeed;
-        private float _offset;
-        
-        private readonly IBackgroundView _backgroundView;
-
-        public BackgroundController(IBackgroundView backgroundView)
+        private readonly IReadOnlyList<IBackgroundPresenter> _backgroundPresenters;
+        public BackgroundController(BackgroundsInstantiator backgroundsInstantiator)
         {
-            _backgroundView = backgroundView;
+            _backgroundPresenters = backgroundsInstantiator.GetPresentersList();
         }
 
-        private void CalculateScrollSpeed(float deltaTime)
+        public void Tick(float deltaTime)
         {
-            _offset += (deltaTime * _scrollSpeed *-1) / 10f;
-        }
-
-        public void SetScrollSpeed(float value)
-        {
-            _scrollSpeed = value;
+            ScrollBackground(deltaTime);
         }
         
-        public void OnUpdate(float deltaTime)
+        private void ScrollBackground(float deltaTime)
         {
-            CalculateScrollSpeed(deltaTime);
-            _backgroundView.ScrollBackground(new Vector2(0, _offset));
+            foreach (var presenter in _backgroundPresenters)
+            {
+                presenter.ScrollBackground(deltaTime);
+            }
         }
     }
 }

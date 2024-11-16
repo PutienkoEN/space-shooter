@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc8dc139753413f8e16eb2e0e998a10, type: 3}
   m_Name: GameCoreInstaller
   m_EditorClassIdentifier: 
+  camera: {fileID: 8227545485835546194, guid: c975f8a6ba526ce4d9057528eaf81d86, type: 3}
