@@ -1,8 +1,9 @@
 {
-    "name": "Game.Modules.CameraUtility",
+    "name": "Game.DebugTool",
     "rootNamespace": "",
     "references": [
-        "Zenject"
+        "Zenject",
+        "Game.Modules.GameSpeed"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

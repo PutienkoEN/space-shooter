@@ -1,9 +1,10 @@
 {
-  "name": "SettingsManager",
+  "name": "Game.Modules.GameSpeed",
   "rootNamespace": "",
   "references": [
     "Zenject",
-    "Background"
+    "Game.LifeCycle.Common",
+    "Game.Modules.Input"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
