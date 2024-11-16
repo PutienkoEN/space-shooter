@@ -1,14 +1,24 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceShooter.Background
 {
-    [Serializable]
-    public sealed class BackgroundData
+    public struct BackgroundData
     {
-        public float speed;
-        public int zDistance;
-        public Material material;
-        public GameObject prefab;
+        public float Speed { get; private set; }
+        public int ZDistance { get; private set; }
+        public Material Material { get; private set; }
+        public GameObject Prefab { get; private set; }
+
+        public BackgroundData(
+            float speed, 
+            int zDistance, 
+            Material material, 
+            GameObject prefab)
+        {
+            Speed = speed;
+            ZDistance = zDistance;
+            Material = material;
+            Prefab = prefab;
+        }
     }
 }

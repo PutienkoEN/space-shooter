@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using Game.Modules.Background.Scripts.Data;
 using SpaceShooter.Background;
-using SpaceShooter.Background.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Modules.Background.Scripts
@@ -11,10 +10,10 @@ namespace Game.Modules.Background.Scripts
         private readonly List<IBackgroundPresenter> _backgroundPresenters = new();
         
         public BackgroundsInstantiator(
-            BackgroundDataConfig backgroundDataConfig,
+            BackgroundLayersConfig backgroundLayersConfig,
             Transform parent)
         {
-            InstantiateBackgrounds(backgroundDataConfig, parent);
+            InstantiateBackgrounds(backgroundLayersConfig, parent);
         }
 
         public IReadOnlyList<IBackgroundPresenter> GetPresentersList()
@@ -23,25 +22,25 @@ namespace Game.Modules.Background.Scripts
         }
 
         private void InstantiateBackgrounds(
-            BackgroundDataConfig backgroundDataConfig,
+            BackgroundLayersConfig backgroundLayersConfig,
             Transform parent)
         {
-            if (backgroundDataConfig == null || parent == null)
+            if (backgroundLayersConfig == null || parent == null)
             {
                 Debug.LogError("Check if config and parent for backgrounds are added");
                 return;
             }
 
-            foreach (var backgroundConfig in backgroundDataConfig.configs)
+            foreach (var backgroundConfig in backgroundLayersConfig.GetBackgroundLayersData())
             {
-                if (backgroundConfig.prefab == null)
+                if (backgroundConfig.Prefab == null)
                 {
                     Debug.LogError("Background prefab is null");
                     return;
                 }
-                var position = new Vector3(0, 0, backgroundConfig.zDistance);
+                var position = new Vector3(0, 0, backgroundConfig.ZDistance);
                 GameObject backgroundObj = Object.Instantiate(
-                    backgroundConfig.prefab, 
+                    backgroundConfig.Prefab, 
                     position,
                     Quaternion.identity,
                     parent);
@@ -55,14 +54,14 @@ namespace Game.Modules.Background.Scripts
                 var rendererComponent = backgroundObj.GetComponentInChildren<Renderer>();
                 if(rendererComponent != null)
                 {
-                    rendererComponent.material = backgroundConfig.material;
+                    rendererComponent.material = backgroundConfig.Material;
                 }
                 else
                 {
                     Debug.LogError("Failed to get Renderer component on background prefab.");
                 }
                 
-                IBackgroundPresenter presenter = new BackgroundPresenter(backgroundConfig.material, backgroundConfig.speed);
+                IBackgroundPresenter presenter = new BackgroundPresenter(backgroundConfig.Material, backgroundConfig.Speed);
                 _backgroundPresenters.Add(presenter);
             }
         }

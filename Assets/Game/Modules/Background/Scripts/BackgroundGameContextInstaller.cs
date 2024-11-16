@@ -1,14 +1,13 @@
 ﻿using Game.Modules.Background.Scripts;
+using Game.Modules.Background.Scripts.Data;
 using SpaceShooter.Background;
-using SpaceShooter.Background.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Zenject
 {
     public sealed class BackgroundGameContextInstaller : MonoInstaller
     {
-        [FormerlySerializedAs("backgroundLayersConfig")] [SerializeField] private BackgroundDataConfig backgroundDataConfig;
+        [SerializeField] private BackgroundLayersConfig backgroundDataConfig;
         [SerializeField] private Transform parent;
 
         public override void InstallBindings()
