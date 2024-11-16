@@ -31,16 +31,16 @@ namespace Game.Modules.Background.Scripts
                 return;
             }
 
-            foreach (var backgroundConfig in backgroundLayersConfig.GetBackgroundLayersData())
+            foreach (var backgroundData in backgroundLayersConfig.GetBackgroundLayersData())
             {
-                if (backgroundConfig.Prefab == null)
+                if (backgroundData.Prefab == null)
                 {
                     Debug.LogError("Background prefab is null");
                     return;
                 }
-                var position = new Vector3(0, 0, backgroundConfig.ZDistance);
+                var position = new Vector3(0, 0, backgroundData.ZDistance);
                 GameObject backgroundObj = Object.Instantiate(
-                    backgroundConfig.Prefab, 
+                    backgroundData.Prefab, 
                     position,
                     Quaternion.identity,
                     parent);
@@ -54,14 +54,14 @@ namespace Game.Modules.Background.Scripts
                 var rendererComponent = backgroundObj.GetComponentInChildren<Renderer>();
                 if(rendererComponent != null)
                 {
-                    rendererComponent.material = backgroundConfig.Material;
+                    rendererComponent.material = backgroundData.Material;
                 }
                 else
                 {
                     Debug.LogError("Failed to get Renderer component on background prefab.");
                 }
                 
-                IBackgroundPresenter presenter = new BackgroundPresenter(backgroundConfig.Material, backgroundConfig.Speed);
+                IBackgroundPresenter presenter = new BackgroundPresenter(backgroundData.Material, backgroundData.Speed);
                 _backgroundPresenters.Add(presenter);
             }
         }
