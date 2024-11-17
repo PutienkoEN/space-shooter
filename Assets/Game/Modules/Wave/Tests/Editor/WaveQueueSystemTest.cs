@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Game.Modules.Wave.Interface;
 using Moq;
 using NUnit.Framework;
+using UnityEngine.TestTools;
 
 namespace Game.Modules.Wave.Tests.Editor
 {
@@ -276,7 +277,26 @@ namespace Game.Modules.Wave.Tests.Editor
             // Assert
             _waveMock1.Verify(w => w.StartWave(), Times.Once, "Wave should not restart when OnGameStart is called again.");
         }
+        
+        [Test]
+        public void Given_WavesFinish_When_OnWaveQueueFinishedInvoked_Then_ItShouldTriggerOnlyOnce()
+        {
+            //TODO For ignore Debug.LogError() and Debug.LogException()
+            LogAssert.ignoreFailingMessages = true;
+            
+            // Arrange
+            var eventCallCount = 0;
+            _waveQueueSystem.OnWaveQueueFinished += () => eventCallCount++;
+            _waveQueueSystem.OnGameStart();
 
+            // Act
+            _waveMock1.Raise(w => w.OnWaveFinished += null);
+            _waveMock2.Raise(w => w.OnWaveFinished += null);
+            _waveQueueSystem.OnGamePause();
+            _waveQueueSystem.OnGameResume();
 
+            // Assert
+            Assert.AreEqual(1, eventCallCount, "OnWaveQueueFinished should trigger only once.");
+        }
     }
 }

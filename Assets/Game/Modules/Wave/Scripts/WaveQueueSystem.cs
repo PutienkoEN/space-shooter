@@ -29,6 +29,7 @@ namespace Game.Modules.Wave
         private readonly Queue<IWave> _waves = new();
         private IWave _currentWave;
         private bool _isPlaying;
+        private bool _isWaveQueueFinished;
         
         //TODO Maybe move it to the Init() method.
         public WaveQueueSystem(IListWaveConfig listWaveConfig)
@@ -44,6 +45,7 @@ namespace Game.Modules.Wave
         public void OnGameStart()
         {
             _isPlaying = true;
+            _isWaveQueueFinished = false;
             StartNextWave();
         }
 
@@ -89,8 +91,8 @@ namespace Game.Modules.Wave
 
             if (_waves.IsEmpty())
             {
-                message = "All waves completed!";
-                OnWaveQueueFinished?.Invoke();
+                QueueWaveFinished();
+                message = "The wave queue is empty.";
                 return true;
             }
 
@@ -101,6 +103,18 @@ namespace Game.Modules.Wave
         {
             DisposeCurrentWave();
             StartNextWave();
+        }
+
+        private void QueueWaveFinished()
+        {
+            if (_isWaveQueueFinished)
+            {
+                Debug.LogError("There was already a notification about the end of all waves.");
+                return;
+            }
+
+            _isWaveQueueFinished = true;
+            OnWaveQueueFinished?.Invoke();
         }
 
         private void DisposeCurrentWave()
@@ -124,7 +138,7 @@ namespace Game.Modules.Wave
                 wave.Dispose();
             }
 
-            _waves.Clear();
+            _waves?.Clear();
             Debug.Log("Wave queue has been reset.");
         }
 
