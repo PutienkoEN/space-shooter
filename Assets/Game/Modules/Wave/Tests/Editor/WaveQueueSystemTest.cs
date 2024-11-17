@@ -298,5 +298,18 @@ namespace Game.Modules.Wave.Tests.Editor
             // Assert
             Assert.AreEqual(1, eventCallCount, "OnWaveQueueFinished should trigger only once.");
         }
+        
+        [Test]
+        public void Given_WaveQueueSystemDisposed_When_DisposeCalledAgain_Then_ItShouldNotThrowException()
+        {
+            //TODO For ignore Debug.LogError() and Debug.LogException()
+            LogAssert.ignoreFailingMessages = true;
+            
+            // Arrange
+            _waveQueueSystem.Dispose();
+
+            // Act & Assert
+            Assert.DoesNotThrow(() => _waveQueueSystem.Dispose(), "Dispose should be idempotent.");
+        }
     }
 }
