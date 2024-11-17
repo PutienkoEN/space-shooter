@@ -263,5 +263,20 @@ namespace Game.Modules.Wave.Tests.Editor
             _waveMock2.Verify(w => w.StartWave(), Times.Never, "StartWave should not be called for wave 2 when the game is paused before starting.");
             Assert.IsFalse(_waveQueueSystem.IsPlaying, "IsPlaying should remain false when game is paused before start.");
         }
+        
+        [Test]
+        public void Given_GameStarted_When_OnGameStartCalledAgain_Then_ItShouldNotRestartCurrentWave()
+        {
+            // Arrange
+            _waveQueueSystem.OnGameStart();
+
+            // Act
+            _waveQueueSystem.OnGameStart();
+
+            // Assert
+            _waveMock1.Verify(w => w.StartWave(), Times.Once, "Wave should not restart when OnGameStart is called again.");
+        }
+
+
     }
 }
