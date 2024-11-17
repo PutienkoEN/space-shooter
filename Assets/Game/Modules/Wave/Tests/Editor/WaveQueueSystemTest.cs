@@ -144,20 +144,7 @@ namespace Game.Modules.Wave.Tests.Editor
             
             // Assert
             Assert.IsTrue(isQueueFinished, "OnWaveQueueFinished should be triggered after all waves are completed.");
-            Assert.IsTrue(_waveQueueSystem.CountWaves == 0, "Queue should be Empty");
-        }
-        
-        [Test]
-        public void Given_WavesInQueue_When_DisposeCalled_Then_WavesShouldBeDisposedAndQueueShouldBeCleared()
-        {
-            // Arrange
-            _waveQueueSystem.OnGameStart();
-
-            // Act
-            _waveQueueSystem.Dispose();
-    
-            // Assert
-            Assert.IsTrue(_waveQueueSystem.CountWaves == 0, "Queue should be cleared after dispose.");
+            Assert.AreEqual(0, _waveQueueSystem.CountWaves, "Queue should be Empty");
         }
         
         [Test]
@@ -300,6 +287,19 @@ namespace Game.Modules.Wave.Tests.Editor
         }
         
         [Test]
+        public void Given_WavesInQueue_When_DisposeCalled_Then_WavesShouldBeDisposedAndQueueShouldBeCleared()
+        {
+            // Arrange
+            _waveQueueSystem.OnGameStart();
+
+            // Act
+            _waveQueueSystem.Dispose();
+    
+            // Assert
+            Assert.AreEqual(0, _waveQueueSystem.CountWaves, "Queue should be cleared after dispose.");
+        }
+        
+        [Test]
         public void Given_WaveQueueSystemDisposed_When_DisposeCalledAgain_Then_ItShouldNotThrowException()
         {
             //TODO For ignore Debug.LogError() and Debug.LogException()
@@ -310,6 +310,23 @@ namespace Game.Modules.Wave.Tests.Editor
 
             // Act & Assert
             Assert.DoesNotThrow(() => _waveQueueSystem.Dispose(), "Dispose should be idempotent.");
+        }
+        
+        [Test]
+        public void Given_GameDisposed_When_ResetQueueCalled_Then_AllWavesShouldBeClearedAndDisposed()
+        {
+            LogAssert.ignoreFailingMessages = true;
+    
+            // Arrange
+            _waveQueueSystem.OnGameStart();
+
+            // Act
+            _waveQueueSystem.Dispose();
+
+            // Assert
+            _waveMock1.Verify(w => w.Dispose(), Times.Once, "First wave should be disposed.");
+            _waveMock2.Verify(w => w.Dispose(), Times.Once, "Second wave should be disposed, even if not started.");
+            Assert.AreEqual(0, _waveQueueSystem.CountWaves, "Queue should be cleared after dispose.");
         }
     }
 }
