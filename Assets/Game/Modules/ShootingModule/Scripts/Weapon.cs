@@ -1,40 +1,33 @@
-﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+﻿using System;
+using System.Globalization;
+using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public class Weapon : IGameListener, IGameTickable
+    public class Weapon : IWeapon
     {
-        private LayerMask _targetLayer;
-        public GameObject WeaponObj { get; private set; }
-        private GameObject _bulletPrefab;
-        private float _projectileSpeed;
+        private Transform[] firepoints;
         private float _fireRate;
 
         private float _timer;
         public bool IsFiring;
 
-        public void InitiateWeapon(WeaponData weaponData, GameObject weaponObj)
+        public void InitiateWeapon(WeaponData weaponData)
         {
-            _targetLayer = weaponData.TargetLayer;
-            WeaponObj = weaponObj;
-            _bulletPrefab = weaponData.BulletPrefab;
-            _projectileSpeed = weaponData.ProjectileSpeed;
-            _fireRate = weaponData.FireRate;
-        }
-
-        private void LaunchBullet()
-        {
-            foreach (Transform source in WeaponObj.transform)
-            {
-                GameObject bullet = Object.Instantiate(_bulletPrefab, source.position, source.rotation);
-                bullet.GetComponent<Rigidbody>().linearVelocity = source.transform.up * _projectileSpeed;
-            }
+            // _fireRate = weaponData.FireRate;
+            
         }
         
-        public void Fire()
+        public void Fire(float deltaTime)
         {
+            if (IsFiring)
+            {
+                _timer -= deltaTime;
+            }
+            
             if (IsFiring && _timer <= 0)
             {
                 LaunchBullet();
@@ -42,12 +35,18 @@ namespace Game.Modules.ShootingModule.Scripts
             }
         }
 
-        public void Tick(float deltaTime)
+        private void LaunchBullet()
         {
-            if (IsFiring)
-            {
-                _timer -= deltaTime;
-            }
+            // foreach (Transform source in WeaponObj.transform)
+            // {
+            //    Debug.Log("Launching bullet");
+            // }
         }
+
+    }
+
+    public interface IWeapon
+    {
+        public void Fire(float deltaTime);
     }
 }

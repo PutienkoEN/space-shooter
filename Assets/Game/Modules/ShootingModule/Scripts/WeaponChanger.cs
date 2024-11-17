@@ -18,7 +18,7 @@ namespace Game.Modules.ShootingModule.Scripts
         [Button]
         public void SwitchWeapon(WeaponConfig config)
         {
-            _weaponController.EquipWeapon(config.GetWeaponData());
+            // _weaponController.EquipWeapon(config.GetWeaponData());
         }
     }
 }
