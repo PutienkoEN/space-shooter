@@ -175,5 +175,81 @@ namespace Game.Modules.Wave.Tests.Editor
             _waveMock1.Verify(w => w.StartWave(), Times.Once, "First wave should start when the game starts.");
             _waveMock2.Verify(w => w.StartWave(), Times.Never, "The next wave does not start when pausing and resuming.");
         }
+        
+        [Test]
+        public void Given_GamePaused_When_WaveFinishes_Then_NextWaveDoesNotStart()
+        {
+            // Arrange
+            _waveQueueSystem.OnGameStart();
+
+            // Act
+            _waveQueueSystem.OnGamePause();
+            _waveMock1.Raise(w => w.OnWaveFinished += null);
+
+            // Assert
+            _waveMock1.Verify(w => w.StartWave(), Times.Once, "First wave should start when the game starts.");
+            _waveMock2.Verify(w => w.StartWave(), Times.Never, "Next wave should not start while the game is paused.");
+        }
+        
+        [Test]
+        public void Given_GamePausedAndResumed_When_WaveFinishes_Then_NextWaveStarts()
+        {
+            // Arrange
+            _waveQueueSystem.OnGameStart();
+
+            // Act
+            _waveQueueSystem.OnGamePause();
+            _waveMock1.Raise(w => w.OnWaveFinished += null);
+            _waveQueueSystem.OnGameResume();
+    
+            // Assert
+            _waveMock1.Verify(w => w.StartWave(), Times.Once, "First wave should start when the game starts.");
+            _waveMock2.Verify(w => w.StartWave(), Times.Once, "Next wave should start after resuming the game.");
+        }
+        
+        [Test]
+        public void Given_GamePaused_When_AllWavesFinish_Then_QueueDoesNotTriggerCompletionEvent()
+        {
+            // Arrange
+            var isQueueFinished = false;
+            _waveQueueSystem.OnGameStart();
+            _waveQueueSystem.OnWaveQueueFinished += () =>
+            {
+                isQueueFinished = true;
+            };
+
+            // Act
+            _waveMock1.Raise(w => w.OnWaveFinished += null);
+            _waveQueueSystem.OnGamePause();
+            _waveMock2.Raise(w => w.OnWaveFinished += null);
+    
+            // Assert
+            _waveMock1.Verify(w => w.StartWave(), Times.Once, "First wave should start when the game starts.");
+            _waveMock2.Verify(w => w.StartWave(), Times.Once, "Second wave should start after the first wave finishes.");
+            Assert.IsFalse(isQueueFinished, "Wave queue should not finish while the game is paused.");
+        }
+        
+        [Test]
+        public void Given_GamePausedAndResumed_When_AllWavesFinish_Then_QueueTriggersCompletionEvent()
+        {
+            // Arrange
+            var isQueueFinished = false;
+            _waveQueueSystem.OnGameStart();
+            _waveQueueSystem.OnWaveQueueFinished += () =>
+            {
+                isQueueFinished = true;
+            };
+
+            // Act
+            _waveMock1.Raise(w => w.OnWaveFinished += null);
+            _waveQueueSystem.OnGamePause();
+            _waveMock2.Raise(w => w.OnWaveFinished += null);
+            _waveQueueSystem.OnGameResume();
+    
+            // Assert
+            _waveMock1.Verify(w => w.StartWave(), Times.Once, "First wave should start when the game starts.");
+            _waveMock2.Verify(w => w.StartWave(), Times.Once, "Second wave should start after the first wave finishes.");
+            Assert.IsTrue(isQueueFinished, "Wave queue should trigger completion event after all waves finish.");
+        }
     }
 }

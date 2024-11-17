@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Modules.Wave.Interface;
+using ModestTree;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 
@@ -54,26 +55,46 @@ namespace Game.Modules.Wave
         public void OnGameResume()
         {
             _isPlaying = true;
+            StartNextWave();
         }
 
         private void StartNextWave()
         {
-            if (!_isPlaying)
+            if (CanNotStartNextWave(out var message))
             {
-                Debug.Log("Is not Playing Wave");
-                return;
-            }
-
-            if (_waves.Count == 0)
-            {
-                Debug.Log("All waves completed!");
-                OnWaveQueueFinished?.Invoke();
+                Debug.LogWarning(message);
                 return;
             }
 
             _currentWave = _waves.Dequeue();
             _currentWave.OnWaveFinished += OnWaveFinished;
             _currentWave.StartWave();
+        }
+
+        private bool CanNotStartNextWave(out string message)
+        {
+            message = string.Empty;
+            
+            if (!_isPlaying)
+            {
+                message = "Is not Playing Wave";
+                return true;
+            }
+
+            if (_currentWave != null)
+            {
+                message = "Cannot start next wave until current one is finished.";
+                return true;
+            }
+
+            if (_waves.IsEmpty())
+            {
+                message = "All waves completed!";
+                OnWaveQueueFinished?.Invoke();
+                return true;
+            }
+
+            return false;
         }
 
         private void OnWaveFinished()
@@ -84,7 +105,11 @@ namespace Game.Modules.Wave
 
         private void DisposeCurrentWave()
         {
-            if (_currentWave == null) return;
+            if (_currentWave == null)
+            {
+                Debug.LogError("Trying to clear an empty wave.");
+                return;
+            }
             
             Debug.Log($"Current {_currentWave.GetType().Name} wave has been stopped.");
             _currentWave.Dispose();
