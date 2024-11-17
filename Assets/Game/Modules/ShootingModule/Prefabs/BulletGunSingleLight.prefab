@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6115094818833412184}
   m_Layer: 0
-  m_Name: Source
+  m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

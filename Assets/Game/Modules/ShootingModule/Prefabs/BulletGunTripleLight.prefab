@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2139743607266219363}
-  - component: {fileID: 8896371635825738117}
   m_Layer: 0
-  m_Name: BulletGunTriple
+  m_Name: BulletGunTripleLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,29 +34,6 @@ Transform:
   - {fileID: 6357198992606204550}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8896371635825738117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960499326345783170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5473bd07b90745c6ba2f10efb45653c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  projectileSource:
-  - {fileID: 664928079140370715}
-  - {fileID: 8740678209636289407}
-  - {fileID: 6357198992606204550}
-  bulletPrefab: {fileID: 6604108071514749578, guid: 24b722786cc1c714791133fadcd6300a, type: 3}
-  projectileSpeed: 10
-  fireRate: 2
-  isFiring: 0
 --- !u!1 &1344451243323990855
 GameObject:
   m_ObjectHideFlags: 0

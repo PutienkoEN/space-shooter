@@ -7,7 +7,7 @@ namespace Game.Modules.ShootingModule.Scripts
     public class Weapon : IGameListener, IGameTickable
     {
         private LayerMask _targetLayer;
-        private GameObject _weaponObj;
+        public GameObject WeaponObj { get; private set; }
         private GameObject _bulletPrefab;
         private float _projectileSpeed;
         private float _fireRate;
@@ -18,7 +18,7 @@ namespace Game.Modules.ShootingModule.Scripts
         public void InitiateWeapon(WeaponData weaponData, GameObject weaponObj)
         {
             _targetLayer = weaponData.TargetLayer;
-            _weaponObj = weaponObj;
+            WeaponObj = weaponObj;
             _bulletPrefab = weaponData.BulletPrefab;
             _projectileSpeed = weaponData.ProjectileSpeed;
             _fireRate = weaponData.FireRate;
@@ -26,8 +26,7 @@ namespace Game.Modules.ShootingModule.Scripts
 
         private void LaunchBullet()
         {
-            Debug.Log("launch bullet");
-            foreach (Transform source in _weaponObj.transform)
+            foreach (Transform source in WeaponObj.transform)
             {
                 GameObject bullet = Object.Instantiate(_bulletPrefab, source.position, source.rotation);
                 bullet.GetComponent<Rigidbody>().linearVelocity = source.transform.up * _projectileSpeed;

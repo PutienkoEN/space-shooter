@@ -6,23 +6,33 @@ using Object = UnityEngine.Object;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public class WeaponComponent : IGameListener, IGameTickable
+    public class WeaponController : IGameListener, IGameTickable
     {
         public bool CanShoot { get; private set; }
         private readonly Transform _weaponsParent;
         private Weapon _activeWeapon;
         private Weapon _weapon;
 
-        public WeaponComponent(
+        private WeaponSpawner _weaponSpawner;
+
+        public WeaponController(
             WeaponConfig defaultWeapon, 
             Transform weaponsParent, 
-            Weapon weapon)
+            Weapon weapon, 
+            WeaponSpawner weaponSpawner)
         {
             WeaponData weaponData = defaultWeapon.GetWeaponData();
             _weaponsParent = weaponsParent;
             _weapon = weapon;
+            _weaponSpawner = weaponSpawner;
             EquipWeapon(weaponData);
             SetCanShoot(true);
+        }
+        
+        public void Tick(float deltaTime)
+        {
+            SetIsFiring(true);
+            _activeWeapon.Fire();
         }
         
         public void SetCanShoot(bool value)
@@ -30,32 +40,37 @@ namespace Game.Modules.ShootingModule.Scripts
             CanShoot = value;
         }
         
+        public void EquipWeapon(WeaponData weaponData)
+        {
+            _weaponSpawner.DestroyWeapon(_activeWeapon.WeaponObj);
+            var weaponObj = _weaponSpawner.CreateWeapon(weaponData, _weaponsParent);
+            
+            _weapon.InitiateWeapon(weaponData, weaponObj);
+            SetActiveWeapon(_weapon);
+        }
+        
         private void SetActiveWeapon(Weapon weapon)
         {
             _activeWeapon = weapon;
-        }
-        
-        public void EquipWeapon(WeaponData weaponData)
-        {
-            if (_weaponsParent.transform.childCount > 0)
-            {
-                GameObject currentWeapon = _weaponsParent.transform.GetChild(0).gameObject;
-                Object.Destroy(currentWeapon);
-            }
-            GameObject weaponObj = Object.Instantiate(weaponData.WeaponPrefab, _weaponsParent);
-            _weapon.InitiateWeapon(weaponData, weaponObj);
-            SetActiveWeapon(_weapon);
         }
         
         private void SetIsFiring(bool value)
         {
             _activeWeapon.IsFiring = value;
         }
-        
-        public void Tick(float deltaTime)
+    }
+
+    public class WeaponSpawner
+    {
+
+        public GameObject CreateWeapon(WeaponData weaponData, Transform weaponParent)
         {
-            SetIsFiring(true);
-            _activeWeapon.Fire();
+            return Object.Instantiate(weaponData.WeaponPrefab, weaponParent);
+        }
+
+        public void DestroyWeapon(GameObject weapon)
+        {
+            Object.Destroy(weapon);
         }
     }
 }
