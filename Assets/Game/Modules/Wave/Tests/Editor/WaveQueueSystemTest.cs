@@ -158,5 +158,22 @@ namespace Game.Modules.Wave.Tests.Editor
             // Assert
             Assert.IsTrue(_waveQueueSystem.CountWaves == 0, "Queue should be cleared after dispose.");
         }
+        
+        [Test]
+        public void Given_GamePausedAndResumedMultipleTimes_When_GameContinues_Then_CurrentWaveResumesAndNextWaveDoesNotStart()
+        {
+            // Arrange
+            _waveQueueSystem.OnGameStart();
+    
+            // Act
+            _waveQueueSystem.OnGamePause();
+            _waveQueueSystem.OnGameResume();
+            _waveQueueSystem.OnGamePause();
+            _waveQueueSystem.OnGameResume();
+    
+            // Assert
+            _waveMock1.Verify(w => w.StartWave(), Times.Once, "First wave should start when the game starts.");
+            _waveMock2.Verify(w => w.StartWave(), Times.Never, "The next wave does not start when pausing and resuming.");
+        }
     }
 }

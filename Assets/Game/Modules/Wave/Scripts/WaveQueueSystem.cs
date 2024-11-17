@@ -54,7 +54,6 @@ namespace Game.Modules.Wave
         public void OnGameResume()
         {
             _isPlaying = true;
-            StartNextWave();
         }
 
         private void StartNextWave()
