@@ -36,7 +36,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
         {
             base.Start();
             _gameManager.AddListener(this);
-            _gameManager.StartGame();
+            _gameManager.StartGame(); //TODO : Remove it once we add proper Start/Stop.
         }
 
         public void OnGameStart()
