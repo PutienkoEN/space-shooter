@@ -1,4 +1,5 @@
 ﻿using SpaceShooter.Game.GameSpeed;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using UnityEngine.Audio;
 using Zenject;
@@ -6,7 +7,7 @@ using Zenject;
 namespace Game.Modules.GameSpeed
 {
     [RequireComponent(typeof(AudioMixer))]
-    public class GameSpeedInstaller : MonoInstaller
+    public class GameSpeedInstaller : MonoBehaviour, IGameModuleInstaller
     {
         [Tooltip("This is base speed scale of the game. Where 1.0f is 100% speed")] [Range(0, 2f)] [SerializeField]
         private float gameSpeedInitialScale = 1.0f;
@@ -24,23 +25,23 @@ namespace Game.Modules.GameSpeed
         [SerializeField]
         private AudioMixer audioMixer;
 
-        public override void InstallBindings()
+        public void Install(DiContainer container)
         {
-            Container
+            container
                 .BindInterfacesTo<GameSpeedManager>()
                 .AsSingle()
                 .WithArguments(gameSpeedInitialScale, gameSpeedSlowdownScale, timeForFullSlowDown, timeForFullSpeedup);
 
-            Container
+            container
                 .BindInterfacesTo<GameAudioSpeedManager>()
                 .AsSingle()
                 .WithArguments(audioMixer);
 
-            Container
+            container
                 .BindInterfacesTo<GameTimeScaleManager>()
                 .AsSingle();
 
-            Container
+            container
                 .BindInterfacesTo<UserInputGameSpeedController>()
                 .AsSingle()
                 .NonLazy();

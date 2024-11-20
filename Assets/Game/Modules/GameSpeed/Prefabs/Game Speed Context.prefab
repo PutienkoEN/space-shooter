@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2012117735042301691}
   - component: {fileID: 7064229614691273990}
   m_Layer: 0
-  m_Name: Game Speed Installer
+  m_Name: Game Speed Context
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
