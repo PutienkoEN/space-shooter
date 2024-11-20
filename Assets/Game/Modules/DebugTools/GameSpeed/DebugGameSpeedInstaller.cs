@@ -1,12 +1,14 @@
-﻿using Zenject;
+﻿using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
+using Zenject;
 
-namespace Game.Modules
+namespace Game.Modules.DebugTools
 {
-    public class DebugGameSpeedInstaller : MonoInstaller
+    public class DebugGameSpeedInstaller : MonoBehaviour, IGameModuleInstaller
     {
-        public override void InstallBindings()
+        public void Install(DiContainer container)
         {
-            Container
+            container
                 .Bind<DebugGameSpeedManager>()
                 .FromComponentInHierarchy()
                 .AsSingle()
