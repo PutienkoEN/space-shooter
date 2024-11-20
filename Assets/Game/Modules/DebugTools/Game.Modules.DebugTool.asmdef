@@ -1,8 +1,10 @@
 {
-  "name": "Game.LifeCycle.Common",
-  "rootNamespace": "SpaceShooter.Game.LifeCycle.Common",
+  "name": "Game.Modules.DebugTool",
+  "rootNamespace": "",
   "references": [
-    "Zenject"
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Game.Modules.GameSpeed"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

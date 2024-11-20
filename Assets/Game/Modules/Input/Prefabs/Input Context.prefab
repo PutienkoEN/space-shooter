@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3252267392490105428}
   - component: {fileID: 2789852990403272441}
+  - component: {fileID: -5107563833306770721}
   m_Layer: 0
-  m_Name: Player Input
+  m_Name: Input Context
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,3 +63,16 @@ MonoBehaviour:
   m_DefaultActionMap: Touch
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-5107563833306770721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740463732842903427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f4d2b76e774e879128a111ae716cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 2789852990403272441}

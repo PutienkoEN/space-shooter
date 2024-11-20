@@ -1,20 +1,21 @@
-﻿using UnityEngine;
+﻿using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.CameraUtility
 {
-    public class CameraInstaller : MonoInstaller
+    public class CameraInstaller : GameModuleInstaller
     {
         [SerializeField] private Camera mainCamera;
 
-        public override void InstallBindings()
+        public override void Install(DiContainer container)
         {
-            Container
+            container
                 .Bind<Camera>()
                 .FromInstance(mainCamera)
                 .AsSingle();
 
-            Container
+            container
                 .Bind<WorldCoordinates>()
                 .AsSingle();
         }

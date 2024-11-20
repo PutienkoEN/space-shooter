@@ -3,6 +3,7 @@
   "rootNamespace": "",
   "references": [
     "Zenject",
+    "Game.LifeCycle.Common",
     "Unity.InputSystem",
     "Game.Modules.CameraUtility"
   ],
