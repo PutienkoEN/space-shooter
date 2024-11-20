@@ -42,10 +42,10 @@ namespace Game.Modules.EnemyGroup.Scripts
 
         private void OnEnemyDeath(EnemyView enemy)
         {
-            Debug.Log($"Enemy {enemy.name} died. Remaining enemies: {_enemiesActive.Count}");
             enemy.OnDeath -= OnEnemyDeath;
             _enemiesActive.Remove(enemy);
             Object.Destroy(enemy.gameObject);
+            Debug.Log($"Enemy {enemy.name} died. Remaining enemies: {_enemiesActive.Count}");
             CheckDeathAllEnemy();
         }
 
