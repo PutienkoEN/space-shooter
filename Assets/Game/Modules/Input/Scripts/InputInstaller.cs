@@ -1,25 +1,26 @@
-﻿using UnityEngine;
+﻿using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 namespace SpaceShooter.Game.Input
 {
-    public class InputInstaller : MonoInstaller
+    public class InputInstaller : MonoBehaviour, IGameModuleInstaller
     {
         [SerializeField] private PlayerInput playerInput;
 
-        public override void InstallBindings()
+        public void Install(DiContainer container)
         {
-            Container
+            container
                 .Bind<PlayerInput>()
                 .FromInstance(playerInput)
                 .AsSingle();
 
-            Container
+            container
                 .BindInterfacesAndSelfTo<TouchInputHandler>()
                 .AsSingle();
 
-            Container
+            container
                 .BindInterfacesAndSelfTo<TouchInputMovementHandler>()
                 .AsSingle();
         }
