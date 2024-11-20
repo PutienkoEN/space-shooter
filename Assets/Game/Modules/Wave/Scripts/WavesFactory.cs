@@ -7,7 +7,6 @@
 using System;
 using Game.Modules.Wave.Config;
 using Game.Modules.Wave.Waves;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Wave
