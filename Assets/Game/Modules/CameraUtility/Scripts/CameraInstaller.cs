@@ -4,11 +4,11 @@ using Zenject;
 
 namespace SpaceShooter.Game.CameraUtility
 {
-    public class CameraInstaller : MonoBehaviour, IGameModuleInstaller
+    public class CameraInstaller : GameModuleInstaller
     {
         [SerializeField] private Camera mainCamera;
 
-        public void Install(DiContainer container)
+        public override void Install(DiContainer container)
         {
             container
                 .Bind<Camera>()

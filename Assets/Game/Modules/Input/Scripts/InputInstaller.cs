@@ -5,11 +5,11 @@ using Zenject;
 
 namespace SpaceShooter.Game.Input
 {
-    public class InputInstaller : MonoBehaviour, IGameModuleInstaller
+    public class InputInstaller : GameModuleInstaller
     {
         [SerializeField] private PlayerInput playerInput;
 
-        public void Install(DiContainer container)
+        public override void Install(DiContainer container)
         {
             container
                 .Bind<PlayerInput>()

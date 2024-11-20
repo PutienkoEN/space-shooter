@@ -7,7 +7,7 @@ using Zenject;
 namespace Game.Modules.GameSpeed
 {
     [RequireComponent(typeof(AudioMixer))]
-    public class GameSpeedInstaller : MonoBehaviour, IGameModuleInstaller
+    public class GameSpeedInstaller : GameModuleInstaller
     {
         [Tooltip("This is base speed scale of the game. Where 1.0f is 100% speed")] [Range(0, 2f)] [SerializeField]
         private float gameSpeedInitialScale = 1.0f;
@@ -25,7 +25,7 @@ namespace Game.Modules.GameSpeed
         [SerializeField]
         private AudioMixer audioMixer;
 
-        public void Install(DiContainer container)
+        public override void Install(DiContainer container)
         {
             container
                 .BindInterfacesTo<GameSpeedManager>()

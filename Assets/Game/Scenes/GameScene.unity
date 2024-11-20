@@ -358,6 +358,10 @@ PrefabInstance:
       value: '[GameSceneContext]'
       objectReference: {fileID: 0}
     - target: {fileID: 4079698042452451231, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 673412501714728181, guid: 5560186514018f04d8dcb85616c73e75, type: 3}
+    - target: {fileID: 4079698042452451231, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: spawnPosition
       value: 
       objectReference: {fileID: 989745151}

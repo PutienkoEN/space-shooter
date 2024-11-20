@@ -4,9 +4,9 @@ using Zenject;
 
 namespace Game.Modules.DebugTools
 {
-    public class DebugGameSpeedInstaller : MonoBehaviour, IGameModuleInstaller
+    public class DebugGameSpeedInstaller : GameModuleInstaller
     {
-        public void Install(DiContainer container)
+        public override void Install(DiContainer container)
         {
             container
                 .Bind<DebugGameSpeedManager>()
