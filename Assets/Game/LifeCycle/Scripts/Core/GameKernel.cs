@@ -18,11 +18,19 @@ namespace SpaceShooter.Game.LifeCycle.Core
         IGameFinishListener
     {
         [Inject] private IGameManager _gameManager;
-        
-        [Inject(Optional = true, Source = InjectSources.Local)] private readonly List<IGameListener> _gameListeners = new();
-        [Inject(Optional = true, Source = InjectSources.Local)] private readonly List<IGameLateTickable> _lateTickables = new();
-        [Inject(Optional = true, Source = InjectSources.Local)] private readonly List<IGameTickable> _tickables = new();
-        [Inject(Optional = true, Source = InjectSources.Local)] private readonly List<IGameFixedTickable> _fixedTickables = new();
+
+        [Inject(Optional = true, Source = InjectSources.Local)]
+        private readonly List<IGameListener> _gameListeners = new();
+
+        [Inject(Optional = true, Source = InjectSources.Local)]
+        private readonly List<IGameLateTickable> _lateTickables = new();
+
+        [Inject(Optional = true, Source = InjectSources.Local)]
+        private readonly List<IGameTickable> _tickables = new();
+
+        [Inject(Optional = true, Source = InjectSources.Local)]
+        private readonly List<IGameFixedTickable> _fixedTickables = new();
+
 
         public override void Start()
         {
@@ -74,14 +82,14 @@ namespace SpaceShooter.Game.LifeCycle.Core
                 }
             }
         }
-        
+
         public override void LateUpdate()
         {
             base.LateUpdate();
 
             if (_gameManager.State != GameState.PLAY)
                 return;
-            
+
             var deltaTime = Time.deltaTime;
             foreach (var tickable in _lateTickables)
             {
@@ -92,10 +100,10 @@ namespace SpaceShooter.Game.LifeCycle.Core
         public override void Update()
         {
             base.Update();
-            
+
             if (_gameManager.State != GameState.PLAY)
                 return;
-            
+
             var deltaTime = Time.deltaTime;
             foreach (var tickable in _tickables)
             {
@@ -106,10 +114,10 @@ namespace SpaceShooter.Game.LifeCycle.Core
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            
+
             if (_gameManager.State != GameState.PLAY)
                 return;
-            
+
             var deltaTime = Time.fixedDeltaTime;
             foreach (var tickable in _fixedTickables)
             {

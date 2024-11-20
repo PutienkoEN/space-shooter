@@ -10,7 +10,14 @@ namespace SpaceShooter.Game.LifeCycle.Core
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<GameManager>().AsSingle();
+            Container
+                .BindInterfacesTo<GameManager>()
+                .AsSingle();
+
+            Container
+                .Bind<DOTweenConfiguration>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

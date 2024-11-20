@@ -1,12 +1,9 @@
 {
-  "name": "Game.Modules.Player",
+  "name": "SettingsManager",
   "rootNamespace": "",
   "references": [
     "Zenject",
-    "Game.Modules.CameraUtility",
-    "Game.Modules.Input",
-    "Game.Modules.Components",
-    "Game.LifeCycle.Common"
+    "Background"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

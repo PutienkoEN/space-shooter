@@ -1,12 +1,10 @@
 {
-  "name": "Game.Modules.Player",
+  "name": "Game.Modules.GameSpeed",
   "rootNamespace": "",
   "references": [
     "Zenject",
-    "Game.Modules.CameraUtility",
-    "Game.Modules.Input",
-    "Game.Modules.Components",
-    "Game.LifeCycle.Common"
+    "Game.LifeCycle.Common",
+    "Game.Modules.Input"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
