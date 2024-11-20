@@ -9,7 +9,7 @@ namespace Game.Modules.ShootingModule.Scripts
 {
     public class Weapon : IWeapon
     {
-        private Transform[] firepoints;
+        private Transform[] _firepoints;
         private float _fireRate;
 
         private float _timer;
@@ -17,18 +17,23 @@ namespace Game.Modules.ShootingModule.Scripts
 
         public void InitiateWeapon(WeaponData weaponData)
         {
-            // _fireRate = weaponData.FireRate;
-            
+            _firepoints = weaponData.FirePoints;
+            _fireRate = 2f; //TODO: This will be replaced with data from Config;
+            _timer = _fireRate;
         }
         
         public void Fire(float deltaTime)
         {
-            if (IsFiring)
+            // Debug.Log("_timer : " + _timer);
+            if (!IsFiring)
             {
-                _timer -= deltaTime;
+               IsFiring = true;
+               LaunchBullet();
             }
             
-            if (IsFiring && _timer <= 0)
+            _timer -= deltaTime;
+            
+            if (_timer <= 0)
             {
                 LaunchBullet();
                 _timer = _fireRate;
@@ -37,16 +42,17 @@ namespace Game.Modules.ShootingModule.Scripts
 
         private void LaunchBullet()
         {
-            // foreach (Transform source in WeaponObj.transform)
-            // {
-            //    Debug.Log("Launching bullet");
-            // }
+            foreach (Transform firepoint in _firepoints)
+            {
+               Debug.Log("Launching bullet");
+            }
         }
 
     }
 
     public interface IWeapon
     {
+        public void InitiateWeapon(WeaponData weaponData);
         public void Fire(float deltaTime);
     }
 }

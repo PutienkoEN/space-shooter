@@ -8,17 +8,16 @@ namespace Game.Modules.ShootingModule.Scripts
     public class WeaponComponentInstaller : MonoInstaller
     {
         [SerializeField] private WeaponConfig weaponConfig;
-        [SerializeField] private Transform weaponParent;
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<Weapon>().AsSingle();
-            Container.Bind<WeaponSpawner>().AsSingle().NonLazy();
+            // Container.BindInterfacesAndSelfTo<Weapon>().AsSingle();
+            // Container.Bind<WeaponSpawner>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<WeaponController>()
                 .AsSingle()
-                .WithArguments(weaponConfig, weaponParent)
+                .WithArguments(weaponConfig)
                 .NonLazy();
 
-            Container.Bind<WeaponChanger>().FromComponentInHierarchy().AsSingle().NonLazy();
+            // Container.Bind<WeaponChanger>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
 }
