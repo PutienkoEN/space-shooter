@@ -21,7 +21,7 @@ namespace Game.Modules.Wave
         
         public override void InstallBindings()
         {
-            Container.BindInstance(listWaveConfig);
+            Container.Bind<IWaveListConfig>().FromInstance(listWaveConfig);
             
             Container.BindInterfacesAndSelfTo<EnemyFactory>()
                 .AsSingle()

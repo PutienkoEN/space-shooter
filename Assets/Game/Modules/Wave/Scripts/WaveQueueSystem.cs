@@ -33,7 +33,7 @@ namespace Game.Modules.Wave
         private bool _isWaveQueueFinished;
         
         //TODO Maybe move it to the Init() method.
-        public WaveQueueSystem(WaveListConfig waveListConfig, WavesFactory wavesFactory)
+        public WaveQueueSystem(IWaveListConfig waveListConfig, WavesFactory wavesFactory)
         {
             if (waveListConfig == null) throw new ArgumentNullException(nameof(waveListConfig));
 
@@ -151,4 +151,5 @@ namespace Game.Modules.Wave
             ResetQueue();
         }
     }
+    
 }
