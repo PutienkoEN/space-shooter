@@ -1,12 +1,9 @@
 {
-    "name": "Game.Modules.Wave",
+    "name": "Game.Modules.EnemyGroup",
     "rootNamespace": "",
     "references": [
-        "Zenject",
-        "Game.LifeCycle.Common",
-        "Game.Modules.EnemyGroup",
         "Game.Modules.Enemy",
-        "Unity.TextMeshPro"
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

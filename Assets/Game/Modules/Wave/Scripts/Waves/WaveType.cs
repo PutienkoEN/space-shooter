@@ -1,13 +1,15 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
-// <created>: 2024-11-16
-// <file>: IWaveData.cs
+// <created>: 2024-11-20
+// <file>: WaveType.cs
 // ------------------------------------------------------------------------------
 
-namespace Game.Modules.Wave.Interface
+namespace Game.Modules.Wave.Waves
 {
-    public interface IWaveData
+    public enum WaveType
     {
-        IWave GetWave();
+        WaveEnemy,
+        WaveDelay,
+        WaveEvent
     }
 }

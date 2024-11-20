@@ -1,15 +1,16 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
 // <created>: 2024-11-16
-// <file>: IListWaveConfig.cs
+// <file>: WaveConfig.cs
 // ------------------------------------------------------------------------------
 
-using System.Collections.Generic;
+using UnityEngine;
 
-namespace Game.Modules.Wave.Interface
+namespace Game.Modules.Wave.Config
 {
-    public interface IListWaveConfig
+    public abstract class WaveConfig : ScriptableObject
     {
-        IReadOnlyList<IWaveData> GetListWaveConfig();
+        public abstract IWaveData GetWaveData();
     }
+    public interface IWaveData { }
 }

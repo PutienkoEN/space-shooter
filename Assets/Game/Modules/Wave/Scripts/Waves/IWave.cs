@@ -1,16 +1,17 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
 // <created>: 2024-11-16
-// <file>: WaveConfig.cs
+// <file>: IWave.cs
 // ------------------------------------------------------------------------------
 
-using Game.Modules.Wave.Interface;
-using UnityEngine;
+using System;
 
-namespace Game.Modules.Wave.Data
+namespace Game.Modules.Wave.Waves
 {
-    public abstract class WaveConfig : ScriptableObject
+    public interface IWave
     {
-        public abstract IWaveData GetWaveData();
+        event Action OnWaveFinished;
+        void StartWave();
+        void Dispose();
     }
 }
