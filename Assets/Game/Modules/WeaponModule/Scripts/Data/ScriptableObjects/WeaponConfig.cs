@@ -1,51 +1,42 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "WeaponConfig", menuName = "SpaceShooter/ShootingModule/WeaponConfig", order = 0)]
-    public class WeaponConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "WeaponData", menuName = "SpaceShooter/ShootingModule/WeaponData", order = 0)]
+    public sealed class WeaponConfig : ScriptableObject
     {
         [SerializeField] private WeaponView prefab;
-        [SerializeField] private Transform parent;
         [SerializeField] private int damage;
+        [SerializeField] private float fireRate;
         [SerializeField] private ProjectileConfig projectileConfig;
 
         public WeaponData GetWeaponData()
         {
             return new WeaponData(
-                prefab.firePoints,
-                parent,
+                prefab,
                 damage,
+                fireRate,
                 projectileConfig);
         }
     }
 
     public struct WeaponData
     {
-        public Transform[] FirePoints;
-        public Transform Parent;
+        public WeaponView Prefab;
         public int Damage;
+        public float FireRate;
         public IProjectileConfig ProjectileConfig;
 
         public WeaponData(
-            Transform[] firePoints,
-            Transform parent,
+            WeaponView prefab,
             int damage,
+            float fireRate,
             IProjectileConfig projectileConfig)
         {
-            FirePoints = firePoints;
-            Parent = parent;
             Damage = damage;
             ProjectileConfig = projectileConfig;
+            FireRate = fireRate;
+            Prefab = prefab;
         }
-    }
-    
-    public class ProjectileConfig : ScriptableObject, IProjectileConfig
-    {
-    }
-
-    public interface IProjectileConfig
-    {
     }
 }

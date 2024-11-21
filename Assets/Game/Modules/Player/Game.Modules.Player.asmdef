@@ -6,7 +6,8 @@
         "GUID:03d1cb4877a3f7b41baf3faeaeed9a85",
         "GUID:b09b360d00317bd41bcff73f759f8dc4",
         "GUID:0712c349d3e24e8d8e25048a0b08f7fa",
-        "GUID:efdd616bd324540bab8c316dbfba7c02"
+        "GUID:efdd616bd324540bab8c316dbfba7c02",
+        "Game.Modules.Weapon"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

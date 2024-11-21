@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c9e1a1d423e475f8d25fee13f483a3d, type: 3}
-  m_Name: SingleShotWeaponConfig
+  m_Name: SingleShotWeaponData
   m_EditorClassIdentifier: 
   prefab: {fileID: -5788393637922991918, guid: 6ab5c5d712a91014db0b242a07d959cd, type: 3}
-  parent: {fileID: 0}
   damage: 0
-  projectileConfig: {fileID: 0}
+  fireRate: 2
+  projectileConfig: {fileID: 11400000, guid: 8e82717d816681847840239e87326052, type: 2}

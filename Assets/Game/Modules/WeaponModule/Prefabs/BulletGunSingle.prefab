@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4168117584104971329}
   - component: {fileID: -5788393637922991918}
   m_Layer: 0
-  m_Name: BulletGunSingleView
+  m_Name: BulletGunSingle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
