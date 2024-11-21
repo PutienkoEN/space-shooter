@@ -37,7 +37,7 @@ namespace Game.Modules.Wave.Waves
             _enemyGroupManager.OnDeathAllEnemy += OnDeathAllEnemy;
             foreach (var enemyGroupData in _listEnemyGroupData)
             {
-                _enemyGroupManager.SpawnEnemies(enemyGroupData.listEnemyData);
+                _enemyGroupManager.SpawnEnemies(enemyGroupData.ListEnemyData);
             }
         }
 

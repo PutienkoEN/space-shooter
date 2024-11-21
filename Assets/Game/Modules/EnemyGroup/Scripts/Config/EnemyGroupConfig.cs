@@ -26,11 +26,11 @@ namespace Game.Modules.Enemy.Scripts
 
     public struct EnemyGroupData
     {
-        public IReadOnlyList<EnemyData> listEnemyData { get; private set; }
+        public IReadOnlyList<EnemyData> ListEnemyData { get; private set; }
 
         public EnemyGroupData(IReadOnlyList<EnemyData> listEnemyData)
         {
-            this.listEnemyData = listEnemyData;
+            this.ListEnemyData = listEnemyData;
         }
     }
 }
