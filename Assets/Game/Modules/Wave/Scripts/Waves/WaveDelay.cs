@@ -7,20 +7,15 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.Modules.Wave.Config;
 using UnityEngine;
 
 namespace Game.Modules.Wave.Waves
 {
-    public interface IWaveDelay
-    {
-        event Action<float> OnTimeUpdated;
-    }
-    
-    public sealed class WaveDelay : IWave, IWaveDelay
+    public sealed class WaveDelay : IWave
     {
         public event Action OnWaveFinished;
-        public event Action<float> OnTimeUpdated;
         
         private float _duration;
         private CancellationTokenSource _cancellationTokenSource;
@@ -41,10 +36,10 @@ namespace Game.Modules.Wave.Waves
                 throw new InvalidOperationException("Delay has already been started.");
             }
             Debug.Log("[WaveDelay] StartWave");
-            StartDelayAsync().ConfigureAwait(false);
+            StartDelayAsync().Forget();
         }
 
-        private async Task StartDelayAsync()
+        private async UniTaskVoid StartDelayAsync()
         {
             if (_delayStarted)
             {
@@ -61,8 +56,7 @@ namespace Game.Modules.Wave.Waves
                 while (remainingTime > 0)
                 {
                     Debug.Log(TimeSpan.FromSeconds(remainingTime).ToString(@"mm\:ss"));
-                    OnTimeUpdated?.Invoke(remainingTime);
-                    await Task.Delay(1000, _cancellationTokenSource.Token);
+                    await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
                     remainingTime -= 1f;
                 }
 

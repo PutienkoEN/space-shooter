@@ -6,7 +6,7 @@
         "Game.LifeCycle.Common",
         "Game.Modules.EnemyGroup",
         "Game.Modules.Enemy",
-        "Unity.TextMeshPro"
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
