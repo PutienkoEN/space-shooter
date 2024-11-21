@@ -1,21 +1,25 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
 // <created>: 2024-11-16
-// <file>: ListWaveConfig.cs
+// <file>: WaveListConfig.cs
 // ------------------------------------------------------------------------------
 
 using System.Collections.Generic;
 using System.Linq;
-using Game.Modules.Wave.Interface;
 using UnityEngine;
 
-namespace Game.Modules.Wave.Data
+namespace Game.Modules.Wave.Config
 {
+    public interface IWaveListConfig
+    {
+        IReadOnlyList<IWaveData> GetListWaveConfig();
+    }
+    
     [CreateAssetMenu(
-        fileName = "ListWaveConfig",
-        menuName = "SpaceShooter/Wave/ListWaveConfig",
+        fileName = "WaveListConfig",
+        menuName = "SpaceShooter/Wave/WaveListConfig",
         order = 0)]
-    internal sealed class ListWaveConfig : ScriptableObject, IListWaveConfig
+    internal sealed class WaveListConfig : ScriptableObject, IWaveListConfig
     {
         [SerializeField] private List<WaveConfig> listWaveConfig;
 
