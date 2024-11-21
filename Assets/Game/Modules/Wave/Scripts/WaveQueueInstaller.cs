@@ -35,7 +35,6 @@ namespace Game.Modules.Wave
             
             Container.Bind<WaveEnemyGroup>().AsTransient();
             Container.Bind<WaveDelay>().AsTransient();
-            Container.Bind<WaveEvent>().AsTransient();
             
             Container.BindInterfacesAndSelfTo<WaveQueueSystem>()
                 .AsSingle()

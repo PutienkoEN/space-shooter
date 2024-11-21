@@ -26,7 +26,6 @@ namespace Game.Modules.Wave
             {
                 WaveEnemyGroupData enemyGroupData => _container.Resolve<WaveEnemyGroup>().Init(enemyGroupData),
                 WaveDelayData delayData => _container.Resolve<WaveDelay>().Init(delayData),
-                WaveEventData eventData => _container.Resolve<WaveEvent>().Init(eventData),
                 _ => throw new ArgumentException($"Unknown wave data type: {waveData.GetType()}")
             };
         }
