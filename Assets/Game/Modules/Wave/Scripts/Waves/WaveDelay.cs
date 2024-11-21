@@ -18,8 +18,9 @@ namespace Game.Modules.Wave.Waves
         public event Action OnWaveFinished;
         
         private float _duration;
+        private float _remainingTime;
         private CancellationTokenSource _cancellationTokenSource;
-        private bool _delayStarted;
+        private bool _isDelayStarted;
 
         public IWave Init(WaveDelayData data)
         {
@@ -31,9 +32,9 @@ namespace Game.Modules.Wave.Waves
 
         public void StartWave()
         {
-            if (_delayStarted)
+            if (_isDelayStarted)
             {
-                throw new InvalidOperationException("Delay has already been started.");
+                throw new InvalidOperationException($"Delay has already been started. Duration = {_duration} RemainingTime = {TimeSpan.FromSeconds(_remainingTime):mm\\:ss} isDelayStarted = {_isDelayStarted}");
             }
             Debug.Log("[WaveDelay] StartWave");
             StartDelayAsync().Forget();
@@ -41,23 +42,23 @@ namespace Game.Modules.Wave.Waves
 
         private async UniTaskVoid StartDelayAsync()
         {
-            if (_delayStarted)
+            if (_isDelayStarted)
             {
                 Debug.LogWarning("Delay has already been started.");
                 return;
             }
 
-            _delayStarted = true;
+            _isDelayStarted = true;
             _cancellationTokenSource = new CancellationTokenSource();
 
             try
             {
-                var remainingTime = _duration;
-                while (remainingTime > 0)
+                _remainingTime = _duration;
+                while (_remainingTime > 0)
                 {
-                    Debug.Log(TimeSpan.FromSeconds(remainingTime).ToString(@"mm\:ss"));
+                    Debug.Log(TimeSpan.FromSeconds(_remainingTime).ToString(@"mm\:ss"));
                     await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
-                    remainingTime -= 1f;
+                    _remainingTime -= 1f;
                 }
 
                 OnWaveFinished?.Invoke();
@@ -68,7 +69,7 @@ namespace Game.Modules.Wave.Waves
             }
             finally
             {
-                _delayStarted = false;
+                _isDelayStarted = false;
             }
         }
 
