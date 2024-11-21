@@ -1,18 +1,19 @@
 {
-    "name": "Game.Modules.Input",
-    "rootNamespace": "",
-    "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:03d1cb4877a3f7b41baf3faeaeed9a85"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Game.Modules.Input",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Unity.InputSystem",
+    "Game.Modules.CameraUtility"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }
