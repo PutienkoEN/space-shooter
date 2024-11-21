@@ -24,14 +24,9 @@ namespace Game.Modules.Wave.Waves
             _enemyGroupManager = enemyGroupManager;
         }
 
-        public IWave Init(IWaveData data)
+        public IWave Init(WaveEnemyGroupData data)
         {
-            if (data is not WaveEnemyGroupData enemyGroupData)
-            {
-                throw new InvalidOperationException($"[WaveDelay] Unknown wave data type: {data.GetType()}");
-            }
-            
-            _listEnemyGroupData = enemyGroupData.listEnemyGroupData;
+            _listEnemyGroupData = data.listEnemyGroupData;
             
             return this;
         }

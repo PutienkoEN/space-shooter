@@ -26,15 +26,10 @@ namespace Game.Modules.Wave.Waves
         private CancellationTokenSource _cancellationTokenSource;
         private bool _delayStarted;
 
-        public IWave Init(IWaveData data)
+        public IWave Init(WaveDelayData data)
         {
-            if (data is not WaveDelayData delayData)
-            {
-                throw new InvalidOperationException($"[WaveDelay] Unknown wave data type: {data.GetType()}");
-            }
-
             Debug.Log("[WaveDelay] Init");
-            _duration = delayData.Duration;
+            _duration = data.Duration;
 
             return this;
         }

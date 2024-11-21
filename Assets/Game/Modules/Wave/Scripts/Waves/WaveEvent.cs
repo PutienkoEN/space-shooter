@@ -13,7 +13,7 @@ namespace Game.Modules.Wave.Waves
     {
         public event Action OnWaveFinished;
         
-        public IWave Init(IWaveData data)
+        public IWave Init(WaveEventData data)
         {
             return this;
         }
