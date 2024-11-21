@@ -1,18 +1,19 @@
 {
-    "name": "Game.LifeCycle.Core",
-    "rootNamespace": "SpaceShooter.Game.LifeCycle.Core",
-    "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:efdd616bd324540bab8c316dbfba7c02",
-        "GUID:03d1cb4877a3f7b41baf3faeaeed9a85"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Game.LifeCycle.Core",
+  "rootNamespace": "SpaceShooter.Game.LifeCycle.Core",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Game.Modules.CameraUtility",
+    "Game.Modules.GameSpeed"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }
