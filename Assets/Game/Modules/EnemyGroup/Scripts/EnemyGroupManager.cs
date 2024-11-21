@@ -15,7 +15,7 @@ namespace Game.Modules.EnemyGroup.Scripts
     public interface IEnemyGroupManager
     {
         event Action OnDeathAllEnemy;
-        public void SpawnEnemies(IEnumerable<EnemyData> enemiesData);
+        void SpawnEnemies(IEnumerable<EnemyData> enemiesData);
     }
     
     //TODO This class will work on all enemy groups on the stage.
