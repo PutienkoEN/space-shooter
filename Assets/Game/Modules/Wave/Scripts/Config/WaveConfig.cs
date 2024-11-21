@@ -1,13 +1,16 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
 // <created>: 2024-11-16
-// <file>: IWaveData.cs
+// <file>: WaveConfig.cs
 // ------------------------------------------------------------------------------
 
-namespace Game.Modules.Wave.Interface
+using UnityEngine;
+
+namespace Game.Modules.Wave.Config
 {
-    public interface IWaveData
+    public abstract class WaveConfig : ScriptableObject
     {
-        IWave GetWave();
+        public abstract IWaveData GetWaveData();
     }
+    public interface IWaveData { }
 }

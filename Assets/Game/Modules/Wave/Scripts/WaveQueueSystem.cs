@@ -6,7 +6,8 @@
 
 using System;
 using System.Collections.Generic;
-using Game.Modules.Wave.Interface;
+using Game.Modules.Wave.Config;
+using Game.Modules.Wave.Waves;
 using ModestTree;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
@@ -32,13 +33,14 @@ namespace Game.Modules.Wave
         private bool _isWaveQueueFinished;
         
         //TODO Maybe move it to the Init() method.
-        public WaveQueueSystem(IListWaveConfig listWaveConfig)
+        public WaveQueueSystem(IWaveListConfig waveListConfig, WavesFactory wavesFactory)
         {
-            if (listWaveConfig == null) throw new ArgumentNullException(nameof(listWaveConfig));
+            if (waveListConfig == null) throw new ArgumentNullException(nameof(waveListConfig));
 
-            foreach (var waveData in listWaveConfig.GetListWaveConfig())
+            foreach (var waveData in waveListConfig.GetListWaveConfig())
             {
-                _waves.Enqueue(waveData.GetWave());
+                var wave = wavesFactory.Create(waveData);
+                _waves.Enqueue(wave);
             }
         }
 
@@ -113,6 +115,7 @@ namespace Game.Modules.Wave
                 return;
             }
 
+            Debug.Log("All the waves are over.");
             _isWaveQueueFinished = true;
             OnWaveQueueFinished?.Invoke();
         }
@@ -148,4 +151,5 @@ namespace Game.Modules.Wave
             ResetQueue();
         }
     }
+    
 }

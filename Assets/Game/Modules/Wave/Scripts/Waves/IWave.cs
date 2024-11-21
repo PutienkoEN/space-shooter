@@ -1,15 +1,17 @@
 // ------------------------------------------------------------------------------
 // <author>: Iurii Ponomarev (Ponyu)
 // <created>: 2024-11-16
-// <file>: IListWaveConfig.cs
+// <file>: IWave.cs
 // ------------------------------------------------------------------------------
 
-using System.Collections.Generic;
+using System;
 
-namespace Game.Modules.Wave.Interface
+namespace Game.Modules.Wave.Waves
 {
-    public interface IListWaveConfig
+    public interface IWave
     {
-        IReadOnlyList<IWaveData> GetListWaveConfig();
+        event Action OnWaveFinished;
+        void StartWave();
+        void Dispose();
     }
 }
