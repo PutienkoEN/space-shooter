@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abd49a4e75742968e39e120f48ad48d, type: 3}
   m_Name: EnemyConfig-Sphere
   m_EditorClassIdentifier: 
-  enemyView: {fileID: 8561222294921315145, guid: 78f0a7d67bf7c4acca1ce015519a48ea, type: 3}
+  enemyPrefab: {fileID: 8561222294921315145, guid: 78f0a7d67bf7c4acca1ce015519a48ea, type: 3}

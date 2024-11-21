@@ -13,18 +13,18 @@ namespace Game.Modules.Enemy.Scripts
         menuName = "SpaceShooter/Enemy/EnemyConfig")]
     public sealed class EnemyConfig : ScriptableObject
     {
-        [SerializeField] private EnemyView enemyView;
+        [SerializeField] private EnemyView enemyPrefab;
 
-        public EnemyData GetEnemyData() => new EnemyData(enemyView);
+        public EnemyData GetEnemyData() => new EnemyData(enemyPrefab);
     }
 
     public struct EnemyData
     {
-        public EnemyView enemyView { get; private set; }
+        public EnemyView enemyPrefab { get; private set; }
 
-        public EnemyData(EnemyView enemyView)
+        public EnemyData(EnemyView enemyPrefab)
         {
-            this.enemyView = enemyView;
+            this.enemyPrefab = enemyPrefab;
         }
     }
 }

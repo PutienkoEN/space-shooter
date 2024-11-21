@@ -24,7 +24,7 @@ namespace Game.Modules.Enemy.Scripts
 
         public EnemyView CreateEnemy(EnemyData data)
         {
-            return Object.Instantiate(data.enemyView, _worldContainer);
+            return Object.Instantiate(data.enemyPrefab, _worldContainer);
         }
     }
 }
