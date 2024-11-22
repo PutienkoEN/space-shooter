@@ -2,13 +2,12 @@
 using SpaceShooter.Game.CameraUtility;
 using SpaceShooter.Game.Components;
 using SpaceShooter.Game.Input;
-using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player
 {
-    public class PlayerMovementController : IInitializable, IDisposable, IGameTickable
+    public class PlayerMovementController : IInitializable, IDisposable
     {
         private readonly MoveComponent _moveComponent;
         private readonly ColliderComponent _colliderComponent;
@@ -42,7 +41,7 @@ namespace SpaceShooter.Game.Player
             _touchInputMovementHandler.OnPositionChange -= MovePlayerToCoordinates;
         }
 
-        public void Tick(float deltaTime)
+        public void Move(float deltaTime)
         {
             _moveComponent.Move(_targetPosition, deltaTime);
         }
