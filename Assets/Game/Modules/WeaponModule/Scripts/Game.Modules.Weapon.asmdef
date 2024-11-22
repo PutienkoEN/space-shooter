@@ -1,0 +1,7 @@
+﻿{
+  "name": "Game.Modules.Weapon",
+  "references": [
+    "Game.LifeCycle.Common",
+    "Zenject"
+  ]
+}

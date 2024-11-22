@@ -1,11 +1,12 @@
 {
-    "name": "Background",
-    "rootNamespace": "",
+    "name": "Game.WeaponModule.Tests.Editor",
+    "rootNamespace": "SpaceShooter.WeaponModule.Tests",
     "references": [
-        "Zenject",
-        "Game.LifeCycle.Common"
+        "Game.Modules.Weapon"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
