@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public interface IWeapon
+    public interface IWeaponComponent
     {
-        public void Setup(WeaponData weaponData, Transform[] firePoints);
+        public void Setup(WeaponConfig weaponConfig, Transform[] firePoints);
         public void Fire(float deltaTime);
     }
 }

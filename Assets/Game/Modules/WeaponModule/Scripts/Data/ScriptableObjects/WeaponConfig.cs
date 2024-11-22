@@ -16,7 +16,7 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
                 prefab,
                 damage,
                 fireRate,
-                projectileConfig);
+                projectileConfig.GetProjectileData());
         }
     }
 
@@ -25,16 +25,16 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
         public WeaponView Prefab;
         public int Damage;
         public float FireRate;
-        public IProjectileConfig ProjectileConfig;
+        public ProjectileData ProjectileData;
 
         public WeaponData(
             WeaponView prefab,
             int damage,
             float fireRate,
-            IProjectileConfig projectileConfig)
+            ProjectileData projectileData)
         {
             Damage = damage;
-            ProjectileConfig = projectileConfig;
+            ProjectileData = projectileData;
             FireRate = fireRate;
             Prefab = prefab;
         }

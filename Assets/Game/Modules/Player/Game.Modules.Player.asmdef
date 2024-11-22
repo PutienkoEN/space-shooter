@@ -6,7 +6,8 @@
     "Game.Modules.CameraUtility",
     "Game.Modules.Input",
     "Game.Modules.Components",
-    "Game.LifeCycle.Common"
+    "Game.LifeCycle.Common",
+    "Game.Modules.Weapon"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

@@ -38,7 +38,9 @@ namespace SpaceShooter.Game.Player
             
             Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
             
-            Container.BindInterfacesAndSelfTo<WeaponController>().AsSingle().WithArguments(_weaponConfig, player);
+            Container.BindInterfacesAndSelfTo<WeaponController>()
+                .AsSingle()
+                .WithArguments(_weaponConfig, player);
         }
     }
 }
