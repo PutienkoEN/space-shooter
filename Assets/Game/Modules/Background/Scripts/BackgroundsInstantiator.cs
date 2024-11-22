@@ -61,7 +61,7 @@ namespace Game.Modules.Background.Scripts
                     Debug.LogError("Failed to get Renderer component on background prefab.");
                 }
                 
-                IBackgroundPresenter presenter = new BackgroundPresenter(backgroundData.Material, backgroundData.Speed);
+                IBackgroundPresenter presenter = new BackgroundPresenter(rendererComponent.material, backgroundData.Speed);
                 _backgroundPresenters.Add(presenter);
             }
         }
