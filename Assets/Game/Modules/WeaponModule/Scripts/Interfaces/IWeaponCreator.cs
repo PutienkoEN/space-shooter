@@ -5,6 +5,6 @@ namespace Game.Modules.ShootingModule.Scripts
 {
     public interface IWeaponCreator
     {
-        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, GameObject parentEntity);
+        public IWeaponComponent CreateWeapon(WeaponDataConfig weaponDataConfig, GameObject parentEntity);
     }
 }

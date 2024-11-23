@@ -2,6 +2,7 @@
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.Components;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace SpaceShooter.Game.Player
@@ -13,12 +14,17 @@ namespace SpaceShooter.Game.Player
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private float speed;
 
-        [SerializeField] private WeaponConfig _weaponConfig;
+        [SerializeField] private WeaponDataConfig weaponDataConfig;
 
         public override void InstallBindings()
         {
-            var player = Container
+            GameObject player = Container
                 .InstantiatePrefab(playerPrefab, spawnPosition.position, Quaternion.identity, worldContainer);
+            
+            Container.Bind<GameObject>()
+                .WithId("Player")
+                .FromInstance(player)
+                .AsSingle();
 
             Container
                 .Bind<MoveComponent>()
@@ -35,12 +41,6 @@ namespace SpaceShooter.Game.Player
                 .BindInterfacesAndSelfTo<PlayerMovementController>()
                 .AsSingle()
                 .NonLazy();
-            
-            Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<WeaponController>()
-                .AsSingle()
-                .WithArguments(_weaponConfig, player);
         }
     }
 }

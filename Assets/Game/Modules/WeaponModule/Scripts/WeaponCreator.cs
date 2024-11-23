@@ -1,16 +1,22 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, GameObject parentEntity)
+        private WeaponComponent.Factory _weaponComponentFactory;
+        public WeaponCreator(WeaponComponent.Factory weaponComponentFactory)
         {
-            if (weaponConfig == null)
+            _weaponComponentFactory = weaponComponentFactory;
+        }
+        public IWeaponComponent CreateWeapon(WeaponDataConfig weaponDataConfig, GameObject parentEntity)
+        {
+            if (weaponDataConfig == null)
             {
-                throw new System.ArgumentNullException(nameof(weaponConfig));
+                throw new System.ArgumentNullException(nameof(weaponDataConfig));
             }
             
             if (parentEntity == null)
@@ -20,16 +26,16 @@ namespace Game.Modules.ShootingModule.Scripts
 
             Transform weaponParent = SetWeaponParent(parentEntity);
 
-            WeaponView weaponView = SetWeaponView(weaponConfig, weaponParent);
+            WeaponView weaponView = SetWeaponView(weaponDataConfig, weaponParent);
             
-            IWeaponComponent weaponComponent = new WeaponComponent(new BulletLauncher());
-            weaponComponent.Setup(weaponConfig, weaponView.firePoints);
+            IWeaponComponent weaponComponent = _weaponComponentFactory.Create();
+            weaponComponent.Setup(weaponDataConfig, weaponView.firePoints);
             return weaponComponent;
         }
 
-        private WeaponView SetWeaponView(WeaponConfig weaponConfig, Transform weaponParent)
+        private WeaponView SetWeaponView(WeaponDataConfig weaponDataConfig, Transform weaponParent)
         {
-            WeaponData weaponData = weaponConfig.GetWeaponData();
+            WeaponData weaponData = weaponDataConfig.GetWeaponData();
             WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
             return weaponView;
         }

@@ -3,7 +3,7 @@
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "ProjectileData", menuName = "SpaceShooter/ShootingModule/ProjectileData", order = 0)]
-    public sealed class ProjectileConfig : ScriptableObject, IProjectileConfig
+    public sealed class ProjectileDataConfig : ScriptableObject, IProjectileDataConfig
     {
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float projectileSpeed;

@@ -1,12 +1,13 @@
 ﻿using System;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponComponent : IWeaponComponent
     {
-        private readonly BulletLauncher _bulletLauncher;
+        private readonly BulletSpawner _bulletSpawner;
         private GameObject _projectilePrefab;
         private Transform[] _firePoints;
         private float _fireRate;
@@ -14,16 +15,16 @@ namespace Game.Modules.ShootingModule.Scripts
 
         private float _timer;
 
-        public WeaponComponent(BulletLauncher bulletLauncher)
+        public WeaponComponent(BulletSpawner bulletSpawner)
         {
-            _bulletLauncher = bulletLauncher;
+            _bulletSpawner = bulletSpawner;
         }
 
-        public void Setup(WeaponConfig weaponConfig, Transform[] firePoints)
+        public void Setup(WeaponDataConfig weaponDataConfig, Transform[] firePoints)
         {
-            if (weaponConfig == null)
+            if (weaponDataConfig == null)
             {
-                throw new ArgumentNullException(nameof(weaponConfig));
+                throw new ArgumentNullException(nameof(weaponDataConfig));
             }
 
             if (firePoints.Length == 0)
@@ -31,7 +32,7 @@ namespace Game.Modules.ShootingModule.Scripts
                 throw new ArgumentException("At least one fire point is required", nameof(firePoints));
             }
 
-            WeaponData weaponData = weaponConfig.GetWeaponData();
+            WeaponData weaponData = weaponDataConfig.GetWeaponData();
             _projectilePrefab = weaponData.ProjectileData.ProjectilePrefab;
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
             _firePoints = firePoints;
@@ -54,9 +55,12 @@ namespace Game.Modules.ShootingModule.Scripts
             foreach (Transform firePoint in _firePoints)
             {
                 //ToDO: Temp implementation. Will be replaced with proper classes.
-                _bulletLauncher.LaunchBullet(_projectilePrefab,firePoint, _projectileSpeed);
+                Debug.Log("weaponComponent launching from firePoint : " + firePoint.position);
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed);
             }
         }
+        
+        public class Factory : PlaceholderFactory<WeaponComponent>{}
 
     }
 }

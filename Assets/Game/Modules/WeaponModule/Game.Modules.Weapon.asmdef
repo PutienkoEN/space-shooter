@@ -2,6 +2,7 @@
   "name": "Game.Modules.Weapon",
   "references": [
     "Game.LifeCycle.Common",
-    "Zenject"
+    "Zenject",
+    "Game.Modules.BulletModule"
   ]
 }

@@ -3,12 +3,12 @@
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "WeaponData", menuName = "SpaceShooter/ShootingModule/WeaponData", order = 0)]
-    public sealed class WeaponConfig : ScriptableObject
+    public sealed class WeaponDataConfig : ScriptableObject
     {
         [SerializeField] private WeaponView prefab;
         [SerializeField] private int damage;
         [SerializeField] private float fireRate;
-        [SerializeField] private ProjectileConfig projectileConfig;
+        [SerializeField] private ProjectileDataConfig projectileDataDataConfig;
 
         public WeaponData GetWeaponData()
         {
@@ -16,7 +16,7 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
                 prefab,
                 damage,
                 fireRate,
-                projectileConfig.GetProjectileData());
+                projectileDataDataConfig.GetProjectileData());
         }
     }
 
@@ -26,7 +26,7 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
         public int Damage;
         public float FireRate;
         public ProjectileData ProjectileData;
-
+        
         public WeaponData(
             WeaponView prefab,
             int damage,
