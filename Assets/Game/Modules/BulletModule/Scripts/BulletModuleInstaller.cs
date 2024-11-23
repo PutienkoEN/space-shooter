@@ -37,6 +37,7 @@ namespace Game.Modules.BulletModule.Scripts
             Container.BindFactory<Bullet, Bullet.Factory>();
             
             Container.Bind<BulletFacade>().FromComponentInNewPrefab(bulletFacadePrefab).AsSingle();
+            
             Container.BindFactory<BulletFacade, BulletFacade.Factory>()
                 .FromSubContainerResolve()
                 .ByNewContextPrefab(bulletFacadePrefab);
