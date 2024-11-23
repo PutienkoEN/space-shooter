@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &845265147 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1456495658511909731, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-  m_PrefabInstance: {fileID: 884812852}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0068af1bd494b1ca605f61d5a28e90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &859717104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1012968870253898313, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
@@ -162,70 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletComponentPrefab: {fileID: 1571480444436519749, guid: 6f693da7993de4e4f93fa50fcabc4abe, type: 3}
-  bulletFacadePrefab: {fileID: 1456495658511909731, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
+  bulletViewPrefab: {fileID: 1456495658511909731, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
   bulletContainer: {fileID: 1264921088}
   initialPoolSize: 10
---- !u!1001 &884812852
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901614599020308134, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2938908785875356185, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: m_Name
-      value: BulletFacade
-      objectReference: {fileID: 0}
-    - target: {fileID: 4775736608197480699, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
-      propertyPath: bulletFacade
-      value: 
-      objectReference: {fileID: 845265147}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
 --- !u!1001 &1085509810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -554,4 +482,3 @@ SceneRoots:
   - {fileID: 1085509810}
   - {fileID: 1264921088}
   - {fileID: 1797046816}
-  - {fileID: 884812852}

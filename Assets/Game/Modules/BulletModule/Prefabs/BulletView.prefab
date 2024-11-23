@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9220417129270663773}
   - component: {fileID: 8805203332097108488}
   m_Layer: 0
-  m_Name: BulletFacade
+  m_Name: BulletView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

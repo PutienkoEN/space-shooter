@@ -8,7 +8,7 @@ namespace Game.Modules.BulletModule.Scripts
     public class BulletModuleInstaller : MonoInstaller
     {
         [SerializeField] private BulletComponent bulletComponentPrefab;
-        [SerializeField] private BulletFacade bulletFacadePrefab;
+        [SerializeField] private BulletView bulletViewPrefab;
         [SerializeField] private Transform bulletContainer;
         [SerializeField] private int initialPoolSize = 10;
         
@@ -36,11 +36,9 @@ namespace Game.Modules.BulletModule.Scripts
 
             Container.BindFactory<Bullet, Bullet.Factory>();
             
-            Container.Bind<BulletFacade>().FromComponentInNewPrefab(bulletFacadePrefab).AsSingle();
-            
-            Container.BindFactory<BulletFacade, BulletFacade.Factory>()
+            Container.BindFactory<NewBullet, NewBullet.Factory>()
                 .FromSubContainerResolve()
-                .ByNewContextPrefab(bulletFacadePrefab);
+                .ByNewContextPrefab(bulletViewPrefab);
             
 
             Container.Bind<BulletSpawner>().AsSingle().NonLazy();

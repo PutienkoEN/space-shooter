@@ -8,12 +8,12 @@ namespace Game.Modules.ShootingModule.Scripts
     public class BulletSpawner
     {
         private Bullet.Factory _bulletFactory;
-        private BulletFacade.Factory _bulletFacadeFactory;
+        private NewBullet.Factory _newBulletFactory;
 
-        public BulletSpawner(Bullet.Factory bulletFactory, BulletFacade.Factory bulletFacadeFactory)
+        public BulletSpawner(Bullet.Factory bulletFactory, NewBullet.Factory newBulletFactory)
         {
             _bulletFactory = bulletFactory;
-            _bulletFacadeFactory = bulletFacadeFactory;
+            _newBulletFactory = newBulletFactory;
         }
         
         public void LaunchBullet(Transform firePoint, float speed)
@@ -21,7 +21,8 @@ namespace Game.Modules.ShootingModule.Scripts
             // Bullet bullet = _bulletFactory.Create();
             // BulletComponent bulletComponent = bullet.GetBulletComponent();
 
-            BulletFacade bulletComponent = _bulletFacadeFactory.Create();
+            NewBullet bullet = _newBulletFactory.Create();
+            BulletView bulletComponent = bullet.GetView();
             
             bulletComponent.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
             
