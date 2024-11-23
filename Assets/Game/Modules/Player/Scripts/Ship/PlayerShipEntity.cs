@@ -1,8 +1,7 @@
 ﻿using System;
 using Game.Modules.ShootingModule.Scripts;
-using UnityEngine;
+using SpaceShooter.Game.Components;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace SpaceShooter.Game.Player.Ship
 {
@@ -12,13 +11,24 @@ namespace SpaceShooter.Game.Player.Ship
         private readonly PlayerMovementController _playerMovementController;
         private readonly WeaponController _weaponController;
 
+        private readonly HealthComponent _healthComponent;
+
         [Inject]
-        public PlayerShipEntity(PlayerShipView playerShipView, PlayerMovementController playerMovementController,
-            WeaponController weaponController)
+        public PlayerShipEntity(
+            PlayerShipView playerShipView,
+            PlayerMovementController playerMovementController,
+            WeaponController weaponController,
+            HealthComponent healthComponent)
         {
             _playerShipView = playerShipView;
             _playerMovementController = playerMovementController;
             _weaponController = weaponController;
+            _healthComponent = healthComponent;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            _healthComponent.TakeDamage(damage);
         }
 
         public void Update(float deltaTime)
@@ -29,17 +39,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public void Dispose()
         {
-            Object.Destroy(_playerShipView.gameObject);
-        }
-
-        public void Initialize()
-        {
-            Debug.Log("PlayerShipEntity.Initialize");
-        }
-
-        public void Tick()
-        {
-            Debug.Log("PlayerShipEntity.Tick");
+            _playerShipView.DestroyShip();
         }
 
         public class Factory : PlaceholderFactory<PlayerShipEntity>

@@ -10,9 +10,19 @@ namespace SpaceShooter.Game.Player.Ship
     {
         [SerializeField] private WeaponConfig weaponConfig;
         [SerializeField] private float speed;
+        [SerializeField] private float health;
 
         public override void InstallBindings()
         {
+            Container
+                .Bind<PlayerShipEntity>()
+                .AsSingle();
+
+            Container
+                .Bind<PlayerShipView>()
+                .FromComponentOnRoot()
+                .AsSingle();
+
             Container
                 .Bind<MoveComponent>()
                 .AsSingle()
@@ -25,13 +35,14 @@ namespace SpaceShooter.Game.Player.Ship
                 .WithArguments(component);
 
             Container
-                .Bind<PlayerShipView>()
-                .FromComponentOnRoot()
-                .AsSingle();
+                .Bind<HealthComponent>()
+                .AsSingle()
+                .WithArguments(health);
 
             Container
-                .Bind<PlayerShipEntity>()
-                .AsSingle();
+                .BindInterfacesAndSelfTo<PlayerHealthController>()
+                .AsSingle()
+                .NonLazy();
 
             Container
                 .BindInterfacesAndSelfTo<PlayerMovementController>()

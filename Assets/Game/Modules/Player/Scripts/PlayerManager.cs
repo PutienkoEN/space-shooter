@@ -15,9 +15,10 @@ namespace SpaceShooter.Game.Player
             _shipEntityFactory = shipEntityFactory;
         }
 
-        public void CreatePlayer()
+        public PlayerShipEntity CreatePlayer()
         {
             _playerShipEntity = _shipEntityFactory.Create();
+            return _playerShipEntity;
         }
 
         public void DestroyPlayer()
