@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Moq;
-using NUnit.Framework;
-using UnityEngine;
+﻿using NUnit.Framework;
 
 namespace Game.Modules.BulletModule.Tests
 {
@@ -13,15 +10,5 @@ namespace Game.Modules.BulletModule.Tests
             
         }
         
-        [Test]
-        public void WhenCreateWeaponController_AndWeaponConfigPassed_SetActiveWeapon()
-        {
-            //Arrange
-        
-            //Act
-
-            //Assert
-     
-        }
     }
 }
