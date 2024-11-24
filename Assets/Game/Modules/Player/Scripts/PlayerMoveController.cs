@@ -2,13 +2,12 @@
 using SpaceShooter.Game.CameraUtility;
 using SpaceShooter.Game.Components;
 using SpaceShooter.Game.Input;
-using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player
 {
-    public class PlayerMovementController : IInitializable, IDisposable, IGameTickable
+    public class PlayerMoveController : IInitializable, IDisposable
     {
         private readonly MoveComponent _moveComponent;
         private readonly ColliderComponent _colliderComponent;
@@ -19,7 +18,7 @@ namespace SpaceShooter.Game.Player
         private Vector3 _targetPosition;
 
         [Inject]
-        public PlayerMovementController(
+        public PlayerMoveController(
             MoveComponent moveComponent,
             ColliderComponent colliderComponent,
             ITouchInputMovementHandler touchInputMovementHandler,
@@ -42,12 +41,12 @@ namespace SpaceShooter.Game.Player
             _touchInputMovementHandler.OnPositionChange -= MovePlayerToCoordinates;
         }
 
-        public void Tick(float deltaTime)
+        public void Move(float deltaTime)
         {
             _moveComponent.Move(_targetPosition, deltaTime);
         }
 
-        private void MovePlayerToCoordinates(Vector2 target)
+        private void MovePlayerToCoordinates(Vector3 target)
         {
             var newPosition = GetNewPosition(target);
             _targetPosition = ClampPosition(newPosition);
@@ -60,10 +59,10 @@ namespace SpaceShooter.Game.Player
             var newPositionX = currentPosition.x + targetWorldPosition.x;
             var newPositionY = currentPosition.y + targetWorldPosition.y;
 
-            return new Vector3(newPositionX, newPositionY);
+            return new Vector3(newPositionX, newPositionY, 0);
         }
 
-        private Vector3 ClampPosition(Vector2 newPosition)
+        private Vector3 ClampPosition(Vector3 newPosition)
         {
             var size = _colliderComponent.GetSize();
             return _worldCoordinates.ClampToScreen(newPosition, size.x, size.y);
