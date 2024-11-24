@@ -1,32 +1,27 @@
 ﻿using System;
 using Game.Modules.BulletModule.Scripts;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public class BulletSpawner
     {
         public event Action<BulletEntity> OnNewBullet;
-        private BulletEntity.Factory _newBulletFactory;
+        private readonly BulletEntity.Factory _bulletFactory;
 
-        public BulletSpawner(BulletEntity.Factory newBulletFactory)
+        public BulletSpawner(BulletEntity.Factory bulletFactory)
         {
-            _newBulletFactory = newBulletFactory;
+            _bulletFactory = bulletFactory;
         }
         
         public void LaunchBullet(Transform firePoint, float speed)
         {
-            // Bullet bullet = _bulletFactory.Create();
-            // BulletComponent bulletComponent = bullet.GetBulletComponent();
-
-            BulletEntity bulletEntity = _newBulletFactory.Create(speed);
+            BulletEntity bulletEntity = _bulletFactory.Create(speed);
             BulletView bulletComponent = bulletEntity.GetView();
             
             bulletComponent.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
             
             OnNewBullet?.Invoke(bulletEntity);
-            
         }
     }
 }

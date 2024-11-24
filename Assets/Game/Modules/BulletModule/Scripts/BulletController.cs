@@ -1,19 +1,17 @@
+using System;
 using System.Collections.Generic;
 using Game.Modules.ShootingModule.Scripts;
-using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BulletController : IGameListener, IGameTickable
+    public sealed class BulletController : IDisposable
     {
-        private List<BulletEntity> _bullets = new();
-        private BulletSpawner _bulletSpawner;
+        private readonly List<BulletEntity> _bullets = new();
+        private readonly BulletSpawner _bulletSpawner;
         public BulletController(BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
             _bulletSpawner.OnNewBullet += HandleNewBullet;
-            Debug.Log("BulletController initialized");
         }
 
         private void HandleNewBullet(BulletEntity obj)
@@ -23,12 +21,15 @@ namespace Game.Modules.BulletModule.Scripts
 
         public void Tick(float deltaTime)
         {
-            // Debug.Log("BulletController ticking");
-            foreach (var bullet in _bullets)
+            foreach (BulletEntity bullet in _bullets)
             {
                 bullet.OnUpdate(deltaTime);
             }
         }
-        
+
+        public void Dispose()
+        {
+            _bulletSpawner.OnNewBullet -= HandleNewBullet;
+        }
     }
 }

@@ -4,11 +4,11 @@ using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BulletEntity
+    public sealed class BulletEntity
     {
         private readonly BulletView _bulletView;
         private readonly MoveComponent _moveComponent;
-        private readonly Vector3 _target = Vector3.up;
+        private readonly Vector3 _direction = Vector3.up;
 
         public BulletEntity(BulletView bulletView, MoveComponent moveComponent)
         {
@@ -23,7 +23,7 @@ namespace Game.Modules.BulletModule.Scripts
 
         public void OnUpdate(float deltaTime)
         {
-            _moveComponent.Move(_target, deltaTime);
+            _moveComponent.MoveToDirection(_direction, deltaTime);
         }
         
         public class Factory : PlaceholderFactory<float, BulletEntity>

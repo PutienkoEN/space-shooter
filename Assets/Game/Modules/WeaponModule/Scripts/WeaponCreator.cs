@@ -1,6 +1,5 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {

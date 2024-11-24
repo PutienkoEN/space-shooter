@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BulletInstaller : MonoInstaller
+    public sealed class BulletInstaller : MonoInstaller
     {
         [Inject] private float _speed;
         public override void InstallBindings()

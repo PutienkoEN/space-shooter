@@ -8,14 +8,14 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponComponent : IWeaponComponent
     {
         private readonly BulletSpawner _bulletSpawner;
-        private GameObject _projectilePrefab;
         private Transform[] _firePoints;
         private float _fireRate;
         private float _projectileSpeed;
 
         private float _timer;
 
-        public WeaponComponent(BulletSpawner bulletSpawner)
+        public WeaponComponent(
+            [InjectOptional] BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
         }
@@ -33,7 +33,6 @@ namespace Game.Modules.ShootingModule.Scripts
             }
 
             WeaponData weaponData = weaponDataConfig.GetWeaponData();
-            _projectilePrefab = weaponData.ProjectileData.ProjectilePrefab;
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
             _firePoints = firePoints;
             _fireRate = weaponData.FireRate;
@@ -54,8 +53,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                //ToDO: Temp implementation. Will be replaced with proper classes.
-                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed);
+                _bulletSpawner?.LaunchBullet(firePoint, _projectileSpeed);
             }
         }
         

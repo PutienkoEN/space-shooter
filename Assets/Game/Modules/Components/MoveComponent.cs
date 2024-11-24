@@ -23,7 +23,7 @@ namespace SpaceShooter.Game.Components
             transform.position = moveTowards;
         }
 
-        public void Move(Vector3 direction, float deltaTime)
+        public void MoveToDirection(Vector3 direction, float deltaTime)
         {
             transform.position += direction * speed * deltaTime;
         }
