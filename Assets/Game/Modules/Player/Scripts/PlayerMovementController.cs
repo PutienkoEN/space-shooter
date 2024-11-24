@@ -44,7 +44,7 @@ namespace SpaceShooter.Game.Player
 
         public void Tick(float deltaTime)
         {
-            _moveComponent.Move(_targetPosition, deltaTime);
+            _moveComponent.MoveTowards(_targetPosition, deltaTime);
         }
 
         private void MovePlayerToCoordinates(Vector2 target)

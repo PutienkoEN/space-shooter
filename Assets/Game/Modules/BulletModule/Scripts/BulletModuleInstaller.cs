@@ -7,7 +7,6 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public class BulletModuleInstaller : MonoInstaller
     {
-        [SerializeField] private BulletComponent bulletComponentPrefab;
         [SerializeField] private BulletView bulletViewPrefab;
         [SerializeField] private Transform bulletContainer;
         [SerializeField] private int initialPoolSize = 10;
@@ -15,13 +14,13 @@ namespace Game.Modules.BulletModule.Scripts
         public override void InstallBindings()
         {
 
-            // Container.BindMemoryPool<BulletComponent, BulletMemoryPool>()
+            // Container.BindMemoryPool<BulletView, BulletMemoryPool>()
             //     .WithInitialSize(initialPoolSize) 
-            //     .FromComponentInNewPrefab(bulletComponentPrefab)
+            //     .FromComponentInNewPrefab(bulletViewPrefab)
             //     .UnderTransform(bulletContainer)
             //     .NonLazy();
 
-            // Container.Bind<IMemoryPool<BulletComponent>>()
+            // Container.Bind<IMemoryPool<BulletView>>()
             //     .To<BulletMemoryPool>()
             //     .FromResolve();
             
@@ -29,19 +28,14 @@ namespace Game.Modules.BulletModule.Scripts
             //     .FromComponentInHierarchy()
             //     .AsSingle()
             //     .NonLazy();
-
-            Container.BindFactory<BulletComponent, BulletComponent.Factory>()
-                .FromComponentInNewPrefab(bulletComponentPrefab)
-                .UnderTransform(bulletContainer);
-
-            Container.BindFactory<Bullet, Bullet.Factory>();
             
-            Container.BindFactory<NewBullet, NewBullet.Factory>()
+            Container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
                 .FromSubContainerResolve()
-                .ByNewContextPrefab(bulletViewPrefab);
-            
+                .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab);
 
             Container.Bind<BulletSpawner>().AsSingle().NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
 
         }
     }

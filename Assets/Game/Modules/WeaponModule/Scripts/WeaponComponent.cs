@@ -55,7 +55,6 @@ namespace Game.Modules.ShootingModule.Scripts
             foreach (Transform firePoint in _firePoints)
             {
                 //ToDO: Temp implementation. Will be replaced with proper classes.
-                Debug.Log("weaponComponent launching from firePoint : " + firePoint.position);
                 _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed);
             }
         }

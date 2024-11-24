@@ -6,10 +6,10 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public class BulletPoolController : MonoBehaviour
     {
-        private IMemoryPool<BulletComponent> _bulletPool;
+        private IMemoryPool<BulletView> _bulletPool;
 
         [Inject]
-        public void Construct(IMemoryPool<BulletComponent> bulletPool)
+        public void Construct(IMemoryPool<BulletView> bulletPool)
         {
             Debug.Log("BulletPoolController");
             _bulletPool = bulletPool;

@@ -5,11 +5,13 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public class BulletInstaller : MonoInstaller
     {
+        [Inject] private float _speed;
         public override void InstallBindings()
         {
-            Container.Bind<NewBullet>().AsSingle();
+            Container.Bind<BulletEntity>().AsSingle();
             Container.Bind<BulletView>().FromComponentOnRoot().AsSingle();
-            Container.Bind<MoveComponent>().AsSingle();
+            Container.Bind<MoveComponent>().AsSingle()
+                .WithArguments(transform, _speed);
         }
     }
 }
