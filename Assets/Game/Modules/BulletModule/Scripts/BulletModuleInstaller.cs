@@ -13,22 +13,6 @@ namespace Game.Modules.BulletModule.Scripts
         
         public override void InstallBindings()
         {
-
-            // Container.BindMemoryPool<BulletView, BulletMemoryPool>()
-            //     .WithInitialSize(initialPoolSize) 
-            //     .FromComponentInNewPrefab(bulletViewPrefab)
-            //     .UnderTransform(bulletContainer)
-            //     .NonLazy();
-
-            // Container.Bind<IMemoryPool<BulletView>>()
-            //     .To<BulletMemoryPool>()
-            //     .FromResolve();
-            
-            // Container.Bind<BulletPoolController>()
-            //     .FromComponentInHierarchy()
-            //     .AsSingle()
-            //     .NonLazy();
-            
             Container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
                 .FromSubContainerResolve()
                 .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab);
