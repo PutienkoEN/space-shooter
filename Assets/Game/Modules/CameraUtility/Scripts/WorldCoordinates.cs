@@ -23,6 +23,8 @@ namespace SpaceShooter.Game.CameraUtility
             _worldMinY = _camera.ViewportToWorldPoint(Vector3.zero).y;
             _worldMaxY = _camera.ViewportToWorldPoint(Vector3.up).y;
         }
+        
+        public Rect WorldBounds => new Rect(_worldMinX, _worldMinY, _worldMaxX - _worldMinX, _worldMaxY - _worldMinY);
 
         public Vector3 ClampToScreen(Vector3 position, float objectWidth, float objectHeight)
         {

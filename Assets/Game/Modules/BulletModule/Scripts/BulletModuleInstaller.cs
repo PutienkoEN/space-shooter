@@ -18,6 +18,7 @@ namespace Game.Modules.BulletModule.Scripts
                 .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab);
 
             Container.Bind<BulletSpawner>().AsSingle().NonLazy();
+            Container.Bind<OutOfBoundsController>().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
 

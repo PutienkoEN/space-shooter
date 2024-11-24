@@ -9,9 +9,11 @@ namespace Game.Modules.BulletModule.Scripts
     {
         private List<BulletEntity> _bullets = new();
         private BulletSpawner _bulletSpawner;
-        public BulletController(BulletSpawner bulletSpawner)
+        private OutOfBoundsController _outOfBoundsController;
+        public BulletController(BulletSpawner bulletSpawner, OutOfBoundsController outOfBoundsController)
         {
             _bulletSpawner = bulletSpawner;
+            _outOfBoundsController = outOfBoundsController;
             _bulletSpawner.OnNewBullet += HandleNewBullet;
             Debug.Log("BulletController initialized");
         }
@@ -24,9 +26,11 @@ namespace Game.Modules.BulletModule.Scripts
         public void Tick(float deltaTime)
         {
             // Debug.Log("BulletController ticking");
-            foreach (var bullet in _bullets)
+            foreach (BulletEntity bullet in _bullets)
             {
                 bullet.OnUpdate(deltaTime);
+                Debug.Log("bullet is in bounds : " + 
+                          _outOfBoundsController.IsInBounds(bullet.GetView().transform.position));
             }
         }
         
