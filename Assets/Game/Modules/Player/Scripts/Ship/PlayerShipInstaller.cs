@@ -8,7 +8,7 @@ namespace SpaceShooter.Game.Player.Ship
 {
     public class PlayerShipInstaller : MonoInstaller
     {
-        [SerializeField] private WeaponConfig weaponConfig;
+        [SerializeField] private WeaponDataConfig weaponConfig;
         [SerializeField] private float speed;
         [SerializeField] private float health;
 
