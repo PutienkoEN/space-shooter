@@ -23,14 +23,11 @@ namespace SpaceShooter.Game.Components
                 return;
             }
 
-            var resultHealth = _health - damage;
-            if (resultHealth <= 0)
+            _health = Mathf.Max(_health - damage, 0);
+            if (_health == 0)
             {
-                _health = 0;
                 OnDeath?.Invoke();
             }
-
-            _health = resultHealth;
         }
     }
 }

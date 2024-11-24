@@ -45,7 +45,7 @@ namespace SpaceShooter.Game.Player.Ship
                 .NonLazy();
 
             Container
-                .BindInterfacesAndSelfTo<PlayerMovementController>()
+                .BindInterfacesAndSelfTo<PlayerMoveController>()
                 .AsSingle()
                 .NonLazy();
 

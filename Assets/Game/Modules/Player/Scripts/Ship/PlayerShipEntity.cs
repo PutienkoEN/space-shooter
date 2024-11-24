@@ -8,7 +8,7 @@ namespace SpaceShooter.Game.Player.Ship
     public class PlayerShipEntity : IDisposable
     {
         private readonly PlayerShipView _playerShipView;
-        private readonly PlayerMovementController _playerMovementController;
+        private readonly PlayerMoveController _playerMoveController;
         private readonly WeaponController _weaponController;
 
         private readonly HealthComponent _healthComponent;
@@ -16,12 +16,12 @@ namespace SpaceShooter.Game.Player.Ship
         [Inject]
         public PlayerShipEntity(
             PlayerShipView playerShipView,
-            PlayerMovementController playerMovementController,
+            PlayerMoveController playerMoveController,
             WeaponController weaponController,
             HealthComponent healthComponent)
         {
             _playerShipView = playerShipView;
-            _playerMovementController = playerMovementController;
+            _playerMoveController = playerMoveController;
             _weaponController = weaponController;
             _healthComponent = healthComponent;
         }
@@ -33,7 +33,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public void Update(float deltaTime)
         {
-            _playerMovementController.Move(deltaTime);
+            _playerMoveController.Move(deltaTime);
             _weaponController.Tick(deltaTime);
         }
 
