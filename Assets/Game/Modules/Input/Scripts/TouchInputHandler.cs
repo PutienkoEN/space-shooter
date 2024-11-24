@@ -8,9 +8,9 @@ namespace SpaceShooter.Game.Input
 {
     public sealed class TouchInputHandler : ITouchInputHandler, IInitializable, IDisposable
     {
-        public event Action<Vector2> OnTouchStarted;
+        public event Action<Vector3> OnTouchStarted;
         public event Action OnTouchFinished;
-        public event Action<Vector2> OnTouchPositionChange;
+        public event Action<Vector3> OnTouchPositionChange;
 
         /*
          * Considered started when user touched screen.
