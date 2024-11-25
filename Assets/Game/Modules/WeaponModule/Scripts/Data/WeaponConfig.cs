@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "WeaponData", menuName = "SpaceShooter/ShootingModule/WeaponData", order = 0)]
-    public sealed class WeaponDataConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "WeaponConfig", menuName = "SpaceShooter/ShootingModule/WeaponConfig", order = 0)]
+    public sealed class WeaponConfig : ScriptableObject
     {
         [SerializeField] private WeaponView prefab;
         [SerializeField] private int damage;
         [SerializeField] private float fireRate;
-        [SerializeField] private ProjectileDataConfig projectileDataDataConfig;
+        [SerializeField] private ProjectileConfig projectileConfig;
 
         public WeaponData GetWeaponData()
         {
@@ -16,7 +17,7 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
                 prefab,
                 damage,
                 fireRate,
-                projectileDataDataConfig.GetProjectileData());
+                projectileConfig.GetProjectileData());
         }
     }
 

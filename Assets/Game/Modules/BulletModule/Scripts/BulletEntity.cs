@@ -16,11 +16,6 @@ namespace Game.Modules.BulletModule.Scripts
             _moveComponent = moveComponent;
         }
 
-        public BulletView GetView()
-        {
-            return _bulletView;
-        }
-
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
             _direction = direction;

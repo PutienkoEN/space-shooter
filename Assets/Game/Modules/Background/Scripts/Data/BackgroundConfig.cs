@@ -2,8 +2,8 @@
 
 namespace SpaceShooter.Background.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "BackgroundDataConfig", menuName = "SpaceShooter/Background/BackgroundDataConfig", order = 0)]
-    public class BackgroundDataConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "BackgroundConfig", menuName = "SpaceShooter/Background/BackgroundConfig", order = 0)]
+    public class BackgroundConfig : ScriptableObject
     {
         [SerializeField] private float speed;
         [SerializeField] private int zDistance;

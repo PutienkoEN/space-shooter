@@ -1,6 +1,6 @@
 ﻿namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
-    public interface IProjectileDataConfig
+    public interface IProjectileConfig
     {
         public ProjectileData GetProjectileData();
     }

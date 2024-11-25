@@ -16,6 +16,10 @@ namespace Game.Modules.ShootingModule.Scripts
         
         public void LaunchBullet(Transform firePoint, float speed)
         {
+            if (firePoint == null)
+            {
+                throw new ArgumentNullException(nameof(firePoint));
+            }
             BulletEntity bulletEntity = _bulletFactory.Create(speed);
             bulletEntity.LaunchBullet(firePoint.position, firePoint.rotation, firePoint.up);
             

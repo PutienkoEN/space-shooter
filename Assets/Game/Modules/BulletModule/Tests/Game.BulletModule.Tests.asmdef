@@ -3,7 +3,9 @@
     "rootNamespace": "",
     "references": [
         "Game.Modules.BulletModule",
-        "Zenject"
+        "Zenject",
+        "Zenject-TestFramework",
+        "Game.Modules.Components"
     ],
     "includePlatforms": [
         "Editor"

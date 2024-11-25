@@ -7,6 +7,7 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class BulletController : IGameTickable, IDisposable
     {
+        public IReadOnlyList<BulletEntity> Bullets => _bullets;
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
 

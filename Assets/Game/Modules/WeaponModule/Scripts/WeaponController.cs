@@ -10,12 +10,12 @@ namespace Game.Modules.ShootingModule.Scripts
         private readonly IWeaponComponent _activeIWeaponComponent;
         
         public WeaponController(
-            WeaponDataConfig weaponDataConfig,
+            WeaponConfig weaponConfig,
             IWeaponCreator weaponCreator,
-            GameObject player)
+            Transform player)
         {
-            if (weaponDataConfig == null)
-                throw new ArgumentNullException(nameof(weaponDataConfig), "Weapon data cannot be null.");
+            if (weaponConfig == null)
+                throw new ArgumentNullException(nameof(weaponConfig), "Weapon data cannot be null.");
             
             if (weaponCreator == null)
                 throw new ArgumentNullException(nameof(weaponCreator), "Weapon creator cannot be null.");
@@ -23,7 +23,7 @@ namespace Game.Modules.ShootingModule.Scripts
             if (player == null)
                 throw new ArgumentNullException(nameof(player), "Player object cannot be null.");
             
-            _activeIWeaponComponent = weaponCreator.CreateWeapon(weaponDataConfig, player);
+            _activeIWeaponComponent = weaponCreator.CreateWeapon(weaponConfig, player);
             
             Debug.Log("WeaponController initialized.");
         }
