@@ -12,7 +12,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             Container.BindFactory<WeaponComponent, WeaponComponent.Factory>();
             Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
-            Container.BindInterfacesAndSelfTo<WeaponController>()
+            Container.Bind<WeaponController>()
                 .AsSingle()
                 .WithArguments(weaponDataConfig, gameObject);
 

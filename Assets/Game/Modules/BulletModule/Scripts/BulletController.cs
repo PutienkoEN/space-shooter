@@ -10,7 +10,7 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
 
-        private int counter = -1;
+        private int _counter = -1;
         
         public BulletController(BulletSpawner bulletSpawner)
         {
@@ -29,22 +29,22 @@ namespace Game.Modules.BulletModule.Scripts
         private void RemoveBullet(BulletEntity obj)
         {
             int bulletIndex = _bullets.IndexOf(obj);
-            if (counter >= bulletIndex)
+            if (_counter >= bulletIndex)
             {
-                counter--;
+                _counter--;
             }
             _bullets.RemoveAt(bulletIndex);
         }
 
         public void Tick(float deltaTime)
         {
-            for (counter = 0; counter < _bullets.Count; counter++)
+            for (_counter = 0; _counter < _bullets.Count; _counter++)
             {
-                var bullet = _bullets[counter];
+                var bullet = _bullets[_counter];
                 bullet.OnUpdate(deltaTime);
             }
 
-            counter = -1;
+            _counter = -1;
         }
 
         public void Dispose()

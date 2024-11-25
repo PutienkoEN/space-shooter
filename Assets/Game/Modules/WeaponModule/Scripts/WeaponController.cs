@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public sealed class WeaponController : IGameListener, IGameTickable
+    public sealed class WeaponController
     {
         private readonly IWeaponComponent _activeIWeaponComponent;
         

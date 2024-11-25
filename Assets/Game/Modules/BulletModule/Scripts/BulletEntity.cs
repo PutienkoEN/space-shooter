@@ -8,7 +8,7 @@ namespace Game.Modules.BulletModule.Scripts
     {
         private readonly BulletView _bulletView;
         private readonly MoveComponent _moveComponent;
-        private readonly Vector3 _direction = Vector3.up;
+        private Vector3 _direction;
 
         public BulletEntity(BulletView bulletView, MoveComponent moveComponent)
         {
@@ -21,8 +21,9 @@ namespace Game.Modules.BulletModule.Scripts
             return _bulletView;
         }
 
-        public void LaunchBullet(Vector3 position, Quaternion rotation)
+        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
+            _direction = direction;
             _bulletView.transform.SetPositionAndRotation(position, rotation);
         }
 

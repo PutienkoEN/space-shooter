@@ -27,5 +27,7 @@ namespace SpaceShooter.Game.Player
                 .FromComponentInHierarchy()
                 .AsSingle();
         }
+        
+        
     }
 }
