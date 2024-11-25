@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: bulletContainer
       value: 
       objectReference: {fileID: 1264921088}
+    - target: {fileID: 3180179506568711041, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: bulletViewPrefab
+      value: 
+      objectReference: {fileID: 1456495658511909731, guid: 4bb9721e9a6679144b5a982c88709953, type: 3}
     - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: spawnPosition
       value: 
