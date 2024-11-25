@@ -7,7 +7,8 @@
     "Game.Modules.Input",
     "Game.Modules.Components",
     "Game.LifeCycle.Common",
-    "Game.Modules.Weapon"
+    "Game.Modules.Weapon",
+    "Game.Modules.BulletModule"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

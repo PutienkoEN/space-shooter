@@ -1,8 +1,8 @@
 ﻿using System;
 using Game.Modules.GameSpeed;
 using SpaceShooter.Game.Input;
+using UnityEngine;
 using Zenject;
-using Vector2 = UnityEngine.Vector2;
 
 namespace Game.Modules
 {
@@ -34,7 +34,7 @@ namespace Game.Modules
             _gameSpeedManager.StartSlowdown();
         }
 
-        private void StopSlowdown(Vector2 _)
+        private void StopSlowdown(Vector3 _)
         {
             _gameSpeedManager.StopSlowdown();
         }

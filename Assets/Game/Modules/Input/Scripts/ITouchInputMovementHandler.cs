@@ -5,6 +5,6 @@ namespace SpaceShooter.Game.Input
 {
     public interface ITouchInputMovementHandler
     {
-        public event Action<Vector2> OnPositionChange;
+        public event Action<Vector3> OnPositionChange;
     }
 }

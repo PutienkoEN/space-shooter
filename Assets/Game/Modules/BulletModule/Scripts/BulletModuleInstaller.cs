@@ -1,27 +1,25 @@
 using Game.Modules.ShootingModule.Scripts;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BulletModuleInstaller : MonoInstaller
+    public class BulletModuleInstaller : GameModuleInstaller
     {
         [SerializeField] private BulletView bulletViewPrefab;
         [SerializeField] private Transform bulletContainer;
-        [SerializeField] private int initialPoolSize = 10;
-        
-        public override void InstallBindings()
+
+        public override void Install(DiContainer container)
         {
-            Container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
+            container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
                 .FromSubContainerResolve()
-                .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab);
+                .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab)
+                .UnderTransform(bulletContainer);
 
-            Container.Bind<BulletSpawner>().AsSingle().NonLazy();
-            Container.Bind<OutOfBoundsController>().AsSingle().NonLazy();
-            
-            Container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
-
+            container.Bind<BulletSpawner>().AsSingle().NonLazy();
+            container.Bind<OutOfBoundsController>().AsSingle().NonLazy();
+            container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
         }
     }
 }

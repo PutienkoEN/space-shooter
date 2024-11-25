@@ -1,0 +1,19 @@
+{
+    "name": "Game.BulletModule.Tests",
+    "rootNamespace": "",
+    "references": [
+        "Game.Modules.BulletModule",
+        "Zenject"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
