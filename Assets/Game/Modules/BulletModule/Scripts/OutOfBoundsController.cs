@@ -12,9 +12,9 @@ namespace Game.Modules.BulletModule.Scripts
             _worldCoordinates = worldCoordinates;
         }
 
-        public bool IsInBounds(Vector3 position)
+        public bool IsInBounds(Rect bounds)
         {
-            return _worldCoordinates.WorldBounds.Contains(position);
+            return _worldCoordinates.WorldBounds.Overlaps(bounds);
         }
     }
 }

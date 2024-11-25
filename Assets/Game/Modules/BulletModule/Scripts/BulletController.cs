@@ -30,7 +30,7 @@ namespace Game.Modules.BulletModule.Scripts
             {
                 bullet.OnUpdate(deltaTime);
                 Debug.Log("bullet is in bounds : " + 
-                          _outOfBoundsController.IsInBounds(bullet.GetView().transform.position));
+                          _outOfBoundsController.IsInBounds(bullet.GetColliderRect()));
             }
         }
         
