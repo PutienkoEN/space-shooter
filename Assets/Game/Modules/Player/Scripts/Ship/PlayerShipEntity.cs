@@ -11,7 +11,6 @@ namespace SpaceShooter.Game.Player.Ship
         private readonly PlayerShipView _playerShipView;
         private readonly PlayerMoveController _playerMoveController;
         private readonly WeaponController _weaponController;
-        private readonly BulletController _bulletController;
 
         private readonly HealthComponent _healthComponent;
 
@@ -20,13 +19,11 @@ namespace SpaceShooter.Game.Player.Ship
             PlayerShipView playerShipView,
             PlayerMoveController playerMoveController,
             [InjectOptional] WeaponController weaponController,
-            [InjectOptional] BulletController bulletController,
             HealthComponent healthComponent)
         {
             _playerShipView = playerShipView;
             _playerMoveController = playerMoveController;
             _weaponController = weaponController;
-            _bulletController = bulletController;
             _healthComponent = healthComponent;
         }
 
@@ -40,7 +37,6 @@ namespace SpaceShooter.Game.Player.Ship
             _playerMoveController.Move(deltaTime);
             
             _weaponController?.Tick(deltaTime);
-            _bulletController?.Tick(deltaTime);
         }
 
         public void Dispose()

@@ -5,12 +5,12 @@ using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BulletModuleInstaller : MonoInstaller, IGameModuleInstaller
+    public class BulletModuleInstaller : GameModuleInstaller
     {
         [SerializeField] private BulletView bulletViewPrefab;
         [SerializeField] private Transform bulletContainer;
 
-        public void Install(DiContainer container)
+        public override void Install(DiContainer container)
         {
             container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
                 .FromSubContainerResolve()

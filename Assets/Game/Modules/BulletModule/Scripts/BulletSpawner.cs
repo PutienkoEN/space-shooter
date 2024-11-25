@@ -17,9 +17,7 @@ namespace Game.Modules.ShootingModule.Scripts
         public void LaunchBullet(Transform firePoint, float speed)
         {
             BulletEntity bulletEntity = _bulletFactory.Create(speed);
-            BulletView bulletComponent = bulletEntity.GetView();
-            
-            bulletComponent.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
+            bulletEntity.LaunchBullet(firePoint.position, firePoint.rotation);
             
             OnNewBullet?.Invoke(bulletEntity);
         }

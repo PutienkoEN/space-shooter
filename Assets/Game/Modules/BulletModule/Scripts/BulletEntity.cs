@@ -21,6 +21,11 @@ namespace Game.Modules.BulletModule.Scripts
             return _bulletView;
         }
 
+        public void LaunchBullet(Vector3 position, Quaternion rotation)
+        {
+            _bulletView.transform.SetPositionAndRotation(position, rotation);
+        }
+
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
