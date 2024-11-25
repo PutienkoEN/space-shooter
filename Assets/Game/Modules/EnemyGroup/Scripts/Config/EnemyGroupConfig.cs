@@ -19,7 +19,7 @@ namespace Game.Modules.Enemy.Scripts
 
         public EnemyGroupData GetEnemyGroupData()
         {
-            var list = listEnemyConfig.Select(enemyConfig => enemyConfig.GetEnemyData()).ToList();
+            var list = listEnemyConfig.Select(enemyConfig => enemyConfig.GetData()).ToList();
             return new EnemyGroupData(list);
         }
     }

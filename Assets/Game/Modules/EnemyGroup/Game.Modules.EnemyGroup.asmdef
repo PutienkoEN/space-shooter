@@ -1,17 +1,17 @@
 {
-    "name": "Game.Modules.EnemyGroup",
-    "rootNamespace": "",
-    "references": [
-        "Game.Modules.Enemy",
-        "Zenject"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Game.Modules.EnemyGroup",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "Game.Modules.Enemy"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

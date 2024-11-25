@@ -4,24 +4,20 @@
 // <file>: EnemyView.cs
 // ------------------------------------------------------------------------------
 
-using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Modules.Enemy.Scripts
 {
     public interface IEnemyView
     {
-        event Action<EnemyView> OnDeath;
+        public void Destroy();
     }
+
     public class EnemyView : MonoBehaviour, IEnemyView
     {
-        public event Action<EnemyView> OnDeath;
-        
-        [Button]
-        private void Death()
+        public void Destroy()
         {
-            OnDeath?.Invoke(this);
+            Destroy(transform.gameObject);
         }
     }
 }

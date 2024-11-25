@@ -23,26 +23,26 @@ namespace Game.Modules.EnemyGroup.Scripts
     {
         public event Action OnDeathAllEnemy;
         private readonly HashSet<EnemyView> _enemiesActive = new();
-        private readonly IEnemyFactory _enemyFactory;
-
-        public EnemyGroupManager(IEnemyFactory enemyFactory)
-        {
-            _enemyFactory = enemyFactory;
-        }
+        // private readonly IEnemyFactory _enemyFactory;
+        //
+        // public EnemyGroupManager(IEnemyFactory enemyFactory)
+        // {
+        //     _enemyFactory = enemyFactory;
+        // }
 
         public void SpawnEnemies(IEnumerable<EnemyData> enemiesData)
         {
             foreach (var data in enemiesData)
             {
-                var enemy = _enemyFactory.CreateEnemy(data);
-                _enemiesActive.Add(enemy);
-                enemy.OnDeath += OnEnemyDeath;
+                // var enemy = _enemyFactory.CreateEnemy(data);
+                // _enemiesActive.Add(enemy);
+                // enemy.OnDeath += OnEnemyDeath;
             }
         }
 
         private void OnEnemyDeath(EnemyView enemy)
         {
-            enemy.OnDeath -= OnEnemyDeath;
+            // enemy.OnDeath -= OnEnemyDeath;
             _enemiesActive.Remove(enemy);
             Object.Destroy(enemy.gameObject);
             Debug.Log($"Enemy {enemy.name} died. Remaining enemies: {_enemiesActive.Count}");
@@ -61,7 +61,7 @@ namespace Game.Modules.EnemyGroup.Scripts
         {
             foreach (var enemy in _enemiesActive)
             {
-                enemy.OnDeath -= OnEnemyDeath;
+                // enemy.OnDeath -= OnEnemyDeath;
                 Object.Destroy(enemy.gameObject);
             }
             _enemiesActive.Clear();

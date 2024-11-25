@@ -22,10 +22,10 @@ namespace Game.Modules.Wave
         public override void InstallBindings()
         {
             Container.Bind<IWaveListConfig>().FromInstance(listWaveConfig);
-            
-            Container.BindInterfacesAndSelfTo<EnemyFactory>()
-                .AsSingle()
-                .WithArguments(worldTransform);
+            //
+            // Container.BindInterfacesAndSelfTo<EnemyFactory>()
+            //     .AsSingle()
+            //     .WithArguments(worldTransform);
 
             Container.BindInterfacesAndSelfTo<EnemyGroupManager>()
                 .AsSingle();

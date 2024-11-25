@@ -23,6 +23,11 @@ namespace SpaceShooter.Game.Components
             transform.position = moveTowards;
         }
 
+        public void MoveToDirection(Vector3 direction)
+        {
+            transform.position += direction * speed;
+        }
+
         public Vector3 GetPosition()
         {
             return transform.position;
