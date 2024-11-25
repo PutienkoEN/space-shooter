@@ -18,7 +18,6 @@ namespace Game.Modules.BulletModule.Scripts
                 .UnderTransform(bulletContainer);
 
             container.Bind<BulletSpawner>().AsSingle().NonLazy();
-            container.Bind<OutOfBoundsController>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
         }
     }

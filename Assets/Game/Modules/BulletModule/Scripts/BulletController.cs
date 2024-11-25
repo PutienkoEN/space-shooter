@@ -17,7 +17,6 @@ namespace Game.Modules.BulletModule.Scripts
         
         public BulletController(
             BulletSpawner bulletSpawner,
-            OutOfBoundsController outOfBoundsController, 
             WorldCoordinates worldCoordinates)
         {
             _bulletSpawner = bulletSpawner;
