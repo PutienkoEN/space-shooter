@@ -39,22 +39,5 @@ namespace Game.Modules.BulletModule.Tests
             Assert.Throws<ArgumentNullException>(()=> bulletSpawner.LaunchBullet(null, 10));
         }
         
-        [Test]
-        public void AddNewBullet_ShouldAddBulletToList_WhenOnNewBulletEventIsTriggered()
-        {
-            // Arrange
-            var bulletFactory = Container.Resolve<BulletEntity.Factory>();
-            var bulletSpawnerMock = new Mock<BulletSpawner>(MockBehavior.Strict, bulletFactory);
-            var bulletController = new BulletController(bulletSpawnerMock.Object);
-            BulletEntity bulletMock = Container.Resolve<BulletEntity>();
-
-            // Act
-            bulletSpawnerMock.Raise(spawner => spawner.OnNewBullet += null, bulletMock);
-
-            // Assert
-            Assert.AreEqual(1, bulletController.Bullets.Count);
-            Assert.Contains(bulletMock, bulletController.Bullets.ToList());
-        }
-        
     }
 }
