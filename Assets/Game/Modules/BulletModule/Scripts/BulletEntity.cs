@@ -19,11 +19,6 @@ namespace Game.Modules.BulletModule.Scripts
             _collider = _bulletView.GetComponent<Collider>();
         }
 
-        public BulletView GetView()
-        {
-            return _bulletView;
-        }
-
         public void LaunchBullet(Vector3 position, Quaternion rotation)
         {
             _bulletView.transform.SetPositionAndRotation(position, rotation);
@@ -57,6 +52,11 @@ namespace Game.Modules.BulletModule.Scripts
             }
             
             return _colliderRect;
+        }
+        
+        public void Dispose()
+        {
+            _bulletView.DestroyBullet();
         }
         
         public class Factory : PlaceholderFactory<float, BulletEntity>

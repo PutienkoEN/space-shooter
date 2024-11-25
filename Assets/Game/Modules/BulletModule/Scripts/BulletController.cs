@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using Object = System.Object;
 
 namespace Game.Modules.BulletModule.Scripts
 {
@@ -32,6 +33,8 @@ namespace Game.Modules.BulletModule.Scripts
         
         private void RemoveBullet(BulletEntity obj)
         {
+            if (!_bullets.Contains(obj))
+                return;
             int bulletIndex = _bullets.IndexOf(obj);
             if (counter >= bulletIndex)
             {
@@ -44,10 +47,14 @@ namespace Game.Modules.BulletModule.Scripts
         {
             for (counter = 0; counter < _bullets.Count; counter++)
             {
-                var bullet = _bullets[counter];
+                BulletEntity bullet = _bullets[counter];
                 bullet.OnUpdate(deltaTime);
-                Debug.Log("bullet is in bounds : " + 
-                          _outOfBoundsController.IsInBounds(bullet.GetColliderRect()));
+                
+                if (!_outOfBoundsController.IsInBounds(bullet.GetColliderRect()))
+                {
+                    RemoveBullet(bullet);
+                    bullet.Dispose();
+                }
             }
 
             counter = -1;
