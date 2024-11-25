@@ -20,9 +20,7 @@ namespace Game.Modules.BulletModule.Tests
             BulletView view = testBullet.AddComponent<BulletView>();
             Transform bulletTransform = testBullet.transform;
             float speed = 10f;
-
-            // Container.Bind<Transform>().FromInstance(bulletTransform).AsSingle();
-            // Container.Bind<float>().FromInstance(speed).AsSingle();
+            
             Container.Bind<BulletView>().FromInstance(view).AsSingle();
             Container.Bind<BulletController>().AsCached();
             Container.BindFactory<float, BulletEntity, BulletEntity.Factory>().AsSingle();
@@ -40,19 +38,6 @@ namespace Game.Modules.BulletModule.Tests
             // Act && Assert
             Assert.Throws<ArgumentNullException>(()=> bulletSpawner.LaunchBullet(null, 10));
         }
-        
-        // [Test]
-        // public void Constructor_ShouldSubscribeToOnNewBulletEvent()
-        // {
-        //     // Arrange
-        //     var bulletSpawnerMock = new Mock<BulletSpawner>();
-        //
-        //     // Act
-        //     var bulletController = new BulletController(bulletSpawnerMock.Object);
-        //
-        //     // Assert
-        //     bulletSpawnerMock.Verify(spawner => spawner.OnNewBullet += It.IsAny<Action<BulletEntity>>(), Times.Once);
-        // }
         
         [Test]
         public void AddNewBullet_ShouldAddBulletToList_WhenOnNewBulletEventIsTriggered()
