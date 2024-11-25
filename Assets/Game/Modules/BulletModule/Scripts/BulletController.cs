@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Modules.ShootingModule.Scripts;
+using SpaceShooter.Game.CameraUtility;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Object = System.Object;
@@ -11,15 +12,16 @@ namespace Game.Modules.BulletModule.Scripts
     {
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
-        private OutOfBoundsController _outOfBoundsController;
+        private WorldCoordinates _worldCoordinates;
         private int counter = -1;
         
         public BulletController(
             BulletSpawner bulletSpawner,
-            OutOfBoundsController outOfBoundsController)
+            OutOfBoundsController outOfBoundsController, 
+            WorldCoordinates worldCoordinates)
         {
             _bulletSpawner = bulletSpawner;
-            _outOfBoundsController = outOfBoundsController;
+            _worldCoordinates = worldCoordinates;
             _bulletSpawner.OnNewBullet += AddNewBullet;
         }
 
@@ -50,7 +52,7 @@ namespace Game.Modules.BulletModule.Scripts
                 BulletEntity bullet = _bullets[counter];
                 bullet.OnUpdate(deltaTime);
                 
-                if (!_outOfBoundsController.IsInBounds(bullet.GetColliderRect()))
+                if (!_worldCoordinates.IsInBounds(bullet.GetColliderRect()))
                 {
                     RemoveBullet(bullet);
                     bullet.Dispose();
