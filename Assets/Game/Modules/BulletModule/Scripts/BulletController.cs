@@ -10,10 +10,11 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class BulletController : IGameTickable, IDisposable
     {
+        public IReadOnlyList<BulletEntity> Bullets => _bullets;
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
         private WorldCoordinates _worldCoordinates;
-        private int counter = -1;
+        private int _counter = -1;
         
         public BulletController(
             BulletSpawner bulletSpawner,
@@ -37,18 +38,18 @@ namespace Game.Modules.BulletModule.Scripts
             if (!_bullets.Contains(obj))
                 return;
             int bulletIndex = _bullets.IndexOf(obj);
-            if (counter >= bulletIndex)
+            if (_counter >= bulletIndex)
             {
-                counter--;
+                _counter--;
             }
             _bullets.RemoveAt(bulletIndex);
         }
 
         public void Tick(float deltaTime)
         {
-            for (counter = 0; counter < _bullets.Count; counter++)
+            for (_counter = 0; _counter < _bullets.Count; _counter++)
             {
-                BulletEntity bullet = _bullets[counter];
+                BulletEntity bullet = _bullets[_counter];
                 bullet.OnUpdate(deltaTime);
                 
                 if (!_worldCoordinates.IsInBounds(bullet.GetColliderRect()))
@@ -58,7 +59,7 @@ namespace Game.Modules.BulletModule.Scripts
                 }
             }
 
-            counter = -1;
+            _counter = -1;
         }
 
         public void Dispose()

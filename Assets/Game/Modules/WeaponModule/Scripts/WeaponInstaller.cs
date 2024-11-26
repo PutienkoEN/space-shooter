@@ -6,15 +6,15 @@ namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponInstaller : MonoInstaller
     {
-        [SerializeField] private WeaponDataConfig weaponDataConfig;
+        [SerializeField] private WeaponConfig weaponConfig;
 
         public override void InstallBindings()
         {
             Container.BindFactory<WeaponComponent, WeaponComponent.Factory>();
             Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
-            Container.BindInterfacesAndSelfTo<WeaponController>()
+            Container.Bind<WeaponController>()
                 .AsSingle()
-                .WithArguments(weaponDataConfig, gameObject);
+                .WithArguments(weaponConfig, gameObject.transform);
 
         }
         

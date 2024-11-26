@@ -18,7 +18,7 @@ namespace SpaceShooter.Game.Player.Ship
         public PlayerShipEntity(
             PlayerShipView playerShipView,
             PlayerMoveController playerMoveController,
-            [InjectOptional] WeaponController weaponController,
+            WeaponController weaponController,
             HealthComponent healthComponent)
         {
             _playerShipView = playerShipView;
@@ -36,7 +36,7 @@ namespace SpaceShooter.Game.Player.Ship
         {
             _playerMoveController.Move(deltaTime);
             
-            _weaponController?.Tick(deltaTime);
+            _weaponController.Tick(deltaTime);
         }
 
         public void Dispose()

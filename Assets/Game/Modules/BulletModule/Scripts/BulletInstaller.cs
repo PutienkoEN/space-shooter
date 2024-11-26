@@ -6,7 +6,14 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class BulletInstaller : MonoInstaller
     {
-        [Inject] private float _speed;
+        private float _speed;
+        
+        [Inject]
+        private void Construct(float speed)
+        {
+            _speed = speed;
+        }
+        
         public override void InstallBindings()
         {
             Container.Bind<BulletEntity>().AsSingle();

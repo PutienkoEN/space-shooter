@@ -11,11 +11,11 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
-        public IWeaponComponent CreateWeapon(WeaponDataConfig weaponDataConfig, GameObject parentEntity)
+        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, Transform parentEntity)
         {
-            if (weaponDataConfig == null)
+            if (weaponConfig == null)
             {
-                throw new System.ArgumentNullException(nameof(weaponDataConfig));
+                throw new System.ArgumentNullException(nameof(weaponConfig));
             }
             
             if (parentEntity == null)
@@ -25,25 +25,25 @@ namespace Game.Modules.ShootingModule.Scripts
 
             Transform weaponParent = SetWeaponParent(parentEntity);
 
-            WeaponView weaponView = SetWeaponView(weaponDataConfig, weaponParent);
+            WeaponView weaponView = SetWeaponView(weaponConfig, weaponParent);
             
             IWeaponComponent weaponComponent = _weaponComponentFactory.Create();
-            weaponComponent.Setup(weaponDataConfig, weaponView.firePoints);
+            weaponComponent.Setup(weaponConfig, weaponView.firePoints);
             return weaponComponent;
         }
 
-        private WeaponView SetWeaponView(WeaponDataConfig weaponDataConfig, Transform weaponParent)
+        private WeaponView SetWeaponView(WeaponConfig weaponConfig, Transform weaponParent)
         {
-            WeaponData weaponData = weaponDataConfig.GetWeaponData();
+            WeaponData weaponData = weaponConfig.GetWeaponData();
             WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
             return weaponView;
         }
 
-        private Transform SetWeaponParent(GameObject parentEntity)
+        private Transform SetWeaponParent(Transform parentEntity)
         {
             Transform weaponParent;
 
-            Transform weaponParentTransform = parentEntity.transform.Find(WEAPON_PARENT_NAME);
+            Transform weaponParentTransform = parentEntity.Find(WEAPON_PARENT_NAME);
             if (weaponParentTransform != null)
             {
                 weaponParent = weaponParentTransform;

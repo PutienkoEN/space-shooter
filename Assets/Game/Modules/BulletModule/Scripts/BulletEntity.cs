@@ -19,8 +19,9 @@ namespace Game.Modules.BulletModule.Scripts
             _collider = _bulletView.GetComponent<Collider>();
         }
 
-        public void LaunchBullet(Vector3 position, Quaternion rotation)
+        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
+            _direction = direction;
             _bulletView.transform.SetPositionAndRotation(position, rotation);
         }
 

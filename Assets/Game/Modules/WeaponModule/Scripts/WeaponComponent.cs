@@ -15,16 +15,16 @@ namespace Game.Modules.ShootingModule.Scripts
         private float _timer;
 
         public WeaponComponent(
-            [InjectOptional] BulletSpawner bulletSpawner)
+            BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
         }
 
-        public void Setup(WeaponDataConfig weaponDataConfig, Transform[] firePoints)
+        public void Setup(WeaponConfig weaponConfig, Transform[] firePoints)
         {
-            if (weaponDataConfig == null)
+            if (weaponConfig == null)
             {
-                throw new ArgumentNullException(nameof(weaponDataConfig));
+                throw new ArgumentNullException(nameof(weaponConfig));
             }
 
             if (firePoints.Length == 0)
@@ -32,7 +32,7 @@ namespace Game.Modules.ShootingModule.Scripts
                 throw new ArgumentException("At least one fire point is required", nameof(firePoints));
             }
 
-            WeaponData weaponData = weaponDataConfig.GetWeaponData();
+            WeaponData weaponData = weaponConfig.GetWeaponData();
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
             _firePoints = firePoints;
             _fireRate = weaponData.FireRate;
@@ -53,7 +53,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                _bulletSpawner?.LaunchBullet(firePoint, _projectileSpeed);
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed);
             }
         }
         
