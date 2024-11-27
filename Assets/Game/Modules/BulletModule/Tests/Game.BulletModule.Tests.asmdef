@@ -1,11 +1,11 @@
 {
-    "name": "Game.WeaponModule.Tests.Editor",
-    "rootNamespace": "SpaceShooter.WeaponModule.Tests",
+    "name": "Game.BulletModule.Tests",
+    "rootNamespace": "",
     "references": [
-        "Game.Modules.Weapon",
         "Game.Modules.BulletModule",
         "Zenject",
-        "Zenject-TestFramework"
+        "Zenject-TestFramework",
+        "Game.Modules.Components"
     ],
     "includePlatforms": [
         "Editor"

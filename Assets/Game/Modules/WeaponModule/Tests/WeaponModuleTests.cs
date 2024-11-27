@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Reflection;
+using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using Moq;
 using NUnit.Framework;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.WeaponModule.Tests
 {
-    public class WeaponModuleTests
+    [TestFixture]
+    public class WeaponModuleTests : ZenjectUnitTestFixture
     {
         private Mock<IWeaponCreator> _mockWeaponCreator;
         private Mock<IWeaponComponent> _mockWeapon;
         private WeaponConfig _testWeaponConfig;
         private ProjectileConfig _testProjectileConfig;
         private GameObject _testPlayer;
+        private BulletEntity.Factory _bulletFactory;
+        private BulletSpawner _bulletSpawner;
         
         [SetUp]
         public void Setup()
         {
             _mockWeapon = new Mock<IWeaponComponent>();
             _mockWeaponCreator = new Mock<IWeaponCreator>();
-
+        
             _testProjectileConfig = ScriptableObject.CreateInstance<ProjectileConfig>();
             _testWeaponConfig = ScriptableObject.CreateInstance<WeaponConfig>();
             
@@ -32,8 +37,15 @@ namespace Game.Modules.WeaponModule.Tests
             _testPlayer = new GameObject("Player");
             
             _mockWeaponCreator
-                .Setup(creator => creator.CreateWeapon(_testWeaponConfig, _testPlayer))
+                .Setup(creator => creator.CreateWeapon(_testWeaponConfig, _testPlayer.transform))
                 .Returns(_mockWeapon.Object);
+            
+            Container.BindFactory<WeaponComponent, WeaponComponent.Factory>().AsSingle();
+            Container.Bind<WeaponComponent>().AsSingle();
+            Container.Bind<WeaponCreator>().AsSingle();
+            
+            Container.BindFactory<float, BulletEntity, BulletEntity.Factory>().AsSingle();
+            Container.Bind<BulletSpawner>().AsSingle();
         }
 
         [Test]
@@ -43,8 +55,9 @@ namespace Game.Modules.WeaponModule.Tests
             
         
             //Act
-            WeaponController weaponController = new WeaponController(_testWeaponConfig,_mockWeaponCreator.Object, _testPlayer);
-
+            WeaponController weaponController = new WeaponController(
+                _testWeaponConfig,_mockWeaponCreator.Object, _testPlayer.transform);
+        
             //Assert
             Assert.IsNotNull(_mockWeapon.Object);
         }
@@ -53,7 +66,8 @@ namespace Game.Modules.WeaponModule.Tests
         public void WhenCreateWeaponController_AndAssignIGameTickable_TickMethodShouldGetDeltaTime()
         {
             //Arrange
-            var weaponController = new WeaponController(_testWeaponConfig, _mockWeaponCreator.Object, _testPlayer);
+            var weaponController = new WeaponController(
+                _testWeaponConfig, _mockWeaponCreator.Object, _testPlayer.transform);
             float testDeltaTime = 0.5f;
             
             //Act
@@ -69,50 +83,40 @@ namespace Game.Modules.WeaponModule.Tests
         public void WhenWeaponComponentSetupCalled_AndWeaponConfigIsNull_ThenShouldThrowException()
         {
             //Arrange
-            var bulletLauncherMock = new Mock<BulletLauncher>();
-            var weaponComponent = new WeaponComponent(bulletLauncherMock.Object);
-            WeaponConfig weaponConfig = null;
+            _bulletSpawner = Container.Resolve<BulletSpawner>();
+            var weaponComponent = new WeaponComponent(_bulletSpawner);
+            WeaponConfig weaponDataConfig = null;
             Transform[] firePoints = new Transform[1];
-
+        
             //Act //Assert
             Assert.Throws<ArgumentNullException>(() =>
-                weaponComponent.Setup(weaponConfig, firePoints));
+                weaponComponent.Setup(weaponDataConfig, firePoints));
         }
         
         [Test]
         public void WhenWeaponComponentSetupCalled_AndFirePointIsZero_ThenShouldThrowException()
         {
             //Arrange
-            var bulletLauncherMock = new Mock<BulletLauncher>();
-            var weaponComponent = new WeaponComponent(bulletLauncherMock.Object);
-            WeaponConfig weaponConfig = ScriptableObject.CreateInstance<WeaponConfig>();
+            _bulletSpawner = Container.Resolve<BulletSpawner>();
+            var weaponComponent = new WeaponComponent(_bulletSpawner);
+            WeaponConfig weaponDataConfig = ScriptableObject.CreateInstance<WeaponConfig>();
             Transform[] firePoints = new Transform[0];
-
+        
             //Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                weaponComponent.Setup(weaponConfig, firePoints));
+                weaponComponent.Setup(weaponDataConfig, firePoints));
         }
 
         [Test]
         public void WhenCreateWeapon_AndWeaponConfigIsNull_ThenShouldThrowException()
         {
             //Arrange
-            WeaponCreator weaponCreator = new WeaponCreator();
-            WeaponConfig weaponConfig = null;
+            WeaponCreator weaponCreator = Container.Resolve<WeaponCreator>();
+            WeaponConfig weaponDataConfig = null;
             
             //Act & & Assert
-            Assert.Throws<ArgumentNullException>(()=> weaponCreator.CreateWeapon(weaponConfig, _testPlayer));
-        }
-        
-        [Test]
-        public void WhenCreateWeapon_AndPlayerIsNull_ThenShouldThrowException()
-        {
-            //Arrange
-            WeaponCreator weaponCreator = new WeaponCreator();
-            GameObject player = null;
-            
-            //Act & & Assert
-            Assert.Throws<ArgumentNullException>(()=> weaponCreator.CreateWeapon(_testWeaponConfig, player));
+            Assert.Throws<ArgumentNullException>(()=> weaponCreator.CreateWeapon(
+                weaponDataConfig, _testPlayer.transform));
         }
     }
 }

@@ -17,10 +17,15 @@ namespace SpaceShooter.Game.Components
             this.speed = speed;
         }
 
-        public void Move(Vector3 target, float deltaTime)
+        public void MoveTowards(Vector3 target, float deltaTime)
         {
-            var moveTowards = Vector3.MoveTowards(transform.position, target, speed * deltaTime);
+            Vector3 moveTowards = Vector3.MoveTowards(transform.position, target, speed * deltaTime);
             transform.position = moveTowards;
+        }
+
+        public void MoveToDirection(Vector3 direction, float deltaTime)
+        {
+            transform.position += direction * speed * deltaTime;
         }
 
         public Vector3 GetPosition()

@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public sealed class WeaponController : IGameListener, IGameTickable
+    public sealed class WeaponController
     {
         private readonly IWeaponComponent _activeIWeaponComponent;
         
         public WeaponController(
             WeaponConfig weaponConfig,
             IWeaponCreator weaponCreator,
-            GameObject player)
+            Transform player)
         {
             if (weaponConfig == null)
                 throw new ArgumentNullException(nameof(weaponConfig), "Weapon data cannot be null.");
@@ -24,6 +24,8 @@ namespace Game.Modules.ShootingModule.Scripts
                 throw new ArgumentNullException(nameof(player), "Player object cannot be null.");
             
             _activeIWeaponComponent = weaponCreator.CreateWeapon(weaponConfig, player);
+            
+            Debug.Log("WeaponController initialized.");
         }
         
         public void Tick(float deltaTime)

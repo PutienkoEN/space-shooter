@@ -1,6 +1,4 @@
-﻿using Game.Modules.ShootingModule.Scripts;
-using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using SpaceShooter.Game.Components;
+﻿using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +6,6 @@ namespace SpaceShooter.Game.Player.Ship
 {
     public class PlayerShipInstaller : MonoInstaller
     {
-        [SerializeField] private WeaponConfig weaponConfig;
         [SerializeField] private float speed;
         [SerializeField] private float health;
 
@@ -48,14 +45,6 @@ namespace SpaceShooter.Game.Player.Ship
                 .BindInterfacesAndSelfTo<PlayerMoveController>()
                 .AsSingle()
                 .NonLazy();
-
-            Container
-                .BindInterfacesAndSelfTo<WeaponCreator>()
-                .AsSingle();
-
-            Container.BindInterfacesAndSelfTo<WeaponController>()
-                .AsSingle()
-                .WithArguments(weaponConfig, gameObject);
         }
     }
 }
