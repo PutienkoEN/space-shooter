@@ -59,11 +59,6 @@ namespace Game.Modules.BulletModule.Scripts
             {
                 BulletEntity bullet = _bullets[_counter];
                 bullet.OnUpdate(deltaTime);
-                
-                // if (!_worldCoordinates.IsInBounds(bullet.GetColliderRect()))
-                // {
-                //     RemoveBullet(bullet);
-                // }
             }
 
             _counter = -1;
