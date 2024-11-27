@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
@@ -25,7 +24,6 @@ namespace Game.Modules.ShootingModule.Scripts
             
             _activeIWeaponComponent = weaponCreator.CreateWeapon(weaponConfig, player);
             
-            Debug.Log("WeaponController initialized.");
         }
         
         public void Tick(float deltaTime)

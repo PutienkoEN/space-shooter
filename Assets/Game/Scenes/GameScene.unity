@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[GameSceneContext]'
       objectReference: {fileID: 0}
+    - target: {fileID: 3180179506568711041, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: bulletContainer
+      value: 
+      objectReference: {fileID: 1264921088}
     - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: spawnPosition
       value: 
