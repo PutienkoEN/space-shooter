@@ -72,7 +72,7 @@ namespace Game.Modules.BulletModule.Scripts
         private void HandleDestroy(BulletEntity _)
         {
             //The check required for the unit test to work correctly.
-            // Destroying in Edit Mode is no allowed.
+            // Destroying in Edit Mode is not allowed.
             if(Application.isPlaying) 
                 _bulletView.DestroyBullet();
         }

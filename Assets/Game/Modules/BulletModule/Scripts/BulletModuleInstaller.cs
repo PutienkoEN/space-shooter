@@ -21,8 +21,6 @@ namespace Game.Modules.BulletModule.Scripts
                 .To<BulletEntity.Factory>()
                 .FromResolve();
 
-            container.Bind<IBulletFactory>().To<BulletFactory>().AsSingle();//ToDO: Reconsider this custom Interface
-
             container.Bind<BulletSpawner>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
         }

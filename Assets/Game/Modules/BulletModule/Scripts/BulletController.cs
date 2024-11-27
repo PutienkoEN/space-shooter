@@ -11,15 +11,12 @@ namespace Game.Modules.BulletModule.Scripts
         public IReadOnlyList<BulletEntity> Bullets => _bullets;//ToDo: consider removing it later. Used only in Tests for now;
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
-        private readonly WorldCoordinates _worldCoordinates;
         private int _counter = -1;
         
         public BulletController(
-            BulletSpawner bulletSpawner,
-            WorldCoordinates worldCoordinates)
+            BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
-            _worldCoordinates = worldCoordinates;
             
             _bulletSpawner.OnNewBullet += AddNewBullet;
         }
@@ -48,11 +45,6 @@ namespace Game.Modules.BulletModule.Scripts
 
         public void Tick(float deltaTime)
         {
-            if (deltaTime <= 0)
-            {
-                throw new ArgumentException("deltaTime must be greater than 0.", nameof(BulletController));
-            }
-            
             for (_counter = 0; _counter < _bullets.Count; _counter++)
             {
                 BulletEntity bullet = _bullets[_counter];
