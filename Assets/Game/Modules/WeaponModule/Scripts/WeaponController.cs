@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
