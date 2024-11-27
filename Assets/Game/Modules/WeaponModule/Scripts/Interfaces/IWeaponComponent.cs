@@ -5,7 +5,7 @@ namespace Game.Modules.ShootingModule.Scripts
 {
     public interface IWeaponComponent
     {
-        public void Setup(WeaponConfig weaponConfig, Transform[] firePoints);
+        public void Setup(WeaponConfig weaponConfig, IWeaponView weaponView);
         public void Fire(float deltaTime);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
@@ -11,7 +12,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
-        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, Transform parentEntity)
+        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, IEntityView parentEntity)
         {
             if (weaponConfig == null)
             {
@@ -23,12 +24,14 @@ namespace Game.Modules.ShootingModule.Scripts
                 throw new System.ArgumentNullException(nameof(parentEntity));
             }
 
-            Transform weaponParent = SetWeaponParent(parentEntity);
+            Transform weaponParent = SetWeaponParent(parentEntity.GetTransform());
 
             WeaponView weaponView = SetWeaponView(weaponConfig, weaponParent);
+
+            weaponView.gameObject.layer = parentEntity.GetLayerMask();
             
             IWeaponComponent weaponComponent = _weaponComponentFactory.Create();
-            weaponComponent.Setup(weaponConfig, weaponView.firePoints);
+            weaponComponent.Setup(weaponConfig, weaponView);
             return weaponComponent;
         }
 

@@ -29,6 +29,11 @@ namespace Game.Modules.BulletModule.Scripts
             OnDestroy += HandleDestroy;
         }
 
+        public void SetLayer(LayerMask layer)
+        {
+            _bulletView.gameObject.layer = layer;
+        }
+
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
             _direction = direction;
@@ -38,10 +43,11 @@ namespace Game.Modules.BulletModule.Scripts
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (!_boundsCheckComponent.IsInBounds(GetColliderRect()))
+            if (!_boundsCheckComponent.IsInBounds(GetColliderRect()) || _bulletView.Collided)
             {
                 OnDestroy?.Invoke(this);
             }
+
         }
 
         public Rect GetColliderRect()
@@ -72,7 +78,7 @@ namespace Game.Modules.BulletModule.Scripts
         private void HandleDestroy(BulletEntity _)
         {
             //The check required for the unit test to work correctly.
-            // Destroying in Edit Mode is no allowed.
+            // Destroying in Edit Mode is not allowed.
             if(Application.isPlaying) 
                 _bulletView.DestroyBullet();
         }

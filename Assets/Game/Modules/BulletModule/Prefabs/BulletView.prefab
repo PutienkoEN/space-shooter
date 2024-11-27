@@ -67,6 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0068af1bd494b1ca605f61d5a28e90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &4775736608197480699
 MonoBehaviour:
   m_ObjectHideFlags: 0

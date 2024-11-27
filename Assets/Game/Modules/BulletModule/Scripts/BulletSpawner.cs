@@ -15,13 +15,14 @@ namespace Game.Modules.ShootingModule.Scripts
             _bulletFactory = bulletFactory;
         }
         
-        public void LaunchBullet(Transform firePoint, float speed)
+        public void LaunchBullet(Transform firePoint, float speed, LayerMask layerMask)
         {
             if (firePoint == null)
             {
                 throw new ArgumentNullException(nameof(firePoint));
             }
             BulletEntity bulletEntity = _bulletFactory.Create(speed);
+            bulletEntity.SetLayer(layerMask);
             bulletEntity.LaunchBullet(firePoint.position, firePoint.rotation, firePoint.up);
             
             OnNewBullet?.Invoke(bulletEntity);

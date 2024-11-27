@@ -16,7 +16,7 @@ namespace SpaceShooter.Game.Player.Ship
                 .AsSingle();
 
             Container
-                .Bind<PlayerShipView>()
+                .BindInterfacesAndSelfTo<PlayerShipView>()
                 .FromComponentOnRoot()
                 .AsSingle();
 

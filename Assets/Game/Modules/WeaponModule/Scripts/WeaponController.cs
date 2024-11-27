@@ -1,6 +1,5 @@
-﻿using System;
-using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using UnityEngine;
+﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using SpaceShooter.Game.LifeCycle.Common;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
@@ -11,10 +10,9 @@ namespace Game.Modules.ShootingModule.Scripts
         public WeaponController(
             WeaponConfig weaponConfig,
             IWeaponCreator weaponCreator,
-            Transform player)
+            IEntityView playerView)
         {
-            _activeIWeaponComponent = weaponCreator.CreateWeapon(weaponConfig, player);
-            
+            _activeIWeaponComponent = weaponCreator.CreateWeapon(weaponConfig, playerView);
         }
         
         public void Tick(float deltaTime)

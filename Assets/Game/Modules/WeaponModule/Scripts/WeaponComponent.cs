@@ -9,6 +9,7 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         private readonly BulletSpawner _bulletSpawner;
         private Transform[] _firePoints;
+        private IWeaponView _weaponView;
         private float _fireRate;
         private float _projectileSpeed;
 
@@ -20,21 +21,22 @@ namespace Game.Modules.ShootingModule.Scripts
             _bulletSpawner = bulletSpawner;
         }
 
-        public void Setup(WeaponConfig weaponConfig, Transform[] firePoints)
+        public void Setup(WeaponConfig weaponConfig, IWeaponView weaponView)
         {
             if (weaponConfig == null)
             {
                 throw new ArgumentNullException(nameof(weaponConfig));
             }
 
-            if (firePoints.Length == 0)
+            if (weaponView.GetFirePoints().Length == 0)
             {
-                throw new ArgumentException("At least one fire point is required", nameof(firePoints));
+                throw new ArgumentException("At least one fire point is required", nameof(weaponView));
             }
 
             WeaponData weaponData = weaponConfig.GetWeaponData();
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
-            _firePoints = firePoints;
+            _weaponView = weaponView;
+            // _firePoints = weaponView.GetFirePoints();
             _fireRate = weaponData.FireRate;
         }
 
@@ -51,9 +53,9 @@ namespace Game.Modules.ShootingModule.Scripts
 
         private void LaunchBullet()
         {
-            foreach (Transform firePoint in _firePoints)
+            foreach (Transform firePoint in _weaponView.GetFirePoints())
             {
-                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed);
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _weaponView.GetLayer());
             }
         }
         
