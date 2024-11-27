@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.CameraUtility;
 using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine;
-using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
 {

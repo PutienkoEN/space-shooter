@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
-using Moq;
 using NUnit.Framework;
 using SpaceShooter.Game.CameraUtility;
 using SpaceShooter.Game.Components;
 using UnityEngine;
-using UnityEngine.TestTools;
 using Zenject;
 
 namespace Game.Modules.BulletModule.Tests
