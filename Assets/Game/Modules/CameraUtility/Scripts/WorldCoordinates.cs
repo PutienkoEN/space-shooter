@@ -6,7 +6,7 @@ namespace SpaceShooter.Game.CameraUtility
     /*
      * Utility class to store generic helper methods of world data.
      */
-    public sealed class WorldCoordinates
+    public sealed class WorldCoordinates : IWorldCoordinates
     {
         private readonly Camera _camera;
 
@@ -23,7 +23,9 @@ namespace SpaceShooter.Game.CameraUtility
             _worldMinY = _camera.ViewportToWorldPoint(Vector3.zero).y;
             _worldMaxY = _camera.ViewportToWorldPoint(Vector3.up).y;
         }
-
+        
+        public Rect WorldBounds => new Rect(_worldMinX, _worldMinY, _worldMaxX - _worldMinX, _worldMaxY - _worldMinY);
+        
         public Vector3 ClampToScreen(Vector3 position, float objectWidth, float objectHeight)
         {
             var halfOfWidth = objectWidth / 2;

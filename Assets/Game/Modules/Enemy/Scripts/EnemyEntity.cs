@@ -41,7 +41,7 @@ namespace Game.Modules.Enemy.Scripts
 
         public void Update(float deltaTime)
         {
-            _moveComponent.MoveToDirection(Vector3.down * deltaTime);
+            _moveComponent.MoveToDirection(Vector3.down, deltaTime);
         }
 
 

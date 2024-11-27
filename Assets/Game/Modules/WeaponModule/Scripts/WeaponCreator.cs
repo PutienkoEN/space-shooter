@@ -6,7 +6,12 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, GameObject parentEntity)
+        private WeaponComponent.Factory _weaponComponentFactory;
+        public WeaponCreator(WeaponComponent.Factory weaponComponentFactory)
+        {
+            _weaponComponentFactory = weaponComponentFactory;
+        }
+        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, Transform parentEntity)
         {
             if (weaponConfig == null)
             {
@@ -22,7 +27,7 @@ namespace Game.Modules.ShootingModule.Scripts
 
             WeaponView weaponView = SetWeaponView(weaponConfig, weaponParent);
             
-            IWeaponComponent weaponComponent = new WeaponComponent(new BulletLauncher());
+            IWeaponComponent weaponComponent = _weaponComponentFactory.Create();
             weaponComponent.Setup(weaponConfig, weaponView.firePoints);
             return weaponComponent;
         }
@@ -34,11 +39,11 @@ namespace Game.Modules.ShootingModule.Scripts
             return weaponView;
         }
 
-        private Transform SetWeaponParent(GameObject parentEntity)
+        private Transform SetWeaponParent(Transform parentEntity)
         {
             Transform weaponParent;
 
-            Transform weaponParentTransform = parentEntity.transform.Find(WEAPON_PARENT_NAME);
+            Transform weaponParentTransform = parentEntity.Find(WEAPON_PARENT_NAME);
             if (weaponParentTransform != null)
             {
                 weaponParent = weaponParentTransform;

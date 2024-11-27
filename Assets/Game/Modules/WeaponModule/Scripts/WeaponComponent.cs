@@ -1,22 +1,23 @@
 ﻿using System;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponComponent : IWeaponComponent
     {
-        private readonly BulletLauncher _bulletLauncher;
-        private GameObject _projectilePrefab;
+        private readonly BulletSpawner _bulletSpawner;
         private Transform[] _firePoints;
         private float _fireRate;
         private float _projectileSpeed;
 
         private float _timer;
 
-        public WeaponComponent(BulletLauncher bulletLauncher)
+        public WeaponComponent(
+            BulletSpawner bulletSpawner)
         {
-            _bulletLauncher = bulletLauncher;
+            _bulletSpawner = bulletSpawner;
         }
 
         public void Setup(WeaponConfig weaponConfig, Transform[] firePoints)
@@ -32,7 +33,6 @@ namespace Game.Modules.ShootingModule.Scripts
             }
 
             WeaponData weaponData = weaponConfig.GetWeaponData();
-            _projectilePrefab = weaponData.ProjectileData.ProjectilePrefab;
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
             _firePoints = firePoints;
             _fireRate = weaponData.FireRate;
@@ -53,10 +53,11 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                //ToDO: Temp implementation. Will be replaced with proper classes.
-                _bulletLauncher.LaunchBullet(_projectilePrefab,firePoint, _projectileSpeed);
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed);
             }
         }
+        
+        public class Factory : PlaceholderFactory<WeaponComponent>{}
 
     }
 }

@@ -1,10 +1,16 @@
 {
-    "name": "Game.Modules.Components",
+    "name": "Game.BulletModule.Tests",
     "rootNamespace": "",
     "references": [
+        "Game.Modules.BulletModule",
+        "Zenject",
+        "Zenject-TestFramework",
+        "Game.Modules.Components",
         "Game.Modules.CameraUtility"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

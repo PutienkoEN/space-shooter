@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "WeaponData", menuName = "SpaceShooter/ShootingModule/WeaponData", order = 0)]
+    [CreateAssetMenu(fileName = "WeaponConfig", menuName = "SpaceShooter/ShootingModule/WeaponConfig", order = 0)]
     public sealed class WeaponConfig : ScriptableObject
     {
         [SerializeField] private WeaponView prefab;
@@ -26,7 +27,7 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
         public int Damage;
         public float FireRate;
         public ProjectileData ProjectileData;
-
+        
         public WeaponData(
             WeaponView prefab,
             int damage,
