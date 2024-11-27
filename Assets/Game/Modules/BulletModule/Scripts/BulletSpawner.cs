@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public class BulletSpawner
+    public sealed class BulletSpawner
     {
         public event Action<BulletEntity> OnNewBullet;
         private readonly BulletEntity.Factory _bulletFactory;

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
-using Moq;
 using NUnit.Framework;
 using SpaceShooter.Game.Components;
 using UnityEngine;

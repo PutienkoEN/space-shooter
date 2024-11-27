@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BulletModuleInstaller : GameModuleInstaller
+    public sealed class BulletModuleInstaller : GameModuleInstaller
     {
         [SerializeField] private BulletView bulletViewPrefab;
         [SerializeField] private Transform bulletContainer;
