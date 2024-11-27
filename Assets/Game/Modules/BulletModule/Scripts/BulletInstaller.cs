@@ -1,4 +1,5 @@
 ﻿using SpaceShooter.Game.Components;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.BulletModule.Scripts
@@ -17,8 +18,14 @@ namespace Game.Modules.BulletModule.Scripts
         {
             Container.Bind<BulletEntity>().AsSingle();
             Container.Bind<BulletView>().FromComponentOnRoot().AsSingle();
+
+            var collider = transform.GetComponent<Collider>();
+            Container.Bind<ColliderComponent>().AsSingle().WithArguments(collider).NonLazy();
+            
             Container.Bind<MoveComponent>().AsSingle()
                 .WithArguments(transform, _speed);
+
+            Container.Bind<BoundsCheckComponent>().AsSingle();
         }
     }
 }

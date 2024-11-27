@@ -1,7 +1,9 @@
 {
     "name": "Game.Modules.Components",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "Game.Modules.CameraUtility"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

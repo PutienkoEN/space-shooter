@@ -16,7 +16,7 @@ namespace SpaceShooter.Game.CameraUtility
                 .AsSingle();
 
             container
-                .Bind<WorldCoordinates>()
+                .BindInterfacesAndSelfTo<WorldCoordinates>()
                 .AsSingle();
         }
     }

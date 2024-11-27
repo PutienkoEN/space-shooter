@@ -1,15 +1,16 @@
 ﻿using System;
 using Game.Modules.BulletModule.Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class BulletSpawner
     {
         public event Action<BulletEntity> OnNewBullet;
-        private readonly BulletEntity.Factory _bulletFactory;
+        private readonly IFactory<float, BulletEntity> _bulletFactory;
 
-        public BulletSpawner(BulletEntity.Factory bulletFactory)
+        public BulletSpawner(IFactory<float, BulletEntity> bulletFactory)
         {
             _bulletFactory = bulletFactory;
         }
