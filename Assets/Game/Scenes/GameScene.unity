@@ -369,7 +369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldTransform: {fileID: 1264921088}
-  enemyPrefab: {fileID: -8157317904408921074, guid: a2b90cac623bef74db1c09dd199d2301, type: 3}
   levelConfiguration: {fileID: 11400000, guid: 373b73beafc158a4aaa58412850f274d, type: 2}
 --- !u!114 &1924051708
 MonoBehaviour:

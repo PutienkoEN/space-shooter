@@ -29,7 +29,7 @@ namespace Game.Modules.Enemy.Scripts
         }
 
         [Button]
-        public void DestroyEnemies()
+        public void DestroyEnemy()
         {
             _enemyManager.DestroyEnemy(enemyEntity);
         }

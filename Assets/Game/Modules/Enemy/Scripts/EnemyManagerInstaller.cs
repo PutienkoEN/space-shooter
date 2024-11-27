@@ -8,7 +8,6 @@ namespace Game.Modules.Enemy.Scripts
     public class EnemyManagerInstaller : GameModuleInstaller
     {
         [SerializeField] private Transform worldTransform;
-        [SerializeField] private EnemyView enemyPrefab;
         [SerializeField] private LevelConfiguration levelConfiguration;
 
         public override void Install(DiContainer container)
