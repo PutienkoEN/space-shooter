@@ -5,7 +5,8 @@
         "Game.Modules.BulletModule",
         "Zenject",
         "Zenject-TestFramework",
-        "Game.Modules.Components"
+        "Game.Modules.Components",
+        "Game.Modules.CameraUtility"
     ],
     "includePlatforms": [
         "Editor"

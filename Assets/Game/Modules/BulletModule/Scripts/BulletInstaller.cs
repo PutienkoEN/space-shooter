@@ -24,6 +24,8 @@ namespace Game.Modules.BulletModule.Scripts
             
             Container.Bind<MoveComponent>().AsSingle()
                 .WithArguments(transform, _speed);
+
+            Container.Bind<BoundsCheckComponent>().AsSingle();
         }
     }
 }

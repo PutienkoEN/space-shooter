@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.Components;
+﻿using System;
+using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
 
@@ -6,17 +7,26 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class BulletEntity
     {
+        public event Action<BulletEntity> OnDestroy;
+        
         private readonly BulletView _bulletView;
         private readonly MoveComponent _moveComponent;
-        private readonly Vector3 _direction = Vector3.up;
+        private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
+        private Vector3 _direction;
         private Rect _colliderRect;
         
-        public BulletEntity(BulletView bulletView, MoveComponent moveComponent)
+        public BulletEntity(
+            BulletView bulletView, 
+            MoveComponent moveComponent, 
+            BoundsCheckComponent boundsCheckComponent)
         {
             _bulletView = bulletView;
             _moveComponent = moveComponent;
+            _boundsCheckComponent = boundsCheckComponent;
             _collider = _bulletView.GetComponent<Collider>();
+
+            OnDestroy += HandleDestroy;
         }
 
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
@@ -28,6 +38,10 @@ namespace Game.Modules.BulletModule.Scripts
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
+            if (!_boundsCheckComponent.IsInBounds(GetColliderRect()))
+            {
+                OnDestroy?.Invoke(this);
+            }
         }
 
         public Rect GetColliderRect()
@@ -55,9 +69,12 @@ namespace Game.Modules.BulletModule.Scripts
             return _colliderRect;
         }
         
-        public void Dispose()
+        private void HandleDestroy(BulletEntity _)
         {
-            _bulletView.DestroyBullet();
+            //The check required for the unit test to work correctly.
+            // Destroying in Edit Mode is no allowed.
+            if(Application.isPlaying) 
+                _bulletView.DestroyBullet();
         }
         
         public class Factory : PlaceholderFactory<float, BulletEntity>
