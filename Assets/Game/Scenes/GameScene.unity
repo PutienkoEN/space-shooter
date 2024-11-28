@@ -374,6 +374,11 @@ Transform:
   - {fileID: 377038173}
   m_Father: {fileID: 2078975668}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &968922159 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+  m_PrefabInstance: {fileID: 7402022298023236488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &989745150
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +496,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5366562399551866894, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1924051706}
+    - targetCorrespondingSourceObject: {fileID: 5366562399551866894, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 968922159}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4418689416390464214, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       insertIndex: -1
@@ -575,7 +583,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1924051706}
   - component: {fileID: 1924051707}
-  - component: {fileID: 1924051708}
   m_Layer: 0
   m_Name: Enemy Manager Context
   m_TagString: Untagged
@@ -611,20 +618,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldTransform: {fileID: 1264921088}
-  levelConfiguration: {fileID: 11400000, guid: 373b73beafc158a4aaa58412850f274d, type: 2}
---- !u!114 &1924051708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924051705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03944f2ce5494a97a4131829874f5569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
 --- !u!1 &2045935757
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +772,63 @@ Transform:
   - {fileID: 637733510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7402022298023236488
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1920368570}
+    m_Modifications:
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31234833672636988, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1152232912571811666, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
+      propertyPath: m_Name
+      value: Level Manager Context
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5804ea7b8f0e32d41b773736aa2b7701, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
