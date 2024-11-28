@@ -8,7 +8,7 @@ namespace Game.Modules.Enemy.Scripts
         menuName = "SpaceShooter/Level/Configuration")]
     public class GameLevelConfig : ScriptableObject
     {
-        [SerializeReference] private List<EnemySpawnGameLeveEventConfig> gameLeveEvents = new();
+        [SerializeReference] private List<IGameLevelEventConfig<IGameLevelEventData>> gameLeveEvents = new();
 
         public GameLevelData GetData()
         {
@@ -19,9 +19,9 @@ namespace Game.Modules.Enemy.Scripts
 
     public class GameLevelData
     {
-        public List<EnemySpawnGameLeveEventData> GameLevelEvents { get; private set; }
+        public List<IGameLevelEventData> GameLevelEvents { get; private set; }
 
-        public GameLevelData(List<EnemySpawnGameLeveEventData> gameLevelEvents)
+        public GameLevelData(List<IGameLevelEventData> gameLevelEvents)
         {
             GameLevelEvents = gameLevelEvents;
         }

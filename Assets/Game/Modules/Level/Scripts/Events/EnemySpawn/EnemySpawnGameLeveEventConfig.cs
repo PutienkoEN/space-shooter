@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Modules.Enemy.Scripts
 {
     [Serializable]
-    public class EnemySpawnGameLeveEventConfig
+    public class EnemySpawnGameLeveEventConfig : IGameLevelEventConfig<EnemySpawnGameLevelEventData>
     {
         [Header("Coordinates")] [SerializeField]
         private Transform spawnPoint;
@@ -14,7 +14,7 @@ namespace Game.Modules.Enemy.Scripts
         [SerializeField] private float spawnIntervalInSeconds = 1;
         [SerializeField] private int numberOfEnemiesToSpawn = 4;
 
-        public EnemySpawnGameLeveEventData GetData() => new(
+        public EnemySpawnGameLevelEventData GetData() => new(
             spawnPoint.position,
             spawnPoint.rotation,
             enemyConfig.GetData(),
@@ -22,7 +22,7 @@ namespace Game.Modules.Enemy.Scripts
             numberOfEnemiesToSpawn);
     }
 
-    public class EnemySpawnGameLeveEventData
+    public class EnemySpawnGameLevelEventData : IGameLevelEventData
     {
         public Vector3 SpawnPosition { get; private set; }
         public Quaternion SpawnRotation { get; private set; }
@@ -30,7 +30,7 @@ namespace Game.Modules.Enemy.Scripts
         public float SpawnIntervalInSeconds { get; private set; }
         public int NumberOfEnemiesToSpawn { get; private set; }
 
-        public EnemySpawnGameLeveEventData(
+        public EnemySpawnGameLevelEventData(
             Vector3 spawnPosition,
             Quaternion spawnRotation,
             EnemyData enemyData,

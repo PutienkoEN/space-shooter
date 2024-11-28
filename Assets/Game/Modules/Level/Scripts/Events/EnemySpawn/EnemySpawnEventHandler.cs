@@ -3,12 +3,12 @@ using Cysharp.Threading.Tasks;
 
 namespace Game.Modules.Enemy.Scripts
 {
-    public class EnemySpawnEventHandler
+    public class EnemySpawnEventHandler : IGameEventHandler
     {
         private readonly EnemyManager _enemyManager;
-        private readonly EnemySpawnGameLeveEventData _spawnData;
+        private readonly EnemySpawnGameLevelEventData _spawnData;
 
-        public EnemySpawnEventHandler(EnemyManager enemyManager, EnemySpawnGameLeveEventData spawnData)
+        public EnemySpawnEventHandler(EnemyManager enemyManager, EnemySpawnGameLevelEventData spawnData)
         {
             _enemyManager = enemyManager;
             _spawnData = spawnData;

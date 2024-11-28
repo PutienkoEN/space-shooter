@@ -8,9 +8,12 @@ namespace Game.Modules.Enemy.Scripts
         public override void Install(DiContainer container)
         {
             container
-                .Bind<LevelManager>()
+                .Bind<GameLevelEventHandlerResolver>()
                 .AsSingle();
 
+            container
+                .Bind<LevelEventManager>()
+                .AsSingle();
 
             container
                 .Bind<DebugLevelManager>()

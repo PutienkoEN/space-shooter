@@ -11,13 +11,13 @@ namespace Game.Modules.Enemy.Scripts
         [SerializeField] private GameLevelConfig gameLevelConfig;
 
         private IEnemyManager _enemyManager;
-        private LevelManager _levelManager;
+        private LevelEventManager _levelEventManager;
 
         [Inject]
-        public void Construct(IEnemyManager enemyManager, LevelManager levelManager)
+        public void Construct(IEnemyManager enemyManager, LevelEventManager levelEventManager)
         {
             _enemyManager = enemyManager;
-            _levelManager = levelManager;
+            _levelEventManager = levelEventManager;
         }
 
         [Button]
@@ -38,7 +38,7 @@ namespace Game.Modules.Enemy.Scripts
         [Button]
         public void StartLevel()
         {
-            _levelManager.StartLevel(gameLevelConfig.GetData());
+            _levelEventManager.StartLevel(gameLevelConfig.GetData());
         }
     }
 }
