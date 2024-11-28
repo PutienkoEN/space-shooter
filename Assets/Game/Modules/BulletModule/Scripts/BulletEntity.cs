@@ -26,17 +26,17 @@ namespace Game.Modules.BulletModule.Scripts
             _boundsCheckComponent = boundsCheckComponent;
             _collider = _bulletView.GetComponent<Collider>();
 
-            // _bulletView.OnCollided += HandleOnCollided;
+            _bulletView.OnCollision += HandleOnCollision;
         }
 
-        private void HandleOnCollided(Collision collision)
+        // public void SetLayer(LayerMask layer)
+        // {
+        //     _bulletView.gameObject.layer = layer.value;
+        // }
+        
+        private void HandleOnCollision(Collider collider)
         {
-            HandleDestroy();
-        }
-
-        public void SetLayer(LayerMask layer)
-        {
-            _bulletView.gameObject.layer = layer.value;
+            Destroy();
         }
 
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
@@ -50,7 +50,7 @@ namespace Game.Modules.BulletModule.Scripts
             _moveComponent.MoveToDirection(_direction, deltaTime);
             if (!_boundsCheckComponent.IsInBounds(GetColliderRect()))
             {
-                HandleDestroy();
+                Destroy();
             }
         }
 
@@ -79,9 +79,9 @@ namespace Game.Modules.BulletModule.Scripts
             return _colliderRect;
         }
         
-        private void HandleDestroy()
+        private void Destroy()
         {
-            // _bulletView.OnCollided -= HandleOnCollided;
+            _bulletView.OnCollision -= HandleOnCollision;
             
             OnDestroy?.Invoke(this);
             
@@ -89,11 +89,9 @@ namespace Game.Modules.BulletModule.Scripts
             // Destroying in Edit Mode is not allowed.
             if(Application.isPlaying) 
                 _bulletView.DestroyBullet();
-            
-            
         }
         
-        public class Factory : PlaceholderFactory<float, BulletEntity>
+        public class Factory : PlaceholderFactory<float, LayerMask, BulletEntity>
         {
         }
         

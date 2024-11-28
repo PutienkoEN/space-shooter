@@ -55,20 +55,14 @@ namespace Game.Modules.BulletModule.Tests
         }
         
         [Test]
-        public void WhenLaunchBulletIsCalled_AndTransformArgumentIsNull_ThenThrowException()
-        {
-            // Act && Assert
-            // Assert.Throws<ArgumentNullException>(()=> _bulletSpawner.LaunchBullet(null, 10));
-        }
-        
-        [Test]
         public void WhenLaunchBulletIsCalled_AndBulletControllerIsCreated_ThenBulletAddedToBulletController()
         {
             // Arrange
-            GameObject testBullet = new GameObject();
+            GameObject firePoint = new GameObject();
+            LayerMask layerMask = (LayerMask)firePoint.layer;
         
             // Act
-            // _bulletSpawner.LaunchBullet(testBullet.transform, 10f);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
@@ -79,7 +73,8 @@ namespace Game.Modules.BulletModule.Tests
         {
             // Arrange
             GameObject firePoint = new GameObject();
-            // _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
+            LayerMask layerMask = (LayerMask)firePoint.layer;
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             MoveComponent moveComponent = _bulletFactory.Bullets[0].MoveComponent;
         
             // Act
@@ -97,9 +92,10 @@ namespace Game.Modules.BulletModule.Tests
         {
             //Arrange
             GameObject firePoint = new GameObject();
-            // _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
-            // _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
-            // _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
+            LayerMask layerMask = (LayerMask)firePoint.layer;
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             
             MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
             MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
@@ -115,15 +111,21 @@ namespace Game.Modules.BulletModule.Tests
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
         }
+
+        [Test]
+        public void TestCollision()
+        {
+            
+        }
     }
     
-    public class TestBulletFactory : IFactory<float, BulletEntity>
+    public class TestBulletFactory : IFactory<float, LayerMask, BulletEntity>
     {
         public Dictionary<int, BulletComponents> Bullets = new();
         
         private int _bulletCount = 0;
         
-        public BulletEntity Create(float speed)
+        public BulletEntity Create(float speed, LayerMask layerMask)
         {
             var bulletObj = new GameObject("BulletView");
             Collider bulletCollider = bulletObj.AddComponent<SphereCollider>();

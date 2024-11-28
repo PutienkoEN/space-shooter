@@ -6,7 +6,7 @@ namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponController
     {
-        private readonly IWeaponComponent _activeIWeaponComponent;
+        private readonly IWeaponComponent _activeWeapon;
         
         public WeaponController(
             WeaponConfig weaponConfig,
@@ -14,7 +14,7 @@ namespace Game.Modules.ShootingModule.Scripts
             Transform parentTransform,
             LayerMask parentLayer)
         {
-            _activeIWeaponComponent = weaponCreator.CreateWeapon(
+            _activeWeapon = weaponCreator.CreateWeapon(
                 weaponConfig, 
                 parentTransform,
                 parentLayer);
@@ -22,7 +22,7 @@ namespace Game.Modules.ShootingModule.Scripts
         
         public void Tick(float deltaTime)
         {
-            _activeIWeaponComponent.Fire(deltaTime);
+            _activeWeapon.Fire(deltaTime);
         }
         
     }

@@ -15,26 +15,12 @@ namespace Game.Modules.BulletModule.Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-           
             if (other.gameObject.layer == gameObject.layer)
             {
                 // Ignore trigger event for same-layer objects
                 return;
             }
-            Debug.Log("collided with on trigger : " + LayerMask.LayerToName(other.gameObject.layer));
             OnCollision?.Invoke(other);
-        }
-        
-        private void OnCollisionEnter(Collision other)
-        {
-           
-            if (other.gameObject.layer == gameObject.layer)
-            {
-                // Ignore trigger event for same-layer objects
-                return;
-            }
-            Debug.Log("collided with on collision : " + LayerMask.LayerToName(other.gameObject.layer));
-            // OnCollision?.Invoke(other);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using SpaceShooter.Game.LifeCycle.Common;
+﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
 using Zenject;
 
@@ -75,6 +73,5 @@ namespace Game.Modules.ShootingModule.Scripts
                 return weaponComponent;
             }
         }
-
     }
 }

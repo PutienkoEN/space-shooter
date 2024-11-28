@@ -1,14 +1,16 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        private WeaponComponent.Factory _weaponComponentFactory;
-        public WeaponCreator(WeaponComponent.Factory weaponComponentFactory)
+        private IFactory<WeaponConfig, Transform[], LayerMask, WeaponComponent> _weaponComponentFactory;
+        public WeaponCreator(IFactory
+            <WeaponConfig, Transform[], LayerMask, WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
