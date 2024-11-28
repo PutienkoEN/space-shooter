@@ -17,7 +17,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public LayerMask GetLayerMask()
         {
-            return gameObject.layer;
+            return (LayerMask)(1 << gameObject.layer);
         }
     }
 }

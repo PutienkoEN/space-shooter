@@ -12,24 +12,27 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
-        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, IEntityView parentEntity)
+        public IWeaponComponent CreateWeapon(
+            WeaponConfig weaponConfig, 
+            Transform parentEntity,
+            LayerMask entityLayer)
         {
             IWeaponView weaponView = CreateWeaponView(weaponConfig, parentEntity);
             
             IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
                 weaponConfig,
                 weaponView.GetFirePoints(),
-                parentEntity.GetLayerMask());
+                entityLayer);
            
             return weaponComponent;
         }
 
         private WeaponView CreateWeaponView(
             WeaponConfig weaponConfig, 
-            IEntityView parentEntity)
+            Transform parentEntity)
         {
             WeaponData weaponData = weaponConfig.GetWeaponData();
-            Transform weaponParent = SetWeaponParent(parentEntity.GetTransform());
+            Transform weaponParent = SetWeaponParent(parentEntity);
             WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
             return weaponView;
         }
