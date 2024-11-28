@@ -28,11 +28,6 @@ namespace Game.Modules.BulletModule.Scripts
 
             _bulletView.OnCollision += HandleOnCollision;
         }
-
-        // public void SetLayer(LayerMask layer)
-        // {
-        //     _bulletView.gameObject.layer = layer.value;
-        // }
         
         private void HandleOnCollision(Collider collider)
         {
@@ -91,7 +86,7 @@ namespace Game.Modules.BulletModule.Scripts
                 _bulletView.DestroyBullet();
         }
         
-        public class Factory : PlaceholderFactory<float, LayerMask, BulletEntity>
+        public class Factory : PlaceholderFactory<float, int, BulletEntity>
         {
         }
         

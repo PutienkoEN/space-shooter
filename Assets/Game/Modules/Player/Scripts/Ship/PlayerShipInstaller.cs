@@ -51,10 +51,10 @@ namespace SpaceShooter.Game.Player.Ship
                 .AsSingle()
                 .NonLazy();
             
-            Container.BindFactory<WeaponConfig, Transform[], LayerMask, 
+            Container.BindFactory<WeaponConfig, Transform[], int, 
                 WeaponComponent, WeaponComponent.Factory>();
 
-            Container.Bind<IFactory<WeaponConfig, Transform[], LayerMask, WeaponComponent>>()
+            Container.Bind<IFactory<WeaponConfig, Transform[], int, WeaponComponent>>()
                 .To<WeaponComponent.Factory>().FromResolve();
             
             Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();

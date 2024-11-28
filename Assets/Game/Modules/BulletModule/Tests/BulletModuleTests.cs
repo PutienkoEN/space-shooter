@@ -59,7 +59,7 @@ namespace Game.Modules.BulletModule.Tests
         {
             // Arrange
             GameObject firePoint = new GameObject();
-            LayerMask layerMask = (LayerMask)firePoint.layer;
+            int layerMask = firePoint.layer;
         
             // Act
             _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
@@ -73,7 +73,7 @@ namespace Game.Modules.BulletModule.Tests
         {
             // Arrange
             GameObject firePoint = new GameObject();
-            LayerMask layerMask = (LayerMask)firePoint.layer;
+            int layerMask = firePoint.layer;
             _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             MoveComponent moveComponent = _bulletFactory.Bullets[0].MoveComponent;
         
@@ -92,7 +92,32 @@ namespace Game.Modules.BulletModule.Tests
         {
             //Arrange
             GameObject firePoint = new GameObject();
-            LayerMask layerMask = (LayerMask)firePoint.layer;
+            int layerMask = firePoint.layer;
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            
+            MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
+            MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
+            
+            //Act
+            
+            bullet1MoveComponent.MoveToDirection(new Vector3(0,0,0), 0);
+            bullet3MoveComponent.MoveToDirection(new Vector3(0,0,0), 0);
+            Physics.SyncTransforms();
+            
+            _bulletController.Tick(10f);
+            
+            // Assert
+            Assert.AreEqual(1, _bulletController.Bullets.Count);
+        }
+
+        [Test]
+        public void TestCollision()
+        {
+            //Arrange
+            GameObject firePoint = new GameObject();
+            int layerMask = firePoint.layer;
             _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
@@ -111,21 +136,15 @@ namespace Game.Modules.BulletModule.Tests
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
         }
-
-        [Test]
-        public void TestCollision()
-        {
-            
-        }
     }
     
-    public class TestBulletFactory : IFactory<float, LayerMask, BulletEntity>
+    public class TestBulletFactory : IFactory<float, int, BulletEntity>
     {
         public Dictionary<int, BulletComponents> Bullets = new();
         
         private int _bulletCount = 0;
         
-        public BulletEntity Create(float speed, LayerMask layerMask)
+        public BulletEntity Create(float speed, int layerMask)
         {
             var bulletObj = new GameObject("BulletView");
             Collider bulletCollider = bulletObj.AddComponent<SphereCollider>();

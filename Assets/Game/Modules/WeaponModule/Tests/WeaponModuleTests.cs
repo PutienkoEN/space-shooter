@@ -34,8 +34,8 @@ namespace Game.Modules.WeaponModule.Tests
             _testPlayer = new GameObject("Player");
             
             Container.Bind<BulletSpawner>().AsSingle();
-            Container.BindFactory<float, LayerMask, BulletEntity, BulletEntity.Factory>().AsSingle();
-            Container.Bind<IFactory<float, LayerMask, BulletEntity>>().To<BulletEntity.Factory>().FromResolve();
+            Container.BindFactory<float, int, BulletEntity, BulletEntity.Factory>().AsSingle();
+            Container.Bind<IFactory<float, int, BulletEntity>>().To<BulletEntity.Factory>().FromResolve();
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace Game.Modules.WeaponModule.Tests
     }
 
     public class TestWeaponFactory : PlaceholderFactory
-    <WeaponConfig, Transform[], LayerMask, WeaponComponent>
+    <WeaponConfig, Transform[], int, WeaponComponent>
     {
         private BulletSpawner _bulletSpawner;
 
@@ -84,7 +84,7 @@ namespace Game.Modules.WeaponModule.Tests
         {
             _bulletSpawner = bulletSpawner;
         }
-        public override WeaponComponent Create(WeaponConfig config, Transform[] parent, LayerMask layer)
+        public override WeaponComponent Create(WeaponConfig config, Transform[] parent, int layer)
         {
             return new WeaponComponent(_bulletSpawner, config, parent, layer);
         }

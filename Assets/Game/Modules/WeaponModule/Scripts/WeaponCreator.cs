@@ -8,16 +8,18 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        private IFactory<WeaponConfig, Transform[], LayerMask, WeaponComponent> _weaponComponentFactory;
+        private IFactory<WeaponConfig, Transform[], int, WeaponComponent> _weaponComponentFactory;
+        
         public WeaponCreator(IFactory
-            <WeaponConfig, Transform[], LayerMask, WeaponComponent> weaponComponentFactory)
+            <WeaponConfig, Transform[], int, WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
+        
         public IWeaponComponent CreateWeapon(
             WeaponConfig weaponConfig, 
             Transform parentTransform,
-            LayerMask entityLayer)
+            int entityLayer)
         {
             IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
             

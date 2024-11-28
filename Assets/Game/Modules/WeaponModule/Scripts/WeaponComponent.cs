@@ -8,7 +8,7 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         private readonly BulletSpawner _bulletSpawner;
         private readonly Transform[] _firePoints;
-        private readonly LayerMask _layerMask;
+        private readonly int _layer;
         private readonly float _fireRate;
         private readonly float _projectileSpeed;
 
@@ -18,14 +18,14 @@ namespace Game.Modules.ShootingModule.Scripts
             BulletSpawner bulletSpawner,
             WeaponConfig weaponConfig,
             Transform[] firePoints,
-            LayerMask layerMask)
+            int layer)
         {
             _bulletSpawner = bulletSpawner;
             
             WeaponData weaponData = weaponConfig.GetWeaponData();
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
             _firePoints = firePoints;
-            _layerMask = layerMask;
+            _layer = layer;
             _fireRate = weaponData.FireRate;
         }
         
@@ -45,11 +45,11 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _layerMask);
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _layer);
             }
         }
         
-        public class Factory : PlaceholderFactory<WeaponConfig, Transform[], LayerMask, WeaponComponent>
+        public class Factory : PlaceholderFactory<WeaponConfig, Transform[], int, WeaponComponent>
         {
             private readonly BulletSpawner _bulletSpawner;
 
@@ -62,7 +62,7 @@ namespace Game.Modules.ShootingModule.Scripts
             public override WeaponComponent Create(
                 WeaponConfig config, 
                 Transform[] firePoints, 
-                LayerMask layer)
+                int layer)
             {
                 WeaponComponent weaponComponent = new WeaponComponent(
                     _bulletSpawner,

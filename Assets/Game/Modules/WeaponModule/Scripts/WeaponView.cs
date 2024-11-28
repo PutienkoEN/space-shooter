@@ -10,16 +10,10 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             return firePoints;
         }
-
-        public LayerMask GetLayer()
-        {
-            return this.gameObject.layer;
-        }
     }
 
     public interface IWeaponView
     {
         public Transform[] GetFirePoints();
-        public LayerMask GetLayer();
     }
 }
