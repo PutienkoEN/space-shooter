@@ -28,11 +28,6 @@ namespace Game.Modules.BulletModule.Scripts
 
             _bulletView.OnCollision += HandleOnCollision;
         }
-        
-        private void HandleOnCollision(Collider collider)
-        {
-            Destroy();
-        }
 
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
@@ -72,6 +67,11 @@ namespace Game.Modules.BulletModule.Scripts
             }
             
             return _colliderRect;
+        }
+        
+        private void HandleOnCollision(Collider collider)
+        {
+            Destroy();
         }
         
         private void Destroy()

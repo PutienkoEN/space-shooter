@@ -90,7 +90,7 @@ namespace Game.Modules.BulletModule.Tests
         [Test]
         public void WhenRandomBulletsAreDestroyed_AndSeveralBulletsLaunched_ThenBulletControllerShouldCorrectlyRemoveThem()
         {
-            //Arrange
+             //Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
             _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
@@ -101,37 +101,11 @@ namespace Game.Modules.BulletModule.Tests
             MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
             
             //Act
-            
-            bullet1MoveComponent.MoveToDirection(new Vector3(0,0,0), 0);
-            bullet3MoveComponent.MoveToDirection(new Vector3(0,0,0), 0);
+            bullet1MoveComponent.MoveToDirection(new Vector3(1,1,0), 1);
+            bullet3MoveComponent.MoveToDirection(new Vector3(1,1,0), 1);
             Physics.SyncTransforms();
             
-            _bulletController.Tick(10f);
-            
-            // Assert
-            Assert.AreEqual(1, _bulletController.Bullets.Count);
-        }
-
-        [Test]
-        public void TestCollision()
-        {
-            //Arrange
-            GameObject firePoint = new GameObject();
-            int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            
-            MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
-            MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
-            
-            //Act
-            
-            bullet1MoveComponent.MoveToDirection(new Vector3(1,2,3), 10);
-            bullet3MoveComponent.MoveToDirection(new Vector3(1,2,3), 10);
-            Physics.SyncTransforms();
-            
-            _bulletController.Tick(10f);
+            _bulletController.Tick(1f);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);

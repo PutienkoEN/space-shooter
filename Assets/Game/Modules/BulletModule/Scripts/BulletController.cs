@@ -48,11 +48,6 @@ namespace Game.Modules.BulletModule.Scripts
 
         public void Tick(float deltaTime)
         {
-            if (deltaTime <= 0)
-            {
-                throw new ArgumentException("deltaTime must be greater than 0.", nameof(BulletController));
-            }
-            
             for (_counter = 0; _counter < _bullets.Count; _counter++)
             {
                 BulletEntity bullet = _bullets[_counter];
