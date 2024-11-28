@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 
@@ -8,37 +9,28 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponComponent : IWeaponComponent
     {
         private readonly BulletSpawner _bulletSpawner;
-        private Transform[] _firePoints;
-        private IWeaponView _weaponView;
-        private float _fireRate;
-        private float _projectileSpeed;
+        private readonly Transform[] _firePoints;
+        private readonly LayerMask _layerMask;
+        private readonly float _fireRate;
+        private readonly float _projectileSpeed;
 
         private float _timer;
 
         public WeaponComponent(
-            BulletSpawner bulletSpawner)
+            BulletSpawner bulletSpawner,
+            WeaponConfig weaponConfig,
+            Transform[] firePoints,
+            LayerMask layerMask)
         {
             _bulletSpawner = bulletSpawner;
-        }
-
-        public void Setup(WeaponConfig weaponConfig, IWeaponView weaponView)
-        {
-            if (weaponConfig == null)
-            {
-                throw new ArgumentNullException(nameof(weaponConfig));
-            }
-
-            if (weaponView.GetFirePoints().Length == 0)
-            {
-                throw new ArgumentException("At least one fire point is required", nameof(weaponView));
-            }
-
+            
             WeaponData weaponData = weaponConfig.GetWeaponData();
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
-            _weaponView = weaponView;
-            // _firePoints = weaponView.GetFirePoints();
+            _firePoints = firePoints;
+            _layerMask = layerMask;
             _fireRate = weaponData.FireRate;
         }
+        
 
         public void Fire(float deltaTime)
         {
@@ -53,13 +45,36 @@ namespace Game.Modules.ShootingModule.Scripts
 
         private void LaunchBullet()
         {
-            foreach (Transform firePoint in _weaponView.GetFirePoints())
+            foreach (Transform firePoint in _firePoints)
             {
-                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _weaponView.GetLayer());
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _layerMask);
             }
         }
         
-        public class Factory : PlaceholderFactory<WeaponComponent>{}
+        public class Factory : PlaceholderFactory<WeaponConfig, Transform[], LayerMask, WeaponComponent>
+        {
+            private readonly BulletSpawner _bulletSpawner;
+
+            [Inject]
+            public Factory(BulletSpawner bulletSpawner)
+            {
+                _bulletSpawner = bulletSpawner;
+            }
+            
+            public override WeaponComponent Create(
+                WeaponConfig config, 
+                Transform[] firePoints, 
+                LayerMask layer)
+            {
+                WeaponComponent weaponComponent = new WeaponComponent(
+                    _bulletSpawner,
+                    config,
+                    firePoints,
+                    layer);
+                
+                return weaponComponent;
+            }
+        }
 
     }
 }

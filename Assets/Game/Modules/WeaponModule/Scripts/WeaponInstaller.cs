@@ -11,7 +11,13 @@ namespace Game.Modules.ShootingModule.Scripts
 
         public override void InstallBindings()
         {
-            Container.BindFactory<WeaponComponent, WeaponComponent.Factory>();
+            Container.BindFactory<
+                WeaponConfig, 
+                Transform[], 
+                LayerMask, 
+                WeaponComponent, 
+                WeaponComponent.Factory>();
+            
             Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
             
             Container.Bind<WeaponController>()

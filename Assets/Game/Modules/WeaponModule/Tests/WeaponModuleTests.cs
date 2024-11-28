@@ -44,7 +44,7 @@ namespace Game.Modules.WeaponModule.Tests
                 .Setup(creator => creator.CreateWeapon(_testWeaponConfig, _testEntityViewMock.Object))
                 .Returns(_mockWeapon.Object);
             
-            Container.BindFactory<WeaponComponent, WeaponComponent.Factory>().AsSingle();
+            // Container.BindFactory<WeaponComponent, WeaponComponent.Factory>().AsSingle();
             Container.Bind<WeaponComponent>().AsSingle();
             Container.Bind<WeaponCreator>().AsSingle();
             
@@ -88,7 +88,7 @@ namespace Game.Modules.WeaponModule.Tests
         {
             //Arrange
             _bulletSpawner = Container.Resolve<BulletSpawner>();
-            var weaponComponent = new WeaponComponent(_bulletSpawner);
+            // var weaponComponent = new WeaponComponent(_bulletSpawner);
             WeaponConfig weaponDataConfig = null;
             Transform[] firePoints = new Transform[1];
         
@@ -102,7 +102,7 @@ namespace Game.Modules.WeaponModule.Tests
         {
             //Arrange
             _bulletSpawner = Container.Resolve<BulletSpawner>();
-            var weaponComponent = new WeaponComponent(_bulletSpawner);
+            // var weaponComponent = new WeaponComponent(_bulletSpawner);
             WeaponConfig weaponDataConfig = ScriptableObject.CreateInstance<WeaponConfig>();
             // var weaponViewMock = new Mock<IWeaponView>;
             //

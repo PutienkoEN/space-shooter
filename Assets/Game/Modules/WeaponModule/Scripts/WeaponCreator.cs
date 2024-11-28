@@ -14,30 +14,22 @@ namespace Game.Modules.ShootingModule.Scripts
         }
         public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, IEntityView parentEntity)
         {
-            if (weaponConfig == null)
-            {
-                throw new System.ArgumentNullException(nameof(weaponConfig));
-            }
+            IWeaponView weaponView = CreateWeaponView(weaponConfig, parentEntity);
             
-            if (parentEntity == null)
-            {
-                throw new System.ArgumentNullException(nameof(parentEntity));
-            }
-
-            Transform weaponParent = SetWeaponParent(parentEntity.GetTransform());
-
-            WeaponView weaponView = SetWeaponView(weaponConfig, weaponParent);
-
-            weaponView.gameObject.layer = parentEntity.GetLayerMask();
-            
-            IWeaponComponent weaponComponent = _weaponComponentFactory.Create();
-            weaponComponent.Setup(weaponConfig, weaponView);
+            IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
+                weaponConfig,
+                weaponView.GetFirePoints(),
+                parentEntity.GetLayerMask());
+           
             return weaponComponent;
         }
 
-        private WeaponView SetWeaponView(WeaponConfig weaponConfig, Transform weaponParent)
+        private WeaponView CreateWeaponView(
+            WeaponConfig weaponConfig, 
+            IEntityView parentEntity)
         {
             WeaponData weaponData = weaponConfig.GetWeaponData();
+            Transform weaponParent = SetWeaponParent(parentEntity.GetTransform());
             WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
             return weaponView;
         }

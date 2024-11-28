@@ -6,23 +6,35 @@ namespace Game.Modules.BulletModule.Scripts
     [RequireComponent(typeof(Collider))]
     public class BulletView : MonoBehaviour
     {
-        public bool Collided { get; private set; }
-        public LayerMask enemyLayerMask;
+        public event Action<Collider> OnCollision;
+        
         public void DestroyBullet()
         {
             Destroy(gameObject);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+           
+            if (other.gameObject.layer == gameObject.layer)
+            {
+                // Ignore trigger event for same-layer objects
+                return;
+            }
+            Debug.Log("collided with on trigger : " + LayerMask.LayerToName(other.gameObject.layer));
+            OnCollision?.Invoke(other);
+        }
+        
         private void OnCollisionEnter(Collision other)
         {
-            if ((enemyLayerMask.value & (1 << other.gameObject.layer)) != 0 && !Collided)
+           
+            if (other.gameObject.layer == gameObject.layer)
             {
-                Collided = true;
+                // Ignore trigger event for same-layer objects
+                return;
             }
-            else
-            {
-                Collided = false;
-            }
+            Debug.Log("collided with on collision : " + LayerMask.LayerToName(other.gameObject.layer));
+            // OnCollision?.Invoke(other);
         }
     }
 }
