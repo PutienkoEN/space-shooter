@@ -37,7 +37,7 @@ namespace Game.Modules.Enemy.Scripts
         [Button]
         public void StartLevel()
         {
-            _ = _levelManager.StartLevel();
+            // _ = _levelManager.StartLevel();
         }
     }
 }

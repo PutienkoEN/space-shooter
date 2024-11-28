@@ -6,9 +6,7 @@ using UnityEngine;
 namespace Game.Modules.EnemyGroup.Scripts
 {
     // TODO 2024-11-28 Class to be split into more configurations in future to handle waves/groups
-    [CreateAssetMenu(
-        fileName = "LevelConfiguration",
-        menuName = "SpaceShooter/Level/Configuration")]
+
     public class LevelConfiguration : ScriptableObject
     {
         [SerializeField] private Vector3 spawnPoint = new Vector3(0, 10, 0);
