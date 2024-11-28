@@ -62,7 +62,7 @@ namespace SpaceShooter.Game.Player.Ship
             
             Container.Bind<WeaponController>()
                 .AsSingle()
-                .WithArguments(weaponConfig);
+                .WithArguments(weaponConfig, transform, (LayerMask)gameObject.layer);
         }
     }
 }

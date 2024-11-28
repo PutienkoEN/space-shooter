@@ -8,7 +8,7 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         public IWeaponComponent CreateWeapon(
             WeaponConfig weaponConfig, 
-            Transform weaponParent,
+            Transform parentTransform,
             LayerMask entityLayer);
     }
 }

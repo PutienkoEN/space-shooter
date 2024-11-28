@@ -11,13 +11,13 @@ namespace Game.Modules.ShootingModule.Scripts
         public WeaponController(
             WeaponConfig weaponConfig,
             IWeaponCreator weaponCreator,
-            Transform parentEntity,
-            LayerMask entityLayer)
+            Transform parentTransform,
+            LayerMask parentLayer)
         {
             _activeIWeaponComponent = weaponCreator.CreateWeapon(
                 weaponConfig, 
-                parentEntity,
-                entityLayer);
+                parentTransform,
+                parentLayer);
         }
         
         public void Tick(float deltaTime)

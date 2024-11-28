@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public class PlayerShipView : MonoBehaviour, IEntityView
+    public class PlayerShipView : MonoBehaviour
     {
         public void DestroyShip()
         {
@@ -17,7 +17,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public LayerMask GetLayerMask()
         {
-            return (LayerMask)(1 << gameObject.layer);
+            return (LayerMask)gameObject.layer;
         }
     }
 }

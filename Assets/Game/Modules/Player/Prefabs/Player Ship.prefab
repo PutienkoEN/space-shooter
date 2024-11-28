@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 418412233843595618}
   - component: {fileID: 3778900963558016895}
   - component: {fileID: 3969559179258471843}
-  - component: {fileID: 7803632544974439359}
   - component: {fileID: 7792327859899704942}
   m_Layer: 14
   m_Name: Player Ship
@@ -84,7 +83,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 3969559179258471843}
-  - {fileID: 7803632544974439359}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -102,18 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 25
   health: 25
---- !u!114 &7803632544974439359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350751389196330029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a71a6530bf244edae747b16f180faf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   weaponConfig: {fileID: 11400000, guid: 18b379e7fee98624dbb6fd5566647702, type: 2}
 --- !u!114 &7792327859899704942
 MonoBehaviour:

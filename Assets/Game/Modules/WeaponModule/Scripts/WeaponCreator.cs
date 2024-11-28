@@ -14,10 +14,10 @@ namespace Game.Modules.ShootingModule.Scripts
         }
         public IWeaponComponent CreateWeapon(
             WeaponConfig weaponConfig, 
-            Transform parentEntity,
+            Transform parentTransform,
             LayerMask entityLayer)
         {
-            IWeaponView weaponView = CreateWeaponView(weaponConfig, parentEntity);
+            IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
             
             IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
                 weaponConfig,
@@ -29,19 +29,19 @@ namespace Game.Modules.ShootingModule.Scripts
 
         private WeaponView CreateWeaponView(
             WeaponConfig weaponConfig, 
-            Transform parentEntity)
+            Transform parentTransform)
         {
             WeaponData weaponData = weaponConfig.GetWeaponData();
-            Transform weaponParent = SetWeaponParent(parentEntity);
+            Transform weaponParent = SetWeaponParent(parentTransform);
             WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
             return weaponView;
         }
 
-        private Transform SetWeaponParent(Transform parentEntity)
+        private Transform SetWeaponParent(Transform parentTransform)
         {
             Transform weaponParent;
 
-            Transform weaponParentTransform = parentEntity.Find(WEAPON_PARENT_NAME);
+            Transform weaponParentTransform = parentTransform.Find(WEAPON_PARENT_NAME);
             if (weaponParentTransform != null)
             {
                 weaponParent = weaponParentTransform;
@@ -49,7 +49,7 @@ namespace Game.Modules.ShootingModule.Scripts
             else
             {
                 var newWeaponParent = new GameObject(WEAPON_PARENT_NAME);
-                newWeaponParent.transform.SetParent(parentEntity.transform);
+                newWeaponParent.transform.SetParent(parentTransform.transform);
                 newWeaponParent.transform.localPosition = Vector3.zero;
                 weaponParent = newWeaponParent.transform;
             }
