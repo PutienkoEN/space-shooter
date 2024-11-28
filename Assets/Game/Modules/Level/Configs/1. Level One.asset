@@ -12,7 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
   m_Name: 1. Level One
   m_EditorClassIdentifier: 
-  gameLeveEvents: []
+  gameLeveEvents:
+  - rid: 1232526775155425354
+  - rid: 1232526775155425355
+  - rid: 1232526775155425356
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1232526775155425354
+      type: {class: EnemySpawnGameLeveEventConfig, ns: Game.Modules.Enemy.Scripts, asm: Assembly-CSharp}
+      data:
+        spawnPoint: {fileID: 0}
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 4
+    - rid: 1232526775155425355
+      type: {class: EnemySpawnGameLeveEventConfig, ns: Game.Modules.Enemy.Scripts, asm: Assembly-CSharp}
+      data:
+        spawnPoint: {fileID: 0}
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 4
+    - rid: 1232526775155425356
+      type: {class: EnemySpawnGameLeveEventConfig, ns: Game.Modules.Enemy.Scripts, asm: Assembly-CSharp}
+      data:
+        spawnPoint: {fileID: 0}
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 10

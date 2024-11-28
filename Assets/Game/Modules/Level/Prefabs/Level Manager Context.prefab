@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e110378b70f4f009a0b46e4cf29f794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelConfig: {fileID: 11400000, guid: f373de6f080e5674fabe74228c89f81c, type: 2}
 --- !u!114 &1148141257715225423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +57,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03944f2ce5494a97a4131829874f5569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyConfig: {fileID: 0}
+  enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+  gameLevelConfig: {fileID: 11400000, guid: f373de6f080e5674fabe74228c89f81c, type: 2}

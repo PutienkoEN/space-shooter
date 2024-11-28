@@ -19,11 +19,11 @@ namespace Game.Modules.Enemy.Scripts
 
     public class GameLevelData
     {
-        public List<EnemySpawnGameLeveEventData> GameLeveEventData { get; private set; }
+        public List<EnemySpawnGameLeveEventData> GameLevelEvents { get; private set; }
 
-        public GameLevelData(List<EnemySpawnGameLeveEventData> gameLeveEventData)
+        public GameLevelData(List<EnemySpawnGameLeveEventData> gameLevelEvents)
         {
-            GameLeveEventData = gameLeveEventData;
+            GameLevelEvents = gameLevelEvents;
         }
     }
 }

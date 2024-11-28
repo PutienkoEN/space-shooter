@@ -9,15 +9,15 @@ namespace Game.Modules.Enemy.Scripts
         [Header("Coordinates")] [SerializeField]
         private Transform spawnPoint;
 
-        [Header("Spawn")] [SerializeField] private EnemyConfig enemy;
+        [Header("Spawn")] [SerializeField] private EnemyConfig enemyConfig;
 
-        [SerializeField] private int spawnIntervalInSeconds = 1;
+        [SerializeField] private float spawnIntervalInSeconds = 1;
         [SerializeField] private int numberOfEnemiesToSpawn = 4;
 
         public EnemySpawnGameLeveEventData GetData() => new(
             spawnPoint.position,
-            spawnPoint.rotation.eulerAngles,
-            enemy.GetData(),
+            spawnPoint.rotation,
+            enemyConfig.GetData(),
             spawnIntervalInSeconds,
             numberOfEnemiesToSpawn);
     }
@@ -25,21 +25,21 @@ namespace Game.Modules.Enemy.Scripts
     public class EnemySpawnGameLeveEventData
     {
         public Vector3 SpawnPosition { get; private set; }
-        public Vector3 SpawnRotation { get; private set; }
-        public EnemyData Enemies { get; private set; }
-        public int SpawnIntervalInSeconds { get; private set; }
+        public Quaternion SpawnRotation { get; private set; }
+        public EnemyData EnemyData { get; private set; }
+        public float SpawnIntervalInSeconds { get; private set; }
         public int NumberOfEnemiesToSpawn { get; private set; }
 
         public EnemySpawnGameLeveEventData(
             Vector3 spawnPosition,
-            Vector3 spawnRotation,
-            EnemyData enemies,
-            int spawnIntervalInSeconds,
+            Quaternion spawnRotation,
+            EnemyData enemyData,
+            float spawnIntervalInSeconds,
             int numberOfEnemiesToSpawn)
         {
             SpawnPosition = spawnPosition;
             SpawnRotation = spawnRotation;
-            Enemies = enemies;
+            EnemyData = enemyData;
             SpawnIntervalInSeconds = spawnIntervalInSeconds;
             NumberOfEnemiesToSpawn = numberOfEnemiesToSpawn;
         }

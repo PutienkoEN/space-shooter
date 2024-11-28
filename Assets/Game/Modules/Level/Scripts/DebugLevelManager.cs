@@ -8,6 +8,7 @@ namespace Game.Modules.Enemy.Scripts
     {
         [SerializeField] private EnemyConfig enemyConfig;
         [SerializeField] private EnemyEntity enemyEntity;
+        [SerializeField] private GameLevelConfig gameLevelConfig;
 
         private IEnemyManager _enemyManager;
         private LevelManager _levelManager;
@@ -37,7 +38,7 @@ namespace Game.Modules.Enemy.Scripts
         [Button]
         public void StartLevel()
         {
-            // _ = _levelManager.StartLevel();
+            _levelManager.StartLevel(gameLevelConfig.GetData());
         }
     }
 }
