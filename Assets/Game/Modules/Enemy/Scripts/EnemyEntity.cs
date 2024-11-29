@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.BulletModule.Scripts;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace SpaceShooter.Game.Enemy
 
         private readonly MoveComponent _moveComponent;
         private readonly IEnemyView _enemyView;
+        private readonly BoundsCheckComponent _boundsCheckComponent;
+        private Collider _collider;
 
         [Button]
         public void TakeDamage(float damage)
@@ -21,11 +24,18 @@ namespace SpaceShooter.Game.Enemy
         }
 
         [Inject]
-        public EnemyEntity(HealthComponent healthComponent, MoveComponent moveComponent, IEnemyView enemyView)
+        public EnemyEntity(
+            HealthComponent healthComponent, 
+            MoveComponent moveComponent, 
+            IEnemyView enemyView, 
+            BoundsCheckComponent boundsCheckComponent)
         {
             HealthComponent = healthComponent;
             _moveComponent = moveComponent;
             _enemyView = enemyView;
+            _boundsCheckComponent = boundsCheckComponent;
+
+            _collider = _enemyView.GetCollider();
         }
 
         public void Initialize()
@@ -42,6 +52,10 @@ namespace SpaceShooter.Game.Enemy
         public void Update(float deltaTime)
         {
             _moveComponent.MoveToDirection(Vector3.down, deltaTime);
+            if (!_boundsCheckComponent.IsInBounds(_collider))
+            {
+                Debug.Log("is out of bounds ");
+            }
         }
 
 

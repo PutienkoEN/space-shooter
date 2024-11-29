@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.Components;
+﻿using Game.Modules.BulletModule.Scripts;
+using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
 
@@ -51,6 +52,9 @@ namespace SpaceShooter.Game.Enemy
                 .BindInterfacesAndSelfTo<EnemyDeathController>()
                 .AsSingle()
                 .NonLazy();
+            
+            Container.Bind<BoundsCheckComponent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ColliderRectProvider>().AsSingle();
         }
     }
 }

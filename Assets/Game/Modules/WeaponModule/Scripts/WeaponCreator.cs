@@ -1,49 +1,51 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        private WeaponComponent.Factory _weaponComponentFactory;
-        public WeaponCreator(WeaponComponent.Factory weaponComponentFactory)
+        private IFactory<WeaponConfig, Transform[], int, WeaponComponent> _weaponComponentFactory;
+        
+        public WeaponCreator(IFactory
+            <WeaponConfig, Transform[], int, WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
-        public IWeaponComponent CreateWeapon(WeaponConfig weaponConfig, Transform parentEntity)
+        
+        public IWeaponComponent CreateWeapon(
+            WeaponConfig weaponConfig, 
+            Transform parentTransform,
+            int entityLayer)
         {
-            if (weaponConfig == null)
-            {
-                throw new System.ArgumentNullException(nameof(weaponConfig));
-            }
+            IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
             
-            if (parentEntity == null)
-            {
-                throw new System.ArgumentNullException(nameof(parentEntity));
-            }
-
-            Transform weaponParent = SetWeaponParent(parentEntity);
-
-            WeaponView weaponView = SetWeaponView(weaponConfig, weaponParent);
-            
-            IWeaponComponent weaponComponent = _weaponComponentFactory.Create();
-            weaponComponent.Setup(weaponConfig, weaponView.firePoints);
+            IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
+                weaponConfig,
+                weaponView.GetFirePoints(),
+                entityLayer);
+           
             return weaponComponent;
         }
 
-        private WeaponView SetWeaponView(WeaponConfig weaponConfig, Transform weaponParent)
+        private WeaponView CreateWeaponView(
+            WeaponConfig weaponConfig, 
+            Transform parentTransform)
         {
             WeaponData weaponData = weaponConfig.GetWeaponData();
+            Transform weaponParent = SetWeaponParent(parentTransform);
             WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
             return weaponView;
         }
 
-        private Transform SetWeaponParent(Transform parentEntity)
+        private Transform SetWeaponParent(Transform parentTransform)
         {
             Transform weaponParent;
 
-            Transform weaponParentTransform = parentEntity.Find(WEAPON_PARENT_NAME);
+            Transform weaponParentTransform = parentTransform.Find(WEAPON_PARENT_NAME);
             if (weaponParentTransform != null)
             {
                 weaponParent = weaponParentTransform;
@@ -51,7 +53,7 @@ namespace Game.Modules.ShootingModule.Scripts
             else
             {
                 var newWeaponParent = new GameObject(WEAPON_PARENT_NAME);
-                newWeaponParent.transform.SetParent(parentEntity.transform);
+                newWeaponParent.transform.SetParent(parentTransform.transform);
                 newWeaponParent.transform.localPosition = Vector3.zero;
                 weaponParent = newWeaponParent.transform;
             }

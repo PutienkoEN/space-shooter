@@ -1,4 +1,7 @@
-﻿using SpaceShooter.Game.Components;
+﻿using Game.Modules.ShootingModule.Scripts;
+using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using SpaceShooter.Game.Components;
+using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +11,8 @@ namespace SpaceShooter.Game.Player.Ship
     {
         [SerializeField] private float speed;
         [SerializeField] private float health;
+        
+        [SerializeField] private WeaponConfig weaponConfig;
 
         public override void InstallBindings()
         {
@@ -16,7 +21,7 @@ namespace SpaceShooter.Game.Player.Ship
                 .AsSingle();
 
             Container
-                .Bind<PlayerShipView>()
+                .BindInterfacesAndSelfTo<PlayerShipView>()
                 .FromComponentOnRoot()
                 .AsSingle();
 
@@ -45,6 +50,18 @@ namespace SpaceShooter.Game.Player.Ship
                 .BindInterfacesAndSelfTo<PlayerMoveController>()
                 .AsSingle()
                 .NonLazy();
+            
+            Container.BindFactory<WeaponConfig, Transform[], int, 
+                WeaponComponent, WeaponComponent.Factory>();
+
+            Container.Bind<IFactory<WeaponConfig, Transform[], int, WeaponComponent>>()
+                .To<WeaponComponent.Factory>().FromResolve();
+            
+            Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
+            
+            Container.Bind<WeaponController>()
+                .AsSingle()
+                .WithArguments(weaponConfig, transform, (LayerMask)gameObject.layer);
         }
     }
 }
