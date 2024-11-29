@@ -123,8 +123,12 @@ namespace Game.Modules.BulletModule.Tests
             BulletView bulletView = bulletObj.AddComponent<BulletView>();
             MoveComponent bulletMoveComponent = new MoveComponent(bulletView.transform, speed);
             WorldCoordinates worldCoordinates = new WorldCoordinates(Camera.main);
-            BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates);
-            BulletEntity bulletEntity = new BulletEntity(bulletView, bulletMoveComponent, boundsCheckComponent);
+            IRectProvider rectProvider = new ColliderRectProvider();
+            BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates, rectProvider);
+            BulletEntity bulletEntity = new BulletEntity(
+                bulletView, 
+                bulletMoveComponent, 
+                boundsCheckComponent);
             
             BulletComponents components = new BulletComponents(
                 bulletEntity,

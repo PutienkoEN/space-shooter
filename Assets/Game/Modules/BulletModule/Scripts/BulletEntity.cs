@@ -14,8 +14,8 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
         private Vector3 _direction;
-        private Rect _colliderRect;
         
+        [Inject]
         public BulletEntity(
             BulletView bulletView, 
             MoveComponent moveComponent, 
@@ -38,35 +38,10 @@ namespace Game.Modules.BulletModule.Scripts
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (!_boundsCheckComponent.IsInBounds(GetColliderRect()))
+            if (!_boundsCheckComponent.IsInBounds(_collider))
             {
                 Destroy();
             }
-        }
-
-        public Rect GetColliderRect()
-        {
-            if (_collider != null)
-            {
-                Bounds colliderBounds = _collider.bounds;
-                if (_colliderRect == Rect.zero)
-                {
-                    _colliderRect = new Rect(
-                        colliderBounds.min.x,
-                        colliderBounds.min.y,
-                        colliderBounds.size.x,
-                        colliderBounds.size.y);
-                }
-                else
-                {
-                    _colliderRect.x = colliderBounds.min.x;
-                    _colliderRect.y = colliderBounds.min.y;
-                    _colliderRect.width = colliderBounds.size.x;
-                    _colliderRect.height = colliderBounds.size.y;
-                }
-            }
-            
-            return _colliderRect;
         }
         
         private void HandleOnCollision(Collider collider)

@@ -20,14 +20,14 @@ namespace Game.Modules.BulletModule.Scripts
         {
             Container.Bind<BulletEntity>().AsSingle();
             Container.Bind<BulletView>().FromComponentOnRoot().AsSingle();
-            var collider = transform.GetComponent<Collider>();
-            Container.Bind<ColliderComponent>().AsSingle().WithArguments(collider).NonLazy();
+            var colliderComponent = transform.GetComponent<Collider>();
+            Container.Bind<ColliderComponent>().AsSingle().WithArguments(colliderComponent).NonLazy();
             
             Container.Bind<MoveComponent>().AsSingle()
                 .WithArguments(transform, _speed);
 
             Container.Bind<BoundsCheckComponent>().AsSingle();
-            
+            Container.BindInterfacesAndSelfTo<ColliderRectProvider>().AsSingle();
             gameObject.layer = _layerMask;
         }
     }
