@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Enemy
 {
     public class EnemyDeathController
     {

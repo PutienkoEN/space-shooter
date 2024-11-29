@@ -1,14 +1,15 @@
 ﻿using System;
+using SpaceShooter.Game.Enemy;
 using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level.Events
 {
-    public class GameLevelEventHandlerResolver
+    public class LevelEventHandlerResolver
     {
         private readonly EnemyManager _enemyManager;
 
         [Inject]
-        public GameLevelEventHandlerResolver(EnemyManager enemyManager)
+        public LevelEventHandlerResolver(EnemyManager enemyManager)
         {
             _enemyManager = enemyManager;
         }
@@ -17,7 +18,7 @@ namespace Game.Modules.Enemy.Scripts
         {
             switch (eventData)
             {
-                case EnemySpawnGameLevelEventData data:
+                case EnemySpawnLevelEventData data:
                     return new EnemySpawnEventHandler(_enemyManager, data);
                 case PickupSpawnGameLevelEventData:
                     throw new NotImplementedException(

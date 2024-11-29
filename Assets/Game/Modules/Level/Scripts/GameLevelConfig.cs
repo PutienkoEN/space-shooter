@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
+using GSpaceShooter.Game.Level.Events;
+using SpaceShooter.Game.Level.Events;
 using UnityEngine;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level
 {
     [CreateAssetMenu(
         fileName = "LevelConfiguration",
         menuName = "SpaceShooter/Level/Configuration")]
     public class GameLevelConfig : ScriptableObject
     {
-        [SerializeReference] private List<IGameLevelEventConfig<IGameLevelEventData>> gameLeveEvents = new();
+        [SerializeReference] private List<ILevelEventConfig<IGameLevelEventData>> gameLeveEvents = new();
 
         public GameLevelData GetData()
         {

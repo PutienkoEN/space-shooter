@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Enemy
 {
     public class EnemyInstaller : Installer<EnemyInstaller>
     {

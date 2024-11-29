@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Enemy
 {
     public class EnemyViewFactory : PlaceholderFactory<EnemyView, Vector3, Quaternion, EnemyView>
     {

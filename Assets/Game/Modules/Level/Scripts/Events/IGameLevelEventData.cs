@@ -1,4 +1,4 @@
-﻿namespace Game.Modules.Enemy.Scripts
+﻿namespace SpaceShooter.Game.Level.Events
 {
     public class IGameLevelEventData
     {

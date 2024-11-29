@@ -1,8 +1,9 @@
 ﻿using Sirenix.OdinInspector;
+using SpaceShooter.Game.Enemy;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level
 {
     public class DebugLevelManager : MonoBehaviour
     {

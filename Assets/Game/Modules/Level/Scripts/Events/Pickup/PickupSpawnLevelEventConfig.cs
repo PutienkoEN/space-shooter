@@ -1,6 +1,8 @@
-﻿namespace Game.Modules.Enemy.Scripts
+﻿using GSpaceShooter.Game.Level.Events;
+
+namespace SpaceShooter.Game.Level.Events
 {
-    public class PickupSpawnGameLevelEventConfig : IGameLevelEventConfig<PickupSpawnGameLevelEventData>
+    public class PickupSpawnLevelEventConfig : ILevelEventConfig<PickupSpawnGameLevelEventData>
     {
         public PickupSpawnGameLevelEventData GetData()
         {

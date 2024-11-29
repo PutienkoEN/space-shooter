@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level.Events
 {
     public interface IGameEventHandler
     {

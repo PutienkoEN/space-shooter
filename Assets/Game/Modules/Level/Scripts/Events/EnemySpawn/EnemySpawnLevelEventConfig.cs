@@ -1,10 +1,12 @@
 ﻿using System;
+using GSpaceShooter.Game.Level.Events;
+using SpaceShooter.Game.Enemy;
 using UnityEngine;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level.Events
 {
     [Serializable]
-    public class EnemySpawnGameLeveEventConfig : IGameLevelEventConfig<EnemySpawnGameLevelEventData>
+    public class EnemySpawnLevelEventConfig : ILevelEventConfig<EnemySpawnLevelEventData>
     {
         [Header("Coordinates")] [SerializeField]
         private Transform spawnPoint;
@@ -14,15 +16,18 @@ namespace Game.Modules.Enemy.Scripts
         [SerializeField] private float spawnIntervalInSeconds = 1;
         [SerializeField] private int numberOfEnemiesToSpawn = 4;
 
-        public EnemySpawnGameLevelEventData GetData() => new(
-            spawnPoint.position,
-            spawnPoint.rotation,
-            enemyConfig.GetData(),
-            spawnIntervalInSeconds,
-            numberOfEnemiesToSpawn);
+        public EnemySpawnLevelEventData GetData()
+        {
+            return new EnemySpawnLevelEventData(
+                spawnPoint.position,
+                spawnPoint.rotation,
+                enemyConfig.GetData(),
+                spawnIntervalInSeconds,
+                numberOfEnemiesToSpawn);
+        }
     }
 
-    public class EnemySpawnGameLevelEventData : IGameLevelEventData
+    public class EnemySpawnLevelEventData : IGameLevelEventData
     {
         public Vector3 SpawnPosition { get; private set; }
         public Quaternion SpawnRotation { get; private set; }
@@ -30,7 +35,7 @@ namespace Game.Modules.Enemy.Scripts
         public float SpawnIntervalInSeconds { get; private set; }
         public int NumberOfEnemiesToSpawn { get; private set; }
 
-        public EnemySpawnGameLevelEventData(
+        public EnemySpawnLevelEventData(
             Vector3 spawnPosition,
             Quaternion spawnRotation,
             EnemyData enemyData,

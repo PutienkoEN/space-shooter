@@ -1,14 +1,15 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using SpaceShooter.Game.Enemy;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level.Events
 {
     public class EnemySpawnEventHandler : IGameEventHandler
     {
         private readonly EnemyManager _enemyManager;
-        private readonly EnemySpawnGameLevelEventData _spawnData;
+        private readonly EnemySpawnLevelEventData _spawnData;
 
-        public EnemySpawnEventHandler(EnemyManager enemyManager, EnemySpawnGameLevelEventData spawnData)
+        public EnemySpawnEventHandler(EnemyManager enemyManager, EnemySpawnLevelEventData spawnData)
         {
             _enemyManager = enemyManager;
             _spawnData = spawnData;

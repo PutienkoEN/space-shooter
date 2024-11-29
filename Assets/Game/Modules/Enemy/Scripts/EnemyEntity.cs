@@ -4,7 +4,7 @@ using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Enemy
 {
     [Serializable]
     public class EnemyEntity : IInitializable, IDisposable

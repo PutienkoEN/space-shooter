@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SpaceShooter.Game.Level.Events;
 using Zenject;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Level
 {
     public class LevelEventManager
     {
-        private readonly GameLevelEventHandlerResolver _gameLevelEventResolver;
+        private readonly LevelEventHandlerResolver _levelEventResolver;
 
         [Inject]
-        public LevelEventManager(GameLevelEventHandlerResolver gameLevelEventResolver)
+        public LevelEventManager(LevelEventHandlerResolver levelEventResolver)
         {
-            _gameLevelEventResolver = gameLevelEventResolver;
+            _levelEventResolver = levelEventResolver;
         }
 
         public async void StartLevel(GameLevelData gameLevelData)
@@ -26,7 +27,7 @@ namespace Game.Modules.Enemy.Scripts
         private List<IGameEventHandler> GetHandlers(List<IGameLevelEventData> gameLevelEvents)
         {
             return gameLevelEvents
-                .ConvertAll(_gameLevelEventResolver.Resolve)
+                .ConvertAll(_levelEventResolver.Resolve)
                 .ToList();
         }
     }
