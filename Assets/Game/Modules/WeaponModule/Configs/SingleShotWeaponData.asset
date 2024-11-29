@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SingleShotWeaponData
   m_EditorClassIdentifier: 
   prefab: {fileID: -5788393637922991918, guid: 6ab5c5d712a91014db0b242a07d959cd, type: 3}
-  damage: 0
+  damage: 11
   fireRate: 2
   projectileConfig: {fileID: 11400000, guid: 8e82717d816681847840239e87326052, type: 2}

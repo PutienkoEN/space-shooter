@@ -60,7 +60,7 @@ namespace Game.Modules.BulletModule.Tests
             int layerMask = firePoint.layer;
         
             // Act
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
@@ -72,7 +72,7 @@ namespace Game.Modules.BulletModule.Tests
             // Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
             MoveComponent moveComponent = _bulletFactory.Bullets[0].MoveComponent;
         
             // Act
@@ -91,9 +91,9 @@ namespace Game.Modules.BulletModule.Tests
              //Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
             
             MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
             MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
@@ -125,10 +125,13 @@ namespace Game.Modules.BulletModule.Tests
             WorldCoordinates worldCoordinates = new WorldCoordinates(Camera.main);
             IRectProvider rectProvider = new ColliderRectProvider();
             BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates, rectProvider);
+            CollisionConditions collisionConditions = new CollisionConditions();
+            CollisionProcessor collisionProcessor = new CollisionProcessor(collisionConditions);
             BulletEntity bulletEntity = new BulletEntity(
                 bulletView, 
                 bulletMoveComponent, 
-                boundsCheckComponent);
+                boundsCheckComponent,
+                collisionProcessor);
             
             BulletComponents components = new BulletComponents(
                 bulletEntity,

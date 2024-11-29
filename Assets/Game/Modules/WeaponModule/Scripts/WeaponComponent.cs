@@ -8,9 +8,10 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         private readonly BulletSpawner _bulletSpawner;
         private readonly Transform[] _firePoints;
-        private readonly int _layer;
         private readonly float _fireRate;
         private readonly float _projectileSpeed;
+        private readonly int _layer;
+        private readonly int _damage;
 
         private float _timer;
 
@@ -24,9 +25,10 @@ namespace Game.Modules.ShootingModule.Scripts
             
             WeaponData weaponData = weaponConfig.GetWeaponData();
             _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
+            _fireRate = weaponData.FireRate;
+            _damage = weaponData.Damage;
             _firePoints = firePoints;
             _layer = layer;
-            _fireRate = weaponData.FireRate;
         }
         
 
@@ -45,7 +47,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _layer);
+                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _layer, _damage);
             }
         }
         

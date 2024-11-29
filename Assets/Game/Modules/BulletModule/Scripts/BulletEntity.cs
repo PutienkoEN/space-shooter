@@ -13,25 +13,30 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
+        private readonly CollisionProcessor _collisionProcessor;
         private Vector3 _direction;
+        private int _damage;
         
         [Inject]
         public BulletEntity(
             BulletView bulletView, 
             MoveComponent moveComponent, 
-            BoundsCheckComponent boundsCheckComponent)
+            BoundsCheckComponent boundsCheckComponent, 
+            CollisionProcessor collisionProcessor)
         {
             _bulletView = bulletView;
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
+            _collisionProcessor = collisionProcessor;
             _collider = _bulletView.GetComponent<Collider>();
 
             _bulletView.OnCollision += HandleOnCollision;
         }
 
-        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
+        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction, int damage)
         {
             _direction = direction;
+            _damage = damage;
             _bulletView.transform.SetPositionAndRotation(position, rotation);
         }
 
@@ -44,8 +49,16 @@ namespace Game.Modules.BulletModule.Scripts
             }
         }
         
-        private void HandleOnCollision(Collider collider)
+        private void HandleOnCollision(Collider otherObject)
         {
+            if(otherObject.gameObject.TryGetComponent<IDamagable>(out IDamagable damagable))
+            {
+                Debug.Log("found damagable");
+                var colliderObject = new ColliderObject(_bulletView.gameObject.layer, _damage);
+                var collisionEvent = new CollisionEvent(colliderObject, damagable);
+                _collisionProcessor.AddCollisionEvent(collisionEvent);
+            }
+           
             Destroy();
         }
         
