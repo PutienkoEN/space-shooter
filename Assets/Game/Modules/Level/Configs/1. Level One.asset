@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
+  m_Name: 1. Level One
+  m_EditorClassIdentifier: 
+  gameLeveEvents:
+  - rid: 1232526775155425354
+  - rid: 1232526775155425355
+  - rid: 1232526775155425356
+  references:
+    version: 2
+    RefIds:
+    - rid: 1232526775155425354
+      type: {class: EnemySpawnGameLeveEventConfig, ns: Game.Modules.Enemy.Scripts, asm: Assembly-CSharp}
+      data:
+        spawnPoint: {fileID: 0}
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 4
+    - rid: 1232526775155425355
+      type: {class: EnemySpawnGameLeveEventConfig, ns: Game.Modules.Enemy.Scripts, asm: Assembly-CSharp}
+      data:
+        spawnPoint: {fileID: 0}
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 4
+    - rid: 1232526775155425356
+      type: {class: EnemySpawnGameLeveEventConfig, ns: Game.Modules.Enemy.Scripts, asm: Assembly-CSharp}
+      data:
+        spawnPoint: {fileID: 0}
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 10

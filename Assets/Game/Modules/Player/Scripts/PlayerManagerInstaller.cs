@@ -7,8 +7,7 @@ namespace SpaceShooter.Game.Player
 {
     public class PlayerManagerInstaller : GameModuleInstaller
     {
-        [SerializeField] private Transform worldContainer;
-        [SerializeField] private Transform spawnPosition;
+        [SerializeField] private Transform playerContainer;
         [SerializeField] private PlayerShipView playerShipPrefab;
 
         public override void Install(DiContainer container)
@@ -16,8 +15,10 @@ namespace SpaceShooter.Game.Player
             container
                 .BindFactory<PlayerShipEntity, PlayerShipEntity.Factory>()
                 .FromSubContainerResolve()
-                .ByNewContextPrefab(playerShipPrefab);
-            
+                .ByNewContextPrefab(playerShipPrefab)
+                .UnderTransform(playerContainer);
+
+
             container
                 .BindInterfacesAndSelfTo<PlayerManager>()
                 .AsSingle();
@@ -27,7 +28,5 @@ namespace SpaceShooter.Game.Player
                 .FromComponentInHierarchy()
                 .AsSingle();
         }
-        
-        
     }
 }
