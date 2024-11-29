@@ -7,10 +7,10 @@ namespace Game.Modules.BulletModule.Scripts
     public sealed class BulletInstaller : MonoInstaller
     {
         private float _speed;
-        private int _layerMask;
+        private LayerMask _layerMask;
         
         [Inject]
-        private void Construct(float speed, int layerMask)
+        private void Construct(float speed, LayerMask layerMask)
         {
             _speed = speed;
             _layerMask = layerMask;

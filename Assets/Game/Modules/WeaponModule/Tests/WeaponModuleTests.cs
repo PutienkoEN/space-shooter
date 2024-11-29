@@ -34,8 +34,8 @@ namespace Game.Modules.WeaponModule.Tests
             _testPlayer = new GameObject("Player");
             
             Container.Bind<BulletSpawner>().AsSingle();
-            Container.BindFactory<float, int, BulletEntity, BulletEntity.Factory>().AsSingle();
-            Container.Bind<IFactory<float, int, BulletEntity>>().To<BulletEntity.Factory>().FromResolve();
+            Container.BindFactory<float, LayerMask, BulletEntity, BulletEntity.Factory>().AsSingle();
+            Container.Bind<IFactory<float, LayerMask, BulletEntity>>().To<BulletEntity.Factory>().FromResolve();
         }
 
         [Test]
