@@ -18,9 +18,13 @@ namespace SpaceShooter.Game.Level
         public async void StartLevel(GameLevelData gameLevelData)
         {
             var gameEventHandlers = GetHandlers(gameLevelData.GameLevelEvents);
-            foreach (var gameEventHandler in gameEventHandlers)
+            for (var eventNumber = 0; eventNumber < gameEventHandlers.Count; eventNumber++)
             {
+                var gameEventHandler = gameEventHandlers[eventNumber];
                 await gameEventHandler.Start();
+
+                // Remove from memory
+                gameEventHandlers[eventNumber] = null;
             }
         }
 
