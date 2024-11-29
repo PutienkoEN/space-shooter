@@ -6,6 +6,8 @@ namespace SpaceShooter.Game.GameSpeed
 {
     public class GameSpeedManager : IGameSpeedManager
     {
+        private const float ZeroSpeed = 0f;
+
         private readonly float _gameSpeedScaleBase;
         private readonly float _gameSpeedScaleSlowdown;
 
@@ -32,6 +34,18 @@ namespace SpaceShooter.Game.GameSpeed
             _timeForFullSpeedup = timeForFullSpeedup;
             _gameAudioSpeedManager = gameAudioSpeedManager;
             _gameTimeScaleManager = gameTimeScaleManager;
+        }
+
+        public void StopTime()
+        {
+            _gameSpeedSequence?.Kill();
+            _gameTimeScaleManager.ChangeTimeScale(ZeroSpeed);
+        }
+
+        public void ResumeTime()
+        {
+            _gameSpeedSequence?.Kill();
+            _gameTimeScaleManager.ChangeTimeScale(_gameSpeedScaleBase);
         }
 
         public void StartSlowdown()
