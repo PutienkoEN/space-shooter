@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-namespace Game.Modules.Enemy.Scripts
+namespace SpaceShooter.Game.Enemy
 {
     [CreateAssetMenu(
         fileName = "EnemyConfig",
@@ -15,16 +15,23 @@ namespace Game.Modules.Enemy.Scripts
     {
         [SerializeField] private EnemyView enemyPrefab;
 
-        public EnemyData GetEnemyData() => new EnemyData(enemyPrefab);
+        [SerializeField] private float health;
+        [SerializeField] private float speed;
+
+        public EnemyData GetData() => new(enemyPrefab, health, speed);
     }
 
     public struct EnemyData
     {
-        public EnemyView enemyPrefab { get; private set; }
+        public EnemyView EnemyPrefab { get; private set; }
+        public float Health { get; private set; }
+        public float Speed { get; private set; }
 
-        public EnemyData(EnemyView enemyPrefab)
+        public EnemyData(EnemyView enemyPrefab, float health, float speed)
         {
-            this.enemyPrefab = enemyPrefab;
+            EnemyPrefab = enemyPrefab;
+            Health = health;
+            Speed = speed;
         }
     }
 }

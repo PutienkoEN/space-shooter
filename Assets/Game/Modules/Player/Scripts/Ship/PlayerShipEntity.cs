@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.Components;
 using Zenject;
@@ -35,7 +34,6 @@ namespace SpaceShooter.Game.Player.Ship
         public void Update(float deltaTime)
         {
             _playerMoveController.Move(deltaTime);
-            
             _weaponController.Tick(deltaTime);
         }
 

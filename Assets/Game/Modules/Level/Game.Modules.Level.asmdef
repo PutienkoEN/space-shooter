@@ -1,0 +1,19 @@
+{
+  "name": "Game.Modules.Level",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "UniTask",
+    "Game.Modules.Enemy",
+    "Game.LifeCycle.Common"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
