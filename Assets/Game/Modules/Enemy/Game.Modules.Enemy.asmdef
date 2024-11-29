@@ -1,3 +1,9 @@
 {
-	"name": "Game.Modules.Enemy"
+  "name": "Game.Modules.Enemy",
+  "references": [
+    "Zenject",
+    "UniTask",
+    "Game.Modules.Components",
+    "Game.LifeCycle.Common"
+  ]
 }

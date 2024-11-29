@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class BoundsCheckComponent
+    public sealed class BoundsCheckComponent
     {
         private readonly IWorldCoordinates _worldCoordinates;
         

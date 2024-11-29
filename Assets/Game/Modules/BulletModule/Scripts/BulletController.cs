@@ -11,15 +11,12 @@ namespace Game.Modules.BulletModule.Scripts
         public IReadOnlyList<BulletEntity> Bullets => _bullets;//ToDo: consider removing it later. Used only in Tests for now;
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
-        private readonly WorldCoordinates _worldCoordinates;
         private int _counter = -1;
         
         public BulletController(
-            BulletSpawner bulletSpawner,
-            WorldCoordinates worldCoordinates)
+            BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
-            _worldCoordinates = worldCoordinates;
             
             _bulletSpawner.OnNewBullet += AddNewBullet;
         }

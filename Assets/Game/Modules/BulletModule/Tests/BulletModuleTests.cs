@@ -11,14 +11,13 @@ using Zenject;
 namespace Game.Modules.BulletModule.Tests
 {
     [TestFixture]
-    public class BulletModuleTests : ZenjectUnitTestFixture
+    public class BulletModuleTests
     {
         private TestBulletFactory _bulletFactory;
         private BulletSpawner _bulletSpawner;
         private BulletController _bulletController;
         private WorldCoordinates _worldCoordinates;
         private Camera _camera;
-        private BoundsCheckComponent _boundsCheckComponent;
 
         [SetUp]
         public void SetupTestData()
@@ -29,8 +28,7 @@ namespace Game.Modules.BulletModule.Tests
             _bulletFactory = new TestBulletFactory();
             _bulletSpawner = new BulletSpawner(_bulletFactory);
             _worldCoordinates = new WorldCoordinates(_camera);
-            _bulletController = new BulletController(_bulletSpawner,_worldCoordinates);
-            _boundsCheckComponent = new BoundsCheckComponent(_worldCoordinates);
+            _bulletController = new BulletController(_bulletSpawner);
         }
 
         //Helper method
@@ -114,7 +112,7 @@ namespace Game.Modules.BulletModule.Tests
     
     public class TestBulletFactory : IFactory<float, int, BulletEntity>
     {
-        public Dictionary<int, BulletComponents> Bullets = new();
+        public readonly Dictionary<int, BulletComponents> Bullets = new();
         
         private int _bulletCount = 0;
         
