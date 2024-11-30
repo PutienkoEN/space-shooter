@@ -19,7 +19,6 @@ namespace Game.Modules.Manager.Scripts
                 .AsSingle()
                 .WithArguments(initialLevel)
                 .NonLazy();
-
         }
     }
 }
