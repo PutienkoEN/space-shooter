@@ -4,13 +4,13 @@ using Zenject;
 
 namespace Game.Modules.Manager.Scripts
 {
-    public class GameMainMenuController : IInitializable, IDisposable
+    public class MainMenuController : IInitializable, IDisposable
     {
         private readonly GameSceneManager _gameSceneManager;
         private readonly Button _startGameButton;
 
         [Inject]
-        public GameMainMenuController(GameSceneManager gameSceneManager, Button startGameButton)
+        public MainMenuController(GameSceneManager gameSceneManager, Button startGameButton)
         {
             _gameSceneManager = gameSceneManager;
             _startGameButton = startGameButton;
