@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Modules.LevelInterfaces.Scripts;
 using GSpaceShooter.Game.Level.Events;
 using SpaceShooter.Game.Level.Events;
@@ -14,18 +13,18 @@ namespace SpaceShooter.Game.Level
     {
         [SerializeReference] private List<ILevelEventConfig<ILevelEventData>> gameLeveEvents = new();
 
-        public GameLevelData GetData()
+        public ILevelData GetData()
         {
             var gameEvents = gameLeveEvents.ConvertAll(gameEvent => gameEvent.GetData());
-            return new GameLevelData(gameEvents);
+            return new LevelData(gameEvents);
         }
     }
 
-    public class GameLevelData
+    public class LevelData : ILevelData
     {
-        public List<ILevelEventData> GameLevelEvents { get; private set; }
+        public List<ILevelEventData> GameLevelEvents { get; }
 
-        public GameLevelData(List<ILevelEventData> gameLevelEvents)
+        public LevelData(List<ILevelEventData> gameLevelEvents)
         {
             GameLevelEvents = gameLevelEvents;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Game.Modules.LevelInterfaces.Scripts;
 using SpaceShooter.Game.Level.Events;
 using Zenject;
 
@@ -15,9 +16,9 @@ namespace SpaceShooter.Game.Level
             _levelEventResolver = levelEventResolver;
         }
 
-        public async void StartLevel(GameLevelData gameLevelData)
+        public async void StartLevel(ILevelData levelData)
         {
-            var gameEventHandlers = GetHandlers(gameLevelData.GameLevelEvents);
+            var gameEventHandlers = GetHandlers(levelData.GameLevelEvents);
             for (var eventNumber = 0; eventNumber < gameEventHandlers.Count; eventNumber++)
             {
                 var gameEventHandler = gameEventHandlers[eventNumber];

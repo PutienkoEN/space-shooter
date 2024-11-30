@@ -17,7 +17,7 @@ namespace SpaceShooter.Game.Level
 
         public void StartLevel()
         {
-            var levelConfig = (LevelConfig)_levelProvider.GetLevelConfig();
+            var levelConfig = _levelProvider.GetLevelConfig();
             _levelEventManager.StartLevel(levelConfig.GetData());
         }
 

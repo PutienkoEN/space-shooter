@@ -2,5 +2,6 @@
 {
     public interface ILevelConfig
     {
+        public ILevelData GetData();
     }
 }
