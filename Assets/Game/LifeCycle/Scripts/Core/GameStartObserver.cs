@@ -24,10 +24,13 @@ namespace SpaceShooter.Game.LifeCycle.Core
                 return;
             }
 
-            if (_gameContext.GameStart)
+            if (!_gameContext.GameStart)
             {
-                _gameManager.StartGame();
+                return;
             }
+
+            _isGameStartTriggered = true;
+            _gameManager.StartGame();
         }
     }
 }

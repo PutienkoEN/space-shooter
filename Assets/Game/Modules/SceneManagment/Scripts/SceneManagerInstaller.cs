@@ -7,6 +7,7 @@ namespace Game.Modules.Manager.Scripts
     public class SceneManagerInstaller : MonoInstaller
     {
         [SerializeField] private ScriptableObject initialLevel;
+        [SerializeField] private bool enableAutonomousGameScene;
 
         public override void InstallBindings()
         {
@@ -24,6 +25,7 @@ namespace Game.Modules.Manager.Scripts
             Container
                 .BindInterfacesTo<GameContext>()
                 .AsSingle()
+                .WithArguments(enableAutonomousGameScene)
                 .NonLazy();
         }
     }
