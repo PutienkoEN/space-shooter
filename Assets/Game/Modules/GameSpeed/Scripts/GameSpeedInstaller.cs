@@ -1,7 +1,9 @@
-﻿using SpaceShooter.Game.GameSpeed;
+﻿using Game.Modules.GameSpeed.Scripts;
+using SpaceShooter.Game.GameSpeed;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Modules.GameSpeed
@@ -25,6 +27,8 @@ namespace Game.Modules.GameSpeed
         [SerializeField]
         private AudioMixer audioMixer;
 
+        [SerializeField] private Button pauseButton;
+
         public override void Install(DiContainer container)
         {
             container
@@ -44,6 +48,17 @@ namespace Game.Modules.GameSpeed
             container
                 .BindInterfacesTo<UserInputGameSpeedController>()
                 .AsSingle()
+                .NonLazy();
+
+            container
+                .BindInterfacesTo<GamePauseController>()
+                .AsSingle()
+                .NonLazy();
+
+            container
+                .BindInterfacesTo<GamePauseInputController>()
+                .AsSingle()
+                .WithArguments(pauseButton)
                 .NonLazy();
         }
     }
