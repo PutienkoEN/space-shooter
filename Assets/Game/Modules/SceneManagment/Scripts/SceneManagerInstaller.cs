@@ -13,7 +13,6 @@ namespace Game.Modules.Manager.Scripts
             Container
                 .Bind<GameSceneManager>()
                 .AsSingle()
-                .WithArguments(initialLevel)
                 .NonLazy();
 
             Container
