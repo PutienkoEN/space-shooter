@@ -22,7 +22,7 @@ namespace Game.Modules.WeaponModule.Tests
         private BulletSpawner _bulletSpawner;
         
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             _mockWeapon = new Mock<IWeaponComponent>();
             _mockWeaponCreator = new Mock<IWeaponCreator>();
