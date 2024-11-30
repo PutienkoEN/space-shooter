@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Game.Modules.LevelInterfaces.Scripts;
+using Sirenix.OdinInspector;
 using SpaceShooter.Game.Enemy;
 using UnityEngine;
 using Zenject;
@@ -11,13 +12,18 @@ namespace SpaceShooter.Game.Level
         [SerializeField] private EnemyEntity enemyEntity;
 
         private IEnemyManager _enemyManager;
-        private LevelManager _levelManager;
+        private ILevelProvider _levelProvider;
+        private LevelEventManager _levelEventManager;
 
         [Inject]
-        public void Construct(IEnemyManager enemyManager, LevelManager levelManager)
+        public void Construct(
+            IEnemyManager enemyManager,
+            ILevelProvider levelProvider,
+            LevelEventManager levelEventManager)
         {
             _enemyManager = enemyManager;
-            _levelManager = levelManager;
+            _levelProvider = levelProvider;
+            _levelEventManager = levelEventManager;
         }
 
         [Button]
@@ -38,13 +44,17 @@ namespace SpaceShooter.Game.Level
         [Button]
         public void StartCurrentLevel()
         {
-            _levelManager.StartLevel();
+            var levelConfig = _levelProvider.GetLevelConfig();
+            var levelData = levelConfig.GetData();
+
+            _levelEventManager.StartLevel(levelData);
         }
 
         [Button]
         public void StartProvidedLevel(LevelConfig levelConfig)
         {
-            _levelManager.StartLevel(levelConfig);
+            var levelData = levelConfig.GetData();
+            _levelEventManager.StartLevel(levelData);
         }
     }
 }
