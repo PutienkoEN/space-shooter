@@ -2,7 +2,7 @@
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    public class ColliderRectProvider : IRectProvider
+    public sealed class ColliderRectProvider : IRectProvider
     {
         private Rect _colliderRect;
         

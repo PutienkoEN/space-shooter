@@ -4,6 +4,7 @@
     "Zenject",
     "UniTask",
     "Game.Modules.Components",
-    "Game.LifeCycle.Common"
+    "Game.LifeCycle.Common",
+    "Game.Modules.Common"
   ]
 }

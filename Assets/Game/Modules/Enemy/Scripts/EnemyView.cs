@@ -5,7 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System;
-using Game.Modules.BulletModule.Scripts;
+using Game.Modules.Common.Interfaces;
 using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy

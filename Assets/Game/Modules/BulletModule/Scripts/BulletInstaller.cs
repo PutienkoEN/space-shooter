@@ -18,6 +18,8 @@ namespace Game.Modules.BulletModule.Scripts
         
         public override void InstallBindings()
         {
+            gameObject.layer = _layerMask;
+            
             Container.Bind<BulletEntity>().AsSingle();
             Container.Bind<BulletView>().FromComponentOnRoot().AsSingle();
             var colliderComponent = transform.GetComponent<Collider>();
@@ -28,7 +30,8 @@ namespace Game.Modules.BulletModule.Scripts
 
             Container.Bind<BoundsCheckComponent>().AsSingle();
             Container.BindInterfacesAndSelfTo<ColliderRectProvider>().AsSingle();
-            gameObject.layer = _layerMask;
+
+            Container.Bind<DealDamageComponent>().AsSingle().NonLazy();
         }
     }
 }

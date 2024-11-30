@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
@@ -24,7 +23,6 @@ namespace Game.Modules.BulletModule.Scripts
 
             container.Bind<BulletSpawner>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
-            container.Bind<CollisionConditions>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<CollisionProcessor>().AsSingle().NonLazy();
         }
     }

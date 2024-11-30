@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
 using NUnit.Framework;
@@ -125,13 +124,13 @@ namespace Game.Modules.BulletModule.Tests
             WorldCoordinates worldCoordinates = new WorldCoordinates(Camera.main);
             IRectProvider rectProvider = new ColliderRectProvider();
             BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates, rectProvider);
-            CollisionConditions collisionConditions = new CollisionConditions();
-            CollisionProcessor collisionProcessor = new CollisionProcessor(collisionConditions);
+            CollisionProcessor collisionProcessor = new CollisionProcessor();
+            DealDamageComponent dealDamageComponent = new DealDamageComponent(collisionProcessor);
             BulletEntity bulletEntity = new BulletEntity(
                 bulletView, 
                 bulletMoveComponent, 
                 boundsCheckComponent,
-                collisionProcessor);
+                dealDamageComponent);
             
             BulletComponents components = new BulletComponents(
                 bulletEntity,

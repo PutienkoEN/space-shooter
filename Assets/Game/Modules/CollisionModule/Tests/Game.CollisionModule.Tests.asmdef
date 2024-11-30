@@ -1,12 +1,8 @@
 {
-    "name": "Game.BulletModule.Tests",
+    "name": "Game.CollisionModule.Tests",
     "rootNamespace": "",
     "references": [
-        "Game.Modules.BulletModule",
-        "Zenject",
-        "Zenject-TestFramework",
-        "Game.Modules.Components",
-        "Game.Modules.CameraUtility",
+        "",
         "Game.Modules.CollisionModule"
     ],
     "includePlatforms": [

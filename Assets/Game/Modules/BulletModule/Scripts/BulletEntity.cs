@@ -13,7 +13,7 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
-        private readonly CollisionProcessor _collisionProcessor;
+        private readonly DealDamageComponent _dealDamageComponent;
         private Vector3 _direction;
         private int _damage;
         
@@ -22,12 +22,12 @@ namespace Game.Modules.BulletModule.Scripts
             BulletView bulletView, 
             MoveComponent moveComponent, 
             BoundsCheckComponent boundsCheckComponent, 
-            CollisionProcessor collisionProcessor)
+            DealDamageComponent dealDamageComponent)
         {
             _bulletView = bulletView;
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
-            _collisionProcessor = collisionProcessor;
+            _dealDamageComponent = dealDamageComponent;
             _collider = _bulletView.GetComponent<Collider>();
 
             _bulletView.OnCollision += HandleOnCollision;
@@ -51,17 +51,11 @@ namespace Game.Modules.BulletModule.Scripts
         
         private void HandleOnCollision(Collider otherObject)
         {
-            if(otherObject.gameObject.TryGetComponent<IDamagable>(out IDamagable damagable))
-            {
-                Debug.Log("found damagable");
-                var colliderObject = new ColliderObject(_bulletView.gameObject.layer, _damage);
-                var collisionEvent = new CollisionEvent(colliderObject, damagable);
-                _collisionProcessor.AddCollisionEvent(collisionEvent);
-            }
-           
+            _dealDamageComponent.TryDealDamage(otherObject, _bulletView.gameObject.layer, _damage);
+
             Destroy();
         }
-        
+
         private void Destroy()
         {
             _bulletView.OnCollision -= HandleOnCollision;

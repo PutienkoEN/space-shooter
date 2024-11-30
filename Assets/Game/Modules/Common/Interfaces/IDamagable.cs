@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Modules.BulletModule.Scripts
+namespace Game.Modules.Common.Interfaces
 {
     public interface IDamagable
     {
