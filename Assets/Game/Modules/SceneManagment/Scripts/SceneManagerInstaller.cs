@@ -1,12 +1,11 @@
-﻿using Game.Modules.LevelInterfaces.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Manager.Scripts
 {
     public class SceneManagerInstaller : MonoInstaller
     {
-        [SerializeReference] private ILevelConfig initialLevel;
+        [SerializeField] private ScriptableObject initialLevel;
 
         public override void InstallBindings()
         {
@@ -18,7 +17,8 @@ namespace Game.Modules.Manager.Scripts
             Container
                 .BindInterfacesTo<LevelProvider>()
                 .AsSingle()
-                .WithArguments(initialLevel);
+                .WithArguments(initialLevel)
+                .NonLazy();
         }
     }
 }

@@ -42,7 +42,7 @@ namespace SpaceShooter.Game.Level
         }
 
         [Button]
-        void StartProvidedLevel(LevelConfig levelConfig)
+        public void StartProvidedLevel(LevelConfig levelConfig)
         {
             _levelManager.StartLevel(levelConfig);
         }

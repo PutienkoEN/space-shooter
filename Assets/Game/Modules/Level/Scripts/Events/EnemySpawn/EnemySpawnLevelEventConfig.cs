@@ -8,7 +8,7 @@ namespace SpaceShooter.Game.Level.Events
     [Serializable]
     public class EnemySpawnLevelEventConfig : ILevelEventConfig<EnemySpawnLevelEventData>
     {
-        [Header("Coordinates")] [SerializeField]
+        [Header("Coordinates")] [SerializeReference]
         private Transform spawnPoint;
 
         [Header("Spawn")] [SerializeField] private EnemyConfig enemyConfig;

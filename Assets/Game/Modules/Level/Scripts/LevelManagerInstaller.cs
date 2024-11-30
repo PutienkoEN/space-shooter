@@ -18,7 +18,8 @@ namespace SpaceShooter.Game.Level
 
             container
                 .Bind<LevelManager>()
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
 
             container
                 .Bind<DebugLevelManager>()

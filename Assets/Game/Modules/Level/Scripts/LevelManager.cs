@@ -1,11 +1,19 @@
 ﻿using Game.Modules.LevelInterfaces.Scripts;
+using Zenject;
 
 namespace SpaceShooter.Game.Level
 {
     public class LevelManager
     {
-        private LevelEventManager _levelEventManager;
-        private ILevelProvider _levelProvider;
+        private readonly LevelEventManager _levelEventManager;
+        private readonly ILevelProvider _levelProvider;
+
+        [Inject]
+        public LevelManager(LevelEventManager levelEventManager, ILevelProvider levelProvider)
+        {
+            _levelEventManager = levelEventManager;
+            _levelProvider = levelProvider;
+        }
 
         public void StartLevel()
         {
