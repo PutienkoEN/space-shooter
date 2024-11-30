@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using SpaceShooter.Game.Enemy;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace SpaceShooter.Game.Level
@@ -9,7 +10,7 @@ namespace SpaceShooter.Game.Level
     {
         [SerializeField] private EnemyConfig enemyConfig;
         [SerializeField] private EnemyEntity enemyEntity;
-        [SerializeField] private GameLevelConfig gameLevelConfig;
+        [FormerlySerializedAs("gameLevelConfig")] [SerializeField] private LevelConfig levelConfig;
 
         private IEnemyManager _enemyManager;
         private LevelEventManager _levelEventManager;
@@ -39,7 +40,7 @@ namespace SpaceShooter.Game.Level
         [Button]
         public void StartLevel()
         {
-            _levelEventManager.StartLevel(gameLevelConfig.GetData());
+            _levelEventManager.StartLevel(levelConfig.GetData());
         }
     }
 }

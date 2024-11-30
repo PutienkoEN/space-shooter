@@ -28,7 +28,7 @@ namespace SpaceShooter.Game.Level
             }
         }
 
-        private List<IGameEventHandler> GetHandlers(List<IGameLevelEventData> gameLevelEvents)
+        private List<IGameEventHandler> GetHandlers(List<ILevelEventData> gameLevelEvents)
         {
             return gameLevelEvents
                 .ConvertAll(_levelEventResolver.Resolve)

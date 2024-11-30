@@ -27,7 +27,7 @@ namespace SpaceShooter.Game.Level.Events
         }
     }
 
-    public class EnemySpawnLevelEventData : IGameLevelEventData
+    public class EnemySpawnLevelEventData : ILevelEventData
     {
         public Vector3 SpawnPosition { get; private set; }
         public Quaternion SpawnRotation { get; private set; }

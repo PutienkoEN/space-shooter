@@ -1,4 +1,4 @@
-﻿using SpaceShooter.Game.Level;
+﻿using Game.Modules.LevelInterfaces.Scripts;
 using UnityEngine;
 using Zenject;
 
@@ -6,19 +6,20 @@ namespace Game.Modules.Manager.Scripts
 {
     public class SceneManagerInstaller : MonoInstaller
     {
-        [SerializeField] private GameLevelConfig initialLevel;
+        [SerializeReference] private ILevelConfig initialLevel;
 
         public override void InstallBindings()
         {
-            Container
-                .Bind<GameContext>()
-                .AsSingle();
-
             Container
                 .Bind<GameSceneManager>()
                 .AsSingle()
                 .WithArguments(initialLevel)
                 .NonLazy();
+
+            Container
+                .BindInterfacesTo<LevelProvider>()
+                .AsSingle()
+                .WithArguments(initialLevel);
         }
     }
 }
