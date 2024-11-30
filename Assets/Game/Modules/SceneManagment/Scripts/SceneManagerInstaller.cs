@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SpaceShooter.Game.LifeCycle.Core;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Manager.Scripts
@@ -18,6 +19,11 @@ namespace Game.Modules.Manager.Scripts
                 .BindInterfacesTo<LevelProvider>()
                 .AsSingle()
                 .WithArguments(initialLevel)
+                .NonLazy();
+
+            Container
+                .BindInterfacesTo<GameContext>()
+                .AsSingle()
                 .NonLazy();
         }
     }

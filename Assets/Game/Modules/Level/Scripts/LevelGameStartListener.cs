@@ -4,13 +4,13 @@ using Zenject;
 
 namespace SpaceShooter.Game.Level
 {
-    public class GameStartLevelController : IGameStartListener
+    public class LevelGameStartListener : IGameStartListener
     {
         private readonly LevelEventManager _levelEventManager;
         private readonly ILevelProvider _levelProvider;
 
         [Inject]
-        public GameStartLevelController(LevelEventManager levelEventManager, ILevelProvider levelProvider)
+        public LevelGameStartListener(LevelEventManager levelEventManager, ILevelProvider levelProvider)
         {
             _levelEventManager = levelEventManager;
             _levelProvider = levelProvider;
