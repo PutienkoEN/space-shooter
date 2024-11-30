@@ -14,8 +14,8 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
         private Vector3 _direction;
-        private Rect _colliderRect;
         
+        [Inject]
         public BulletEntity(
             BulletView bulletView, 
             MoveComponent moveComponent, 
@@ -26,7 +26,7 @@ namespace Game.Modules.BulletModule.Scripts
             _boundsCheckComponent = boundsCheckComponent;
             _collider = _bulletView.GetComponent<Collider>();
 
-            OnDestroy += HandleDestroy;
+            _bulletView.OnCollision += HandleOnCollision;
         }
 
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
@@ -38,46 +38,30 @@ namespace Game.Modules.BulletModule.Scripts
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (!_boundsCheckComponent.IsInBounds(GetColliderRect()))
+            if (!_boundsCheckComponent.IsInBounds(_collider))
             {
-                OnDestroy?.Invoke(this);
+                Destroy();
             }
-        }
-
-        public Rect GetColliderRect()
-        {
-            if (_collider != null)
-            {
-                Bounds colliderBounds = _collider.bounds;
-                if (_colliderRect == Rect.zero)
-                {
-                    _colliderRect = new Rect(
-                        colliderBounds.min.x,
-                        colliderBounds.min.y,
-                        colliderBounds.size.x,
-                        colliderBounds.size.y);
-                }
-                else
-                {
-                    _colliderRect.x = colliderBounds.min.x;
-                    _colliderRect.y = colliderBounds.min.y;
-                    _colliderRect.width = colliderBounds.size.x;
-                    _colliderRect.height = colliderBounds.size.y;
-                }
-            }
-            
-            return _colliderRect;
         }
         
-        private void HandleDestroy(BulletEntity _)
+        private void HandleOnCollision(Collider collider)
         {
+            Destroy();
+        }
+        
+        private void Destroy()
+        {
+            _bulletView.OnCollision -= HandleOnCollision;
+            
+            OnDestroy?.Invoke(this);
+            
             //The check required for the unit test to work correctly.
             // Destroying in Edit Mode is not allowed.
             if(Application.isPlaying) 
                 _bulletView.DestroyBullet();
         }
         
-        public class Factory : PlaceholderFactory<float, BulletEntity>
+        public class Factory : PlaceholderFactory<float, LayerMask, BulletEntity>
         {
         }
         

@@ -10,11 +10,17 @@ namespace SpaceShooter.Game.Enemy
 {
     public interface IEnemyView
     {
+        public Collider GetCollider();
         public void Destroy();
     }
-
+    
     public class EnemyView : MonoBehaviour, IEnemyView
     {
+        public Collider GetCollider()
+        {
+            return GetComponentInChildren<Collider>();
+        }
+
         public void Destroy()
         {
             Destroy(transform.gameObject);

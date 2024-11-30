@@ -20,7 +20,7 @@ namespace Game.Modules.BulletModule.Tests
         private Camera _camera;
 
         [SetUp]
-        public void Setup()
+        public void SetupTestData()
         {
             _camera = Camera.main;
             SetupCamera(_camera);
@@ -53,20 +53,14 @@ namespace Game.Modules.BulletModule.Tests
         }
         
         [Test]
-        public void WhenLaunchBulletIsCalled_AndTransformArgumentIsNull_ThenThrowException()
-        {
-            // Act && Assert
-            Assert.Throws<ArgumentNullException>(()=> _bulletSpawner.LaunchBullet(null, 10));
-        }
-        
-        [Test]
         public void WhenLaunchBulletIsCalled_AndBulletControllerIsCreated_ThenBulletAddedToBulletController()
         {
             // Arrange
-            GameObject testBullet = new GameObject();
+            GameObject firePoint = new GameObject();
+            int layerMask = firePoint.layer;
         
             // Act
-            _bulletSpawner.LaunchBullet(testBullet.transform, 10f);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
@@ -77,7 +71,8 @@ namespace Game.Modules.BulletModule.Tests
         {
             // Arrange
             GameObject firePoint = new GameObject();
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
+            int layerMask = firePoint.layer;
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             MoveComponent moveComponent = _bulletFactory.Bullets[0].MoveComponent;
         
             // Act
@@ -93,43 +88,47 @@ namespace Game.Modules.BulletModule.Tests
         [Test]
         public void WhenRandomBulletsAreDestroyed_AndSeveralBulletsLaunched_ThenBulletControllerShouldCorrectlyRemoveThem()
         {
-            //Arrange
+             //Arrange
             GameObject firePoint = new GameObject();
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f);
+            int layerMask = firePoint.layer;
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
             
             MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
             MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
             
             //Act
-            
-            bullet1MoveComponent.MoveToDirection(new Vector3(1,2,3), 10);
-            bullet3MoveComponent.MoveToDirection(new Vector3(1,2,3), 10);
+            bullet1MoveComponent.MoveToDirection(new Vector3(1,1,0), 1);
+            bullet3MoveComponent.MoveToDirection(new Vector3(1,1,0), 1);
             Physics.SyncTransforms();
             
-            _bulletController.Tick(10f);
+            _bulletController.Tick(1f);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
         }
     }
     
-    public class TestBulletFactory : IFactory<float, BulletEntity>
+    public class TestBulletFactory : IFactory<float, LayerMask, BulletEntity>
     {
         public readonly Dictionary<int, BulletComponents> Bullets = new();
         
         private int _bulletCount = 0;
         
-        public BulletEntity Create(float speed)
+        public BulletEntity Create(float speed, LayerMask layerMask)
         {
             var bulletObj = new GameObject("BulletView");
             Collider bulletCollider = bulletObj.AddComponent<SphereCollider>();
             BulletView bulletView = bulletObj.AddComponent<BulletView>();
             MoveComponent bulletMoveComponent = new MoveComponent(bulletView.transform, speed);
             WorldCoordinates worldCoordinates = new WorldCoordinates(Camera.main);
-            BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates);
-            BulletEntity bulletEntity = new BulletEntity(bulletView, bulletMoveComponent, boundsCheckComponent);
+            IRectProvider rectProvider = new ColliderRectProvider();
+            BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates, rectProvider);
+            BulletEntity bulletEntity = new BulletEntity(
+                bulletView, 
+                bulletMoveComponent, 
+                boundsCheckComponent);
             
             BulletComponents components = new BulletComponents(
                 bulletEntity,

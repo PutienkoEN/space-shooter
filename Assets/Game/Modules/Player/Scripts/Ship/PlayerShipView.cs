@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 
 namespace SpaceShooter.Game.Player.Ship
 {
@@ -7,6 +8,16 @@ namespace SpaceShooter.Game.Player.Ship
         public void DestroyShip()
         {
             Destroy(gameObject);
+        }
+
+        public Transform GetTransform()
+        {
+            return gameObject.transform;
+        }
+
+        public LayerMask GetLayerMask()
+        {
+            return (LayerMask)gameObject.layer;
         }
     }
 }
