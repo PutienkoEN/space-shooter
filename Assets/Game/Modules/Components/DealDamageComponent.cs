@@ -5,21 +5,14 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class DealDamageComponent
     {
-        private readonly CollisionProcessor _collisionProcessor;
-
-        public DealDamageComponent(CollisionProcessor collisionProcessor)
-        {
-            _collisionProcessor = collisionProcessor;
-        }
-        
+       
         public bool TryDealDamage(Collider otherObject, int layer, int damage)
         {
-            if(otherObject.gameObject.TryGetComponent(out IDamagable damagable))
+            var damagable = otherObject.gameObject.GetComponentInParent<IDamagable>();
+            if(damagable != null)
             {
-                Debug.Log("found damagable");
-                ColliderObject colliderObject = new ColliderObject(layer, damage);
-                ICollisionEvent collisionEvent = new DealDamageEvent(colliderObject, damagable);
-                _collisionProcessor.AddCollisionEvent(collisionEvent);
+                damagable.InvokeOnDamage(damage);
+                
                 return true;
             }
             return false;

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: -8157317904408921074, guid: a2b90cac623bef74db1c09dd199d2301, type: 3}
-  health: 25
+  health: 5
   speed: 5

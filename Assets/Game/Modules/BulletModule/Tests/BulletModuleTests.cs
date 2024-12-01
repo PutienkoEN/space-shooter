@@ -109,13 +109,13 @@ namespace Game.Modules.BulletModule.Tests
         }
     }
     
-    public class TestBulletFactory : IFactory<float, int, BulletEntity>
+    public class TestBulletFactory : IFactory<float, BulletEntity>
     {
         public readonly Dictionary<int, BulletComponents> Bullets = new();
         
         private int _bulletCount = 0;
         
-        public BulletEntity Create(float speed, int layerMask)
+        public BulletEntity Create(float speed)
         {
             var bulletObj = new GameObject("BulletView");
             Collider bulletCollider = bulletObj.AddComponent<SphereCollider>();
@@ -124,8 +124,7 @@ namespace Game.Modules.BulletModule.Tests
             WorldCoordinates worldCoordinates = new WorldCoordinates(Camera.main);
             IRectProvider rectProvider = new ColliderRectProvider();
             BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates, rectProvider);
-            CollisionProcessor collisionProcessor = new CollisionProcessor();
-            DealDamageComponent dealDamageComponent = new DealDamageComponent(collisionProcessor);
+            DealDamageComponent dealDamageComponent = new DealDamageComponent();
             BulletEntity bulletEntity = new BulletEntity(
                 bulletView, 
                 bulletMoveComponent, 

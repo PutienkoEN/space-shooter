@@ -68,7 +68,7 @@ namespace Game.Modules.BulletModule.Scripts
                 _bulletView.DestroyBullet();
         }
         
-        public class Factory : PlaceholderFactory<float, int, BulletEntity>
+        public class Factory : PlaceholderFactory<float, BulletEntity>
         {
         }
         

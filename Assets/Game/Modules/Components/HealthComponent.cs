@@ -17,6 +17,7 @@ namespace SpaceShooter.Game.Components
 
         public void TakeDamage(float damage)
         {
+            Debug.Log("taking damage");
             if (_health <= 0)
             {
                 Debug.Log("Health is zero, can't take damage.");

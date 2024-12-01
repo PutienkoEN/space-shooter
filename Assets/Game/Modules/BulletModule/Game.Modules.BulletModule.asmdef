@@ -6,7 +6,8 @@
         "Game.LifeCycle.Common",
         "Game.Modules.Components",
         "Game.Modules.CameraUtility",
-        "Game.Modules.CollisionModule"
+        "Game.Modules.CollisionModule",
+        "Game.Modules.Common"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

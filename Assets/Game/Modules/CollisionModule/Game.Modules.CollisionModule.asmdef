@@ -1,6 +1,0 @@
-﻿{
-  "name": "Game.Modules.CollisionModule",
-  "references":[ 
-    "Game.Modules.Common", 
-    "Game.LifeCycle.Common" ]
-}

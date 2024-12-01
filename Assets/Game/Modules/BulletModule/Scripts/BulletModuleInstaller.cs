@@ -12,18 +12,17 @@ namespace Game.Modules.BulletModule.Scripts
 
         public override void Install(DiContainer container)
         {
-            container.BindFactory<float, int, BulletEntity, BulletEntity.Factory>()
+            container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
                 .FromSubContainerResolve()
                 .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab)
                 .UnderTransform(bulletContainer);
             
-            container.Bind<IFactory<float, int, BulletEntity>>()
+            container.Bind<IFactory<float, BulletEntity>>()
                 .To<BulletEntity.Factory>()
                 .FromResolve();
 
             container.Bind<BulletSpawner>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<BulletController>().AsSingle().NonLazy();
-            container.BindInterfacesAndSelfTo<CollisionProcessor>().AsSingle().NonLazy();
         }
     }
 }

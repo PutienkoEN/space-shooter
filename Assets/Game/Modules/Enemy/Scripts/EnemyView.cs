@@ -5,20 +5,15 @@
 // ------------------------------------------------------------------------------
 
 using System;
+using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public interface IEnemyView
-    {
-        public Collider GetCollider();
-        public void Destroy();
-    }
-    
     public class EnemyView : MonoBehaviour, IEnemyView, IDamagable
     {
-        public event Action<int> OnDamage;
+        public event Action<int> OnTakeDamage;
         public int GetLayer()
         {
             return gameObject.layer;
@@ -26,7 +21,7 @@ namespace SpaceShooter.Game.Enemy
 
         public void InvokeOnDamage(int damage)
         {
-            OnDamage?.Invoke(damage);
+            OnTakeDamage?.Invoke(damage);
         }
 
         public Collider GetCollider()
@@ -38,7 +33,6 @@ namespace SpaceShooter.Game.Enemy
         {
             Destroy(transform.gameObject);
         }
-
         
     }
 }
