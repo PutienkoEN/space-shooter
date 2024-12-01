@@ -86,7 +86,7 @@ namespace Game.Modules.WeaponModule.Tests
         }
         public override WeaponComponent Create(WeaponConfig config, Transform[] parent, int layer)
         {
-            return new WeaponComponent(_bulletSpawner, config, parent, layer);
+            return new WeaponComponent(_bulletSpawner, config, parent);
         }
     }
 }

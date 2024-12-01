@@ -59,7 +59,7 @@ namespace Game.Modules.BulletModule.Tests
             int layerMask = firePoint.layer;
         
             // Act
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, 10);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
@@ -71,7 +71,7 @@ namespace Game.Modules.BulletModule.Tests
             // Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, 10);
             MoveComponent moveComponent = _bulletFactory.Bullets[0].MoveComponent;
         
             // Act
@@ -90,9 +90,9 @@ namespace Game.Modules.BulletModule.Tests
              //Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f,  10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f,  10);
             
             MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
             MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
