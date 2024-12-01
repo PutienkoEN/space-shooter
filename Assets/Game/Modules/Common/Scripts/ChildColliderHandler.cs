@@ -16,7 +16,5 @@ namespace Game.Modules.Common.Scripts
         {
             _iCollidable?.HandleTriggerEnter(other);
         }
-
-        
     }
 }

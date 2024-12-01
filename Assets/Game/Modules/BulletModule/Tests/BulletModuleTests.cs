@@ -124,12 +124,10 @@ namespace Game.Modules.BulletModule.Tests
             WorldCoordinates worldCoordinates = new WorldCoordinates(Camera.main);
             IRectProvider rectProvider = new ColliderRectProvider();
             BoundsCheckComponent boundsCheckComponent = new BoundsCheckComponent(worldCoordinates, rectProvider);
-            DealDamageComponent dealDamageComponent = new DealDamageComponent();
             BulletEntity bulletEntity = new BulletEntity(
                 bulletView, 
                 bulletMoveComponent, 
-                boundsCheckComponent,
-                dealDamageComponent);
+                boundsCheckComponent);
             
             BulletComponents components = new BulletComponents(
                 bulletEntity,
