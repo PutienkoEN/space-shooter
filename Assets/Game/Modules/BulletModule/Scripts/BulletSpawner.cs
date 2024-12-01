@@ -8,17 +8,17 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class BulletSpawner
     {
         public event Action<BulletEntity> OnNewBullet;
-        private readonly IFactory<float, LayerMask, BulletEntity> _bulletFactory;
+        private readonly IFactory<float, BulletEntity> _bulletFactory;
 
-        public BulletSpawner(IFactory<float, LayerMask, BulletEntity> bulletFactory)
+        public BulletSpawner(IFactory<float, BulletEntity> bulletFactory)
         {
             _bulletFactory = bulletFactory;
         }
         
-        public void LaunchBullet(Transform firePoint, float speed, int layerMask)
+        public void LaunchBullet(Transform firePoint, float speed, int damage)
         {
-            BulletEntity bulletEntity = _bulletFactory.Create(speed, layerMask);
-            bulletEntity.LaunchBullet(firePoint.position, firePoint.rotation, firePoint.up);
+            BulletEntity bulletEntity = _bulletFactory.Create(speed);
+            bulletEntity.LaunchBullet(firePoint.position, firePoint.rotation, firePoint.up, damage);
             
             OnNewBullet?.Invoke(bulletEntity);
         }

@@ -1,4 +1,5 @@
 ﻿using Game.Modules.BulletModule.Scripts;
+using Game.Modules.Common.Interfaces;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
@@ -34,9 +35,10 @@ namespace SpaceShooter.Game.Enemy
 
             var enemyView = _enemyViewFactory.Create(_enemyData.EnemyPrefab, _position, _rotation);
             Container
-                .Bind<IEnemyView>()
+                .BindInterfacesTo(enemyView.GetType())
                 .FromInstance(enemyView)
                 .AsSingle();
+            
 
             Container
                 .Bind<MoveComponent>()

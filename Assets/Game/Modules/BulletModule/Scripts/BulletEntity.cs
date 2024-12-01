@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.Common.Interfaces;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,7 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
         private Vector3 _direction;
+        private int _damage;
         
         [Inject]
         public BulletEntity(
@@ -26,12 +28,13 @@ namespace Game.Modules.BulletModule.Scripts
             _boundsCheckComponent = boundsCheckComponent;
             _collider = _bulletView.GetComponent<Collider>();
 
-            _bulletView.OnCollision += HandleOnCollision;
+            _bulletView.OnDealDamage += HandleOnDealDamage;
         }
 
-        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
+        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction, int damage)
         {
             _direction = direction;
+            _damage = damage;
             _bulletView.transform.SetPositionAndRotation(position, rotation);
         }
 
@@ -44,14 +47,16 @@ namespace Game.Modules.BulletModule.Scripts
             }
         }
         
-        private void HandleOnCollision(Collider collider)
+        private void HandleOnDealDamage(IDamagable otherObject)
         {
+            otherObject.InvokeOnDamage(_damage);
+
             Destroy();
         }
-        
+
         private void Destroy()
         {
-            _bulletView.OnCollision -= HandleOnCollision;
+            _bulletView.OnDealDamage -= HandleOnDealDamage;
             
             OnDestroy?.Invoke(this);
             
@@ -61,7 +66,7 @@ namespace Game.Modules.BulletModule.Scripts
                 _bulletView.DestroyBullet();
         }
         
-        public class Factory : PlaceholderFactory<float, LayerMask, BulletEntity>
+        public class Factory : PlaceholderFactory<float, BulletEntity>
         {
         }
         

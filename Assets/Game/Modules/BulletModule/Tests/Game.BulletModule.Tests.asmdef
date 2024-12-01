@@ -6,7 +6,8 @@
         "Zenject",
         "Zenject-TestFramework",
         "Game.Modules.Components",
-        "Game.Modules.CameraUtility"
+        "Game.Modules.CameraUtility",
+        "Game.Modules.CollisionModule"
     ],
     "includePlatforms": [
         "Editor"

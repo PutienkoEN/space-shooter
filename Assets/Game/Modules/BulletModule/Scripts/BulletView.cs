@@ -1,26 +1,32 @@
 ﻿using System;
+using Game.Modules.Common.Interfaces;
+using Game.Modules.Common.Scripts;
 using UnityEngine;
 
 namespace Game.Modules.BulletModule.Scripts
 {
-    [RequireComponent(typeof(Collider))]
-    public class BulletView : MonoBehaviour
+    public sealed class BulletView : MonoBehaviour, ICollidable
     {
-        public event Action<Collider> OnCollision;
-        
+        public event Action<IDamagable> OnDealDamage;
+
+        private void Awake()
+        {
+            var colliderHandler = GetComponentInChildren<ChildColliderHandler>();
+            if (colliderHandler != null)
+            {
+                colliderHandler.SetEntityView(this);
+            }
+        }
+
+        public void HandleTriggerEnter(Collider other)
+        {
+            var damagable = other.GetComponentInParent<IDamagable>();
+            OnDealDamage?.Invoke(damagable);
+        }
+
         public void DestroyBullet()
         {
             Destroy(gameObject);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.layer == gameObject.layer)
-            {
-                // Ignore trigger event for same-layer objects
-                return;
-            }
-            OnCollision?.Invoke(other);
         }
     }
 }

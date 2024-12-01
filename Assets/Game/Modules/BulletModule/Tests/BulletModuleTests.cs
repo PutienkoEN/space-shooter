@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
 using NUnit.Framework;
@@ -60,7 +59,7 @@ namespace Game.Modules.BulletModule.Tests
             int layerMask = firePoint.layer;
         
             // Act
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, 10);
             
             // Assert
             Assert.AreEqual(1, _bulletController.Bullets.Count);
@@ -72,7 +71,7 @@ namespace Game.Modules.BulletModule.Tests
             // Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, 10);
             MoveComponent moveComponent = _bulletFactory.Bullets[0].MoveComponent;
         
             // Act
@@ -91,9 +90,9 @@ namespace Game.Modules.BulletModule.Tests
              //Arrange
             GameObject firePoint = new GameObject();
             int layerMask = firePoint.layer;
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
-            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, layerMask);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f, 10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f,  10);
+            _bulletSpawner.LaunchBullet(firePoint.transform, 10f,  10);
             
             MoveComponent bullet1MoveComponent = _bulletFactory.Bullets[0].MoveComponent;
             MoveComponent bullet3MoveComponent = _bulletFactory.Bullets[2].MoveComponent;
@@ -110,13 +109,13 @@ namespace Game.Modules.BulletModule.Tests
         }
     }
     
-    public class TestBulletFactory : IFactory<float, LayerMask, BulletEntity>
+    public class TestBulletFactory : IFactory<float, BulletEntity>
     {
         public readonly Dictionary<int, BulletComponents> Bullets = new();
         
         private int _bulletCount = 0;
         
-        public BulletEntity Create(float speed, LayerMask layerMask)
+        public BulletEntity Create(float speed)
         {
             var bulletObj = new GameObject("BulletView");
             Collider bulletCollider = bulletObj.AddComponent<SphereCollider>();

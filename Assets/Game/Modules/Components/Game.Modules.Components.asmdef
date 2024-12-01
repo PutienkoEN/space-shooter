@@ -2,7 +2,9 @@
     "name": "Game.Modules.Components",
     "rootNamespace": "",
     "references": [
-        "Game.Modules.CameraUtility"
+        "Game.Modules.CameraUtility",
+        "Game.Modules.CollisionModule",
+        "Game.Modules.Common"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

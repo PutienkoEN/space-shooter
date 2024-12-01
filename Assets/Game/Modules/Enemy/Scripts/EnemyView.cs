@@ -4,18 +4,26 @@
 // <file>: EnemyView.cs
 // ------------------------------------------------------------------------------
 
+using System;
+using Game.Modules.BulletModule.Scripts;
+using Game.Modules.Common.Interfaces;
 using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public interface IEnemyView
+    public class EnemyView : MonoBehaviour, IEnemyView, IDamagable
     {
-        public Collider GetCollider();
-        public void Destroy();
-    }
-    
-    public class EnemyView : MonoBehaviour, IEnemyView
-    {
+        public event Action<int> OnTakeDamage;
+        public int GetLayer()
+        {
+            return gameObject.layer;
+        }
+
+        public void InvokeOnDamage(int damage)
+        {
+            OnTakeDamage?.Invoke(damage);
+        }
+
         public Collider GetCollider()
         {
             return GetComponentInChildren<Collider>();
@@ -25,5 +33,6 @@ namespace SpaceShooter.Game.Enemy
         {
             Destroy(transform.gameObject);
         }
+        
     }
 }

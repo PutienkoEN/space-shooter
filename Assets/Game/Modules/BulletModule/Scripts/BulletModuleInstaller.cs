@@ -12,12 +12,12 @@ namespace Game.Modules.BulletModule.Scripts
 
         public override void Install(DiContainer container)
         {
-            container.BindFactory<float, LayerMask, BulletEntity, BulletEntity.Factory>()
+            container.BindFactory<float, BulletEntity, BulletEntity.Factory>()
                 .FromSubContainerResolve()
                 .ByNewContextPrefab<BulletInstaller>(bulletViewPrefab)
                 .UnderTransform(bulletContainer);
             
-            container.Bind<IFactory<float, LayerMask, BulletEntity>>()
+            container.Bind<IFactory<float, BulletEntity>>()
                 .To<BulletEntity.Factory>()
                 .FromResolve();
 
