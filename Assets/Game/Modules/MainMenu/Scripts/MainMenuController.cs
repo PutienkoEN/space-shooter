@@ -26,7 +26,7 @@ namespace Game.Modules.Manager.Scripts
             _startGameButton = startGameButton;
             _quitGameButton = quitGameButton;
 
-            _mainMenuAnimator = new MainMenuAnimator(animator);
+            _mainMenuAnimator = new MainMenuAnimator(animator, startGameButton, quitGameButton);
         }
 
         public void Initialize()
