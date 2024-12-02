@@ -53,7 +53,7 @@ namespace SpaceShooter.Game.Enemy
             _moveComponent.MoveToDirection(Vector3.down, deltaTime);
             if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
             {
-                Debug.Log("is out of bounds ");
+                OnLeftGameArea?.Invoke(this);
             }
         }
 

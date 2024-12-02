@@ -8,7 +8,7 @@ namespace Game.Modules.Game
         public override void Install(DiContainer container)
         {
             container
-                .Bind<GameEndObserver>()
+                .BindInterfacesTo<GameEndObserver>()
                 .AsSingle()
                 .NonLazy();
         }

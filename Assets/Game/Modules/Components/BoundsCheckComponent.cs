@@ -20,6 +20,11 @@ namespace Game.Modules.BulletModule.Scripts
         public bool LeftGameArea(Collider collider)
         {
             var onScreen = OnScreen(collider);
+            if (onScreen)
+            {
+                _wasOnScreen = true;
+            }
+
             return _wasOnScreen && !onScreen;
         }
 

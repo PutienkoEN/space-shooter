@@ -227,26 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[GameSceneContext]'
       objectReference: {fileID: 0}
-    - target: {fileID: 2392383588111297772, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3180179506568711041, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: bulletContainer
       value: 
       objectReference: {fileID: 1264921088}
-    - target: {fileID: 3180179506568711041, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: bulletViewPrefab
-      value: 
-      objectReference: {fileID: 5208573238623271595, guid: e7f47eb722b9d7345b6ebf7b6a20b6c6, type: 3}
-    - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: spawnPosition
-      value: 
-      objectReference: {fileID: 989745151}
-    - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: worldContainer
-      value: 
-      objectReference: {fileID: 1525875786}
     - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: playerContainer
       value: 
@@ -293,22 +277,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5366562399551866894, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7550334431515991705, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7550334431515991705, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7550334431515991705, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7550334431515991705, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8043972182512057232, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}

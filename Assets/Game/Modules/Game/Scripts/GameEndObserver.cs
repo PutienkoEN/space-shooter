@@ -2,6 +2,7 @@
 using SpaceShooter.Game.Enemy;
 using SpaceShooter.Game.Level;
 using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Game
@@ -61,7 +62,7 @@ namespace Game.Modules.Game
             {
                 return;
             }
-
+            
             _gameManager.FinishGame();
         }
     }

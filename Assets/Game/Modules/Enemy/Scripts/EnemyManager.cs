@@ -22,20 +22,29 @@ namespace SpaceShooter.Game.Enemy
 
         public void Tick(float deltaTime)
         {
-            foreach (var enemy in _enemies)
+            for (var enemyIndex = _enemies.Count - 1; enemyIndex >= 0; enemyIndex--)
             {
-                enemy.Update(deltaTime);
+                var enemyEntity = _enemies[enemyIndex];
+                enemyEntity.Update(deltaTime);
             }
         }
 
         public EnemyEntity CreateEnemy(Vector3 position, Quaternion rotation, EnemyData enemyData)
         {
-            var enemyEntity = _enemyFactory.Create(position, rotation, enemyData);
-            
-            enemyEntity.Initialize();
-            _enemies.Add(enemyEntity);
+            var enemyEntity = SetupEnemy(position, rotation, enemyData);
 
+            _enemies.Add(enemyEntity);
             OnEnemyChange?.Invoke(HasEnemies());
+
+            return enemyEntity;
+        }
+
+        private EnemyEntity SetupEnemy(Vector3 position, Quaternion rotation, EnemyData enemyData)
+        {
+            var enemyEntity = _enemyFactory.Create(position, rotation, enemyData);
+
+            enemyEntity.Initialize();
+            enemyEntity.OnLeftGameArea += DestroyEnemy;
 
             return enemyEntity;
         }
@@ -43,9 +52,15 @@ namespace SpaceShooter.Game.Enemy
         public void DestroyEnemy(EnemyEntity enemyEntity)
         {
             _enemies.Remove(enemyEntity);
-            enemyEntity.Dispose();
+            DisposeEnemy(enemyEntity);
 
             OnEnemyChange?.Invoke(HasEnemies());
+        }
+
+        private void DisposeEnemy(EnemyEntity enemyEntity)
+        {
+            enemyEntity.OnLeftGameArea -= DestroyEnemy;
+            enemyEntity.Dispose();
         }
 
         private bool HasEnemies()
