@@ -18,6 +18,11 @@ namespace SpaceShooter.Game.LifeCycle.Core
                 .Bind<DOTweenConfiguration>()
                 .AsSingle()
                 .NonLazy();
+
+            Container
+                .BindInterfacesTo<GameStartObserver>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }
