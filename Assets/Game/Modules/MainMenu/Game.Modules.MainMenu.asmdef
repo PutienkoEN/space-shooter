@@ -1,12 +1,10 @@
 {
-  "name": "Game.Modules.Level",
+  "name": "Game.Modules.MainMenu",
   "rootNamespace": "",
   "references": [
     "Zenject",
-    "UniTask",
-    "Game.Modules.Enemy",
     "Game.LifeCycle.Common",
-    "Game.Modules.LevelInterfaces"
+    "Game.Module.SceneManagment"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
