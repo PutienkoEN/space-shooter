@@ -3,7 +3,9 @@
   "rootNamespace": "SpaceShooter.Game.LifeCycle.Core",
   "references": [
     "Zenject",
-    "Game.LifeCycle.Common"
+    "Game.LifeCycle.Common",
+    "Game.Modules.CameraUtility",
+    "Game.Modules.GameSpeed"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
