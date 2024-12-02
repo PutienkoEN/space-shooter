@@ -1,23 +1,21 @@
-﻿using SpaceShooter.Game.LifeCycle.Common;
+﻿using System;
 using UnityEngine;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public class PlayerShipView : MonoBehaviour
+    public class PlayerShipView : MonoBehaviour, IPlayerShipView
     {
-        public void DestroyShip()
+        public event Action<int> OnTakeDamage;
+
+
+        public void TakeDamage(int damage)
+        {
+            OnTakeDamage?.Invoke(damage);
+        }
+
+        public void Destroy()
         {
             Destroy(gameObject);
-        }
-
-        public Transform GetTransform()
-        {
-            return gameObject.transform;
-        }
-
-        public LayerMask GetLayerMask()
-        {
-            return (LayerMask)gameObject.layer;
         }
     }
 }

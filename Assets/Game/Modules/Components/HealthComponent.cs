@@ -7,15 +7,15 @@ namespace SpaceShooter.Game.Components
     public class HealthComponent
     {
         public event Action OnDeath;
-        private float _health;
+        private int _health;
 
         [Inject]
-        public HealthComponent(float health)
+        public HealthComponent(int health)
         {
             _health = health;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             if (_health <= 0)
             {

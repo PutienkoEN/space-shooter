@@ -20,12 +20,7 @@ namespace SpaceShooter.Game.Enemy
             _collider = GetComponentInChildren<Collider>();
         }
 
-        public int GetLayer()
-        {
-            return gameObject.layer;
-        }
-
-        public void InvokeOnDamage(int damage)
+        public void TakeDamage(int damage)
         {
             OnTakeDamage?.Invoke(damage);
         }

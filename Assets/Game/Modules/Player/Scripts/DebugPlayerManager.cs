@@ -18,7 +18,7 @@ namespace SpaceShooter.Game.Player
         }
 
         [Button]
-        private void TakeDamage(float damage)
+        private void TakeDamage(int damage)
         {
             _playerShipEntity.TakeDamage(damage);
         }

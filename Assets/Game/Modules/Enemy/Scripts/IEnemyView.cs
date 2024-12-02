@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public interface IEnemyView : IDamagable
+    public interface IEnemyView : IDamageable
     {
         public Collider GetCollider();
         public void Destroy();

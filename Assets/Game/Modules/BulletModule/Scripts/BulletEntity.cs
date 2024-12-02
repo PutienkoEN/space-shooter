@@ -47,9 +47,9 @@ namespace Game.Modules.BulletModule.Scripts
             }
         }
         
-        private void HandleOnDealDamage(IDamagable otherObject)
+        private void HandleOnDealDamage(IDamageable otherObject)
         {
-            otherObject.InvokeOnDamage(_damage);
+            otherObject.TakeDamage(_damage);
 
             Destroy();
         }

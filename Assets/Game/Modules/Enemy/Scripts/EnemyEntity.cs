@@ -19,7 +19,7 @@ namespace SpaceShooter.Game.Enemy
         private readonly BoundsCheckComponent _boundsCheckComponent;
 
         [Button]
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             HealthComponent.TakeDamage(damage);
         }
