@@ -4,6 +4,7 @@
 // <file>: GameManager.cs
 // ------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
@@ -16,12 +17,14 @@ namespace SpaceShooter.Game.LifeCycle.Core
         private GameState _gameState = GameState.OFF;
         public GameState State => _gameState;
 
+        public event Action OnGamePause;
+        public event Action OnGameResume;
+
         private readonly List<IGameListener> _gameListenersList = new();
 
         [Inject]
         public GameManager()
         {
-            Debug.Log("[GameManager] Constructor");
         }
 
         public void AddListener(IGameListener gameListener)
@@ -47,6 +50,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
                     startListener.OnGameStart();
                 }
             }
+
             Debug.Log("[GameManager] StartGame");
         }
 
@@ -56,6 +60,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
                 return;
 
             _gameState = GameState.PAUSE;
+            OnGamePause?.Invoke();
             foreach (var it in _gameListenersList)
             {
                 if (it is IGamePauseListener startListener)
@@ -63,6 +68,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
                     startListener.OnGamePause();
                 }
             }
+
             Debug.Log("[GameManager] PauseGame");
         }
 
@@ -72,6 +78,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
                 return;
 
             _gameState = GameState.PLAY;
+            OnGameResume?.Invoke();
             foreach (var it in _gameListenersList)
             {
                 if (it is IGameResumeListener startListener)
@@ -79,6 +86,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
                     startListener.OnGameResume();
                 }
             }
+
             Debug.Log("[GameManager] ResumeGame");
         }
 
@@ -95,6 +103,7 @@ namespace SpaceShooter.Game.LifeCycle.Core
                     startListener.OnGameFinish();
                 }
             }
+
             Debug.Log("[GameManager] FinishGame");
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.Common.Interfaces;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
@@ -13,7 +14,6 @@ namespace Game.Modules.BulletModule.Scripts
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
-        private readonly DealDamageComponent _dealDamageComponent;
         private Vector3 _direction;
         private int _damage;
         
@@ -21,16 +21,14 @@ namespace Game.Modules.BulletModule.Scripts
         public BulletEntity(
             BulletView bulletView, 
             MoveComponent moveComponent, 
-            BoundsCheckComponent boundsCheckComponent, 
-            DealDamageComponent dealDamageComponent)
+            BoundsCheckComponent boundsCheckComponent)
         {
             _bulletView = bulletView;
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
-            _dealDamageComponent = dealDamageComponent;
             _collider = _bulletView.GetComponent<Collider>();
 
-            _bulletView.OnCollision += HandleOnCollision;
+            _bulletView.OnDealDamage += HandleOnDealDamage;
         }
 
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction, int damage)
@@ -49,16 +47,16 @@ namespace Game.Modules.BulletModule.Scripts
             }
         }
         
-        private void HandleOnCollision(Collider otherObject)
+        private void HandleOnDealDamage(IDamagable otherObject)
         {
-            _dealDamageComponent.TryDealDamage(otherObject, _bulletView.gameObject.layer, _damage);
+            otherObject.InvokeOnDamage(_damage);
 
             Destroy();
         }
 
         private void Destroy()
         {
-            _bulletView.OnCollision -= HandleOnCollision;
+            _bulletView.OnDealDamage -= HandleOnDealDamage;
             
             OnDestroy?.Invoke(this);
             

@@ -26,8 +26,6 @@ namespace Game.Modules.BulletModule.Scripts
 
             Container.Bind<BoundsCheckComponent>().AsSingle();
             Container.BindInterfacesAndSelfTo<ColliderRectProvider>().AsSingle();
-
-            Container.Bind<DealDamageComponent>().AsSingle().NonLazy();
         }
     }
 }

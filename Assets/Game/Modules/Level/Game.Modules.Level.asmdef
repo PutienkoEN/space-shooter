@@ -5,7 +5,8 @@
     "Zenject",
     "UniTask",
     "Game.Modules.Enemy",
-    "Game.LifeCycle.Common"
+    "Game.LifeCycle.Common",
+    "Game.Modules.LevelInterfaces"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

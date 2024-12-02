@@ -15,4 +15,4 @@ MonoBehaviour:
   prefab: {fileID: -5788393637922991918, guid: 6ab5c5d712a91014db0b242a07d959cd, type: 3}
   damage: 20
   fireRate: 1
-  projectileConfig: {fileID: 11400000, guid: 8e82717d816681847840239e87326052, type: 2}
+  projectileConfig: {fileID: 11400000, guid: 033aca9203f30ac47bd2fa22db33a228, type: 2}

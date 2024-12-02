@@ -2,7 +2,7 @@
 
 namespace GSpaceShooter.Game.Level.Events
 {
-    public interface ILevelEventConfig<out T> where T : IGameLevelEventData
+    public interface ILevelEventConfig<out T> where T : ILevelEventData
     {
         public T GetData();
     }

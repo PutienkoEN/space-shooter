@@ -7,7 +7,7 @@ namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class BulletView : MonoBehaviour, ICollidable
     {
-        public event Action<Collider> OnCollision;
+        public event Action<IDamagable> OnDealDamage;
 
         private void Awake()
         {
@@ -20,7 +20,8 @@ namespace Game.Modules.BulletModule.Scripts
 
         public void HandleTriggerEnter(Collider other)
         {
-            OnCollision?.Invoke(other);
+            var damagable = other.GetComponentInParent<IDamagable>();
+            OnDealDamage?.Invoke(damagable);
         }
 
         public void DestroyBullet()
