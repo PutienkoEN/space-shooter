@@ -26,7 +26,7 @@ namespace Game.Modules.BulletModule.Scripts
             _bulletView = bulletView;
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
-            _collider = _bulletView.GetComponent<Collider>();
+            _collider = _bulletView.GetComponentInChildren<Collider>();
 
             _bulletView.OnDealDamage += HandleOnDealDamage;
         }
