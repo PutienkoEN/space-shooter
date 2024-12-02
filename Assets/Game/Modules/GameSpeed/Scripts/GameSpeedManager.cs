@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Game.Modules.GameSpeed;
 using Zenject;
 
@@ -6,6 +7,8 @@ namespace SpaceShooter.Game.GameSpeed
 {
     public class GameSpeedManager : IGameSpeedManager
     {
+        public event Action OnNormalSpeed;
+        public event Action OnSlowDown;
         private const float ZeroSpeed = 0f;
 
         private readonly float _gameSpeedScaleBase;
@@ -51,11 +54,13 @@ namespace SpaceShooter.Game.GameSpeed
         public void StartSlowdown()
         {
             CreateGameSpeedSequence(_gameSpeedScaleSlowdown, _timeForFullSlowDown);
+            OnSlowDown?.Invoke();
         }
 
         public void StopSlowdown()
         {
             CreateGameSpeedSequence(_gameSpeedScaleBase, _timeForFullSpeedup);
+            OnNormalSpeed?.Invoke();
         }
 
         private void CreateGameSpeedSequence(float scale, float duration)
