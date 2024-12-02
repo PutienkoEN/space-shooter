@@ -41,7 +41,7 @@ namespace Game.Modules.BulletModule.Scripts
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (!_boundsCheckComponent.IsInBounds(_collider))
+            if (!_boundsCheckComponent.LeftGameArea(_collider))
             {
                 Destroy();
             }

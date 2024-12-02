@@ -1,17 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Modules.BulletModule.Scripts
 {
     public sealed class ColliderRectProvider : IRectProvider
     {
         private Rect _colliderRect;
-        
+
         public Rect GetColliderRect(Collider collider)
         {
             if (collider == null)
             {
-                return Rect.zero;
+                throw new ArgumentException("Collider was not provided!");
             }
+
             Bounds colliderBounds = collider.bounds;
             if (_colliderRect == Rect.zero)
             {
@@ -21,7 +23,7 @@ namespace Game.Modules.BulletModule.Scripts
             {
                 UpdateRect(colliderBounds);
             }
-            
+
             return _colliderRect;
         }
 

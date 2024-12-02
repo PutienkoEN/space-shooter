@@ -5,15 +5,21 @@
 // ------------------------------------------------------------------------------
 
 using System;
-using Game.Modules.BulletModule.Scripts;
-using Game.Modules.Common.Interfaces;
 using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyView : MonoBehaviour, IEnemyView, IDamagable
+    public class EnemyView : MonoBehaviour, IEnemyView
     {
         public event Action<int> OnTakeDamage;
+
+        private Collider _collider;
+
+        private void Awake()
+        {
+            _collider = GetComponentInChildren<Collider>();
+        }
+
         public int GetLayer()
         {
             return gameObject.layer;
@@ -26,13 +32,12 @@ namespace SpaceShooter.Game.Enemy
 
         public Collider GetCollider()
         {
-            return GetComponentInChildren<Collider>();
+            return _collider;
         }
 
         public void Destroy()
         {
             Destroy(transform.gameObject);
         }
-        
     }
 }

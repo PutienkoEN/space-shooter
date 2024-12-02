@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Modules.BulletModule.Scripts;
-using Game.Modules.Common.Interfaces;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
 using UnityEngine;
@@ -11,14 +10,13 @@ namespace SpaceShooter.Game.Enemy
     [Serializable]
     public class EnemyEntity : IInitializable, IDisposable
     {
+        public event Action<EnemyEntity> OnLeftGameArea;
+
         public readonly HealthComponent HealthComponent;
 
         private readonly MoveComponent _moveComponent;
         private readonly IEnemyView _enemyView;
-        private readonly IDamagable _damagable;
-        private readonly ICollidable _collidable;
         private readonly BoundsCheckComponent _boundsCheckComponent;
-        private Collider _collider;
 
         [Button]
         public void TakeDamage(float damage)
@@ -28,48 +26,41 @@ namespace SpaceShooter.Game.Enemy
 
         [Inject]
         public EnemyEntity(
-            HealthComponent healthComponent, 
-            MoveComponent moveComponent, 
+            HealthComponent healthComponent,
+            MoveComponent moveComponent,
             IEnemyView enemyView,
-            IDamagable damagable,
             BoundsCheckComponent boundsCheckComponent)
         {
             HealthComponent = healthComponent;
             _moveComponent = moveComponent;
             _enemyView = enemyView;
-            _damagable = damagable;
             _boundsCheckComponent = boundsCheckComponent;
-
-            _collider = _enemyView.GetCollider();
-            
-            _damagable.OnTakeDamage += HandleTakeTakeDamage;
-        }
-
-        private void HandleTakeTakeDamage(int damage)
-        {
-            Debug.Log("in HandleTakeTakeDamage");
-            HealthComponent.TakeDamage(damage);
         }
 
         public void Initialize()
         {
-            // Required to be called directly since it's in sub-container 
+            _enemyView.OnTakeDamage += HandleTakeTakeDamage;
         }
 
         public void Dispose()
         {
-            _damagable.OnTakeDamage -= HandleTakeTakeDamage;
-            // Required to be called directly since it's in sub-container
+            _enemyView.OnTakeDamage -= HandleTakeTakeDamage;
             _enemyView.Destroy();
         }
 
         public void Update(float deltaTime)
         {
             _moveComponent.MoveToDirection(Vector3.down, deltaTime);
-            if (!_boundsCheckComponent.IsInBounds(_collider))
+            if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
             {
                 Debug.Log("is out of bounds ");
             }
+        }
+
+        private void HandleTakeTakeDamage(int damage)
+        {
+            Debug.Log("in HandleTakeTakeDamage");
+            HealthComponent.TakeDamage(damage);
         }
 
 
