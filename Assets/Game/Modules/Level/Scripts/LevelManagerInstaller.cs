@@ -21,6 +21,11 @@ namespace SpaceShooter.Game.Level
                 .FromComponentInHierarchy()
                 .AsSingle()
                 .NonLazy();
+
+            container
+                .BindInterfacesAndSelfTo<LevelGameStartListener>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

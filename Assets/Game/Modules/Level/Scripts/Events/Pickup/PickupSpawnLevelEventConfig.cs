@@ -2,15 +2,15 @@
 
 namespace SpaceShooter.Game.Level.Events
 {
-    public class PickupSpawnLevelEventConfig : ILevelEventConfig<PickupSpawnGameLevelEventData>
+    public class PickupSpawnLevelEventConfig : ILevelEventConfig<PickupSpawnLevelEventData>
     {
-        public PickupSpawnGameLevelEventData GetData()
+        public PickupSpawnLevelEventData GetData()
         {
-            return new PickupSpawnGameLevelEventData();
+            return new PickupSpawnLevelEventData();
         }
     }
 
-    public class PickupSpawnGameLevelEventData : IGameLevelEventData
+    public class PickupSpawnLevelEventData : ILevelEventData
     {
     }
 }

@@ -25,7 +25,6 @@ namespace SpaceShooter.Game.LifeCycle.Core
         [Inject]
         public GameManager()
         {
-            Debug.Log("[GameManager] Constructor");
         }
 
         public void AddListener(IGameListener gameListener)
