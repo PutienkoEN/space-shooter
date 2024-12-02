@@ -7,7 +7,6 @@ namespace SpaceShooter.Game.Player.Ship
     {
         public event Action<int> OnTakeDamage;
 
-
         public void TakeDamage(int damage)
         {
             OnTakeDamage?.Invoke(damage);
