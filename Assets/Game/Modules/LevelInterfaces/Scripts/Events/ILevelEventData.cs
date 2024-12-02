@@ -1,7 +1,6 @@
 ﻿namespace SpaceShooter.Game.Level.Events
 {
-    public class IGameLevelEventData
+    public interface ILevelEventData
     {
-        
     }
 }

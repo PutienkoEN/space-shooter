@@ -14,15 +14,15 @@ namespace SpaceShooter.Game.Level.Events
             _enemyManager = enemyManager;
         }
 
-        public IGameEventHandler Resolve(IGameLevelEventData eventData)
+        public IGameEventHandler Resolve(ILevelEventData eventData)
         {
             switch (eventData)
             {
                 case EnemySpawnLevelEventData data:
                     return new EnemySpawnEventHandler(_enemyManager, data);
-                case PickupSpawnGameLevelEventData:
+                case PickupSpawnLevelEventData:
                     throw new NotImplementedException(
-                        $"There is no handler for {typeof(PickupSpawnGameLevelEventData)}");
+                        $"There is no handler for {typeof(PickupSpawnLevelEventData)}");
                 default:
                     throw new ArgumentException(
                         $"There is no handler for this event. Provided handler type: {eventData.GetType()}");
