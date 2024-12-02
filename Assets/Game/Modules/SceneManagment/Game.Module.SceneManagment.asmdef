@@ -4,7 +4,8 @@
   "references": [
     "Zenject",
     "Game.LifeCycle.Common",
-    "Game.Modules.LevelInterfaces"
+    "Game.Modules.LevelInterfaces",
+    "UniTask"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

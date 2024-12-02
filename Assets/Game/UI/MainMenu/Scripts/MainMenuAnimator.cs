@@ -1,14 +1,10 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using IInitializable = Zenject.IInitializable;
 
 namespace Game.UI.Scripts
 {
-    public class MainMenuManager : IInitializable, IDisposable
+    public class MainMenuAnimator
     {
         private readonly Animator _animator;
         private readonly Button _startGameButton;
@@ -19,8 +15,9 @@ namespace Game.UI.Scripts
         private const string GameScene = "GameScene";
         
         private int _isOpenId;
+        
 
-        public MainMenuManager(
+        public MainMenuAnimator(
             Animator animator, 
             Button startGameButton, 
             Button quitGameButton)
@@ -28,6 +25,8 @@ namespace Game.UI.Scripts
             _animator = animator;
             _startGameButton = startGameButton;
             _quitGameButton = quitGameButton;
+            
+            Initialize();
         }
 
         public void Initialize()
@@ -35,32 +34,14 @@ namespace Game.UI.Scripts
             _isOpenId = Animator.StringToHash(IsOpen);
             _animator.SetBool(_isOpenId, true);
             
-            _startGameButton.onClick.AddListener(HandleStartGameClicked);
-            _quitGameButton.onClick.AddListener(HandleQuitGameClicked);
         }
         
-        public void Dispose()
-        {
-            _startGameButton.onClick.RemoveListener(HandleStartGameClicked);
-            _quitGameButton.onClick.RemoveListener(HandleQuitGameClicked);
-        }
-        
-        private void HandleStartGameClicked()
+        public async UniTask HandleStartGameClicked()
         {
             _animator.SetBool(_isOpenId, false);
-            DelaySceneLoad().Forget();
+            await WaitForAnimation();
         }
         
-        private async UniTask DelaySceneLoad()
-        {
-            await WaitForAnimation();
-            await SceneManager.LoadSceneAsync(GameScene, LoadSceneMode.Single);
-        }
-
-        private void HandleQuitGameClicked()
-        {
-            Application.Quit();
-        }
 
         private async UniTask WaitForAnimation()
         {
