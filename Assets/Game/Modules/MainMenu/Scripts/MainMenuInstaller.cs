@@ -9,13 +9,15 @@ namespace Game.Modules.Manager
     public class MainMenuInstaller : GameModuleInstaller
     {
         [SerializeField] private Button startGameButton;
+        [SerializeField] private Button quitGameButton;
+        [SerializeField] private Animator animator;
 
         public override void Install(DiContainer container)
         {
             container
                 .BindInterfacesAndSelfTo<MainMenuController>()
                 .AsSingle()
-                .WithArguments(startGameButton)
+                .WithArguments(startGameButton, quitGameButton, animator)
                 .NonLazy();
         }
     }
