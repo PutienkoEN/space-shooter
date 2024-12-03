@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100004, guid: dd7be84edbd5e8044a29b2fd77c59be9, type: 3}
       propertyPath: m_Name
-      value: PauseButton Variant
+      value: PauseButton
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: dd7be84edbd5e8044a29b2fd77c59be9, type: 3}
       propertyPath: m_Text

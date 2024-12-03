@@ -1,4 +1,5 @@
 ﻿using Game.Modules.GameSpeed.Scripts;
+using Game.UI.Buttons;
 using SpaceShooter.Game.GameSpeed;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Game.Modules.GameSpeed
         [SerializeField]
         private AudioMixer audioMixer;
 
-        [SerializeField] private Button pauseButton;
+        [SerializeField] private ButtonView pauseButton;
 
         public override void Install(DiContainer container)
         {
