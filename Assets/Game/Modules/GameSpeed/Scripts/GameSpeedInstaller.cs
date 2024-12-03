@@ -56,7 +56,7 @@ namespace Game.Modules.GameSpeed
                 .NonLazy();
 
             container
-                .BindInterfacesTo<GamePauseInputController>()
+                .BindInterfacesAndSelfTo<GamePauseInputController>()
                 .AsSingle()
                 .WithArguments(pauseButton)
                 .NonLazy();

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Modules.GameSpeed;
 using Zenject;
@@ -21,6 +23,9 @@ namespace SpaceShooter.Game.GameSpeed
         private readonly IGameTimeScaleManager _gameTimeScaleManager;
 
         private Sequence _gameSpeedSequence;
+
+        private CancellationTokenSource _slowDownCancellationToken = new();
+        private CancellationTokenSource _normalSpeedCancellationToken = new();
 
         [Inject]
         public GameSpeedManager(
@@ -53,14 +58,20 @@ namespace SpaceShooter.Game.GameSpeed
 
         public void StartSlowdown()
         {
+            _slowDownCancellationToken?.Cancel();
+            _slowDownCancellationToken = new CancellationTokenSource();
             CreateGameSpeedSequence(_gameSpeedScaleSlowdown, _timeForFullSlowDown);
             OnSlowDown?.Invoke();
+            // DelayEvent(OnSlowDown, _slowDownCancellationToken.Token).Forget();
         }
 
         public void StopSlowdown()
         {
+            _normalSpeedCancellationToken?.Cancel();
+            _normalSpeedCancellationToken = new CancellationTokenSource();
             CreateGameSpeedSequence(_gameSpeedScaleBase, _timeForFullSpeedup);
             OnNormalSpeed?.Invoke();
+            // DelayEvent(OnNormalSpeed, _normalSpeedCancellationToken.Token).Forget();
         }
 
         private void CreateGameSpeedSequence(float scale, float duration)
@@ -76,6 +87,15 @@ namespace SpaceShooter.Game.GameSpeed
                 .Join(changePitch)
                 .SetEase(Ease.InOutQuad)
                 .OnComplete(() => _gameSpeedSequence = null);
+        }
+
+        private async UniTask DelayEvent(Action action, CancellationToken token)
+        {
+            await UniTask.DelayFrame(5, cancellationToken: token);
+            if (!token.IsCancellationRequested)
+            {
+                action?.Invoke();
+            }
         }
     }
 }
