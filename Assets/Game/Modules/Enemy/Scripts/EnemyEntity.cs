@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Modules.BulletModule.Scripts;
+using Game.Modules.Common.Interfaces;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
 using UnityEngine;
@@ -39,7 +40,13 @@ namespace SpaceShooter.Game.Enemy
 
         public void Initialize()
         {
+            _enemyView.OnDealDamage += DealCollisionDamage;
             _enemyView.OnTakeDamage += HandleTakeTakeDamage;
+        }
+
+        private void DealCollisionDamage(IDamageable damageable)
+        {
+            damageable.TakeDamage(5);
         }
 
         public void Dispose()
