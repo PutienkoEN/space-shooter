@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.LifeCycle.Common;
+﻿using System;
+using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player.Ship;
 using Zenject;
 
@@ -6,6 +7,8 @@ namespace SpaceShooter.Game.Player
 {
     public class PlayerManager : IGameTickable
     {
+        public event Action OnPlayerDeath;
+
         private PlayerShipEntity.Factory _shipEntityFactory;
         private PlayerShipEntity _playerShipEntity;
 
@@ -27,6 +30,8 @@ namespace SpaceShooter.Game.Player
         {
             _playerShipEntity.Dispose();
             _playerShipEntity = null;
+            
+            OnPlayerDeath?.Invoke();
         }
 
         public void Tick(float deltaTime)
