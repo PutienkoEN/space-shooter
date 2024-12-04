@@ -1,6 +1,5 @@
 ﻿using System;
 using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Modules.GameSpeed.Scripts
@@ -8,23 +7,42 @@ namespace Game.Modules.GameSpeed.Scripts
     public class GamePauseInputController : IInitializable, IDisposable
     {
         private readonly IGameManager _gameManager;
-        private readonly Button _pauseButton;
+        private readonly IButton _pauseButton;
+        private readonly IGameSpeedManager _speedManager;
 
         [Inject]
-        public GamePauseInputController(IGameManager gameManager, Button pauseButton)
+        public GamePauseInputController(
+            IGameManager gameManager, 
+            IButton pauseButton, 
+            IGameSpeedManager speedManager)
         {
             _gameManager = gameManager;
             _pauseButton = pauseButton;
+            _speedManager = speedManager;
         }
-
+        
         public void Initialize()
         {
-            _pauseButton.onClick.AddListener(TogglePause);
+            _pauseButton.OnClick += TogglePause;
+            _speedManager.OnSlowDown += HandleSlowDown;
+            _speedManager.OnNormalSpeed += HandleNormalSpeed;
         }
 
         public void Dispose()
         {
-            _pauseButton.onClick.RemoveListener(TogglePause);
+            _pauseButton.OnClick += TogglePause;
+            _speedManager.OnSlowDown -= HandleSlowDown;
+            _speedManager.OnNormalSpeed -= HandleNormalSpeed;
+        }
+
+        private void HandleNormalSpeed()
+        {
+            TogglePauseButton(false);
+        }
+
+        private void HandleSlowDown()
+        {
+            TogglePauseButton(true);
         }
 
         private void TogglePause()
@@ -37,6 +55,11 @@ namespace Game.Modules.GameSpeed.Scripts
             {
                 _gameManager.PauseGame();
             }
+        }
+        
+        private void TogglePauseButton(bool value)
+        {
+            _pauseButton.SetActive(value);
         }
     }
 }

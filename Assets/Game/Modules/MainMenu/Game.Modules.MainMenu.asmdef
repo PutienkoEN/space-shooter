@@ -4,7 +4,9 @@
   "references": [
     "Zenject",
     "Game.LifeCycle.Common",
-    "Game.Module.SceneManagment"
+    "Game.Module.SceneManagment",
+    "UniTask",
+    "Game.UI.MainMenu"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

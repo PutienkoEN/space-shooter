@@ -1,7 +1,11 @@
-﻿namespace Game.Modules.GameSpeed
+﻿using System;
+
+namespace Game.Modules.GameSpeed
 {
     public interface IGameSpeedManager
     {
+        public event Action OnSlowDown;
+        public event Action OnNormalSpeed;
         public void StopTime();
         public void ResumeTime();
         public void StartSlowdown();
