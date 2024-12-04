@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Game.UI.Scripts
 {
@@ -9,23 +10,15 @@ namespace Game.UI.Scripts
         
         private const string IsOpen = "Open";
         private const string IsClosed = "Closed";
-        private const string GameScene = "GameScene";
         
         private int _isOpenId;
         
-
+        [Inject]
         public MainMenuAnimator(Animator animator)
         {
             _animator = animator;
             
             Initialize();
-        }
-
-        public void Initialize()
-        {
-            _isOpenId = Animator.StringToHash(IsOpen);
-            _animator.SetBool(_isOpenId, true);
-            
         }
         
         public async UniTask HandleStartGameClicked()
@@ -34,6 +27,11 @@ namespace Game.UI.Scripts
             await WaitForAnimation();
         }
         
+        private void Initialize()
+        {
+            _isOpenId = Animator.StringToHash(IsOpen);
+            _animator.SetBool(_isOpenId, true);
+        }
 
         private async UniTask WaitForAnimation()
         {
