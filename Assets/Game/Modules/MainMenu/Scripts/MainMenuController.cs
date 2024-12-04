@@ -12,21 +12,19 @@ namespace Game.Modules.Manager.Scripts
         private readonly GameSceneManager _gameSceneManager;
         private readonly Button _startGameButton;
         private readonly Button _quitGameButton;
-
-        private MainMenuAnimator _mainMenuAnimator;
+        private readonly MainMenuAnimator _mainMenuAnimator;
 
         [Inject]
         public MainMenuController(
             GameSceneManager gameSceneManager, 
             Button startGameButton, 
             Button quitGameButton, 
-            Animator animator)
+            MainMenuAnimator animator)
         {
             _gameSceneManager = gameSceneManager;
             _startGameButton = startGameButton;
             _quitGameButton = quitGameButton;
-
-            _mainMenuAnimator = new MainMenuAnimator(animator);
+            _mainMenuAnimator = animator;
         }
 
         public void Initialize()
