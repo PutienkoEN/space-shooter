@@ -1,4 +1,5 @@
 ﻿using Game.Modules.Manager.Scripts;
+using Game.UI.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +16,14 @@ namespace Game.Modules.Manager
         public override void Install(DiContainer container)
         {
             container
+                .Bind<MainMenuAnimator>()
+                .AsSingle()
+                .WithArguments(animator);
+            
+            container
                 .BindInterfacesAndSelfTo<MainMenuController>()
                 .AsSingle()
-                .WithArguments(startGameButton, quitGameButton, animator)
+                .WithArguments(startGameButton, quitGameButton)
                 .NonLazy();
         }
     }
