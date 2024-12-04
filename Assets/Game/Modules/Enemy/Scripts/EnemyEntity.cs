@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Sirenix.OdinInspector;
@@ -19,6 +20,8 @@ namespace SpaceShooter.Game.Enemy
         private readonly ICollidable _collidable;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private Collider _collider;
+        
+        private EffectsAnimator _effectsAnimator;
 
         [Button]
         public void TakeDamage(float damage)
@@ -42,12 +45,14 @@ namespace SpaceShooter.Game.Enemy
 
             _collider = _enemyView.GetCollider();
             
-            _damagable.OnTakeDamage += HandleTakeTakeDamage;
+            _damagable.OnTakeDamage += HandleTakeDamage;
+
+            _effectsAnimator = new EffectsAnimator();
         }
 
-        private void HandleTakeTakeDamage(int damage)
+        private void HandleTakeDamage(int damage)
         {
-            Debug.Log("in HandleTakeTakeDamage");
+            Debug.Log("in HandleTakeDamage");
             HealthComponent.TakeDamage(damage);
         }
 
@@ -58,7 +63,7 @@ namespace SpaceShooter.Game.Enemy
 
         public void Dispose()
         {
-            _damagable.OnTakeDamage -= HandleTakeTakeDamage;
+            _damagable.OnTakeDamage -= HandleTakeDamage;
             // Required to be called directly since it's in sub-container
             _enemyView.Destroy();
         }

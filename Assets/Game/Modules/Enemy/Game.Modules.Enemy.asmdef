@@ -5,6 +5,7 @@
     "UniTask",
     "Game.Modules.Components",
     "Game.LifeCycle.Common",
-    "Game.Modules.Common"
+    "Game.Modules.Common",
+    "Game.Modules.AnimationModule"
   ]
 }
