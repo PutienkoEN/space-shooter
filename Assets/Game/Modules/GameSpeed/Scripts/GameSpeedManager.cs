@@ -50,22 +50,20 @@ namespace SpaceShooter.Game.GameSpeed
         public void ResumeTime()
         {
             _gameSpeedSequence?.Kill();
-            _gameTimeScaleManager.ChangeTimeScale(_gameSpeedScaleBase);
+            _gameTimeScaleManager.ChangeTimeScale(_gameSpeedScaleSlowdown);
         }
 
         public void StartSlowdown()
         {
-            CreateGameSpeedSequence(_gameSpeedScaleSlowdown, _timeForFullSlowDown);
-            OnSlowDown?.Invoke();
+            CreateGameSpeedSequence(_gameSpeedScaleSlowdown, _timeForFullSlowDown, OnSlowDown);
         }
 
         public void StopSlowdown()
         {
-            CreateGameSpeedSequence(_gameSpeedScaleBase, _timeForFullSpeedup);
-            OnNormalSpeed?.Invoke();
+            CreateGameSpeedSequence(_gameSpeedScaleBase, _timeForFullSpeedup, OnNormalSpeed);
         }
 
-        private void CreateGameSpeedSequence(float scale, float duration)
+        private void CreateGameSpeedSequence(float scale, float duration, Action action)
         {
             _gameSpeedSequence?.Kill();
 
@@ -77,7 +75,11 @@ namespace SpaceShooter.Game.GameSpeed
                 .Join(changeTimeScale)
                 .Join(changePitch)
                 .SetEase(Ease.InOutQuad)
-                .OnComplete(() => _gameSpeedSequence = null);
+                .OnComplete(() =>
+                {
+                    action?.Invoke();
+                    _gameSpeedSequence = null;
+                });
         }
     }
 }
