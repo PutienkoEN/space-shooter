@@ -8,6 +8,7 @@ using System;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Common.Scripts;
 using UnityEngine;
+using UnityEngine.Splines;
 
 namespace SpaceShooter.Game.Enemy
 {
@@ -17,6 +18,8 @@ namespace SpaceShooter.Game.Enemy
         public event Action<int> OnTakeDamage;
 
         private Collider _collider;
+
+        [SerializeField] private SplineAnimate splineAnimate;
 
         private void Awake()
         {
@@ -31,7 +34,10 @@ namespace SpaceShooter.Game.Enemy
         public void HandleTriggerEnter(Collider other)
         {
             var damageable = other.GetComponentInParent<IDamageable>();
-            OnDealDamage?.Invoke(damageable);
+            if (damageable != null)
+            {
+                OnDealDamage?.Invoke(damageable);
+            }
         }
 
         public void TakeDamage(int damage)
@@ -42,6 +48,11 @@ namespace SpaceShooter.Game.Enemy
         public Collider GetCollider()
         {
             return _collider;
+        }
+
+        public SplineAnimate GetSplineAnimate()
+        {
+            return splineAnimate;
         }
 
         public void Destroy()

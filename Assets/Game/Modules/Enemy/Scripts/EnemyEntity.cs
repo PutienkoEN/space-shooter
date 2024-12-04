@@ -14,10 +14,10 @@ namespace SpaceShooter.Game.Enemy
         public event Action<EnemyEntity> OnLeftGameArea;
 
         public readonly HealthComponent HealthComponent;
-
-        private readonly MoveComponent _moveComponent;
-        private readonly IEnemyView _enemyView;
+        private readonly SplineMoveController _splineMoveController;
         private readonly BoundsCheckComponent _boundsCheckComponent;
+
+        private readonly IEnemyView _enemyView;
 
         [Button]
         public void TakeDamage(int damage)
@@ -25,23 +25,24 @@ namespace SpaceShooter.Game.Enemy
             HealthComponent.TakeDamage(damage);
         }
 
-        [Inject]
         public EnemyEntity(
             HealthComponent healthComponent,
-            MoveComponent moveComponent,
-            IEnemyView enemyView,
-            BoundsCheckComponent boundsCheckComponent)
+            SplineMoveController splineMoveController,
+            BoundsCheckComponent boundsCheckComponent,
+            IEnemyView enemyView)
         {
             HealthComponent = healthComponent;
-            _moveComponent = moveComponent;
-            _enemyView = enemyView;
+            _splineMoveController = splineMoveController;
             _boundsCheckComponent = boundsCheckComponent;
+            _enemyView = enemyView;
         }
 
         public void Initialize()
         {
             _enemyView.OnDealDamage += DealCollisionDamage;
             _enemyView.OnTakeDamage += HandleTakeTakeDamage;
+
+            _splineMoveController.StartMove();
         }
 
         private void DealCollisionDamage(IDamageable damageable)
@@ -57,7 +58,6 @@ namespace SpaceShooter.Game.Enemy
 
         public void Update(float deltaTime)
         {
-            _moveComponent.MoveToDirection(Vector3.down, deltaTime);
             if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
             {
                 OnLeftGameArea?.Invoke(this);
@@ -71,7 +71,7 @@ namespace SpaceShooter.Game.Enemy
         }
 
 
-        public class Factory : PlaceholderFactory<Vector3, Quaternion, EnemyData, EnemyEntity>
+        public class Factory : PlaceholderFactory<EnemyCreateData, EnemyEntity>
         {
         }
     }
