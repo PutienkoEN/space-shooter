@@ -4,7 +4,9 @@
   "references": [
     "Zenject",
     "Game.LifeCycle.Common",
-    "Game.Modules.Input"
+    "Game.Modules.Input",
+    "UniTask",
+    "Game.UI.Buttons"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

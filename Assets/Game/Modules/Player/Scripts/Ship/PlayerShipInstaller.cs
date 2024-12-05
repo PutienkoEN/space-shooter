@@ -1,7 +1,6 @@
 ﻿using Game.Modules.ShootingModule.Scripts;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.Components;
-using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 

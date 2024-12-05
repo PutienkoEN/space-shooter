@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -14,10 +15,10 @@ namespace Game.Modules.Manager.Scripts
             _gameContext = gameContext;
         }
 
-        public void LoadGameScene()
+        public async UniTask LoadGameScene()
         {
             _gameContext.GameStart = true;
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Single);
         }
     }
 }

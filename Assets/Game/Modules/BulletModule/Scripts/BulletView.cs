@@ -21,7 +21,10 @@ namespace Game.Modules.BulletModule.Scripts
         public void HandleTriggerEnter(Collider other)
         {
             var damagable = other.GetComponentInParent<IDamageable>();
-            OnDealDamage?.Invoke(damagable);
+            if (damagable != null)
+            {
+                OnDealDamage?.Invoke(damagable);
+            }
         }
 
         public void DestroyBullet()

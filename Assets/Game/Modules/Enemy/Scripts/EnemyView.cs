@@ -1,9 +1,3 @@
-// ------------------------------------------------------------------------------
-// <author>: Iurii Ponomarev (Ponyu)
-// <created>: 2024-11-19
-// <file>: EnemyView.cs
-// ------------------------------------------------------------------------------
-
 using System;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Common.Scripts;

@@ -1,4 +1,7 @@
-﻿using DG.Tweening;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Game.Modules.GameSpeed;
 using Zenject;
 
@@ -6,6 +9,8 @@ namespace SpaceShooter.Game.GameSpeed
 {
     public class GameSpeedManager : IGameSpeedManager
     {
+        public event Action OnNormalSpeed;
+        public event Action OnSlowDown;
         private const float ZeroSpeed = 0f;
 
         private readonly float _gameSpeedScaleBase;
@@ -45,20 +50,20 @@ namespace SpaceShooter.Game.GameSpeed
         public void ResumeTime()
         {
             _gameSpeedSequence?.Kill();
-            _gameTimeScaleManager.ChangeTimeScale(_gameSpeedScaleBase);
+            _gameTimeScaleManager.ChangeTimeScale(_gameSpeedScaleSlowdown);
         }
 
         public void StartSlowdown()
         {
-            CreateGameSpeedSequence(_gameSpeedScaleSlowdown, _timeForFullSlowDown);
+            CreateGameSpeedSequence(_gameSpeedScaleSlowdown, _timeForFullSlowDown, OnSlowDown);
         }
 
         public void StopSlowdown()
         {
-            CreateGameSpeedSequence(_gameSpeedScaleBase, _timeForFullSpeedup);
+            CreateGameSpeedSequence(_gameSpeedScaleBase, _timeForFullSpeedup, OnNormalSpeed);
         }
 
-        private void CreateGameSpeedSequence(float scale, float duration)
+        private void CreateGameSpeedSequence(float scale, float duration, Action action)
         {
             _gameSpeedSequence?.Kill();
 
@@ -70,7 +75,11 @@ namespace SpaceShooter.Game.GameSpeed
                 .Join(changeTimeScale)
                 .Join(changePitch)
                 .SetEase(Ease.InOutQuad)
-                .OnComplete(() => _gameSpeedSequence = null);
+                .OnComplete(() =>
+                {
+                    action?.Invoke();
+                    _gameSpeedSequence = null;
+                });
         }
     }
 }
