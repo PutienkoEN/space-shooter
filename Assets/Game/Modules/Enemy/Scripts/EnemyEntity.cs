@@ -2,6 +2,7 @@
 using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
+using Game.Modules.Components;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
 using UnityEngine;
@@ -12,70 +13,71 @@ namespace SpaceShooter.Game.Enemy
     [Serializable]
     public class EnemyEntity : IInitializable, IDisposable
     {
-        public readonly HealthComponent HealthComponent;
+        public event Action<EnemyEntity> OnLeftGameArea;
 
-        private readonly MoveComponent _moveComponent;
-        private readonly IEnemyView _enemyView;
-        private readonly IDamagable _damagable;
-        private readonly ICollidable _collidable;
+        public readonly HealthComponent HealthComponent;
+        private readonly SplineMoveController _splineMoveController;
         private readonly BoundsCheckComponent _boundsCheckComponent;
-        private Collider _collider;
-     
+        private readonly CollisionDamageComponent _collisionDamageComponent;
+
+        private readonly IEnemyView _enemyView;
 
         [Button]
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             HealthComponent.TakeDamage(damage);
         }
 
         [Inject]
         public EnemyEntity(
-            HealthComponent healthComponent, 
-            MoveComponent moveComponent, 
-            IEnemyView enemyView,
-            IDamagable damagable,
-            BoundsCheckComponent boundsCheckComponent)
+            HealthComponent healthComponent,
+            SplineMoveController splineMoveController,
+            BoundsCheckComponent boundsCheckComponent,
+            CollisionDamageComponent collisionDamageComponent,
+            IEnemyView enemyView)
         {
             HealthComponent = healthComponent;
-            _moveComponent = moveComponent;
-            _enemyView = enemyView;
-            _damagable = damagable;
+            _splineMoveController = splineMoveController;
             _boundsCheckComponent = boundsCheckComponent;
-
-            _collider = _enemyView.GetCollider();
-            
-            _damagable.OnTakeDamage += HandleTakeDamage;
-        }
-
-        private void HandleTakeDamage(int damage)
-        {
-            Debug.Log("in HandleTakeDamage");
-            HealthComponent.TakeDamage(damage);
+            _collisionDamageComponent = collisionDamageComponent;
+            _enemyView = enemyView;
         }
 
         public void Initialize()
         {
-            // Required to be called directly since it's in sub-container 
+            _enemyView.OnDealDamage += DealCollisionDamage;
+            _enemyView.OnTakeDamage += HandleTakeTakeDamage;
+
+            _splineMoveController.StartMove();
+        }
+
+        private void DealCollisionDamage(IDamageable damageable)
+        {
+            _collisionDamageComponent.DealDamage(damageable);
         }
 
         public void Dispose()
         {
-            _damagable.OnTakeDamage -= HandleTakeDamage;
-            // Required to be called directly since it's in sub-container
+            _enemyView.OnTakeDamage -= HandleTakeTakeDamage;
             _enemyView.Destroy();
         }
 
         public void Update(float deltaTime)
         {
-            _moveComponent.MoveToDirection(Vector3.down, deltaTime);
-            if (!_boundsCheckComponent.IsInBounds(_collider))
+            if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
             {
-                Debug.Log("is out of bounds ");
+                OnLeftGameArea?.Invoke(this);
             }
         }
 
+        private void HandleTakeTakeDamage(int damage)
+        {
+            Debug.Log("in HandleTakeTakeDamage");
+            HealthComponent.TakeDamage(damage);
+        }
 
-        public class Factory : PlaceholderFactory<Vector3, Quaternion, EnemyData, EnemyEntity>
+
+        public class Factory : PlaceholderFactory<EnemyCreateData, EnemyEntity>
         {
         }
     }

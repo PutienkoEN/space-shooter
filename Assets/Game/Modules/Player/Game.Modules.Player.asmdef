@@ -8,7 +8,8 @@
     "Game.Modules.Components",
     "Game.LifeCycle.Common",
     "Game.Modules.Weapon",
-    "Game.Modules.BulletModule"
+    "Game.Modules.BulletModule",
+    "Game.Modules.Common"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

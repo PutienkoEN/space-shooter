@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using SpaceShooter.Game.Enemy;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using UnityEngine.Splines;
 using Zenject;
 
 namespace SpaceShooter.Game.Level
@@ -11,6 +12,7 @@ namespace SpaceShooter.Game.Level
     {
         [BoxGroup("ENEMY")] [SerializeField] private EnemyConfig enemyConfig;
         [BoxGroup("ENEMY")] [SerializeField] private EnemyEntity enemyEntity;
+        [BoxGroup("ENEMY")] [SerializeField] private SplineContainer splineAnimate;
 
         private IEnemyManager _enemyManager;
         private ILevelProvider _levelProvider;
@@ -37,7 +39,8 @@ namespace SpaceShooter.Game.Level
             var position = new Vector3(0, 10, 0);
             var rotation = Quaternion.Euler(0, 0, 180);
 
-            enemyEntity = _enemyManager.CreateEnemy(position, rotation, enemyConfig.GetData());
+            var enemyCreateData = new EnemyCreateData(position, rotation, splineAnimate, enemyConfig.GetData());
+            enemyEntity = _enemyManager.CreateEnemy(enemyCreateData);
         }
 
         [BoxGroup("ENEMY")]

@@ -6,7 +6,8 @@
     "UniTask",
     "Game.Modules.Enemy",
     "Game.LifeCycle.Common",
-    "Game.Modules.LevelInterfaces"
+    "Game.Modules.LevelInterfaces",
+    "Unity.Splines"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

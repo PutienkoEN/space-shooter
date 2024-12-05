@@ -5,9 +5,9 @@ using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public class PlayerShipEntity : IDisposable
+    public class PlayerShipEntity : IInitializable, IDisposable
     {
-        private readonly PlayerShipView _playerShipView;
+        private readonly IPlayerShipView _playerShipView;
         private readonly PlayerMoveController _playerMoveController;
         private readonly WeaponController _weaponController;
 
@@ -15,7 +15,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         [Inject]
         public PlayerShipEntity(
-            PlayerShipView playerShipView,
+            IPlayerShipView playerShipView,
             PlayerMoveController playerMoveController,
             WeaponController weaponController,
             HealthComponent healthComponent)
@@ -26,9 +26,14 @@ namespace SpaceShooter.Game.Player.Ship
             _healthComponent = healthComponent;
         }
 
-        public void TakeDamage(float damage)
+        public void Initialize()
         {
-            _healthComponent.TakeDamage(damage);
+            _playerShipView.OnTakeDamage += TakeDamage;
+        }
+
+        public void Dispose()
+        {
+            _playerShipView.Destroy();
         }
 
         public void Update(float deltaTime)
@@ -37,9 +42,9 @@ namespace SpaceShooter.Game.Player.Ship
             _weaponController.Tick(deltaTime);
         }
 
-        public void Dispose()
+        public void TakeDamage(int damage)
         {
-            _playerShipView.DestroyShip();
+            _healthComponent.TakeDamage(damage);
         }
 
         public class Factory : PlaceholderFactory<PlayerShipEntity>

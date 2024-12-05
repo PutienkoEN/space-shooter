@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abd49a4e75742968e39e120f48ad48d, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: -8157317904408921074, guid: a2b90cac623bef74db1c09dd199d2301, type: 3}
-  health: 5
+  enemyPrefab: {fileID: 761418211596254911, guid: a2b90cac623bef74db1c09dd199d2301, type: 3}
+  health: 15
   speed: 5
+  collisionDamage: 5

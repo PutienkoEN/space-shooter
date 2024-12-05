@@ -18,7 +18,6 @@ namespace SpaceShooter.Game.Player
                 .ByNewContextPrefab(playerShipPrefab)
                 .UnderTransform(playerContainer);
 
-
             container
                 .BindInterfacesAndSelfTo<PlayerManager>()
                 .AsSingle();
@@ -27,6 +26,11 @@ namespace SpaceShooter.Game.Player
                 .Bind<DebugPlayerManager>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+
+            container
+                .BindInterfacesAndSelfTo<PlayerGameStartListener>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }
