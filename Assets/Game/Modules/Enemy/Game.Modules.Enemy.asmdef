@@ -7,7 +7,6 @@
     "Game.LifeCycle.Common",
     "Game.Modules.Common",
     "Unity.Splines",
-    "Game.Modules.Common",
     "Game.Modules.AnimationModule"
   ]
 }

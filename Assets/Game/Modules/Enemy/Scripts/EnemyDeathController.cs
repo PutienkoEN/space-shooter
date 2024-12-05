@@ -38,7 +38,7 @@ namespace SpaceShooter.Game.Enemy
 
         private void DestroyEnemy()
         {
-            Debug.Log("In KillEnemy");
+            Debug.Log("In DestroyEnemy");
             _enemyManager.DestroyEnemy(_enemyEntity);
             _enemyEntity.HealthComponent.OnDeath -= HandleOnDeath;
         }
