@@ -2,25 +2,34 @@
 using GSpaceShooter.Game.Level.Events;
 using SpaceShooter.Game.Enemy;
 using UnityEngine;
+using UnityEngine.Splines;
 
 namespace SpaceShooter.Game.Level.Events
 {
     [Serializable]
     public class EnemySpawnLevelEventConfig : ILevelEventConfig<EnemySpawnLevelEventData>
     {
-        [Header("Coordinates")] [SerializeReference]
+        [Header("Movement and Coordinates")] [SerializeReference]
         private Transform spawnPoint;
 
-        [Header("Spawn")] [SerializeField] private EnemyConfig enemyConfig;
+        [SerializeField] public SplineContainer splineContainer;
 
-        [SerializeField] private float spawnIntervalInSeconds = 1;
+        [Header("Number of enemies and how often")] [SerializeField]
+        private float spawnIntervalInSeconds = 1;
+
         [SerializeField] private int numberOfEnemiesToSpawn = 4;
+
+
+        [Header("Enemy Data")] [SerializeField]
+        private EnemyConfig enemyConfig;
+
 
         public EnemySpawnLevelEventData GetData()
         {
             return new EnemySpawnLevelEventData(
                 spawnPoint.position,
                 spawnPoint.rotation,
+                splineContainer,
                 enemyConfig.GetData(),
                 spawnIntervalInSeconds,
                 numberOfEnemiesToSpawn);
@@ -29,22 +38,19 @@ namespace SpaceShooter.Game.Level.Events
 
     public class EnemySpawnLevelEventData : ILevelEventData
     {
-        public Vector3 SpawnPosition { get; private set; }
-        public Quaternion SpawnRotation { get; private set; }
-        public EnemyData EnemyData { get; private set; }
+        public EnemyCreateData EnemyCreateData { get; private set; }
         public float SpawnIntervalInSeconds { get; private set; }
         public int NumberOfEnemiesToSpawn { get; private set; }
 
         public EnemySpawnLevelEventData(
             Vector3 spawnPosition,
             Quaternion spawnRotation,
+            SplineContainer splineContainer,
             EnemyData enemyData,
             float spawnIntervalInSeconds,
             int numberOfEnemiesToSpawn)
         {
-            SpawnPosition = spawnPosition;
-            SpawnRotation = spawnRotation;
-            EnemyData = enemyData;
+            EnemyCreateData = new EnemyCreateData(spawnPosition, spawnRotation, splineContainer, enemyData);
             SpawnIntervalInSeconds = spawnIntervalInSeconds;
             NumberOfEnemiesToSpawn = numberOfEnemiesToSpawn;
         }

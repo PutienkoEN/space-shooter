@@ -1,0 +1,11 @@
+﻿{
+  "name": "Game.Modules.Game",
+  "references": [
+    "Zenject",
+    "Game.Modules.GameSpeed",
+    "Game.LifeCycle.Common",
+    "Game.Modules.Level",
+    "Game.Modules.Enemy",
+    "Game.Modules.Player"
+  ]
+}

@@ -22,9 +22,10 @@ namespace SpaceShooter.Game.Level.Events
 
         private async UniTask SpawnEnemies()
         {
+            var enemyCreateData = _spawnData.EnemyCreateData;
             for (var i = 0; i < _spawnData.NumberOfEnemiesToSpawn; i++)
             {
-                _enemyManager.CreateEnemy(_spawnData.SpawnPosition, _spawnData.SpawnRotation, _spawnData.EnemyData);
+                _enemyManager.CreateEnemy(enemyCreateData);
                 var millisecondsToWait = ConvertToMilliseconds(_spawnData.SpawnIntervalInSeconds);
                 await UniTask.Delay(millisecondsToWait);
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
+using Game.Modules.Components;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
 using UnityEngine;
@@ -14,10 +15,11 @@ namespace SpaceShooter.Game.Enemy
         public event Action<EnemyEntity> OnLeftGameArea;
 
         public readonly HealthComponent HealthComponent;
-
-        private readonly MoveComponent _moveComponent;
-        private readonly IEnemyView _enemyView;
+        private readonly SplineMoveController _splineMoveController;
         private readonly BoundsCheckComponent _boundsCheckComponent;
+        private readonly CollisionDamageComponent _collisionDamageComponent;
+
+        private readonly IEnemyView _enemyView;
 
         [Button]
         public void TakeDamage(int damage)
@@ -28,25 +30,29 @@ namespace SpaceShooter.Game.Enemy
         [Inject]
         public EnemyEntity(
             HealthComponent healthComponent,
-            MoveComponent moveComponent,
-            IEnemyView enemyView,
-            BoundsCheckComponent boundsCheckComponent)
+            SplineMoveController splineMoveController,
+            BoundsCheckComponent boundsCheckComponent,
+            CollisionDamageComponent collisionDamageComponent,
+            IEnemyView enemyView)
         {
             HealthComponent = healthComponent;
-            _moveComponent = moveComponent;
-            _enemyView = enemyView;
+            _splineMoveController = splineMoveController;
             _boundsCheckComponent = boundsCheckComponent;
+            _collisionDamageComponent = collisionDamageComponent;
+            _enemyView = enemyView;
         }
 
         public void Initialize()
         {
             _enemyView.OnDealDamage += DealCollisionDamage;
             _enemyView.OnTakeDamage += HandleTakeTakeDamage;
+
+            _splineMoveController.StartMove();
         }
 
         private void DealCollisionDamage(IDamageable damageable)
         {
-            damageable.TakeDamage(5);
+            _collisionDamageComponent.DealDamage(damageable);
         }
 
         public void Dispose()
@@ -57,7 +63,6 @@ namespace SpaceShooter.Game.Enemy
 
         public void Update(float deltaTime)
         {
-            _moveComponent.MoveToDirection(Vector3.down, deltaTime);
             if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
             {
                 OnLeftGameArea?.Invoke(this);
@@ -71,7 +76,7 @@ namespace SpaceShooter.Game.Enemy
         }
 
 
-        public class Factory : PlaceholderFactory<Vector3, Quaternion, EnemyData, EnemyEntity>
+        public class Factory : PlaceholderFactory<EnemyCreateData, EnemyEntity>
         {
         }
     }

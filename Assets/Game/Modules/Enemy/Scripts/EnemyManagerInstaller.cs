@@ -16,7 +16,7 @@ namespace SpaceShooter.Game.Enemy
                 .AsSingle();
 
             container
-                .BindFactory<Vector3, Quaternion, EnemyData, EnemyEntity, EnemyEntity.Factory>()
+                .BindFactory<EnemyCreateData, EnemyEntity, EnemyEntity.Factory>()
                 .FromSubContainerResolve()
                 .ByInstaller<EnemyInstaller>()
                 .AsSingle();
