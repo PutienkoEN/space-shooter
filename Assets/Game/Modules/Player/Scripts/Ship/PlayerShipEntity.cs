@@ -39,7 +39,7 @@ namespace SpaceShooter.Game.Player.Ship
         public void Update(float deltaTime)
         {
             _playerMoveController.Move(deltaTime);
-            // _weaponController.Tick(deltaTime);
+            _weaponController.Tick(deltaTime);
         }
 
         public void TakeDamage(int damage)

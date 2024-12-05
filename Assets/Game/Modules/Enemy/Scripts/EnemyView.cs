@@ -1,9 +1,3 @@
-// ------------------------------------------------------------------------------
-// <author>: Iurii Ponomarev (Ponyu)
-// <created>: 2024-11-19
-// <file>: EnemyView.cs
-// ------------------------------------------------------------------------------
-
 using System;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Common.Scripts;
@@ -31,7 +25,10 @@ namespace SpaceShooter.Game.Enemy
         public void HandleTriggerEnter(Collider other)
         {
             var damageable = other.GetComponentInParent<IDamageable>();
-            OnDealDamage?.Invoke(damageable);
+            if (damageable != null)
+            {
+                OnDealDamage?.Invoke(damageable);
+            }
         }
 
         public void TakeDamage(int damage)
