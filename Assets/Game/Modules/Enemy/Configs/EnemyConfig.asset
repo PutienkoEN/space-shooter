@@ -15,3 +15,4 @@ MonoBehaviour:
   enemyPrefab: {fileID: 761418211596254911, guid: a2b90cac623bef74db1c09dd199d2301, type: 3}
   health: 15
   speed: 5
+  collisionDamage: 5

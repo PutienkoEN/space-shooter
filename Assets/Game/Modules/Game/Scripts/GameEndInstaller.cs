@@ -11,6 +11,11 @@ namespace Game.Modules.Game
                 .BindInterfacesTo<GameEndObserver>()
                 .AsSingle()
                 .NonLazy();
+
+            container
+                .BindInterfacesTo<PauseGameFinishListener>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

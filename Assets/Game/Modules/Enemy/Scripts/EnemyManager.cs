@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using ModestTree;
 using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -29,9 +28,9 @@ namespace SpaceShooter.Game.Enemy
             }
         }
 
-        public EnemyEntity CreateEnemy(Vector3 position, Quaternion rotation, EnemyData enemyData)
+        public EnemyEntity CreateEnemy(EnemyCreateData enemyCreateData)
         {
-            var enemyEntity = SetupEnemy(position, rotation, enemyData);
+            var enemyEntity = SetupEnemy(enemyCreateData);
 
             _enemies.Add(enemyEntity);
             OnEnemyChange?.Invoke(HasEnemies());
@@ -39,9 +38,9 @@ namespace SpaceShooter.Game.Enemy
             return enemyEntity;
         }
 
-        private EnemyEntity SetupEnemy(Vector3 position, Quaternion rotation, EnemyData enemyData)
+        private EnemyEntity SetupEnemy(EnemyCreateData enemyCreateData)
         {
-            var enemyEntity = _enemyFactory.Create(position, rotation, enemyData);
+            var enemyEntity = _enemyFactory.Create(enemyCreateData);
 
             enemyEntity.Initialize();
             enemyEntity.OnLeftGameArea += DestroyEnemy;
