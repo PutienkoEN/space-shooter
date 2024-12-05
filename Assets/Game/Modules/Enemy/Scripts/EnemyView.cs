@@ -53,5 +53,10 @@ namespace SpaceShooter.Game.Enemy
         {
             Destroy(transform.gameObject);
         }
+
+        public void SetActive(bool value)
+        {
+            gameObject.SetActive(value);
+        }
     }
 }

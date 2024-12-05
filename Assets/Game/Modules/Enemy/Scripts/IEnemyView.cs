@@ -9,5 +9,6 @@ namespace SpaceShooter.Game.Enemy
         public event Action<IDamageable> OnDealDamage;
         public Collider GetCollider();
         public void Destroy();
+        public void SetActive(bool value);
     }
 }

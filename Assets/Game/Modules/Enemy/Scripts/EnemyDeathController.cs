@@ -13,14 +13,16 @@ namespace SpaceShooter.Game.Enemy
         private EffectsAnimator _effectsAnimator;
 
         [Inject]
-        public EnemyDeathController(EnemyEntity enemyEntity, IEnemyManager enemyManager)
+        public EnemyDeathController(
+            EnemyEntity enemyEntity, 
+            IEnemyManager enemyManager, 
+            EffectsAnimator effectsAnimator)
         {
             _enemyEntity = enemyEntity;
             _enemyManager = enemyManager;
+            _effectsAnimator = effectsAnimator;
 
             _enemyEntity.HealthComponent.OnDeath += HandleOnDeath;
-            
-            _effectsAnimator = new EffectsAnimator();
         }
 
         private void HandleOnDeath()
@@ -28,13 +30,12 @@ namespace SpaceShooter.Game.Enemy
             Debug.Log("In DestroyEnemy");
             if (_effectsAnimator != null)
             {
-                _effectsAnimator.PlayExplosion(DestroyEnemy);
+                _effectsAnimator.PlayExplosion(_enemyEntity.GetCurrentPosition(), DestroyEnemy);
             }
             else
             {
                 DestroyEnemy();
             }
-
         }
 
         private void DestroyEnemy()

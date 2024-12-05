@@ -47,8 +47,14 @@ namespace SpaceShooter.Game.Enemy
         {
             _enemyView.OnDealDamage += DealCollisionDamage;
             _enemyView.OnTakeDamage += HandleTakeTakeDamage;
-
+            HealthComponent.OnDeath += HandleOnDeath;
+            
             _splineMoveController.StartMove();
+        }
+
+        private void HandleOnDeath()
+        {
+           _enemyView.SetActive(false);
         }
 
         private void DealCollisionDamage(IDamageable damageable)
@@ -68,6 +74,11 @@ namespace SpaceShooter.Game.Enemy
             {
                 OnLeftGameArea?.Invoke(this);
             }
+        }
+
+        public Transform GetCurrentPosition()
+        {
+            return _enemyView.GetCollider().transform;
         }
 
         private void HandleTakeTakeDamage(int damage)
