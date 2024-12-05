@@ -1,4 +1,5 @@
 ﻿using Game.Modules.BulletModule.Scripts;
+using Game.Modules.Components;
 using SpaceShooter.Game.Components;
 using Zenject;
 
@@ -46,6 +47,11 @@ namespace SpaceShooter.Game.Enemy
                 .Bind<HealthComponent>()
                 .AsSingle()
                 .WithArguments(enemyData.Health);
+
+            Container
+                .Bind<CollisionDamageComponent>()
+                .AsSingle()
+                .WithArguments(enemyData.CollisionDamage);
 
             Container
                 .BindInterfacesAndSelfTo<EnemyDeathController>()

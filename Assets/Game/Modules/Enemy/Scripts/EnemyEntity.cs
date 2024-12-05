@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
+using Game.Modules.Components;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace SpaceShooter.Game.Enemy
         public readonly HealthComponent HealthComponent;
         private readonly SplineMoveController _splineMoveController;
         private readonly BoundsCheckComponent _boundsCheckComponent;
+        private readonly CollisionDamageComponent _collisionDamageComponent;
 
         private readonly IEnemyView _enemyView;
 
@@ -25,15 +27,18 @@ namespace SpaceShooter.Game.Enemy
             HealthComponent.TakeDamage(damage);
         }
 
+        [Inject]
         public EnemyEntity(
             HealthComponent healthComponent,
             SplineMoveController splineMoveController,
             BoundsCheckComponent boundsCheckComponent,
+            CollisionDamageComponent collisionDamageComponent,
             IEnemyView enemyView)
         {
             HealthComponent = healthComponent;
             _splineMoveController = splineMoveController;
             _boundsCheckComponent = boundsCheckComponent;
+            _collisionDamageComponent = collisionDamageComponent;
             _enemyView = enemyView;
         }
 
@@ -47,7 +52,7 @@ namespace SpaceShooter.Game.Enemy
 
         private void DealCollisionDamage(IDamageable damageable)
         {
-            damageable.TakeDamage(5);
+            _collisionDamageComponent.DealDamage(damageable);
         }
 
         public void Dispose()

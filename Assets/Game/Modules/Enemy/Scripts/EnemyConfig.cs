@@ -17,8 +17,9 @@ namespace SpaceShooter.Game.Enemy
 
         [SerializeField] private int health;
         [SerializeField] private float speed;
+        [SerializeField] private int collisionDamage;
 
-        public EnemyData GetData() => new(enemyPrefab, health, speed);
+        public EnemyData GetData() => new(enemyPrefab, health, speed, collisionDamage);
     }
 
     public struct EnemyData
@@ -26,12 +27,14 @@ namespace SpaceShooter.Game.Enemy
         public EnemyView EnemyPrefab { get; private set; }
         public int Health { get; private set; }
         public float Speed { get; private set; }
+        public int CollisionDamage { get; private set; }
 
-        public EnemyData(EnemyView enemyPrefab, int health, float speed)
+        public EnemyData(EnemyView enemyPrefab, int health, float speed, int collisionDamage)
         {
             EnemyPrefab = enemyPrefab;
             Health = health;
             Speed = speed;
+            CollisionDamage = collisionDamage;
         }
     }
 }
