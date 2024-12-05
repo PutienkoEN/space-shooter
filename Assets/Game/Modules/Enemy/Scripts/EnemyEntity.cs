@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
