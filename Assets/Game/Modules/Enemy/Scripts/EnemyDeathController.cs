@@ -1,4 +1,5 @@
-﻿using Game.Modules.AnimationModule.Scripts;
+﻿
+using Game.Modules.AnimationModule.Scripts;
 using UnityEngine;
 using Zenject;
 
