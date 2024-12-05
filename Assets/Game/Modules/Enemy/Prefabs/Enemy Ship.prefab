@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418412233843595618}
-  - component: {fileID: -8157317904408921074}
+  - component: {fileID: 761418211596254911}
   m_Layer: 15
   m_Name: Enemy Ship
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 1892548535204337110}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8157317904408921074
+--- !u!114 &761418211596254911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 18858803709778759, guid: fe9495149cbf0c44ab54d1163c91fdd6, type: 3}
     - target: {fileID: 919132149155446097, guid: fe9495149cbf0c44ab54d1163c91fdd6, type: 3}
       propertyPath: m_Name
-      value: Player Ship Model
+      value: Enemy Ship Model
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fe9495149cbf0c44ab54d1163c91fdd6, type: 3}
       propertyPath: m_Layer

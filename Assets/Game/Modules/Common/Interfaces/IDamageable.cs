@@ -2,10 +2,9 @@
 
 namespace Game.Modules.Common.Interfaces
 {
-    public interface IDamagable
+    public interface IDamageable
     {
         public event Action<int> OnTakeDamage;
-        public int GetLayer();
-        public void InvokeOnDamage(int damage);
+        public void TakeDamage(int damage);
     }
 }

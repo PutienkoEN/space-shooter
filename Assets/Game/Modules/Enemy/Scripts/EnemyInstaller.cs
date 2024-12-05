@@ -46,7 +46,7 @@ namespace SpaceShooter.Game.Enemy
                 .WithArguments(enemyView.transform, _enemyData.Speed);
 
             Container
-                .Bind<HealthComponent>()
+                .Bind<HealthComponent>()    
                 .AsSingle()
                 .WithArguments(_enemyData.Health);
 

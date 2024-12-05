@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1892548535204337110}
   - component: {fileID: 527044947627817487}
   - component: {fileID: 9219652357102258424}
+  - component: {fileID: 2749088406457485723}
   m_Layer: 14
   m_Name: Collider
   m_TagString: Untagged
@@ -189,11 +190,23 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2749088406457485723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598627229638749405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0084424ab33744aba71cddf4556d6e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6658173700034325732
 PrefabInstance:
   m_ObjectHideFlags: 0
