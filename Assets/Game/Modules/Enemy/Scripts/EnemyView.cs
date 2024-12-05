@@ -14,6 +14,7 @@ namespace SpaceShooter.Game.Enemy
     public class EnemyView : MonoBehaviour, IEnemyView, IDamagable
     {
         public event Action<int> OnTakeDamage;
+        
         public int GetLayer()
         {
             return gameObject.layer;

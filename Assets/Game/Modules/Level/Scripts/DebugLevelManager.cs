@@ -46,7 +46,7 @@ namespace SpaceShooter.Game.Level
         {
             _enemyManager.DestroyEnemy(enemyEntity);
         }
-
+        
         [BoxGroup("GAME")]
         [Button]
         public void StartGame()

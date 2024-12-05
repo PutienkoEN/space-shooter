@@ -14,13 +14,13 @@ namespace Game.Modules.AnimationModule.Scripts
 
         public void PlayExplosion(Action callback)
         {
-            Delay().Forget();
-            callback();
+            Delay(callback).Forget();
         }
 
-        private async UniTaskVoid Delay()
+        private async UniTaskVoid Delay(Action callback)
         {
-            await UniTask.Delay(1);
+            await UniTask.WaitForSeconds(1);
+            callback();
         }
     }
 }

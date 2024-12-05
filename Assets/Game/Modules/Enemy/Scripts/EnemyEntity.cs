@@ -20,8 +20,7 @@ namespace SpaceShooter.Game.Enemy
         private readonly ICollidable _collidable;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private Collider _collider;
-        
-        private EffectsAnimator _effectsAnimator;
+     
 
         [Button]
         public void TakeDamage(float damage)
@@ -46,8 +45,6 @@ namespace SpaceShooter.Game.Enemy
             _collider = _enemyView.GetCollider();
             
             _damagable.OnTakeDamage += HandleTakeDamage;
-
-            _effectsAnimator = new EffectsAnimator();
         }
 
         private void HandleTakeDamage(int damage)
