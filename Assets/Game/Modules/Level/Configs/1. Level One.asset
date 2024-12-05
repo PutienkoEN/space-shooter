@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
+  m_Name: 1. Level One
+  m_EditorClassIdentifier: 
+  gameLeveEvents:
+  - rid: 1232526808483364929
+  - rid: 1232526808483364930
+  references:
+    version: 2
+    RefIds:
+    - rid: 1232526808483364929
+      type: {class: EnemySpawnLevelEventConfig, ns: SpaceShooter.Game.Level.Events, asm: Game.Modules.Level}
+      data:
+        spawnPoint: {fileID: 6042630128254914096, guid: 5d84d1dca433c264dade7333c3949ad3, type: 3}
+        splineContainer: {fileID: 9081799787414541347, guid: 9ca296d5d00689a4bb423fef1c6bc6f3, type: 3}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 4
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}
+    - rid: 1232526808483364930
+      type: {class: EnemySpawnLevelEventConfig, ns: SpaceShooter.Game.Level.Events, asm: Game.Modules.Level}
+      data:
+        spawnPoint: {fileID: 7353488387103676645, guid: f1b7f0159c122454dbcfd1c4594b8f35, type: 3}
+        splineContainer: {fileID: 1227865429821420339, guid: 0edc8d6cfe51a5c499459eaedeb9cc48, type: 3}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 4
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}

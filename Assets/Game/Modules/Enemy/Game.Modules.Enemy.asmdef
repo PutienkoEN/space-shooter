@@ -1,0 +1,11 @@
+{
+  "name": "Game.Modules.Enemy",
+  "references": [
+    "Zenject",
+    "UniTask",
+    "Game.Modules.Components",
+    "Game.LifeCycle.Common",
+    "Game.Modules.Common",
+    "Unity.Splines"
+  ]
+}

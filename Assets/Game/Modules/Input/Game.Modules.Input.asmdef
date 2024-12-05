@@ -1,0 +1,19 @@
+{
+  "name": "Game.Modules.Input",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Unity.InputSystem",
+    "Game.Modules.CameraUtility"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

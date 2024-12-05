@@ -1,0 +1,20 @@
+{
+  "name": "Game.Modules.GameSpeed",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Game.Modules.Input",
+    "UniTask",
+    "Game.UI.Buttons"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

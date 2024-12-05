@@ -1,0 +1,21 @@
+{
+    "name": "Game.Modules.BulletModule",
+    "rootNamespace": "",
+    "references": [
+        "Zenject",
+        "Game.LifeCycle.Common",
+        "Game.Modules.Components",
+        "Game.Modules.CameraUtility",
+        "Game.Modules.CollisionModule",
+        "Game.Modules.Common"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

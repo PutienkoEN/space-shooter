@@ -1,0 +1,20 @@
+{
+  "name": "Game.Modules.MainMenu",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Game.Module.SceneManagment",
+    "UniTask",
+    "Game.UI.MainMenu"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

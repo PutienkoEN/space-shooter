@@ -1,0 +1,23 @@
+{
+  "name": "Game.Modules.Player",
+  "rootNamespace": "",
+  "references": [
+    "Zenject",
+    "Game.Modules.CameraUtility",
+    "Game.Modules.Input",
+    "Game.Modules.Components",
+    "Game.LifeCycle.Common",
+    "Game.Modules.Weapon",
+    "Game.Modules.BulletModule",
+    "Game.Modules.Common"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
