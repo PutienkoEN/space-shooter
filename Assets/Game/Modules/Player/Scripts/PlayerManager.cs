@@ -34,17 +34,9 @@ namespace SpaceShooter.Game.Player
 
         public void DestroyPlayer()
         {
-            if (_effectsAnimator != null)
-            {
-                _effectsAnimator.PlayExplosion(_playerShipEntity.GetCurrentPosition(), OnPlayerDeath);
-            }
-            else
-            {
-                OnPlayerDeath?.Invoke();
-            }
             _playerShipEntity.Dispose();
             _playerShipEntity = null;
-
+            OnPlayerDeath?.Invoke();
         }
 
         public void Tick(float deltaTime)

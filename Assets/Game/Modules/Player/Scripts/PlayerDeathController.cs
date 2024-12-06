@@ -9,18 +9,25 @@ namespace SpaceShooter.Game.Player
     {
         private readonly PlayerShipEntity _playerEntity;
         private readonly PlayerManager _playerManager;
+        private readonly EffectsAnimator _effectsAnimator;
 
         [Inject]
         public PlayerDeathController(
             PlayerShipEntity playerEntity, 
-            PlayerManager playerManager)
+            PlayerManager playerManager, 
+            EffectsAnimator effectsAnimator)
         {
             _playerEntity = playerEntity;
             _playerManager = playerManager;
+            _effectsAnimator = effectsAnimator;
 
-            _playerEntity.HealthComponent.OnDeath += DestroyPlayer;
+            _playerEntity.HealthComponent.OnDeath += OnPlayerDeath;
         }
 
+        private void OnPlayerDeath()
+        {
+            _effectsAnimator.PlayExplosion(_playerEntity.GetCurrentPosition(), DestroyPlayer);
+        }
         private void DestroyPlayer()
         {
             _playerManager.DestroyPlayer();

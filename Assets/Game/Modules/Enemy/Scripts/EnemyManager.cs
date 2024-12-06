@@ -59,26 +59,10 @@ namespace SpaceShooter.Game.Enemy
         public void DestroyEnemy(EnemyEntity enemyEntity)
         {
             _destructionCounter++;
-            if (_effectsAnimator != null)
-            {
-                _effectsAnimator.PlayExplosion(enemyEntity.GetCurrentPosition(), OnEnemyDestroy);
-            }
-            else
-            {
-                OnEnemyDestroy();
-            }
             
             _enemies.Remove(enemyEntity);
             DisposeEnemy(enemyEntity);
-        }
-
-        private void OnEnemyDestroy()
-        {
-            _destructionCounter--;
-            if (_destructionCounter <= 0)
-            {
-                OnEnemyChange?.Invoke(HasEnemies());
-            }
+            OnEnemyChange?.Invoke(HasEnemies());
         }
 
         private void DisposeEnemy(EnemyEntity enemyEntity)

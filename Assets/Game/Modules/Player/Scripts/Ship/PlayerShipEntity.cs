@@ -15,7 +15,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public readonly HealthComponent HealthComponent;
 
-        private bool _isActive;
+        private bool _isAlive;
 
         [Inject]
         public PlayerShipEntity(
@@ -42,6 +42,8 @@ namespace SpaceShooter.Game.Player.Ship
 
         public void Update(float deltaTime)
         {
+            if (!_isAlive)
+                return;
             _playerMoveController.Move(deltaTime);
             _weaponController.Tick(deltaTime);
         }
