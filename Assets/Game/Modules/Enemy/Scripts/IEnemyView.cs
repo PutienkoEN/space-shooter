@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public interface IEnemyView : IDamageable, ICollidable
+    public interface IEnemyView : IEntityView, IDamageable, ICollidable, IDamageDealer
     {
-        public event Action<IDamageable> OnDealDamage;
         public Collider GetCollider();
-        public void Destroy();
-        public void SetActive(bool value);
     }
 }

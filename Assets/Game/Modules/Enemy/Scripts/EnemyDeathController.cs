@@ -1,6 +1,4 @@
-﻿
-using Game.Modules.AnimationModule.Scripts;
-using UnityEngine;
+﻿using Game.Modules.AnimationModule.Scripts;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -10,7 +8,7 @@ namespace SpaceShooter.Game.Enemy
         private readonly EnemyEntity _enemyEntity;
         private readonly IEnemyManager _enemyManager;
            
-        private EffectsAnimator _effectsAnimator;
+        private readonly EffectsAnimator _effectsAnimator;
 
         [Inject]
         public EnemyDeathController(
@@ -22,27 +20,13 @@ namespace SpaceShooter.Game.Enemy
             _enemyManager = enemyManager;
             _effectsAnimator = effectsAnimator;
 
-            _enemyEntity.HealthComponent.OnDeath += HandleOnDeath;
-        }
-
-        private void HandleOnDeath()
-        {
-            Debug.Log("In DestroyEnemy");
-            if (_effectsAnimator != null)
-            {
-                _effectsAnimator.PlayExplosion(_enemyEntity.GetCurrentPosition(), DestroyEnemy);
-            }
-            else
-            {
-                DestroyEnemy();
-            }
+            _enemyEntity.HealthComponent.OnDeath += DestroyEnemy;
         }
 
         private void DestroyEnemy()
         {
-            Debug.Log("In KillEnemy");
             _enemyManager.DestroyEnemy(_enemyEntity);
-            _enemyEntity.HealthComponent.OnDeath -= HandleOnDeath;
+            _enemyEntity.HealthComponent.OnDeath -= DestroyEnemy;
         }
     }
 }

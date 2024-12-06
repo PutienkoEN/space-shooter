@@ -6,7 +6,7 @@ using UnityEngine.Splines;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyView : MonoBehaviour, IEnemyView
+    public sealed class EnemyView : MonoBehaviour, IEnemyView
     {
         public event Action<IDamageable> OnDealDamage;
         public event Action<int> OnTakeDamage;
@@ -52,11 +52,6 @@ namespace SpaceShooter.Game.Enemy
         public void Destroy()
         {
             Destroy(transform.gameObject);
-        }
-
-        public void SetActive(bool value)
-        {
-            gameObject.SetActive(value);
         }
     }
 }

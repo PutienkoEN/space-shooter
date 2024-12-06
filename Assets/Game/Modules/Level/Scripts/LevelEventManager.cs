@@ -23,9 +23,6 @@ namespace SpaceShooter.Game.Level
 
         public async void StartLevel(ILevelData levelData)
         {
-            //ToDO : temp for testing
-            if(!_canSpawnLevel)
-                return;
             
             var gameEventHandlers = GetHandlers(levelData.GameLevelEvents);
 

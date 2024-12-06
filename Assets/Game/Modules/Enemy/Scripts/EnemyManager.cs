@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Modules.AnimationModule.Scripts;
+using Game.Modules.Common.Interfaces;
 using ModestTree;
 using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyManager : IEnemyManager, IGameTickable
+    public sealed class EnemyManager : IEnemyManager, IGameTickable
     {
         public event Action<bool> OnEnemyChange;
 
         private readonly EnemyEntity.Factory _enemyFactory;
-        private readonly List<EnemyEntity> _enemies = new();
+        private readonly List<IEntity> _enemies = new();
+        private EffectsAnimator _effectsAnimator;
+        private int _destructionCounter;
 
         [Inject]
-        public EnemyManager(EnemyEntity.Factory enemyFactory)
+        public EnemyManager(
+            EnemyEntity.Factory enemyFactory, 
+            EffectsAnimator effectsAnimator)
         {
             _enemyFactory = enemyFactory;
+            _effectsAnimator = effectsAnimator;
         }
 
         public void Tick(float deltaTime)
@@ -50,10 +58,27 @@ namespace SpaceShooter.Game.Enemy
 
         public void DestroyEnemy(EnemyEntity enemyEntity)
         {
+            _destructionCounter++;
+            if (_effectsAnimator != null)
+            {
+                _effectsAnimator.PlayExplosion(enemyEntity.GetCurrentPosition(), OnEnemyDestroy);
+            }
+            else
+            {
+                OnEnemyDestroy();
+            }
+            
             _enemies.Remove(enemyEntity);
             DisposeEnemy(enemyEntity);
+        }
 
-            OnEnemyChange?.Invoke(HasEnemies());
+        private void OnEnemyDestroy()
+        {
+            _destructionCounter--;
+            if (_destructionCounter <= 0)
+            {
+                OnEnemyChange?.Invoke(HasEnemies());
+            }
         }
 
         private void DisposeEnemy(EnemyEntity enemyEntity)

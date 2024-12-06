@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceShooter.Game.LifeCycle.Common;
+﻿using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 

@@ -6,7 +6,7 @@ namespace Game.Modules.AnimationModule.Scripts
 {
     public class EffectsAnimator
     {
-        private ParticleSystem _enemyDeathEffect;
+        private readonly ParticleSystem _enemyDeathEffect;
 
         public EffectsAnimator(ParticleSystem enemyDeathEffect)
         {
@@ -15,13 +15,23 @@ namespace Game.Modules.AnimationModule.Scripts
 
         public void PlayExplosion(Transform transform, Action callback)
         {
-            UnityEngine.Object.Instantiate(_enemyDeathEffect, transform.position, transform.rotation);
-            Delay(callback).Forget();
+            if (_enemyDeathEffect == null)
+            {
+                callback();
+                return;
+            }
+            
+            ParticleSystem instance =  UnityEngine.Object.Instantiate(
+                _enemyDeathEffect, 
+                transform.position, 
+                transform.rotation);
+            float duration = instance.main.duration;
+            Delay(duration, callback).Forget();
         }
 
-        private async UniTaskVoid Delay(Action callback)
+        private async UniTaskVoid Delay(float duration, Action callback)
         {
-            await UniTask.WaitForSeconds(1);
+            await UniTask.WaitForSeconds(duration);
             callback();
         }
     }
