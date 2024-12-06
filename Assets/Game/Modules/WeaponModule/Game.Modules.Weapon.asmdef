@@ -3,6 +3,7 @@
   "references": [
     "Game.LifeCycle.Common",
     "Zenject",
-    "Game.Modules.BulletModule"
+    "Game.Modules.BulletModule",
+    "Game.Modules.Audio"
   ]
 }
