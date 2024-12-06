@@ -1,6 +1,7 @@
 using System;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Common.Scripts;
+using Game.Modules.SoundManagement.Scripts;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -13,6 +14,7 @@ namespace SpaceShooter.Game.Enemy
 
         private Collider _collider;
 
+        [SerializeField] private AudioClip destroySound;
         [SerializeField] private SplineAnimate splineAnimate;
 
         private void Awake()
@@ -51,7 +53,8 @@ namespace SpaceShooter.Game.Enemy
 
         public void Destroy()
         {
-            Destroy(transform.gameObject);
+            Destroy(gameObject);
+            SoundFXManager.Instance.PlaySound(destroySound, transform);
         }
     }
 }
