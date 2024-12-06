@@ -3,12 +3,14 @@ using SpaceShooter.Game.Enemy;
 using SpaceShooter.Game.Level;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Game
 {
     public class GameEndObserver : IInitializable, IDisposable
     {
+     
         private readonly IGameManager _gameManager;
 
         private readonly LevelEventManager _levelEventManager;

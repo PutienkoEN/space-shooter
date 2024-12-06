@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Modules.LevelInterfaces.Scripts;
 using ModestTree;
 using SpaceShooter.Game.Level.Events;
+using SpaceShooter.Game.LifeCycle.Common;
 using Zenject;
 
 namespace SpaceShooter.Game.Level
@@ -13,7 +14,7 @@ namespace SpaceShooter.Game.Level
         public event Action<bool> OnLevelEventChange;
 
         private readonly LevelEventHandlerResolver _levelEventResolver;
-
+        
         [Inject]
         public LevelEventManager(LevelEventHandlerResolver levelEventResolver)
         {
@@ -44,6 +45,11 @@ namespace SpaceShooter.Game.Level
             return gameLevelEvents
                 .ConvertAll(_levelEventResolver.Resolve)
                 .ToList();
+        }
+
+        public void OnGameFinish()
+        {
+            
         }
     }
 }
