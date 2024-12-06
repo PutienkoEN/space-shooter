@@ -21,6 +21,7 @@ namespace Game.Modules.AnimationModule.Scripts
                 return;
             }
             
+            //Can be later replaced with a Factory
             ParticleSystem instance =  UnityEngine.Object.Instantiate(
                 _enemyDeathEffect, 
                 transform.position, 
