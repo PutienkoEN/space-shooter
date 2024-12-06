@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Modules.AnimationModule.Scripts
 {
-    public class EffectsAnimator
+    public sealed class EffectsAnimator
     {
         private readonly ParticleSystem _enemyDeathEffect;
 
