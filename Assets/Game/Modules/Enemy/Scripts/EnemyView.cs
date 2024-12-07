@@ -49,6 +49,11 @@ namespace SpaceShooter.Game.Enemy
             return splineAnimate;
         }
 
+        public void SetActive(bool value)
+        {
+            gameObject.SetActive(value);
+        }
+
         public void Destroy()
         {
             Destroy(transform.gameObject);

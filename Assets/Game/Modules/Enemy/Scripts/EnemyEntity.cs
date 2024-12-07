@@ -47,8 +47,14 @@ namespace SpaceShooter.Game.Enemy
         {
             _enemyView.OnDealDamage += DealCollisionDamage;
             _enemyView.OnTakeDamage += HandleTakeDamage;
+            HealthComponent.OnDeath += DeactiveEnemyView;
             
             _splineMoveController.StartMove();
+        }
+
+        private void DeactiveEnemyView()
+        {
+            _enemyView.SetActive(false);
         }
 
         private void DealCollisionDamage(IDamageable damageable)

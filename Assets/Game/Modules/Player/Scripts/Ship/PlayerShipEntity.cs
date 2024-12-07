@@ -15,7 +15,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public readonly HealthComponent HealthComponent;
 
-        private bool _isAlive;
+        private bool _isAlive = true;
 
         [Inject]
         public PlayerShipEntity(
@@ -33,6 +33,13 @@ namespace SpaceShooter.Game.Player.Ship
         public void Initialize()
         {
             _playerShipView.OnTakeDamage += TakeDamage;
+            HealthComponent.OnDeath += DeactivatePlayerView;
+        }
+
+        private void DeactivatePlayerView()
+        {
+            _playerShipView.SetActive(false);
+            _isAlive = false;
         }
 
         public void Dispose()

@@ -15,8 +15,6 @@ namespace SpaceShooter.Game.Enemy
 
         private readonly EnemyEntity.Factory _enemyFactory;
         private readonly List<IEntity> _enemies = new();
-        private EffectsAnimator _effectsAnimator;
-        private int _destructionCounter;
 
         [Inject]
         public EnemyManager(
@@ -24,7 +22,6 @@ namespace SpaceShooter.Game.Enemy
             EffectsAnimator effectsAnimator)
         {
             _enemyFactory = enemyFactory;
-            _effectsAnimator = effectsAnimator;
         }
 
         public void Tick(float deltaTime)
@@ -58,8 +55,6 @@ namespace SpaceShooter.Game.Enemy
 
         public void DestroyEnemy(EnemyEntity enemyEntity)
         {
-            _destructionCounter++;
-            
             _enemies.Remove(enemyEntity);
             DisposeEnemy(enemyEntity);
             OnEnemyChange?.Invoke(HasEnemies());

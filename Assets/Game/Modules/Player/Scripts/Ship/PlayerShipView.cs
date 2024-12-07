@@ -40,6 +40,11 @@ namespace SpaceShooter.Game.Player.Ship
             return _collider;
         }
 
+        public void SetActive(bool value)
+        {
+            gameObject.SetActive(value);
+        }
+
         public void Destroy()
         {
             Destroy(gameObject);
