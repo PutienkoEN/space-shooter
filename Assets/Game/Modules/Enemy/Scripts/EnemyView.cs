@@ -51,10 +51,14 @@ namespace SpaceShooter.Game.Enemy
             return splineAnimate;
         }
 
-        public void Destroy()
+        public void PlayDeathSound()
+        {
+            SoundFXManager.Instance.PlaySound(destroySound, transform);
+        }
+
+        public void Dispose()
         {
             Destroy(gameObject);
-            SoundFXManager.Instance.PlaySound(destroySound, transform);
         }
     }
 }
