@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Game.Modules.LevelInterfaces.Scripts;
 using ModestTree;
 using SpaceShooter.Game.Level.Events;
+using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Level
 {
-    public class LevelEventManager
+    public class LevelEventManager : IGameFinishListener, IDisposable
     {
         public event Action<bool> OnLevelEventChange;
 
         private readonly LevelEventHandlerResolver _levelEventResolver;
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
+
+        private bool isStopped;
 
         [Inject]
         public LevelEventManager(LevelEventHandlerResolver levelEventResolver)
@@ -29,8 +35,24 @@ namespace SpaceShooter.Game.Level
 
             for (var eventNumber = 0; eventNumber < gameEventHandlers.Count; eventNumber++)
             {
+                // When we use cancellation token to stop UniTask, it will go and pick next one and start execution.
+                // Even if we exit play mode, task still starts execution and creates object on Game Scene
+                // That's why when we dispose object, we need to cancel current task and prevent next one to start.
+                // We use isStopped for this.
+                if (isStopped)
+                {
+                    break;
+                }
+
                 var gameEventHandler = gameEventHandlers[eventNumber];
-                await gameEventHandler.Start();
+                try
+                {
+                    await gameEventHandler.Start(_cancellationTokenSource.Token);
+                }
+                catch (Exception)
+                {
+                    Debug.Log("Enemy spawning cancelled");
+                }
 
                 // Remove from memory
                 gameEventHandlers[eventNumber] = null;
@@ -44,6 +66,17 @@ namespace SpaceShooter.Game.Level
             return gameLevelEvents
                 .ConvertAll(_levelEventResolver.Resolve)
                 .ToList();
+        }
+
+        public void OnGameFinish()
+        {
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            isStopped = true;
+            _cancellationTokenSource.Cancel();
         }
     }
 }

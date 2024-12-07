@@ -333,6 +333,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1264921088}
     - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284069083897168360, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: playerContainer
       value: 
       objectReference: {fileID: 1525875786}
@@ -340,6 +344,10 @@ PrefabInstance:
       propertyPath: worldTransform
       value: 
       objectReference: {fileID: 1119938033}
+    - target: {fileID: 4495943699075379523, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5366562399551866894, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
