@@ -41,9 +41,14 @@ namespace SpaceShooter.Game.Player.Ship
                 .WithArguments(health);
 
             Container
-                .BindInterfacesAndSelfTo<PlayerHealthController>()
+                .Bind<PlayerDeathController>()
                 .AsSingle()
                 .NonLazy();
+
+            // Container
+            //     .BindInterfacesAndSelfTo<PlayerHealthController>()
+            //     .AsSingle()
+            //     .NonLazy();
 
             Container
                 .BindInterfacesAndSelfTo<PlayerMoveController>()

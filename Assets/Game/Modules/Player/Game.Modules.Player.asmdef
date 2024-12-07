@@ -9,7 +9,8 @@
     "Game.LifeCycle.Common",
     "Game.Modules.Weapon",
     "Game.Modules.BulletModule",
-    "Game.Modules.Common"
+    "Game.Modules.Common",
+    "Game.Modules.AnimationModule"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

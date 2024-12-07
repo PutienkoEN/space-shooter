@@ -1,0 +1,10 @@
+{
+	"name": "Game.Modules.AnimationModule",
+	"references":
+	[ 
+		"UniTask", 
+		"Game.LifeCycle.Common", 
+		"Zenject",
+		"Effects"
+	]
+}

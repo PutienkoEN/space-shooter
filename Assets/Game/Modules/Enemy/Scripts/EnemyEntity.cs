@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
@@ -10,7 +11,7 @@ using Zenject;
 namespace SpaceShooter.Game.Enemy
 {
     [Serializable]
-    public class EnemyEntity : IInitializable, IDisposable
+    public class EnemyEntity : IInitializable, IDisposable, IEntity
     {
         public event Action<EnemyEntity> OnLeftGameArea;
 
@@ -45,9 +46,15 @@ namespace SpaceShooter.Game.Enemy
         public void Initialize()
         {
             _enemyView.OnDealDamage += DealCollisionDamage;
-            _enemyView.OnTakeDamage += HandleTakeTakeDamage;
-
+            _enemyView.OnTakeDamage += HandleTakeDamage;
+            HealthComponent.OnDeath += DeactiveEnemyView;
+            
             _splineMoveController.StartMove();
+        }
+
+        private void DeactiveEnemyView()
+        {
+            _enemyView.SetActive(false);
         }
 
         private void DealCollisionDamage(IDamageable damageable)
@@ -57,7 +64,7 @@ namespace SpaceShooter.Game.Enemy
 
         public void Dispose()
         {
-            _enemyView.OnTakeDamage -= HandleTakeTakeDamage;
+            _enemyView.OnTakeDamage -= HandleTakeDamage;
             _enemyView.Destroy();
         }
 
@@ -69,9 +76,13 @@ namespace SpaceShooter.Game.Enemy
             }
         }
 
-        private void HandleTakeTakeDamage(int damage)
+        public Transform GetCurrentPosition()
         {
-            Debug.Log("in HandleTakeTakeDamage");
+            return _enemyView.GetCollider().transform;
+        }
+
+        private void HandleTakeDamage(int damage)
+        {
             HealthComponent.TakeDamage(damage);
         }
 

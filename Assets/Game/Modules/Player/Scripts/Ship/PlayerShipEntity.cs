@@ -1,17 +1,21 @@
 ﻿using System;
+using Game.Modules.Common.Interfaces;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.Components;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public class PlayerShipEntity : IInitializable, IDisposable
+    public sealed class PlayerShipEntity : IInitializable, IDisposable, IEntity
     {
         private readonly IPlayerShipView _playerShipView;
         private readonly PlayerMoveController _playerMoveController;
         private readonly WeaponController _weaponController;
 
-        private readonly HealthComponent _healthComponent;
+        public readonly HealthComponent HealthComponent;
+
+        private bool _isAlive = true;
 
         [Inject]
         public PlayerShipEntity(
@@ -23,12 +27,19 @@ namespace SpaceShooter.Game.Player.Ship
             _playerShipView = playerShipView;
             _playerMoveController = playerMoveController;
             _weaponController = weaponController;
-            _healthComponent = healthComponent;
+            HealthComponent = healthComponent;
         }
 
         public void Initialize()
         {
             _playerShipView.OnTakeDamage += TakeDamage;
+            HealthComponent.OnDeath += DeactivatePlayerView;
+        }
+
+        private void DeactivatePlayerView()
+        {
+            _playerShipView.SetActive(false);
+            _isAlive = false;
         }
 
         public void Dispose()
@@ -38,13 +49,20 @@ namespace SpaceShooter.Game.Player.Ship
 
         public void Update(float deltaTime)
         {
+            if (!_isAlive)
+                return;
             _playerMoveController.Move(deltaTime);
             _weaponController.Tick(deltaTime);
         }
 
         public void TakeDamage(int damage)
         {
-            _healthComponent.TakeDamage(damage);
+            HealthComponent.TakeDamage(damage);
+        }
+        
+        public Transform GetCurrentPosition()
+        {
+            return _playerShipView.GetCollider().transform;
         }
 
         public class Factory : PlaceholderFactory<PlayerShipEntity>
