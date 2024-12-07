@@ -1,10 +1,9 @@
-﻿using Game.Modules.UImodule.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Modules.UImodule
 {
-    public class EndGamePopupView : MonoBehaviour, IPopup
+    public sealed class EndGamePopupView : MonoBehaviour
     {
         [SerializeField] private Button restartButton;
         [SerializeField] private Button exitButton;

@@ -1,13 +1,11 @@
 ﻿using Game.Modules.MainMenu.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Modules.UImodule.Scripts
 {
-    public class UIControllerInstaller : GameModuleInstaller
+    public sealed class UIControllerInstaller : GameModuleInstaller
     {
         [SerializeField] private EndGamePopupView endGamePopupView;
         
