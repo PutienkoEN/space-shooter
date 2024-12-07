@@ -4,7 +4,6 @@ using SpaceShooter.Game.GameSpeed;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Modules.GameSpeed
@@ -32,6 +31,12 @@ namespace Game.Modules.GameSpeed
 
         public override void Install(DiContainer container)
         {
+            
+            container
+                .Bind<TimeScaleResetter>()
+                .AsSingle()
+                .NonLazy();
+            
             container
                 .BindInterfacesTo<GameSpeedManager>()
                 .AsSingle()
