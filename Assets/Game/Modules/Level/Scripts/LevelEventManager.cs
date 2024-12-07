@@ -13,7 +13,6 @@ namespace SpaceShooter.Game.Level
         public event Action<bool> OnLevelEventChange;
 
         private readonly LevelEventHandlerResolver _levelEventResolver;
-        private bool _canSpawnLevel = false;// todo: remove
 
         [Inject]
         public LevelEventManager(LevelEventHandlerResolver levelEventResolver)
@@ -23,8 +22,6 @@ namespace SpaceShooter.Game.Level
 
         public async void StartLevel(ILevelData levelData)
         {
-            // if (!_canSpawnLevel)
-            //     return;
             
             var gameEventHandlers = GetHandlers(levelData.GameLevelEvents);
 

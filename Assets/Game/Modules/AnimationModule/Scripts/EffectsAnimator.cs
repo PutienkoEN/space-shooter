@@ -1,14 +1,15 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Effects.Explosion;
 using UnityEngine;
 
 namespace Game.Modules.AnimationModule.Scripts
 {
     public sealed class EffectsAnimator
     {
-        private readonly ParticleSystem _enemyDeathEffect;
+        private readonly IEffect _enemyDeathEffect;
 
-        public EffectsAnimator(ParticleSystem enemyDeathEffect)
+        public EffectsAnimator(IEffect enemyDeathEffect)
         {
             _enemyDeathEffect = enemyDeathEffect;
         }
@@ -21,18 +22,16 @@ namespace Game.Modules.AnimationModule.Scripts
                 return;
             }
             
-            //Can be later replaced with a Factory
-            ParticleSystem instance =  UnityEngine.Object.Instantiate(
-                _enemyDeathEffect, 
-                transform.position, 
-                transform.rotation);
-            float duration = instance.main.duration;
-            Delay(duration, callback).Forget();
+            //Can be later replaced with a Factory and Pool
+            IEffect effect = _enemyDeathEffect.Instantiate(transform.position, transform.rotation);
+            float duration = effect.GetDuration();
+            Delay(effect, duration, callback).Forget();
         }
 
-        private async UniTaskVoid Delay(float duration, Action callback)
+        private async UniTaskVoid Delay(IEffect instance, float duration, Action callback)
         {
             await UniTask.WaitForSeconds(duration);
+            instance.Destroy();
             callback();
         }
     }
