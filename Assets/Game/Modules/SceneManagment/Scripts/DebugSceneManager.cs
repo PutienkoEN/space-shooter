@@ -15,9 +15,9 @@ namespace SpaceShooter.Game.SceneManagement
         }
 
         [Button]
-        public async void ReloadGameScene()
+        public void ReloadGameScene()
         {
-            await _gameSceneManager.LoadGameScene();
+            _gameSceneManager.LoadGameScene();
         }
     }
 }

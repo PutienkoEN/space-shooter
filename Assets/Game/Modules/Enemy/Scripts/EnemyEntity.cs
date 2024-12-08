@@ -59,7 +59,7 @@ namespace SpaceShooter.Game.Enemy
         public void Dispose()
         {
             _enemyView.OnTakeDamage -= HandleTakeDamage;
-            _enemyView.Destroy();
+            _enemyView.Dispose();
         }
 
         public void Update(float deltaTime)

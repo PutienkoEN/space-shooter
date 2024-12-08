@@ -41,7 +41,7 @@ namespace SpaceShooter.Game.Player.Ship
 
         public void Dispose()
         {
-            _playerShipView.Destroy();
+            _playerShipView.Dispose();
         }
 
         public void Update(float deltaTime)

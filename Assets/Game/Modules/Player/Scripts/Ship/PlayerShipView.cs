@@ -46,7 +46,7 @@ namespace SpaceShooter.Game.Player.Ship
             gameObject.SetActive(value);
         }
 
-        public void Destroy()
+        public void Dispose()
         {
             Destroy(gameObject);
         }
