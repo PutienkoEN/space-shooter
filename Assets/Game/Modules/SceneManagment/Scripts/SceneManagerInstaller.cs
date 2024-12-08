@@ -1,8 +1,8 @@
-﻿using SpaceShooter.Game.LifeCycle.Core;
+﻿using SpaceShooter.Game.SceneManagement;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Modules.Manager.Scripts
+namespace SpaceShooter.Game.SceneManagementSceneManagement
 {
     public class SceneManagerInstaller : MonoInstaller
     {
@@ -27,6 +27,11 @@ namespace Game.Modules.Manager.Scripts
                 .AsSingle()
                 .WithArguments(enableAutonomousGameScene)
                 .NonLazy();
+
+            Container
+                .Bind<DebugSceneManager>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
     }
 }

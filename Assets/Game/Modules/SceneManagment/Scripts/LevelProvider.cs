@@ -1,7 +1,7 @@
 ﻿using Game.Modules.LevelInterfaces.Scripts;
 using Zenject;
 
-namespace Game.Modules.Manager.Scripts
+namespace SpaceShooter.Game.SceneManagement
 {
     public class LevelProvider : ILevelProvider
     {

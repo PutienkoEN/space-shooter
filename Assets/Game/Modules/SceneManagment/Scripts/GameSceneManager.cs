@@ -3,7 +3,7 @@ using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Game.Modules.Manager.Scripts
+namespace SpaceShooter.Game.SceneManagement
 {
     public class GameSceneManager
     {
