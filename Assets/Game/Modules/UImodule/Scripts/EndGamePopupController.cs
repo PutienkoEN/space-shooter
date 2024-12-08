@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.Manager.Scripts;
 using Game.Modules.UImodule;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
@@ -9,11 +10,14 @@ namespace Game.Modules.MainMenu.Scripts
     public sealed class EndGamePopupController : IInitializable, IDisposable, IGameFinishListener
     {
         private readonly EndGamePopupView _endGamePopupView;
-        private const string MAIN_MENU_SCENE = "MenuScene"; //ToDo : Will be used when FinishGame is fixed;
+        private readonly GameSceneManager _sceneManager;
         
-        public EndGamePopupController(EndGamePopupView endGamePopupView)
+        public EndGamePopupController(
+            EndGamePopupView endGamePopupView, 
+            GameSceneManager sceneManager)
         {
             _endGamePopupView = endGamePopupView;
+            _sceneManager = sceneManager;
         }
 
         public void OnGameFinish()
@@ -35,13 +39,13 @@ namespace Game.Modules.MainMenu.Scripts
         
         private void OnMainMenuButtonClicked()
         {
-            // SceneManager.LoadScene(MAIN_MENU_SCENE, LoadSceneMode.Single); //ToDo : Will be used when FinishGame is fixed;
+            _sceneManager.LoadMenuScene();
             Debug.Log("OnMainMenuButtonClicked");
         }
 
         private void OnRestartButtonClicked()
         {
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().name); //ToDo : Will be used when FinishGame is fixed;
+            _sceneManager.LoadGameScene();
             Debug.Log("OnRestartButtonClicked");
         }
     }

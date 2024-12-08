@@ -46,10 +46,5 @@ namespace SpaceShooter.Game.Level
                 .ConvertAll(_levelEventResolver.Resolve)
                 .ToList();
         }
-
-        public void OnGameFinish()
-        {
-            
-        }
     }
 }

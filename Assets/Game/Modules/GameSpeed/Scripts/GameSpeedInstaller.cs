@@ -33,11 +33,6 @@ namespace Game.Modules.GameSpeed
         {
             
             container
-                .Bind<TimeScaleResetter>()
-                .AsSingle()
-                .NonLazy();
-            
-            container
                 .BindInterfacesTo<GameSpeedManager>()
                 .AsSingle()
                 .WithArguments(gameSpeedInitialScale, gameSpeedSlowdownScale, timeForFullSlowDown, timeForFullSpeedup);

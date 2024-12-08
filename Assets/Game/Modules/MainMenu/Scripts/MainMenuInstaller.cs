@@ -16,9 +16,6 @@ namespace Game.Modules.Manager
 
         public override void Install(DiContainer container)
         {
-            container.Bind<TimeScaleResetter>()
-                .AsSingle()
-                .NonLazy();
             
             container
                 .Bind<MainMenuAnimator>()
