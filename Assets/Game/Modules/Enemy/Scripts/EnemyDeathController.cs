@@ -8,14 +8,17 @@ namespace SpaceShooter.Game.Enemy
         private readonly EnemyEntity _enemyEntity;
         private readonly IEnemyManager _enemyManager;
         private readonly EffectsAnimator _effectsAnimator;
+        private readonly IEnemyView _enemyView;
 
         [Inject]
         public EnemyDeathController(
             EnemyEntity enemyEntity, 
+            IEnemyView enemyView,
             IEnemyManager enemyManager, 
             EffectsAnimator effectsAnimator)
         {
             _enemyEntity = enemyEntity;
+            _enemyView = enemyView;
             _enemyManager = enemyManager;
             _effectsAnimator = effectsAnimator;
 
@@ -24,6 +27,7 @@ namespace SpaceShooter.Game.Enemy
 
         private void HandleOnDeath()
         {
+            _enemyView.SetActive(false);
             _effectsAnimator.PlayExplosion(_enemyEntity.GetCurrentPosition(), DestroyEnemy);
         }
 
