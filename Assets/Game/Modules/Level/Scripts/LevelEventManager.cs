@@ -22,7 +22,6 @@ namespace SpaceShooter.Game.Level
 
         public async void StartLevel(ILevelData levelData)
         {
-            
             var gameEventHandlers = GetHandlers(levelData.GameLevelEvents);
 
             var hasEvents = !gameEventHandlers.IsEmpty();

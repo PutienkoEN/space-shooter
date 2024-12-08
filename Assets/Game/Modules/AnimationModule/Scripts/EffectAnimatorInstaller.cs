@@ -1,4 +1,5 @@
-﻿using Effects.Explosion;
+﻿using System;
+using Effects.Explosion;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,9 +14,15 @@ namespace Game.Modules.AnimationModule.Scripts
         
         public override void Install(DiContainer container)
         {
+            if (enemyDeathEffect == null)
+            {
+                throw new ArgumentNullException(nameof(enemyDeathEffect));
+            }
+            
             container.Bind<EffectsAnimator>()
                 .AsSingle()
-                .WithArguments(enableEffects, enemyDeathEffect);
+                .WithArguments(enableEffects, enemyDeathEffect)
+                .NonLazy();
         }
     }
 }

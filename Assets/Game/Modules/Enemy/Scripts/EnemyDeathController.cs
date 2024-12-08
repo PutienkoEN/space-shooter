@@ -1,10 +1,9 @@
 ﻿using Game.Modules.AnimationModule.Scripts;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyDeathController
+    public sealed class EnemyDeathController
     {
         private readonly EnemyEntity _enemyEntity;
         private readonly IEnemyManager _enemyManager;

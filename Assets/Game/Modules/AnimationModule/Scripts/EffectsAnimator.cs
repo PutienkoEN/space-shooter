@@ -14,15 +14,10 @@ namespace Game.Modules.AnimationModule.Scripts
 
         public EffectsAnimator(
             bool enableEffects,
-            IEffect enemyDeathEffect
-            )
+            IEffect enemyDeathEffect)
         {
             _enableEffects = enableEffects;
             _enemyDeathEffect = enemyDeathEffect;
-            if (_enemyDeathEffect == null)
-            {
-                Debug.LogError("No enemy death effect set on EffectAnimator");
-            }
         }
 
         public void PlayExplosion(Transform transform, Action callback)
@@ -40,8 +35,6 @@ namespace Game.Modules.AnimationModule.Scripts
                 transform.rotation, 
                 callback, 
                 _cancellationTokenSource.Token);
-            // IEffect effect = _enemyDeathEffect.Instantiate(transform.position, transform.rotation);
-           
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Effects.Explosion
 
         protected override float GetDuration()
         {
-            Debug.Log("_animator : " + _animator);
             return _animator.GetCurrentAnimatorStateInfo(0).length;
         }
     }
