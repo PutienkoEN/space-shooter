@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Modules.GameSpeed;
 using Zenject;
@@ -39,6 +37,12 @@ namespace SpaceShooter.Game.GameSpeed
             _timeForFullSpeedup = timeForFullSpeedup;
             _gameAudioSpeedManager = gameAudioSpeedManager;
             _gameTimeScaleManager = gameTimeScaleManager;
+        }
+
+        public void SetSlowdown()
+        {
+            _gameTimeScaleManager.ChangeTimeScale(_gameSpeedScaleSlowdown);
+            _gameAudioSpeedManager.ChangePitch(_gameSpeedScaleSlowdown);
         }
 
         public void StopTime()

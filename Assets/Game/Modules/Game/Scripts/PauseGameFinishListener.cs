@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Game.Modules.Game
 {
-    public class PauseGameFinishListener : IGameFinishListener
+    public class PauseGameFinishListener : IGameStartListener, IGameFinishListener
     {
         private readonly IGameSpeedManager _gameSpeedManager;
 
@@ -12,6 +12,11 @@ namespace Game.Modules.Game
         public PauseGameFinishListener(IGameSpeedManager gameSpeedManager)
         {
             _gameSpeedManager = gameSpeedManager;
+        }
+
+        public void OnGameStart()
+        {
+            _gameSpeedManager.SetSlowdown();
         }
 
         public void OnGameFinish()
