@@ -6,7 +6,7 @@
     "Game.LifeCycle.Common",
     "Game.Module.SceneManagment",
     "UniTask",
-    "Game.UI.MainMenu"
+    "Game.Modules.GameSpeed"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

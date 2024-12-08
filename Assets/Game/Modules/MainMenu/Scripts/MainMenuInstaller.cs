@@ -1,4 +1,5 @@
-﻿using Game.Modules.Manager.Scripts;
+﻿using Game.Modules.GameSpeed;
+using Game.Modules.Manager.Scripts;
 using Game.UI.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Game.Modules.Manager
 
         public override void Install(DiContainer container)
         {
+            
             container
                 .Bind<MainMenuAnimator>()
                 .AsSingle()
