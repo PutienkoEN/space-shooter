@@ -1,10 +1,11 @@
-﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using UnityEngine;
+﻿using System;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
     public interface IWeaponComponent
     {
+        public event Action OnShoot;
+
         public void Fire(float deltaTime);
     }
 }

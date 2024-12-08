@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.UI.Scripts;
+using SpaceShooter.Game.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

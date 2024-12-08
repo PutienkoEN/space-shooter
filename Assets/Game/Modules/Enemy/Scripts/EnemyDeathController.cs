@@ -6,9 +6,9 @@ namespace SpaceShooter.Game.Enemy
     public sealed class EnemyDeathController
     {
         private readonly EnemyEntity _enemyEntity;
-        private readonly IEnemyManager _enemyManager;
-        private readonly EffectsAnimator _effectsAnimator;
         private readonly IEnemyView _enemyView;
+        readonly IEnemyManager _enemyManager;
+        private readonly EffectsAnimator _effectsAnimator;
 
         [Inject]
         public EnemyDeathController(
@@ -22,11 +22,14 @@ namespace SpaceShooter.Game.Enemy
             _enemyManager = enemyManager;
             _effectsAnimator = effectsAnimator;
 
+            // We want to play death sound only in case we destroyed enemy.
+            // But there also case when it just leaves the screen and disposed. So we add play sound only in case of Death.
             _enemyEntity.HealthComponent.OnDeath += HandleOnDeath;
         }
 
         private void HandleOnDeath()
         {
+            _enemyView.PlayDeathSound();
             _enemyView.SetActive(false);
             _effectsAnimator.PlayExplosion(_enemyEntity.GetCurrentPosition(), DestroyEnemy);
         }

@@ -13,7 +13,7 @@ namespace SpaceShooter.Game.Level
                 .AsSingle();
 
             container
-                .Bind<LevelEventManager>()
+                .BindInterfacesAndSelfTo<LevelEventManager>()
                 .AsSingle();
 
             container

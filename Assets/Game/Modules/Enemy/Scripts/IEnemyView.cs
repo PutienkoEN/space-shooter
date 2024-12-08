@@ -7,5 +7,6 @@ namespace SpaceShooter.Game.Enemy
     public interface IEnemyView : IEntityView, IDamageable, ICollidable, IDamageDealer
     {
         public Collider GetCollider();
+        public void PlayDeathSound();
     }
 }

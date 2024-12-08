@@ -1,7 +1,7 @@
 ﻿using SpaceShooter.Game.LifeCycle.Common;
 using Zenject;
 
-namespace SpaceShooter.Game.LifeCycle.Core
+namespace SpaceShooter.Game.SceneManagement
 {
     public class GameContext : IGameContext
     {

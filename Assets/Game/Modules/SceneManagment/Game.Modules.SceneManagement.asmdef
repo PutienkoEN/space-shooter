@@ -1,5 +1,5 @@
 {
-  "name": "Game.Module.SceneManagment",
+  "name": "Game.Modules.SceneManagement",
   "rootNamespace": "",
   "references": [
     "Zenject",

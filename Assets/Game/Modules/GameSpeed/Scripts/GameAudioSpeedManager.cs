@@ -7,6 +7,8 @@ namespace Game.Modules.GameSpeed
 {
     public class GameAudioSpeedManager : IGameAudioSpeedManager
     {
+        private const string Pitch = "Pitch";
+
         private readonly AudioMixer _audioMixer;
 
         [Inject]
@@ -15,12 +17,15 @@ namespace Game.Modules.GameSpeed
             _audioMixer = audioMixer;
         }
 
+        public void ChangePitch(float pitchScale)
+        {
+            GetPitchOrThrow();
+            SetPitch(pitchScale);
+        }
+
         public Tween ChangePitch(float pitchScale, float duration)
         {
-            if (!_audioMixer.GetFloat("Pitch", out var initialPitch))
-            {
-                throw new ArgumentException($"There is no Pitch parameter in AudioMixer : {_audioMixer}");
-            }
+            var initialPitch = GetPitchOrThrow();
 
             return DOTween
                 .To(() => initialPitch,
@@ -28,7 +33,22 @@ namespace Game.Modules.GameSpeed
                     pitchScale,
                     duration)
                 .SetUpdate(true)
-                .OnUpdate(() => _audioMixer.SetFloat("Pitch", initialPitch));
+                .OnUpdate(() => SetPitch(initialPitch));
+        }
+
+        private float GetPitchOrThrow()
+        {
+            if (!_audioMixer.GetFloat("Pitch", out var initialPitch))
+            {
+                throw new ArgumentException($"There is no Pitch parameter in AudioMixer : {_audioMixer}");
+            }
+
+            return initialPitch;
+        }
+
+        private void SetPitch(float pitchScale)
+        {
+            _audioMixer.SetFloat(Pitch, pitchScale);
         }
     }
 }
