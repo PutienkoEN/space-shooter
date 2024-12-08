@@ -70,11 +70,6 @@ namespace SpaceShooter.Game.Enemy
             }
         }
 
-        public Transform GetCurrentPosition()
-        {
-            return _enemyView.GetCollider().transform;
-        }
-
         private void HandleTakeDamage(int damage)
         {
             HealthComponent.TakeDamage(damage);

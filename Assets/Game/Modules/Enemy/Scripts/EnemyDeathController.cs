@@ -31,7 +31,7 @@ namespace SpaceShooter.Game.Enemy
         {
             _enemyView.PlayDeathSound();
             _enemyView.SetActive(false);
-            _effectsAnimator.PlayExplosion(_enemyEntity.GetCurrentPosition(), DestroyEnemy);
+            _effectsAnimator.PlayExplosion(_enemyView.GetCollider().transform, DestroyEnemy);
         }
 
         private void DestroyEnemy()
