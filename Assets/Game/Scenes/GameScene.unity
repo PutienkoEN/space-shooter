@@ -391,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 9188649973472735502, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: _enemyDeathEffect
       value: 
-      objectReference: {fileID: 1625789139546492470, guid: 8b102760b21d5454195fc00abb7208b4, type: 3}
+      objectReference: {fileID: 5316887582960864342, guid: 8b102760b21d5454195fc00abb7208b4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

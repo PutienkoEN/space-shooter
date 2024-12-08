@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 1990595296821117369}
   - component: {fileID: 3591001393121998388}
   - component: {fileID: 2584113771303783363}
-  - component: {fileID: 93805208080456961}
-  - component: {fileID: 1625789139546492470}
+  - component: {fileID: 5316887582960864342}
   m_Layer: 0
   m_Name: ExposionEffect
   m_TagString: Untagged
@@ -112,7 +111,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &93805208080456961
+--- !u!114 &5316887582960864342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,18 +120,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8466282799524151531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f9e31ce18d42eba3a2b9578afd859c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1625789139546492470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8466282799524151531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c918b489e5435a8505476b673fddb1, type: 3}
+  m_Script: {fileID: 11500000, guid: c3a353bc71674bddb9da5a23d45c3683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

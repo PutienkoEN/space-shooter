@@ -8,6 +8,7 @@ namespace SpaceShooter.Game.Player.Ship
     public sealed class PlayerShipView : MonoBehaviour, IPlayerShipView
     {
         public event Action<IDamageable> OnDealDamage;
+
         public event Action<int> OnTakeDamage;
         private Collider _collider;
        
@@ -35,9 +36,9 @@ namespace SpaceShooter.Game.Player.Ship
             OnTakeDamage?.Invoke(damage);
         }
         
-        public Collider GetCollider()
+        public Transform GetTransform()
         {
-            return _collider;
+            return transform;
         }
 
         public void SetActive(bool value)

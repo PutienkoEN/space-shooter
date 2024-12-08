@@ -2,7 +2,6 @@
 using Game.Modules.Common.Interfaces;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.Components;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
@@ -33,13 +32,11 @@ namespace SpaceShooter.Game.Player.Ship
         public void Initialize()
         {
             _playerShipView.OnTakeDamage += TakeDamage;
-            HealthComponent.OnDeath += DeactivatePlayerView;
         }
 
-        private void DeactivatePlayerView()
+        public void SetIsAlive(bool value)
         {
-            _playerShipView.SetActive(false);
-            _isAlive = false;
+            _isAlive = value;
         }
 
         public void Dispose()
@@ -60,11 +57,6 @@ namespace SpaceShooter.Game.Player.Ship
             HealthComponent.TakeDamage(damage);
         }
         
-        public Transform GetCurrentPosition()
-        {
-            return _playerShipView.GetCollider().transform;
-        }
-
         public class Factory : PlaceholderFactory<PlayerShipEntity>
         {
         }

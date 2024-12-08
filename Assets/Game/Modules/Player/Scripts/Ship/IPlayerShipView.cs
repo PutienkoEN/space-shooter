@@ -5,6 +5,6 @@ namespace SpaceShooter.Game.Player.Ship
 {
     public interface IPlayerShipView : IEntityView, IDamageable, ICollidable, IDamageDealer
     {
-        public Collider GetCollider();
+        public Transform GetTransform();
     }
 }

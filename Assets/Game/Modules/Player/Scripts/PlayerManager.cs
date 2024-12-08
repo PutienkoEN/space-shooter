@@ -12,15 +12,12 @@ namespace SpaceShooter.Game.Player
 
         private PlayerShipEntity.Factory _shipEntityFactory;
         private PlayerShipEntity _playerShipEntity;
-        private EffectsAnimator _effectsAnimator;
 
         [Inject]
         public PlayerManager(
-            PlayerShipEntity.Factory shipEntityFactory, 
-            EffectsAnimator effectsAnimator)
+            PlayerShipEntity.Factory shipEntityFactory)
         {
             _shipEntityFactory = shipEntityFactory;
-            _effectsAnimator = effectsAnimator;
         }
 
 

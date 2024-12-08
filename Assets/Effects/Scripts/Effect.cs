@@ -1,25 +1,51 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Effects.Explosion
 {
-    [RequireComponent(typeof(IEffectRunner))]
-    public sealed class Effect : MonoBehaviour, IEffect
+    public abstract class Effect : MonoBehaviour, IEffect
     {
-        private IEffectRunner EffectRunner => GetComponent<IEffectRunner>();
-        public IEffect Instantiate(Vector3 position, Quaternion rotation)
+        
+        public virtual void Play(Vector3 position, Quaternion rotation, Action callback, CancellationToken token)
         {
-            var instance = Instantiate(this, position, rotation);
-            return instance.GetComponent<IEffect>();
+            if (token.IsCancellationRequested)
+            {
+                return;
+            }
+            Effect instance = Instantiate(position, rotation);
+            float duration = instance.GetDuration();
+            Delay(instance, duration, callback, token).Forget();
+        }
+        
+        protected abstract float GetDuration();
+        
+        private Effect Instantiate(Vector3 position, Quaternion rotation)
+        {
+            return Instantiate(this, position, rotation);
+        }
+        
+        private async UniTaskVoid Delay(Effect instance, float duration, Action callback, CancellationToken token)
+        {
+            try
+            {
+                await UniTask.WaitForSeconds(duration, cancellationToken: token);
+                callback?.Invoke();
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Effect delay canceled.");
+            }
+            finally
+            {
+                instance.Destroy();
+            }
         }
 
-        public void Destroy()
+        private void Destroy()
         {
             GameObject.Destroy(this.gameObject);
-        }
-
-        public float GetDuration()
-        {
-            return EffectRunner.GetDuration();
         }
     }
 }
