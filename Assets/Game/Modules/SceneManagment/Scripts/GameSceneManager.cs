@@ -15,7 +15,7 @@ namespace Game.Modules.Manager.Scripts
             _gameContext = gameContext;
         }
 
-        public async UniTask LoadGameScene()
+        public void LoadGameScene()
         {
             _gameContext.GameStart = true;
             SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Single);
