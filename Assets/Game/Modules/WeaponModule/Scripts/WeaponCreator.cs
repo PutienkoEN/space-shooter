@@ -1,5 +1,4 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
-using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
 using Zenject;
 
@@ -9,30 +8,31 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
         private IFactory<WeaponConfig, Transform[], int, WeaponComponent> _weaponComponentFactory;
-        
+
         public WeaponCreator(IFactory
             <WeaponConfig, Transform[], int, WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
-        
+
         public IWeaponComponent CreateWeapon(
-            WeaponConfig weaponConfig, 
+            WeaponConfig weaponConfig,
             Transform parentTransform,
             int entityLayer)
         {
             IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
-            
+
             IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
                 weaponConfig,
                 weaponView.GetFirePoints(),
                 entityLayer);
-           
+
+            weaponComponent.OnShoot += weaponView.PlayShootSound;
             return weaponComponent;
         }
 
         private WeaponView CreateWeaponView(
-            WeaponConfig weaponConfig, 
+            WeaponConfig weaponConfig,
             Transform parentTransform)
         {
             WeaponData weaponData = weaponConfig.GetWeaponData();
