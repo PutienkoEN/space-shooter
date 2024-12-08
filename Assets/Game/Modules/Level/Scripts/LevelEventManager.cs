@@ -47,7 +47,7 @@ namespace SpaceShooter.Game.Level
                 {
                     await gameEventHandler.Start(_cancellationTokenSource.Token);
                 }
-                catch (Exception)
+                catch (OperationCanceledException)
                 {
                     Debug.Log("Enemy spawning cancelled");
                 }
