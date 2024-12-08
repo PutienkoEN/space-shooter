@@ -17,9 +17,7 @@ namespace SpaceShooter.Game.Level
 
         private readonly LevelEventHandlerResolver _levelEventResolver;
         private readonly CancellationTokenSource _cancellationTokenSource = new();
-
-        private bool isStopped;
-
+        
         [Inject]
         public LevelEventManager(LevelEventHandlerResolver levelEventResolver)
         {
@@ -39,7 +37,7 @@ namespace SpaceShooter.Game.Level
                 // Even if we exit play mode, task still starts execution and creates object on Game Scene
                 // That's why when we dispose object, we need to cancel current task and prevent next one to start.
                 // We use isStopped for this.
-                if (isStopped)
+                if (_cancellationTokenSource.IsCancellationRequested)
                 {
                     break;
                 }
@@ -75,7 +73,6 @@ namespace SpaceShooter.Game.Level
 
         public void Dispose()
         {
-            isStopped = true;
             _cancellationTokenSource.Cancel();
         }
     }
