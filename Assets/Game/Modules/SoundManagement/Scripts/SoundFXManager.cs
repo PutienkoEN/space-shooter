@@ -7,6 +7,7 @@ namespace Game.Modules.SoundManagement.Scripts
         public static ISoundFXManager Instance { get; private set; }
 
         [SerializeField] private AudioSource audioSourcePrefab;
+        [SerializeField] private Transform container;
 
         private void Awake()
         {
@@ -15,10 +16,17 @@ namespace Game.Modules.SoundManagement.Scripts
 
         public void PlaySound(AudioClip clip, Transform spawnTransform)
         {
-            var audioSource = Instantiate(audioSourcePrefab, spawnTransform.position, spawnTransform.rotation);
+            var audioSource = Instantiate(
+                audioSourcePrefab,
+                spawnTransform.position,
+                spawnTransform.rotation,
+                container);
+
             audioSource.clip = clip;
 
             audioSource.Play();
+
+            Destroy(audioSource.gameObject, clip.length);
         }
     }
 }
