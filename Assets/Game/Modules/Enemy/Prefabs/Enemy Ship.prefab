@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701cc202fbcf4846a8e114000bd9b9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroySound: {fileID: 8300000, guid: cbc8fd5e9c969114f960700a63f62825, type: 3}
   splineAnimate: {fileID: -3739754591216379461}
 --- !u!114 &-3739754591216379461
 MonoBehaviour:

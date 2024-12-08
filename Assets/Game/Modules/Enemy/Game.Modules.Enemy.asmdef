@@ -3,9 +3,10 @@
   "references": [
     "Zenject",
     "UniTask",
+    "Unity.Splines",
     "Game.Modules.Components",
     "Game.LifeCycle.Common",
     "Game.Modules.Common",
-    "Unity.Splines"
+    "Game.Modules.SoundManagement"
   ]
 }
