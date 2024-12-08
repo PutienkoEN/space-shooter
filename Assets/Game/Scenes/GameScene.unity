@@ -389,6 +389,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1305581425}
     - target: {fileID: 9188649973472735502, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: enableEffects
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188649973472735502, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: enemyDeathEffect
+      value: 
+      objectReference: {fileID: 5316887582960864342, guid: 8b102760b21d5454195fc00abb7208b4, type: 3}
+    - target: {fileID: 9188649973472735502, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: _enemyDeathEffect
       value: 
       objectReference: {fileID: 5316887582960864342, guid: 8b102760b21d5454195fc00abb7208b4, type: 3}
