@@ -2,7 +2,6 @@
 using Game.Modules.UImodule;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.SceneManagement;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.MainMenu.Scripts
@@ -40,13 +39,11 @@ namespace Game.Modules.MainMenu.Scripts
         private void OnMainMenuButtonClicked()
         {
             _sceneManager.LoadMenuScene();
-            Debug.Log("OnMainMenuButtonClicked");
         }
 
         private void OnRestartButtonClicked()
         {
             _sceneManager.LoadGameScene();
-            Debug.Log("OnRestartButtonClicked");
         }
     }
 }

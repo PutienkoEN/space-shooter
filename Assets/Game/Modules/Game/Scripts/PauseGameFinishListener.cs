@@ -1,5 +1,6 @@
 ﻿using Game.Modules.GameSpeed;
 using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Game

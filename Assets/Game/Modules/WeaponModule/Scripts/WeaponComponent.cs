@@ -15,6 +15,7 @@ namespace Game.Modules.ShootingModule.Scripts
         private readonly float _fireRate;
         private readonly float _projectileSpeed;
         private readonly int _damage;
+        private float _fireStartDelay = 0.5f;
 
         private float _timer;
 
@@ -30,6 +31,8 @@ namespace Game.Modules.ShootingModule.Scripts
             _fireRate = weaponData.FireRate;
             _damage = weaponData.Damage;
             _firePoints = firePoints;
+            
+            _timer = _fireStartDelay;//Is used to delay start of shooting when new weapon is created
         }
 
 

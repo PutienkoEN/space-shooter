@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine.SceneManagement;
 using Zenject;
