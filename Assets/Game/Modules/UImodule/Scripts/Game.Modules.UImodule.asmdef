@@ -1,8 +1,8 @@
 {
 	"name": "Game.Modules.UImodule",
 	"references":[ 
-		"GUID:533b57f689b3473a8c197864b95b0216", 
-		"GUID:efdd616bd324540bab8c316dbfba7c02", 
-		"GUID:0d8beb7f090555447a6cf5ce9e54dbb4", 
-		"GUID:a91f6581f651b77458ba61cade9e564e" ]
+		"Game.Modules.Game", 
+		"Game.LifeCycle.Common", 
+		"Zenject", 
+		"Game.Modules.SceneManagement" ]
 }

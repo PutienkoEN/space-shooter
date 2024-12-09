@@ -1,7 +1,7 @@
 ﻿using System;
-using Game.Modules.Manager.Scripts;
 using Game.Modules.UImodule;
 using SpaceShooter.Game.LifeCycle.Common;
+using SpaceShooter.Game.SceneManagement;
 using UnityEngine;
 using Zenject;
 
