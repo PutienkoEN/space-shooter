@@ -30,8 +30,8 @@ namespace SpaceShooter.Game.Enemy
         private void HandleOnDeath()
         {
             _enemyView.PlayDeathSound();
-            _enemyView.SetActive(false);
             _effectsAnimator.PlayExplosion(_enemyView.GetCollider().transform, DestroyEnemy);
+            _enemyView.SetActive(false);
         }
 
         private void DestroyEnemy()
