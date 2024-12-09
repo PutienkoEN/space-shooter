@@ -25,7 +25,12 @@ namespace Game.Modules.BulletModule.Scripts
                 _wasOnScreen = true;
             }
 
-            return _wasOnScreen && !onScreen;
+            var result = _wasOnScreen && !onScreen;
+            if (result)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool OnScreen(Collider collider)

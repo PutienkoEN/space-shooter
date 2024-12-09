@@ -21,6 +21,7 @@ namespace SpaceShooter.Game.Enemy
         private readonly CollisionDamageComponent _collisionDamageComponent;
 
         private readonly IEnemyView _enemyView;
+        public bool _isActive;
 
         [Button]
         public void TakeDamage(int damage)
@@ -41,6 +42,8 @@ namespace SpaceShooter.Game.Enemy
             _boundsCheckComponent = boundsCheckComponent;
             _collisionDamageComponent = collisionDamageComponent;
             _enemyView = enemyView;
+            
+            _isActive = true;//Todo: re-work later
         }
 
         public void Initialize()
@@ -53,6 +56,10 @@ namespace SpaceShooter.Game.Enemy
 
         private void DealCollisionDamage(IDamageable damageable)
         {
+            if (!_isActive)
+            {
+                return;
+            }
             _collisionDamageComponent.DealDamage(damageable);
         }
 
@@ -64,6 +71,10 @@ namespace SpaceShooter.Game.Enemy
 
         public void Update(float deltaTime)
         {
+            if (!_isActive)
+            {
+                return;
+            }
             if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
             {
                 OnLeftGameArea?.Invoke(this);
