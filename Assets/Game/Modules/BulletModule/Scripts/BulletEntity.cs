@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Modules.Common.Interfaces;
+using ModestTree;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
@@ -50,7 +51,6 @@ namespace Game.Modules.BulletModule.Scripts
         private void HandleOnDealDamage(IDamageable otherObject)
         {
             otherObject.TakeDamage(_damage);
-
             Destroy();
         }
 

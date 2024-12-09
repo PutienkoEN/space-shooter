@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Modules.AnimationModule.Scripts;
+using Game.Modules.Common.Interfaces;
 using ModestTree;
 using SpaceShooter.Game.LifeCycle.Common;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyManager : IEnemyManager, IGameTickable
+    public sealed class EnemyManager : IEnemyManager, IGameTickable
     {
         public event Action<bool> OnEnemyChange;
 
         private readonly EnemyEntity.Factory _enemyFactory;
-        private readonly List<EnemyEntity> _enemies = new();
+        private readonly List<IEntity> _enemies = new();
 
         [Inject]
-        public EnemyManager(EnemyEntity.Factory enemyFactory)
+        public EnemyManager(
+            EnemyEntity.Factory enemyFactory, 
+            EffectsAnimator effectsAnimator)
         {
             _enemyFactory = enemyFactory;
         }
@@ -52,7 +57,6 @@ namespace SpaceShooter.Game.Enemy
         {
             _enemies.Remove(enemyEntity);
             DisposeEnemy(enemyEntity);
-
             OnEnemyChange?.Invoke(HasEnemies());
         }
 

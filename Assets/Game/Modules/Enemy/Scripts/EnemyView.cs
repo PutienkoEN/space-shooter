@@ -7,7 +7,7 @@ using UnityEngine.Splines;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyView : MonoBehaviour, IEnemyView
+    public sealed class EnemyView : MonoBehaviour, IEnemyView
     {
         public event Action<IDamageable> OnDealDamage;
         public event Action<int> OnTakeDamage;
@@ -51,6 +51,11 @@ namespace SpaceShooter.Game.Enemy
             return splineAnimate;
         }
 
+        public void SetActive(bool value)
+        {
+            gameObject.SetActive(value);
+        }
+        
         public void PlayDeathSound()
         {
             SoundFXManager.Instance.PlaySound(destroySound, transform);

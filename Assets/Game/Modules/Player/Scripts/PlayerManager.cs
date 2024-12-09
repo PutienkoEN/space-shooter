@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.AnimationModule.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player.Ship;
 using Zenject;
@@ -13,10 +14,12 @@ namespace SpaceShooter.Game.Player
         private PlayerShipEntity _playerShipEntity;
 
         [Inject]
-        public void Construct(PlayerShipEntity.Factory shipEntityFactory)
+        public PlayerManager(
+            PlayerShipEntity.Factory shipEntityFactory)
         {
             _shipEntityFactory = shipEntityFactory;
         }
+
 
         public PlayerShipEntity CreatePlayer()
         {
@@ -30,7 +33,6 @@ namespace SpaceShooter.Game.Player
         {
             _playerShipEntity.Dispose();
             _playerShipEntity = null;
-            
             OnPlayerDeath?.Invoke();
         }
 
