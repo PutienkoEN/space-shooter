@@ -3,10 +3,9 @@
   "rootNamespace": "",
   "references": [
     "Zenject",
-    "Game.LifeCycle.Common",    
+    "Game.LifeCycle.Common",
     "UniTask",
     "Game.Modules.SceneManagement"
-    
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

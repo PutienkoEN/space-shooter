@@ -53,7 +53,7 @@ namespace Game.Modules.Manager.Scripts
         private async UniTask DelaySceneLoad()
         {
             await _mainMenuAnimator.HandleStartGameClicked();
-            await _gameSceneManager.LoadGameScene();
+            _gameSceneManager.LoadGameScene();
         }
 
     }

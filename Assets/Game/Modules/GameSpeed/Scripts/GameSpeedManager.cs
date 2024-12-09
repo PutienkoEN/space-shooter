@@ -5,7 +5,7 @@ using Zenject;
 
 namespace SpaceShooter.Game.GameSpeed
 {
-    public class GameSpeedManager : IGameSpeedManager
+    public class GameSpeedManager : IGameSpeedManager, IDisposable
     {
         public event Action OnNormalSpeed;
         public event Action OnSlowDown;
@@ -84,6 +84,13 @@ namespace SpaceShooter.Game.GameSpeed
                     action?.Invoke();
                     _gameSpeedSequence = null;
                 });
+        }
+
+
+        public void Dispose()
+        {
+            _gameSpeedSequence?.Kill();
+            _gameSpeedSequence = null;
         }
     }
 }
