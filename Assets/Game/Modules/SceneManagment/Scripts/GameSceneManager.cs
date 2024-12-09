@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -19,6 +18,11 @@ namespace SpaceShooter.Game.SceneManagement
         {
             _gameContext.GameStart = true;
             SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Single);
+        }
+
+        public void LoadMenuScene()
+        {
+            SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Single);
         }
     }
 }

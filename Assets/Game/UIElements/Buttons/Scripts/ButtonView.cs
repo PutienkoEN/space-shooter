@@ -10,21 +10,21 @@ namespace Game.UI.Buttons
     {
         public event Action OnClick;
         
-        private Button _button => GetComponent<Button>();
+        private Button Button => GetComponent<Button>();
 
         public void SetActive(bool value)
         {
-            _button.gameObject.SetActive(value);
+            Button.gameObject.SetActive(value);
         }
         
         private void Awake()
         {
-            _button.onClick.AddListener(HandleOnClick);
+            Button.onClick.AddListener(HandleOnClick);
         }
 
         private void OnDestroy()
         {
-            _button.onClick.RemoveListener(HandleOnClick);
+            Button.onClick.RemoveListener(HandleOnClick);
         }
 
         private void HandleOnClick()
