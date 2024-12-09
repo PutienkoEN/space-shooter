@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using SpaceShooter.Game.Enemy;
 
@@ -15,21 +17,23 @@ namespace SpaceShooter.Game.Level.Events
             _spawnData = spawnData;
         }
 
-        public async UniTask Start()
-        {
-            await SpawnEnemies();
-        }
-
-        private async UniTask SpawnEnemies()
+        public async UniTask Start(CancellationToken cancellationToken)
         {
             var enemyCreateData = _spawnData.EnemyCreateData;
             for (var i = 0; i < _spawnData.NumberOfEnemiesToSpawn; i++)
             {
-                _enemyManager.CreateEnemy(enemyCreateData);
-                var millisecondsToWait = ConvertToMilliseconds(_spawnData.SpawnIntervalInSeconds);
-                await UniTask.Delay(millisecondsToWait);
+                await SpawnEnemy(enemyCreateData, cancellationToken);
             }
         }
+
+        private async Task SpawnEnemy(EnemyCreateData enemyCreateData, CancellationToken cancellationToken)
+        {
+            _enemyManager.CreateEnemy(enemyCreateData);
+
+            var millisecondsToWait = ConvertToMilliseconds(_spawnData.SpawnIntervalInSeconds);
+            await UniTask.Delay(millisecondsToWait, cancellationToken: cancellationToken);
+        }
+
 
         private static int ConvertToMilliseconds(float seconds)
         {

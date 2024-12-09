@@ -6,7 +6,8 @@
         "Game.Modules.BulletModule",
         "Zenject",
         "Zenject-TestFramework",
-        "Game.LifeCycle.Common"
+        "Game.LifeCycle.Common",
+        "Game.Modules.Audio"
     ],
     "includePlatforms": [
         "Editor"

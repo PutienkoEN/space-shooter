@@ -5,6 +5,6 @@ namespace SpaceShooter.Game.Level.Events
 {
     public interface IGameEventHandler
     {
-        public UniTask Start();
+        public UniTask Start(CancellationToken cancellationToken);
     }
 }
