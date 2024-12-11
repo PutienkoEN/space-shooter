@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Modules.Common.Interfaces;
-using ModestTree;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
@@ -42,7 +41,7 @@ namespace Game.Modules.BulletModule.Scripts
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (_boundsCheckComponent.LeftGameArea(_collider))
+            if (!_boundsCheckComponent.OnScreen(_collider))
             {
                 Destroy();
             }

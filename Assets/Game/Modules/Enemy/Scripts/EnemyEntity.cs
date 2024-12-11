@@ -1,91 +1,84 @@
 ﻿using System;
-using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
-using Sirenix.OdinInspector;
-using SpaceShooter.Game.Components;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
 {
     [Serializable]
-    public class EnemyEntity : IInitializable, IDisposable, IEntity
+    public class EnemyEntity : IDisposable, IEnemyEntity
     {
-        public event Action<EnemyEntity> OnLeftGameArea;
-
-        public readonly HealthComponent HealthComponent;
-        private readonly SplineMoveController _splineMoveController;
+        public event Action<IEnemyEntity> OnLeftGameArea;
+        public event Action<bool> OnStateChanged;
+        public event Action<bool> OnInGameStateChanged;
+        
         private readonly BoundsCheckComponent _boundsCheckComponent;
-        private readonly CollisionDamageComponent _collisionDamageComponent;
-
         private readonly IEnemyView _enemyView;
-        public bool _isActive;
-
-        [Button]
-        public void TakeDamage(int damage)
-        {
-            HealthComponent.TakeDamage(damage);
-        }
+        
+        private bool _isActive;
+        private bool _isInGame;
 
         [Inject]
         public EnemyEntity(
-            HealthComponent healthComponent,
-            SplineMoveController splineMoveController,
             BoundsCheckComponent boundsCheckComponent,
-            CollisionDamageComponent collisionDamageComponent,
             IEnemyView enemyView)
         {
-            HealthComponent = healthComponent;
-            _splineMoveController = splineMoveController;
             _boundsCheckComponent = boundsCheckComponent;
-            _collisionDamageComponent = collisionDamageComponent;
             _enemyView = enemyView;
-            
-            _isActive = true;//Todo: re-work later
         }
 
         public void Initialize()
         {
-            _enemyView.OnDealDamage += DealCollisionDamage;
-            _enemyView.OnTakeDamage += HandleTakeDamage;
-            
-            _splineMoveController.StartMove();
+            SetIsActive(true);
         }
-
-        private void DealCollisionDamage(IDamageable damageable)
-        {
-            if (!_isActive)
-            {
-                return;
-            }
-            _collisionDamageComponent.DealDamage(damageable);
-        }
-
+        
         public void Dispose()
         {
-            _enemyView.OnTakeDamage -= HandleTakeDamage;
             _enemyView.Dispose();
         }
 
         public void Update(float deltaTime)
         {
-            if (!_isActive)
+            if (_isActive)
+            {
+                _boundsCheckComponent.IsInGame(
+                    _enemyView.GetCollider(), 
+                    SetIsInGame,
+                    InvokeOnLeftGameArea);
+            }
+
+            if (!_isInGame) return;
+            // invoking on other components here...
+
+        }
+
+        public void SetIsActive(bool value)
+        {
+            if (_isActive == value)
             {
                 return;
             }
-            if (_boundsCheckComponent.LeftGameArea(_enemyView.GetCollider()))
-            {
-                OnLeftGameArea?.Invoke(this);
-            }
+            _isActive = value;
+            OnStateChanged?.Invoke(_isActive);
         }
 
-        private void HandleTakeDamage(int damage)
+        private void SetIsInGame(bool value)
         {
-            HealthComponent.TakeDamage(damage);
+            if (_isInGame == value)
+            {
+                return;
+            }
+            _isInGame = value;
+            OnInGameStateChanged?.Invoke(value);
         }
 
+        private void InvokeOnLeftGameArea()
+        {
+            OnLeftGameArea?.Invoke(this);
+        }
 
         public class Factory : PlaceholderFactory<EnemyCreateData, EnemyEntity>
         {

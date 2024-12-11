@@ -1,25 +1,41 @@
 ﻿using System;
+using Game.Modules.Common.Interfaces;
+using SpaceShooter.Game.Enemy;
 using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Components
 {
-    public class HealthComponent
+    public sealed class HealthComponent : IDisposable
     {
         public event Action OnDeath;
         private int _health;
+        private bool _isInGame;
+
+        private readonly IDamageable _entityView;
+        private readonly IEntity _entity;
 
         [Inject]
-        public HealthComponent(int health)
+        public HealthComponent(int health, IDamageable entityView, IEntity entity)
         {
             _health = health;
+            _entityView = entityView;
+            _entity = entity;
+
+            _entity.OnInGameStateChanged += SetInGameState;
+            _entityView.OnTakeDamage += TakeDamage;
+        }
+
+        private void SetInGameState(bool value)
+        {
+            _isInGame = value;
         }
 
         public void TakeDamage(int damage)
         {
-            if (_health <= 0)
+            if (!_isInGame || _health <= 0)
             {
-                Debug.Log("Health is zero, can't take damage.");
+                Debug.Log("Not in game or health is zero. Can't take damage.");
                 return;
             }
 
@@ -28,6 +44,11 @@ namespace SpaceShooter.Game.Components
             {
                 OnDeath?.Invoke();
             }
+        }
+
+        public void Dispose()
+        {
+            _entityView.OnTakeDamage -= TakeDamage;
         }
     }
 }

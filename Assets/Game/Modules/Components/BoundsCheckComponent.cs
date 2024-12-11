@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.CameraUtility;
+﻿using System;
+using SpaceShooter.Game.CameraUtility;
 using UnityEngine;
 
 namespace Game.Modules.BulletModule.Scripts
@@ -17,23 +18,27 @@ namespace Game.Modules.BulletModule.Scripts
             _rectProvider = rectProvider;
         }
 
-        public bool LeftGameArea(Collider collider)
+        public bool IsInGame(Collider collider, Action<bool> setIsActive, Action invokeLeftScreen)
         {
-            var onScreen = OnScreen(collider);
-            if (onScreen)
+            bool onScreen = OnScreen(collider);
+            if (onScreen && !_wasOnScreen)
             {
                 _wasOnScreen = true;
-            }
-
-            var result = _wasOnScreen && !onScreen;
-            if (result)
-            {
+                setIsActive(true);
                 return true;
             }
+            
+            if (!onScreen && _wasOnScreen)
+            {
+                _wasOnScreen = false;
+                setIsActive(false);
+                invokeLeftScreen();
+            }
+            
             return false;
         }
 
-        private bool OnScreen(Collider collider)
+        public bool OnScreen(Collider collider)
         {
             var colliderRect = _rectProvider.GetColliderRect(collider);
             return _worldCoordinates.WorldBounds.Overlaps(colliderRect);
