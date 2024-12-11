@@ -7,10 +7,12 @@ namespace Effects.Explosion
 {
     public abstract class Effect : MonoBehaviour, IEffect
     {
-        
+        private CancellationTokenSource _cts;
         public virtual void Play(Vector3 position, Quaternion rotation, Action callback, CancellationToken token)
         {
-            if (token.IsCancellationRequested)
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(token);
+            
+            if (_cts.Token.IsCancellationRequested)
             {
                 return;
             }
@@ -46,6 +48,12 @@ namespace Effects.Explosion
         private void Destroy()
         {
             GameObject.Destroy(this.gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
     }
 }

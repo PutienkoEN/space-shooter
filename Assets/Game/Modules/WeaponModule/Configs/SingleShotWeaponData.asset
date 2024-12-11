@@ -16,4 +16,3 @@ MonoBehaviour:
   damage: 20
   fireRate: 1
   projectileConfig: {fileID: 11400000, guid: 033aca9203f30ac47bd2fa22db33a228, type: 2}
-  shootSound: {fileID: 8300000, guid: 495c3a1ed53fca14fb255e24d4a2b38b, type: 3}

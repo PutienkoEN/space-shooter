@@ -1,4 +1,5 @@
 ﻿using Game.Modules.AnimationModule.Scripts;
+using SpaceShooter.Game.Components;
 using SpaceShooter.Game.Player.Ship;
 using UnityEngine;
 using Zenject;
@@ -11,20 +12,23 @@ namespace SpaceShooter.Game.Player
         private readonly PlayerShipView _playerShipView;
         private readonly PlayerManager _playerManager;
         private readonly EffectsAnimator _effectsAnimator;
+        private readonly HealthComponent _healthComponent;
 
         [Inject]
         public PlayerDeathController(
             PlayerShipEntity playerEntity,
             PlayerShipView playerShipView,
             PlayerManager playerManager, 
-            EffectsAnimator effectsAnimator)
+            EffectsAnimator effectsAnimator,
+            HealthComponent healthComponent)
         {
             _playerEntity = playerEntity;
             _playerShipView = playerShipView;
             _playerManager = playerManager;
             _effectsAnimator = effectsAnimator;
+            _healthComponent = healthComponent;
 
-            _playerEntity.HealthComponent.OnDeath += OnPlayerDeath;
+            _healthComponent.OnDeath += OnPlayerDeath;
         }
 
         private void OnPlayerDeath()
@@ -37,7 +41,7 @@ namespace SpaceShooter.Game.Player
         private void DestroyPlayer()
         {
             _playerManager.DestroyPlayer();
-            _playerEntity.HealthComponent.OnDeath -= DestroyPlayer;
+            _healthComponent.OnDeath -= DestroyPlayer;
         }
     }
 }

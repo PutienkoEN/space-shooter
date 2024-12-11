@@ -3,7 +3,6 @@
     "rootNamespace": "",
     "references": [
         "Game.Modules.CameraUtility",
-        "Game.Modules.CollisionModule",
         "Game.Modules.Common"
     ],
     "includePlatforms": [],

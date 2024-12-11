@@ -17,11 +17,11 @@ namespace SpaceShooter.Game.Player
             _playerManager = playerManager;
         }
 
-        [Button]
-        private void TakeDamage(int damage)
-        {
-            _playerShipEntity.TakeDamage(damage);
-        }
+        // [Button]
+        // private void TakeDamage(int damage)
+        // {
+        //     _playerShipEntity.TakeDamage(damage);
+        // }
 
         [Button]
         public void CreatePlayer()

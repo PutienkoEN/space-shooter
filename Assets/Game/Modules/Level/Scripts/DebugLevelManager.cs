@@ -1,4 +1,5 @@
-﻿using Game.Modules.LevelInterfaces.Scripts;
+﻿using Game.Modules.Common.Interfaces;
+using Game.Modules.LevelInterfaces.Scripts;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Enemy;
 using SpaceShooter.Game.LifeCycle.Common;
@@ -47,7 +48,10 @@ namespace SpaceShooter.Game.Level
         [Button]
         public void DestroyEnemy()
         {
-            _enemyManager.DestroyEnemy(enemyEntity);
+            if (enemyEntity is IEnemyEntity enemy)
+            {
+                _enemyManager.DestroyEnemy(enemy);
+            }
         }
         
         [BoxGroup("GAME")]

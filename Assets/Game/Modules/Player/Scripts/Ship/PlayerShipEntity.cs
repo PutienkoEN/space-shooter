@@ -8,35 +8,42 @@ namespace SpaceShooter.Game.Player.Ship
 {
     public sealed class PlayerShipEntity : IInitializable, IDisposable, IEntity
     {
+        public event Action<bool> OnInGameStateChanged;
+        
         private readonly IPlayerShipView _playerShipView;
         private readonly PlayerMoveController _playerMoveController;
         private readonly WeaponController _weaponController;
+        private bool _isAlive;
 
-        public readonly HealthComponent HealthComponent;
 
-        private bool _isAlive = true;
 
         [Inject]
         public PlayerShipEntity(
             IPlayerShipView playerShipView,
             PlayerMoveController playerMoveController,
-            WeaponController weaponController,
-            HealthComponent healthComponent)
+            WeaponController weaponController)
         {
             _playerShipView = playerShipView;
             _playerMoveController = playerMoveController;
             _weaponController = weaponController;
-            HealthComponent = healthComponent;
         }
+
+        
 
         public void Initialize()
         {
-            _playerShipView.OnTakeDamage += TakeDamage;
+            SetIsAlive(true);
+            
         }
 
         public void SetIsAlive(bool value)
         {
+            if (_isAlive == value)
+            {
+                return;
+            }
             _isAlive = value;
+            OnInGameStateChanged?.Invoke(value);
         }
 
         public void Dispose()
@@ -50,11 +57,6 @@ namespace SpaceShooter.Game.Player.Ship
                 return;
             _playerMoveController.Move(deltaTime);
             _weaponController.Tick(deltaTime);
-        }
-
-        public void TakeDamage(int damage)
-        {
-            HealthComponent.TakeDamage(damage);
         }
         
         public class Factory : PlaceholderFactory<PlayerShipEntity>

@@ -38,7 +38,7 @@ namespace SpaceShooter.Game.Enemy
                 .AsSingle();
 
             Container
-                .Bind<SplineMoveController>()
+                .BindInterfacesAndSelfTo<SplineMoveController>()
                 .AsSingle()
                 .WithArguments(enemyView.GetSplineAnimate(), _enemyCreateData.SplineContainer, enemyData.Speed)
                 .NonLazy();
@@ -46,12 +46,14 @@ namespace SpaceShooter.Game.Enemy
             Container
                 .Bind<HealthComponent>()
                 .AsSingle()
-                .WithArguments(enemyData.Health);
+                .WithArguments(enemyData.Health)
+                .NonLazy();
 
             Container
-                .Bind<CollisionDamageComponent>()
+                .BindInterfacesAndSelfTo<CollisionDamageComponent>()
                 .AsSingle()
-                .WithArguments(enemyData.CollisionDamage);
+                .WithArguments(enemyData.CollisionDamage)
+                .NonLazy();
 
             Container
                 .BindInterfacesAndSelfTo<EnemyDeathController>()

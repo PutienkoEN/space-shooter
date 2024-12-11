@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.Common.Interfaces;
 
 namespace SpaceShooter.Game.Enemy
 {
@@ -6,6 +7,6 @@ namespace SpaceShooter.Game.Enemy
     {
         public event Action<bool> OnEnemyChange;
         public EnemyEntity CreateEnemy(EnemyCreateData enemyCreateData);
-        public void DestroyEnemy(EnemyEntity enemyEntity);
+        public void DestroyEnemy(IEnemyEntity enemyEntity);
     }
 }
