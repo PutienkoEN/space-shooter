@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418412233843595618}
+  - component: {fileID: 988506372056248192}
   - component: {fileID: 761418211596254911}
+  - component: {fileID: 8371374388365129482}
   - component: {fileID: -3739754591216379461}
   m_Layer: 15
   m_Name: Enemy Ship
@@ -35,6 +37,24 @@ Transform:
   - {fileID: 1892548535204337110}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &988506372056248192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350751389196330029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 8371374388365129482}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!114 &761418211596254911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +68,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroySound: {fileID: 8300000, guid: cbc8fd5e9c969114f960700a63f62825, type: 3}
+  splineAnimate: {fileID: -3739754591216379461}
+--- !u!114 &8371374388365129482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350751389196330029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc9501e0b0d4477859fbade4c591079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   splineAnimate: {fileID: -3739754591216379461}
 --- !u!114 &-3739754591216379461
 MonoBehaviour:

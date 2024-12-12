@@ -1,11 +1,9 @@
 ﻿using System;
-using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -75,9 +73,5 @@ namespace SpaceShooter.Game.Enemy
             HealthComponent.TakeDamage(damage);
         }
 
-
-        public class Factory : PlaceholderFactory<EnemyCreateData, EnemyEntity>
-        {
-        }
     }
 }

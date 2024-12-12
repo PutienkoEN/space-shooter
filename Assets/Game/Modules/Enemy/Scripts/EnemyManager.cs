@@ -13,12 +13,12 @@ namespace SpaceShooter.Game.Enemy
     {
         public event Action<bool> OnEnemyChange;
 
-        private readonly EnemyEntity.Factory _enemyFactory;
+        private readonly EnemyEntityFactory _enemyFactory;
         private readonly List<IEntity> _enemies = new();
 
         [Inject]
         public EnemyManager(
-            EnemyEntity.Factory enemyFactory, 
+            EnemyEntityFactory enemyFactory, 
             EffectsAnimator effectsAnimator)
         {
             _enemyFactory = enemyFactory;
