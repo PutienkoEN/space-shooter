@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
-using Game.Modules.ShootingModule.Scripts;
-using SpaceShooter.Game.CameraUtility;
 using SpaceShooter.Game.LifeCycle.Common;
 
-namespace Game.Modules.BulletModule.Scripts
+namespace Game.Modules.BulletModule
 {
     public sealed class BulletController : IGameTickable, IDisposable
     {
-        public IReadOnlyList<BulletEntity> Bullets => _bullets;//ToDo: consider removing it later. Used only in Tests for now;
+        public IReadOnlyList<BulletEntity> Bullets =>
+            _bullets; //ToDo: consider removing it later. Used only in Tests for now;
+
         private readonly List<BulletEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
         private int _counter = -1;
-        
+
         public BulletController(
             BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
-            
+
             _bulletSpawner.OnNewBullet += AddNewBullet;
         }
 
@@ -29,7 +29,7 @@ namespace Game.Modules.BulletModule.Scripts
                 bulletEntity.OnDestroy += RemoveBullet;
             }
         }
-        
+
         private void RemoveBullet(BulletEntity bulletEntity)
         {
             if (!_bullets.Contains(bulletEntity))
@@ -39,6 +39,7 @@ namespace Game.Modules.BulletModule.Scripts
             {
                 _counter--;
             }
+
             _bullets.RemoveAt(bulletIndex);
             bulletEntity.OnDestroy -= RemoveBullet;
         }

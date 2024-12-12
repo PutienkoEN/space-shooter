@@ -3,7 +3,7 @@ using Game.Modules.Common.Interfaces;
 using Game.Modules.Common.Scripts;
 using UnityEngine;
 
-namespace Game.Modules.BulletModule.Scripts
+namespace Game.Modules.BulletModule
 {
     public sealed class BulletView : MonoBehaviour, ICollidable
     {
@@ -31,5 +31,7 @@ namespace Game.Modules.BulletModule.Scripts
         {
             Destroy(gameObject);
         }
+
+
     }
 }

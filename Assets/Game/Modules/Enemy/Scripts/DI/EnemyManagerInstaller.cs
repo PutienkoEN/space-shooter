@@ -11,14 +11,12 @@ namespace SpaceShooter.Game.Enemy
         public override void Install(DiContainer container)
         {
             container
-                .BindFactory<EnemyView, Vector3, Quaternion, EnemyView, EnemyViewFactory>()
-                .WithFactoryArguments(worldTransform)
-                .AsSingle();
+                .Bind<EnemyViewFactory>()
+                .AsSingle()
+                .WithArguments(worldTransform);
 
             container
-                .BindFactory<EnemyCreateData, EnemyEntity, EnemyEntity.Factory>()
-                .FromSubContainerResolve()
-                .ByInstaller<EnemyInstaller>()
+                .Bind<EnemyEntityFactory>()
                 .AsSingle();
 
             container

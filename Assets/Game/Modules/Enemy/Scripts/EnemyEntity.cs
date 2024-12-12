@@ -1,11 +1,10 @@
 ﻿using System;
-using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
+using Game.Modules.ShootingModule.Scripts;
 using Sirenix.OdinInspector;
 using SpaceShooter.Game.Components;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -19,7 +18,7 @@ namespace SpaceShooter.Game.Enemy
         private readonly SplineMoveController _splineMoveController;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly CollisionDamageComponent _collisionDamageComponent;
-
+        private readonly WeaponController _weaponController;
         private readonly IEnemyView _enemyView;
 
         [Button]
@@ -34,12 +33,14 @@ namespace SpaceShooter.Game.Enemy
             SplineMoveController splineMoveController,
             BoundsCheckComponent boundsCheckComponent,
             CollisionDamageComponent collisionDamageComponent,
+            WeaponController weaponController,
             IEnemyView enemyView)
         {
             HealthComponent = healthComponent;
             _splineMoveController = splineMoveController;
             _boundsCheckComponent = boundsCheckComponent;
             _collisionDamageComponent = collisionDamageComponent;
+            _weaponController = weaponController;
             _enemyView = enemyView;
         }
 
@@ -47,7 +48,7 @@ namespace SpaceShooter.Game.Enemy
         {
             _enemyView.OnDealDamage += DealCollisionDamage;
             _enemyView.OnTakeDamage += HandleTakeDamage;
-            
+
             _splineMoveController.StartMove();
         }
 
@@ -68,16 +69,12 @@ namespace SpaceShooter.Game.Enemy
             {
                 OnLeftGameArea?.Invoke(this);
             }
+            _weaponController.Tick(deltaTime);
         }
 
         private void HandleTakeDamage(int damage)
         {
             HealthComponent.TakeDamage(damage);
-        }
-
-
-        public class Factory : PlaceholderFactory<EnemyCreateData, EnemyEntity>
-        {
         }
     }
 }

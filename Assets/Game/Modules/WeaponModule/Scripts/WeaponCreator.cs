@@ -7,37 +7,31 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        private IFactory<WeaponConfig, Transform[], int, WeaponComponent> _weaponComponentFactory;
+        private IFactory<WeaponData, Transform[], WeaponComponent> _weaponComponentFactory;
 
-        public WeaponCreator(IFactory
-            <WeaponConfig, Transform[], int, WeaponComponent> weaponComponentFactory)
+        public WeaponCreator(IFactory<WeaponData, Transform[], WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
 
-        public IWeaponComponent CreateWeapon(
-            WeaponConfig weaponConfig,
-            Transform parentTransform,
-            int entityLayer)
+        public IWeaponComponent CreateWeapon(WeaponData weaponConfig, Transform parentTransform)
         {
             IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
 
             IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
                 weaponConfig,
-                weaponView.GetFirePoints(),
-                entityLayer);
+                weaponView.GetFirePoints());
 
             weaponComponent.OnShoot += weaponView.PlayShootSound;
             return weaponComponent;
         }
 
         private WeaponView CreateWeaponView(
-            WeaponConfig weaponConfig,
+            WeaponData weaponData,
             Transform parentTransform)
         {
-            WeaponData weaponData = weaponConfig.GetWeaponData();
             Transform weaponParent = SetWeaponParent(parentTransform);
-            WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
+            WeaponView weaponView = Object.Instantiate(weaponData.WeaponPrefab, weaponParent);
             return weaponView;
         }
 
