@@ -1,4 +1,4 @@
-﻿using Game.Modules.BulletModule.Scripts;
+﻿using Game.Modules.BulletModule;
 using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects

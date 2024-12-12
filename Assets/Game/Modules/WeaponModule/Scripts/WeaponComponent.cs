@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.BulletModule;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
 using Zenject;
@@ -16,8 +17,9 @@ namespace Game.Modules.ShootingModule.Scripts
         private readonly float _projectileSpeed;
         private readonly int _damage;
         private float _fireStartDelay = 0.5f;
-
+        private readonly BulletView _projectilePrefab;
         private float _timer;
+
 
         public WeaponComponent(
             BulletSpawner bulletSpawner,
@@ -31,8 +33,8 @@ namespace Game.Modules.ShootingModule.Scripts
             _fireRate = weaponData.FireRate;
             _damage = weaponData.Damage;
             _firePoints = firePoints;
-            
-            _timer = _fireStartDelay;//Is used to delay start of shooting when new weapon is created
+            _projectilePrefab = weaponData.ProjectilePrefab;
+            _timer = _fireStartDelay; //Is used to delay start of shooting when new weapon is created
         }
 
 
@@ -51,7 +53,8 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                _bulletSpawner.LaunchBullet(firePoint, _projectileSpeed, _damage);
+                var bulletData = new BulletData(_damage, _projectileSpeed);
+                _bulletSpawner.LaunchBullet(firePoint, _projectilePrefab, bulletData);
             }
 
             OnShoot?.Invoke();

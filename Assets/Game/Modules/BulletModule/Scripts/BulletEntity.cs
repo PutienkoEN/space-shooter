@@ -1,41 +1,42 @@
 ﻿using System;
+using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
-using ModestTree;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Modules.BulletModule.Scripts
+namespace Game.Modules.BulletModule
 {
     public sealed class BulletEntity
     {
         public event Action<BulletEntity> OnDestroy;
-        
+
         private readonly BulletView _bulletView;
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
         private Vector3 _direction;
         private int _damage;
-        
+
         [Inject]
         public BulletEntity(
-            BulletView bulletView, 
-            MoveComponent moveComponent, 
-            BoundsCheckComponent boundsCheckComponent)
+            BulletView bulletView,
+            MoveComponent moveComponent,
+            BoundsCheckComponent boundsCheckComponent,
+            int damage)
         {
             _bulletView = bulletView;
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
+            _damage = damage;
             _collider = _bulletView.GetComponentInChildren<Collider>();
 
             _bulletView.OnDealDamage += HandleOnDealDamage;
         }
 
-        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction, int damage)
+        public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
             _direction = direction;
-            _damage = damage;
             _bulletView.transform.SetPositionAndRotation(position, rotation);
         }
 
@@ -47,7 +48,7 @@ namespace Game.Modules.BulletModule.Scripts
                 Destroy();
             }
         }
-        
+
         private void HandleOnDealDamage(IDamageable otherObject)
         {
             otherObject.TakeDamage(_damage);
@@ -57,18 +58,13 @@ namespace Game.Modules.BulletModule.Scripts
         private void Destroy()
         {
             _bulletView.OnDealDamage -= HandleOnDealDamage;
-            
+
             OnDestroy?.Invoke(this);
-            
+
             //The check required for the unit test to work correctly.
             // Destroying in Edit Mode is not allowed.
-            if(Application.isPlaying) 
+            if (Application.isPlaying)
                 _bulletView.DestroyBullet();
         }
-        
-        public class Factory : PlaceholderFactory<float, BulletEntity>
-        {
-        }
-        
     }
 }

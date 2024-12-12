@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Game.Modules.BulletModule.Scripts;
 using Game.Modules.ShootingModule.Scripts;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using Moq;
