@@ -1,5 +1,7 @@
 ﻿using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Components;
+using Game.Modules.ShootingModule.Scripts;
+using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -10,6 +12,7 @@ namespace SpaceShooter.Game.Enemy
     public class EnemyInstaller : MonoInstaller
     {
         [SerializeField] private SplineAnimate splineAnimate;
+        [SerializeField] private WeaponConfig weaponConfig;
 
         [Inject] private EnemyData _enemyData;
         [Inject] private SplineContainer _splineContainer;
@@ -49,6 +52,10 @@ namespace SpaceShooter.Game.Enemy
 
             Container.Bind<BoundsCheckComponent>().AsSingle();
             Container.BindInterfacesAndSelfTo<ColliderRectProvider>().AsSingle();
+            
+            Container.Bind<WeaponController>()
+                .AsSingle()
+                .WithArguments(weaponConfig, transform, (LayerMask)gameObject.layer);
         }
     }
 }

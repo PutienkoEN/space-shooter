@@ -8,6 +8,7 @@
     "Game.LifeCycle.Common",
     "Game.Modules.Common",
     "Game.Modules.SoundManagement",
-    "Game.Modules.AnimationModule"
+    "Game.Modules.AnimationModule",
+    "Game.Modules.Weapon"
   ]
 }
