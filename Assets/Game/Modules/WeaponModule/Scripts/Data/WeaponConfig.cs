@@ -1,43 +1,51 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using Game.Modules.BulletModule.Scripts;
+using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "WeaponConfig", menuName = "SpaceShooter/ShootingModule/WeaponConfig", order = 0)]
     public sealed class WeaponConfig : ScriptableObject
     {
-        [SerializeField] private WeaponView prefab;
-        [SerializeField] private int damage;
+        [Header("Prefabs")] [SerializeField] private WeaponView weaponPrefab;
+        [SerializeField] private BulletView projectilePrefab;
+
+        [Header("Configurations")] [SerializeField]
+        private int damage;
+
         [SerializeField] private float fireRate;
-        [SerializeField] private ProjectileConfig projectileConfig;
+        [SerializeField] private float projectileSpeed;
 
         public WeaponData GetWeaponData()
         {
             return new WeaponData(
-                prefab,
+                weaponPrefab,
+                projectilePrefab,
                 damage,
                 fireRate,
-                projectileConfig.GetProjectileData());
+                projectileSpeed);
         }
     }
 
     public struct WeaponData
     {
-        public WeaponView Prefab;
-        public int Damage;
-        public float FireRate;
-        public ProjectileData ProjectileData;
-        
+        public WeaponView WeaponPrefab { get; private set; }
+        public BulletView ProjectilePrefab { get; private set; }
+        public int Damage { get; private set; }
+        public float FireRate { get; private set; }
+        public float ProjectileSpeed { get; private set; }
+
         public WeaponData(
-            WeaponView prefab,
+            WeaponView weaponPrefab,
+            BulletView projectilePrefab,
             int damage,
             float fireRate,
-            ProjectileData projectileData)
+            float projectileSpeed)
         {
+            WeaponPrefab = weaponPrefab;
+            ProjectilePrefab = projectilePrefab;
             Damage = damage;
-            ProjectileData = projectileData;
             FireRate = fireRate;
-            Prefab = prefab;
+            ProjectileSpeed = projectileSpeed;
         }
     }
 }

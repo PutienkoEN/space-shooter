@@ -27,7 +27,7 @@ namespace Game.Modules.ShootingModule.Scripts
             _bulletSpawner = bulletSpawner;
 
             WeaponData weaponData = weaponConfig.GetWeaponData();
-            _projectileSpeed = weaponData.ProjectileData.ProjectileSpeed;
+            _projectileSpeed = weaponData.ProjectileSpeed;
             _fireRate = weaponData.FireRate;
             _damage = weaponData.Damage;
             _firePoints = firePoints;

@@ -37,7 +37,7 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             WeaponData weaponData = weaponConfig.GetWeaponData();
             Transform weaponParent = SetWeaponParent(parentTransform);
-            WeaponView weaponView = Object.Instantiate(weaponData.Prefab, weaponParent);
+            WeaponView weaponView = Object.Instantiate(weaponData.WeaponPrefab, weaponParent);
             return weaponView;
         }
 
