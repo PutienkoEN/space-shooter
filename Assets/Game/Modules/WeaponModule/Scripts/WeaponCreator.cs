@@ -7,16 +7,15 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
-        private IFactory<WeaponConfig, Transform[], int, WeaponComponent> _weaponComponentFactory;
+        private IFactory<WeaponData, Transform[], int, WeaponComponent> _weaponComponentFactory;
 
-        public WeaponCreator(IFactory
-            <WeaponConfig, Transform[], int, WeaponComponent> weaponComponentFactory)
+        public WeaponCreator(IFactory<WeaponData, Transform[], int, WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }
 
         public IWeaponComponent CreateWeapon(
-            WeaponConfig weaponConfig,
+            WeaponData weaponConfig,
             Transform parentTransform,
             int entityLayer)
         {
@@ -32,10 +31,9 @@ namespace Game.Modules.ShootingModule.Scripts
         }
 
         private WeaponView CreateWeaponView(
-            WeaponConfig weaponConfig,
+            WeaponData weaponData,
             Transform parentTransform)
         {
-            WeaponData weaponData = weaponConfig.GetWeaponData();
             Transform weaponParent = SetWeaponParent(parentTransform);
             WeaponView weaponView = Object.Instantiate(weaponData.WeaponPrefab, weaponParent);
             return weaponView;

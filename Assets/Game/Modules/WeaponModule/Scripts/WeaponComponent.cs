@@ -23,12 +23,11 @@ namespace Game.Modules.ShootingModule.Scripts
 
         public WeaponComponent(
             BulletSpawner bulletSpawner,
-            WeaponConfig weaponConfig,
+            WeaponData weaponData,
             Transform[] firePoints)
         {
             _bulletSpawner = bulletSpawner;
 
-            WeaponData weaponData = weaponConfig.GetWeaponData();
             _projectileSpeed = weaponData.ProjectileSpeed;
             _fireRate = weaponData.FireRate;
             _damage = weaponData.Damage;
@@ -60,7 +59,7 @@ namespace Game.Modules.ShootingModule.Scripts
             OnShoot?.Invoke();
         }
 
-        public class Factory : PlaceholderFactory<WeaponConfig, Transform[], int, WeaponComponent>
+        public class Factory : PlaceholderFactory<WeaponData, Transform[], int, WeaponComponent>
         {
             private readonly BulletSpawner _bulletSpawner;
 
@@ -71,7 +70,7 @@ namespace Game.Modules.ShootingModule.Scripts
             }
 
             public override WeaponComponent Create(
-                WeaponConfig config,
+                WeaponData config,
                 Transform[] firePoints,
                 int layer)
             {

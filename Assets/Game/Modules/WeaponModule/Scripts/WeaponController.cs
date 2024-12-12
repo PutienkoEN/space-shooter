@@ -9,13 +9,13 @@ namespace Game.Modules.ShootingModule.Scripts
         private readonly IWeaponComponent _activeWeapon;
         
         public WeaponController(
-            WeaponConfig weaponConfig,
+            WeaponData weaponData,
             IWeaponCreator weaponCreator,
             Transform parentTransform,
             LayerMask parentLayer)
         {
             _activeWeapon = weaponCreator.CreateWeapon(
-                weaponConfig, 
+                weaponData, 
                 parentTransform,
                 parentLayer);
         }

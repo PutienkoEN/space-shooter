@@ -15,7 +15,7 @@ namespace Game.Modules.ShootingModule.Scripts.ScriptableObjects
         [SerializeField] private float fireRate;
         [SerializeField] private float projectileSpeed;
 
-        public WeaponData GetWeaponData()
+        public WeaponData GetData()
         {
             return new WeaponData(
                 weaponPrefab,
