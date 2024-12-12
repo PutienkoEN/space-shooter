@@ -14,10 +14,7 @@ namespace Game.Modules.ShootingModule.Scripts
             _weaponComponentFactory = weaponComponentFactory;
         }
 
-        public IWeaponComponent CreateWeapon(
-            WeaponData weaponConfig,
-            Transform parentTransform,
-            int entityLayer)
+        public IWeaponComponent CreateWeapon(WeaponData weaponConfig, Transform parentTransform)
         {
             IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
 

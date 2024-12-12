@@ -55,7 +55,7 @@ namespace SpaceShooter.Game.Enemy
             
             Container.Bind<WeaponController>()
                 .AsSingle()
-                .WithArguments(weaponConfig.GetData(), transform, (LayerMask)gameObject.layer);
+                .WithArguments(weaponConfig.GetData(), transform);
         }
     }
 }
