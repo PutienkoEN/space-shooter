@@ -16,7 +16,8 @@ namespace Game.Modules.ShootingModule.Scripts
         private readonly float _fireRate;
         private readonly float _projectileSpeed;
         private readonly int _damage;
-        private float _fireStartDelay = 0.5f;
+        private readonly float _fireStartDelay = 0.5f;
+        
         private readonly BulletView _projectilePrefab;
         private float _timer;
 
@@ -59,28 +60,8 @@ namespace Game.Modules.ShootingModule.Scripts
             OnShoot?.Invoke();
         }
 
-        public class Factory : PlaceholderFactory<WeaponData, Transform[], int, WeaponComponent>
+        public class Factory : PlaceholderFactory<WeaponData, Transform[], WeaponComponent>
         {
-            private readonly BulletSpawner _bulletSpawner;
-
-            [Inject]
-            public Factory(BulletSpawner bulletSpawner)
-            {
-                _bulletSpawner = bulletSpawner;
-            }
-
-            public override WeaponComponent Create(
-                WeaponData config,
-                Transform[] firePoints,
-                int layer)
-            {
-                WeaponComponent weaponComponent = new WeaponComponent(
-                    _bulletSpawner,
-                    config,
-                    firePoints);
-
-                return weaponComponent;
-            }
         }
     }
 }

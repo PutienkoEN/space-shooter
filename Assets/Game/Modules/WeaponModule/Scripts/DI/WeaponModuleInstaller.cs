@@ -10,11 +10,14 @@ namespace Game.Modules.ShootingModule
     {
         public override void Install(DiContainer container)
         {
-            container.BindFactory<WeaponData, Transform[], int,
-                WeaponComponent, WeaponComponent.Factory>();
-
-            container.Bind<IFactory<WeaponData, Transform[], int, WeaponComponent>>()
-                .To<WeaponComponent.Factory>().FromResolve();
+            container
+                .BindFactory<WeaponData, Transform[], WeaponComponent, WeaponComponent.Factory>()
+                .AsSingle();
+            
+            container
+                .Bind<IFactory<WeaponData, Transform[], WeaponComponent>>()
+                .To<WeaponComponent.Factory>()
+                .FromResolve();
 
             container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
         }
