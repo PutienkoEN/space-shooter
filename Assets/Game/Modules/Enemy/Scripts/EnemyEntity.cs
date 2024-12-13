@@ -2,8 +2,7 @@
 using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
-using UnityEngine;
-using UnityEngine.Serialization;
+using Game.Modules.ShootingModule.Scripts;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -16,6 +15,8 @@ namespace SpaceShooter.Game.Enemy
         public event Action<bool> OnInGameStateChanged;
         
         private readonly BoundsCheckComponent _boundsCheckComponent;
+        private readonly CollisionDamageComponent _collisionDamageComponent;
+        private readonly WeaponController _weaponController;
         private readonly IEnemyView _enemyView;
         
         private bool _isActive;
@@ -24,9 +25,11 @@ namespace SpaceShooter.Game.Enemy
         [Inject]
         public EnemyEntity(
             BoundsCheckComponent boundsCheckComponent,
+            WeaponController weaponController,
             IEnemyView enemyView)
         {
             _boundsCheckComponent = boundsCheckComponent;
+            _weaponController = weaponController;
             _enemyView = enemyView;
         }
 
@@ -50,8 +53,12 @@ namespace SpaceShooter.Game.Enemy
                     InvokeOnLeftGameArea);
             }
 
-            if (!_isInGame) return;
-            // invoking on other components here...
+            if (!_isInGame)
+            {
+                return;
+            }
+            
+            _weaponController.Tick(deltaTime);
 
         }
 

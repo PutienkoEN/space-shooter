@@ -10,7 +10,7 @@ namespace SpaceShooter.Game.Player.Ship
     {
         [SerializeField] private float speed;
         [SerializeField] private int health;
-        
+
         [SerializeField] private WeaponConfig weaponConfig;
 
         public override void InstallBindings()
@@ -49,18 +49,10 @@ namespace SpaceShooter.Game.Player.Ship
                 .BindInterfacesAndSelfTo<PlayerMoveController>()
                 .AsSingle()
                 .NonLazy();
-            
-            Container.BindFactory<WeaponConfig, Transform[], int, 
-                WeaponComponent, WeaponComponent.Factory>();
 
-            Container.Bind<IFactory<WeaponConfig, Transform[], int, WeaponComponent>>()
-                .To<WeaponComponent.Factory>().FromResolve();
-            
-            Container.BindInterfacesAndSelfTo<WeaponCreator>().AsSingle();
-            
             Container.Bind<WeaponController>()
                 .AsSingle()
-                .WithArguments(weaponConfig, transform, (LayerMask)gameObject.layer);
+                .WithArguments(weaponConfig.GetData(), transform);
         }
     }
 }

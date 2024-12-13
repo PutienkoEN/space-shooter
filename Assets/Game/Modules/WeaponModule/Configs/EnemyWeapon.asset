@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c9e1a1d423e475f8d25fee13f483a3d, type: 3}
-  m_Name: SingleShotWeaponData
+  m_Name: EnemyWeapon
   m_EditorClassIdentifier: 
-  prefab: {fileID: -5788393637922991918, guid: 6ab5c5d712a91014db0b242a07d959cd, type: 3}
-  damage: 20
-  fireRate: 1
-  projectileConfig: {fileID: 11400000, guid: 033aca9203f30ac47bd2fa22db33a228, type: 2}
+  weaponPrefab: {fileID: -5788393637922991918, guid: 9b61e61ddca46474f89eb293bcbff530, type: 3}
+  projectilePrefab: {fileID: 5208573238623271595, guid: b81bb54b89bb6ae40b364b30b10d3a3b, type: 3}
+  damage: 5
+  fireRate: 2
+  projectileSpeed: 15

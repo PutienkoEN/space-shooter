@@ -1,23 +1,21 @@
 ﻿using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Components;
+using Game.Modules.ShootingModule.Scripts;
+using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using SpaceShooter.Game.Components;
+using UnityEngine;
+using UnityEngine.Splines;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public class EnemyInstaller : Installer<EnemyInstaller>
+    public class EnemyInstaller : MonoInstaller
     {
-        private readonly EnemyViewFactory _enemyViewFactory;
-        private readonly EnemyCreateData _enemyCreateData;
+        [SerializeField] private SplineAnimate splineAnimate;
+        [SerializeField] private WeaponConfig weaponConfig;
 
-        [Inject]
-        public EnemyInstaller(
-            EnemyCreateData enemyCreateData,
-            EnemyViewFactory enemyViewFactory)
-        {
-            _enemyCreateData = enemyCreateData;
-            _enemyViewFactory = enemyViewFactory;
-        }
+        [Inject] private EnemyData _enemyData;
+        [Inject] private SplineContainer _splineContainer;
 
         public override void InstallBindings()
         {
@@ -25,34 +23,27 @@ namespace SpaceShooter.Game.Enemy
                 .BindInterfacesAndSelfTo<EnemyEntity>()
                 .AsSingle();
 
-            var enemyData = _enemyCreateData.EnemyData;
-
-            var enemyView = _enemyViewFactory.Create(
-                enemyData.EnemyPrefab,
-                _enemyCreateData.SpawnPosition,
-                _enemyCreateData.SpawnRotation);
-
             Container
-                .BindInterfacesTo(enemyView.GetType())
-                .FromInstance(enemyView)
+                .BindInterfacesAndSelfTo<EnemyView>()
+                .FromComponentOnRoot()
                 .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<SplineMoveController>()
                 .AsSingle()
-                .WithArguments(enemyView.GetSplineAnimate(), _enemyCreateData.SplineContainer, enemyData.Speed)
+                .WithArguments(splineAnimate, _splineContainer, _enemyData.Speed)
                 .NonLazy();
 
             Container
                 .Bind<HealthComponent>()
                 .AsSingle()
-                .WithArguments(enemyData.Health)
+                .WithArguments(_enemyData.Health)
                 .NonLazy();
 
             Container
                 .BindInterfacesAndSelfTo<CollisionDamageComponent>()
                 .AsSingle()
-                .WithArguments(enemyData.CollisionDamage)
+                .WithArguments(_enemyData.CollisionDamage)
                 .NonLazy();
 
             Container
@@ -60,9 +51,12 @@ namespace SpaceShooter.Game.Enemy
                 .AsSingle()
                 .NonLazy();
 
-
             Container.Bind<BoundsCheckComponent>().AsSingle();
             Container.BindInterfacesAndSelfTo<ColliderRectProvider>().AsSingle();
+            
+            Container.Bind<WeaponController>()
+                .AsSingle()
+                .WithArguments(weaponConfig.GetData(), transform);
         }
     }
 }
