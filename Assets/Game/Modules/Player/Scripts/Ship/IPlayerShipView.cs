@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public interface IPlayerShipView : IEntityView, IDamageable, ICollidable, IDamageDealer
+    public interface IPlayerShipView : IEntityView, ICollidable, IDamageDealer, IDamageable
     {
         public Transform GetTransform();
     }

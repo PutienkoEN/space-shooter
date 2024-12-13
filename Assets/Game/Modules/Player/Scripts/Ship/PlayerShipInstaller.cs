@@ -17,7 +17,7 @@ namespace SpaceShooter.Game.Player.Ship
         public override void InstallBindings()
         {
             Container
-                .Bind<PlayerShipEntity>()
+                .BindInterfacesAndSelfTo<PlayerShipEntity>()
                 .AsSingle();
 
             Container

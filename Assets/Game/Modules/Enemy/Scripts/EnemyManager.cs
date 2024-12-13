@@ -52,14 +52,14 @@ namespace SpaceShooter.Game.Enemy
             return enemyEntity;
         }
 
-        public void DestroyEnemy(EnemyEntity enemyEntity)
+        public void DestroyEnemy(IEnemyEntity enemyEntity)
         {
             _enemies.Remove(enemyEntity);
             DisposeEnemy(enemyEntity);
             OnEnemyChange?.Invoke(HasEnemies());
         }
 
-        private void DisposeEnemy(EnemyEntity enemyEntity)
+        private void DisposeEnemy(IEnemyEntity enemyEntity)
         {
             enemyEntity.OnLeftGameArea -= DestroyEnemy;
             enemyEntity.Dispose();
