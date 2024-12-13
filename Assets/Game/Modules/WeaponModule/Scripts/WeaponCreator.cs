@@ -7,9 +7,11 @@ namespace Game.Modules.ShootingModule.Scripts
     public sealed class WeaponCreator : IWeaponCreator
     {
         private const string WEAPON_PARENT_NAME = "WeaponParent";
+
         private IFactory<WeaponData, Transform[], WeaponComponent> _weaponComponentFactory;
 
-        public WeaponCreator(IFactory<WeaponData, Transform[], WeaponComponent> weaponComponentFactory)
+        public WeaponCreator(
+            IFactory<WeaponData, Transform[], WeaponComponent> weaponComponentFactory)
         {
             _weaponComponentFactory = weaponComponentFactory;
         }

@@ -56,6 +56,10 @@ namespace SpaceShooter.Game.Enemy
             Container.Bind<WeaponController>()
                 .AsSingle()
                 .WithArguments(weaponConfig.GetData(), transform);
+
+            Container
+                .BindInterfacesTo<PlayerTargetStrategy>()
+                .AsSingle();
         }
     }
 }

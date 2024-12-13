@@ -2,6 +2,7 @@
 using Game.Modules.Common.Interfaces;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.Components;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
@@ -29,6 +30,11 @@ namespace SpaceShooter.Game.Player.Ship
             HealthComponent = healthComponent;
         }
 
+        public Transform GetTransform()
+        {
+            return _playerShipView.GetTransform();
+        }
+        
         public void Initialize()
         {
             _playerShipView.OnTakeDamage += TakeDamage;
