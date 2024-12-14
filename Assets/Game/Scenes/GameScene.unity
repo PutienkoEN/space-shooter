@@ -154,6 +154,59 @@ Transform:
   - {fileID: 1159603356}
   m_Father: {fileID: 1264921088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &119326997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119326999}
+  - component: {fileID: 119326998}
+  m_Layer: 0
+  m_Name: GameAreaCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &119326998
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119326997}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.669666, y: 15.652742, z: 3.417133}
+  m_Center: {x: 0.045039177, y: 0.035105467, z: 1.2085665}
+--- !u!4 &119326999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119326997}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &259380485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -540,6 +593,10 @@ PrefabInstance:
       propertyPath: endGamePopupView
       value: 
       objectReference: {fileID: 486981520}
+    - target: {fileID: 7550334431515991705, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8043972182512057232, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: parent
       value: 
@@ -1019,3 +1076,4 @@ SceneRoots:
   - {fileID: 1264921088}
   - {fileID: 1149180653}
   - {fileID: 2034924860}
+  - {fileID: 119326999}
