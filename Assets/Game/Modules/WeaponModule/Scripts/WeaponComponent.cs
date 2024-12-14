@@ -73,7 +73,7 @@ namespace Game.Modules.ShootingModule.Scripts
                 bulletData);
         }
 
-        public class Factory : PlaceholderFactory<WeaponData, Transform[], WeaponComponent>
+        public class Factory : PlaceholderFactory<ITargetStrategy, WeaponData, Transform[], WeaponComponent>
         {
         }
     }

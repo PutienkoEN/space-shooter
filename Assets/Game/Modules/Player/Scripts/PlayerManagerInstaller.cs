@@ -32,11 +32,6 @@ namespace SpaceShooter.Game.Player
                 .BindInterfacesAndSelfTo<PlayerGameStartListener>()
                 .AsSingle()
                 .NonLazy();
-
-            container
-                .BindInterfacesTo<PlayerTargetStrategy>()
-                .AsSingle()
-                .Lazy();
         }
     }
 }
