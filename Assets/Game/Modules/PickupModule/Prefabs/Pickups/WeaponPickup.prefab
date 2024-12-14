@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabf33281f1b4cb8936b7cecb163b7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
   pickupItem: {fileID: 6238215304482312992, guid: 9cb8532650235914193d7938dabbf593, type: 3}
 --- !u!1 &6762783280941411078
 GameObject:

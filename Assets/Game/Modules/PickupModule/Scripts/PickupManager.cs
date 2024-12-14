@@ -3,7 +3,7 @@ using SpaceShooter.Game.LifeCycle.Common;
 
 namespace Game.PickupModule.Scripts
 {
-    public class PickupManager : IGameTickable
+    public sealed class PickupManager : IGameTickable
     {
         private readonly List<PickupEntity> _pickupItems = new();
         private readonly PickupEntityFactory _pickupEntityFactory;

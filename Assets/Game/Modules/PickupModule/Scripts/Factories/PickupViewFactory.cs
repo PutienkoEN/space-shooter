@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SpaceShooter.Game.Components;
+using UnityEngine;
 using Zenject;
 
 namespace Game.PickupModule.Scripts
@@ -16,10 +17,11 @@ namespace Game.PickupModule.Scripts
         }
 
         public PickupView Create(PickupCreateData data)
-        {
+        { 
             var subContainer = _container.CreateSubContainer();
 
-            subContainer.Bind<float>().FromInstance(data.Speed).AsSingle();
+            subContainer.Bind<PickupCreateData>().FromInstance(data).AsSingle();
+            subContainer.BindInstance(data.Speed).WhenInjectedInto<PickupInstaller>();
 
             return subContainer.InstantiatePrefabForComponent<PickupView>(
                 data.PickupPrefab,

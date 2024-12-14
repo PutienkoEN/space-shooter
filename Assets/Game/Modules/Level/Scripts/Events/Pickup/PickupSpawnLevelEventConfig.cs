@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Level.Events
 {
-    public class PickupSpawnLevelEventConfig : ILevelEventConfig<PickupSpawnLevelEventData>
+    public sealed class PickupSpawnLevelEventConfig : ILevelEventConfig<PickupSpawnLevelEventData>
     {
         [Header("Movement and Coordinates")] [SerializeReference]
-        private Transform spawnPoint;
+        private Transform _spawnPoint;
 
         [Header("Enemy Data")] [SerializeField]
-        private PickupView pickupPrefab;
+        private PickupView _pickupPrefab;
         
         public PickupSpawnLevelEventData GetData()
         {
             return new PickupSpawnLevelEventData(
-                spawnPoint.position,
-                spawnPoint.rotation,
-                pickupPrefab);
+                _spawnPoint.position,
+                _spawnPoint.rotation,
+                _pickupPrefab);
         }
     }
 

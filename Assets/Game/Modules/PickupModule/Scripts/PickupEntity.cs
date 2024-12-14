@@ -1,15 +1,23 @@
-﻿using System;
-using Game.Modules.Common.Interfaces;
+﻿using SpaceShooter.Game.Components;
 using UnityEngine;
+using Zenject;
 
 namespace Game.PickupModule.Scripts
 {
-    public class PickupEntity : IEntity
+    public sealed class PickupEntity
     {
-        public event Action<bool> OnInGameStateChanged;
+        
+        private readonly MoveComponent _moveComponent;
+
+        [Inject]
+        public PickupEntity(MoveComponent moveComponent)
+        {
+            _moveComponent = moveComponent;
+        }
+
         public void Update(float deltaTime)
         {
-            Debug.Log("pickup is ticking");
+            _moveComponent.MoveToDirection(Vector3.down, deltaTime);
         }
     }
 }

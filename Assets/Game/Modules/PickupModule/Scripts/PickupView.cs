@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.PickupModule.Scripts
 {
-    public class PickupView : MonoBehaviour
+    public sealed class PickupView : MonoBehaviour
     {
         public int MoveSpeed => moveSpeed;
         

@@ -4,10 +4,10 @@ namespace Game.PickupModule.Scripts
 {
     public struct PickupCreateData
     {
-        public float Speed;
+        public readonly float Speed;
         public Vector3 SpawnPosition;
         public Quaternion SpawnRotation;
-        public PickupView PickupPrefab;
+        public readonly PickupView PickupPrefab;
 
         public PickupCreateData(
             Vector3 spawnPosition, 
