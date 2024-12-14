@@ -16,7 +16,7 @@ namespace Game.Modules.ShootingModule.Scripts
             _playerManager = playerManager;
         }
 
-        public Vector3 GetTarget()
+        public Vector3 GetShootDirection(Transform shootPoint)
         {
             if (_transform == null)
             {
@@ -25,7 +25,7 @@ namespace Game.Modules.ShootingModule.Scripts
 
             if (_transform != null)
             {
-                return _transform.position;
+                return GetDirection(shootPoint);
             }
 
             Debug.LogWarning("Player ship entity is null");
@@ -41,6 +41,12 @@ namespace Game.Modules.ShootingModule.Scripts
             }
 
             _transform = playerShipEntity;
+        }
+
+        private Vector3 GetDirection(Transform shootPoint)
+        {
+            var direction = _transform.position - shootPoint.position;
+            return direction.normalized;
         }
     }
 }

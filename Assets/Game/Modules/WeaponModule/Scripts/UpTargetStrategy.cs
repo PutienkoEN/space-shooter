@@ -5,7 +5,7 @@ namespace Game.Modules.WeaponModule
 {
     public class UpTargetStrategy : ITargetStrategy
     {
-        public Vector3 GetTarget()
+        public Vector3 GetShootDirection(Transform shootPoint)
         {
             return Vector3.up;
         }

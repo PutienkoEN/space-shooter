@@ -68,7 +68,7 @@ namespace Game.Modules.ShootingModule.Scripts
             return new LaunchBulletData(
                 _projectilePrefab,
                 firePoint.position,
-                _targetStrategy.GetTarget(),
+                _targetStrategy.GetShootDirection(firePoint),
                 firePoint.rotation,
                 bulletData);
         }
