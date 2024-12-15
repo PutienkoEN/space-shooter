@@ -43,7 +43,7 @@ namespace SpaceShooter.Game.Player
 
         public void Move(float deltaTime)
         {
-            _moveComponent.MoveTowards(_targetPosition, deltaTime);
+            _moveComponent.MoveToTarget(_targetPosition, deltaTime);
         }
 
         private void MovePlayerToCoordinates(Vector3 target)
