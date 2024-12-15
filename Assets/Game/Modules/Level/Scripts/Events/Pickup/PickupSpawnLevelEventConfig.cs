@@ -11,14 +11,14 @@ namespace SpaceShooter.Game.Level.Events
         private Transform _spawnPoint;
 
         [Header("Pickup Data")] [SerializeField]
-        private PickupView pickupPrefab;
+        private PickupView _pickupPrefab;
         
         public PickupSpawnLevelEventData GetData()
         {
             return new PickupSpawnLevelEventData(
                 _spawnPoint.position,
                 _spawnPoint.rotation,
-                pickupPrefab);
+                _pickupPrefab);
         }
     }
 
@@ -34,8 +34,7 @@ namespace SpaceShooter.Game.Level.Events
             PickupCreateData = new PickupCreateData(
                 spawnPosition, 
                 spawnRotation, 
-                pickupPrefab,
-                pickupPrefab.MoveSpeed);
+                pickupPrefab);
         }
     }
 }

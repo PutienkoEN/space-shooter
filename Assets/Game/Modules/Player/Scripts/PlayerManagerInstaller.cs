@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.LifeCycle.Common;
+﻿using Game.Modules.ShootingModule.Scripts;
+using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player.Ship;
 using UnityEngine;
 using Zenject;

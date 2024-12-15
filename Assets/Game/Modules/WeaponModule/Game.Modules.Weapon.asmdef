@@ -4,6 +4,6 @@
     "Game.LifeCycle.Common",
     "Zenject",
     "Game.Modules.BulletModule",
-    "Game.Modules.Audio"
+    "Game.Modules.Common"
   ]
 }

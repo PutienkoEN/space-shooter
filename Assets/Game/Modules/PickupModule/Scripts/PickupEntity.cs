@@ -7,31 +7,31 @@ namespace Game.PickupModule.Scripts
 {
     public sealed class PickupEntity
     {
-        
-        private readonly MoveComponent _moveComponent;
+        private readonly IPickupConfig _config;
         private readonly IPickupView _pickupView;
+        private readonly MoveComponent _moveComponent;
         private readonly PlayerManager _playerManager;
 
         [Inject]
         public PickupEntity(
             MoveComponent moveComponent, 
-            IPickupView pickupView, 
+            IPickupConfig config,
             PlayerManager playerManager)
         {
             _moveComponent = moveComponent;
-            _pickupView = pickupView;
+            _config = config;
             _playerManager = playerManager;
-
+            
             _pickupView.OnPickupTaken += HandlePickupTaken;
         }
-
+        
         private void HandlePickupTaken(PickupItem pickupItem)
         {
             //pass the item to Player's pickup processor
             //destroy the pickup
         }
 
-        public void Update(float deltaTime)
+        public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(Vector3.down, deltaTime);
         }

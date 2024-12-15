@@ -7,11 +7,7 @@ namespace Game.PickupModule.Scripts
 {
     public sealed class PickupView : MonoBehaviour, IPickupView
     {
-        public event Action<PickupItem> OnPickupTaken;
-        public int MoveSpeed => moveSpeed;
-        
-        [SerializeField] private int moveSpeed;
-        [SerializeField] private PickupItem pickupItem;
+        public event Action<> OnPickupTaken;
         
         private void Awake()
         {
@@ -27,7 +23,7 @@ namespace Game.PickupModule.Scripts
             var player = other.GetComponentInParent<IPlayerShipView>();
             if (player != null)
             {
-                OnPickupTaken?.Invoke(pickupItem);
+                OnPickupTaken?.Invoke();
             }
         }
         
