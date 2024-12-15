@@ -60,10 +60,6 @@ namespace SpaceShooter.Game.Player.Ship
                 .BindInterfacesTo<UpAsTargetStrategy>()
                 .AsSingle();
             
-            Container
-                .Bind<PickupItemProcessor>()
-                .AsSingle()
-                .NonLazy();
         }
     }
 }

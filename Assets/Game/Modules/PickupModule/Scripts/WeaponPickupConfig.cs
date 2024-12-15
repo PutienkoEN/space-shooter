@@ -13,7 +13,6 @@ namespace Game.PickupModule.Scripts
             return new WeaponPickupConfigData(
                 weaponConfig);
         }
-        
     }
     
     public class WeaponPickupConfigData : IPickupConfigData
@@ -24,5 +23,8 @@ namespace Game.PickupModule.Scripts
         {
             WeaponConfig = weaponConfig;
         }
+        
     }
+    
+
 }

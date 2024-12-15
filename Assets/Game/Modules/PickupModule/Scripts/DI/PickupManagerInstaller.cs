@@ -22,6 +22,15 @@ namespace Game.PickupModule.Scripts
             container
                 .BindInterfacesAndSelfTo<PickupManager>()
                 .AsSingle();
+
+            container
+                .BindInterfacesAndSelfTo<WeaponPickupStrategy>()
+                .AsSingle();
+            
+            container
+                .Bind<PickupItemProcessor>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }
