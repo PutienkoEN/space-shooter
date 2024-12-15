@@ -207,6 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16562b0704e4a1c9f420bde8954cc44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  pickupConfig: {fileID: 11400000, guid: e6c35befb6741a44bbaa4d5120cd71c6, type: 2}
 --- !u!114 &8334465637382370220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,8 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabf33281f1b4cb8936b7cecb163b7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  pickupItem: {fileID: 6238215304482312992, guid: 9cb8532650235914193d7938dabbf593, type: 3}
 --- !u!1 &6762783280941411078
 GameObject:
   m_ObjectHideFlags: 0

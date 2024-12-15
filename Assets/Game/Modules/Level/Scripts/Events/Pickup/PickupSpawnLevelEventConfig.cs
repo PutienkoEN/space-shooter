@@ -33,8 +33,7 @@ namespace SpaceShooter.Game.Level.Events
             PickupCreateData = new PickupCreateData(
                 spawnPosition, 
                 spawnRotation, 
-                pickupPrefab,
-                pickupPrefab.MoveSpeed);
+                pickupPrefab);
         }
     }
 }

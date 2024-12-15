@@ -21,7 +21,6 @@ namespace Game.PickupModule.Scripts
             var subContainer = _container.CreateSubContainer();
 
             subContainer.Bind<PickupCreateData>().FromInstance(data).AsSingle();
-            subContainer.BindInstance(data.Speed).WhenInjectedInto<PickupInstaller>();
 
             return subContainer.InstantiatePrefabForComponent<PickupView>(
                 data.PickupPrefab,
