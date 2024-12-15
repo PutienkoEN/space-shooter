@@ -38,5 +38,5 @@ MonoBehaviour:
     - rid: 5470158638544060506
       type: {class: PickupSpawnLevelEventConfig, ns: SpaceShooter.Game.Level.Events, asm: Game.Modules.Level}
       data:
-        spawnPoint: {fileID: 7353488387103676645, guid: f1b7f0159c122454dbcfd1c4594b8f35, type: 3}
-        pickupPrefab: {fileID: 8334465637382370220, guid: db842945bf6c9c645933dd82926c9e34, type: 3}
+        _spawnPoint: {fileID: 7353488387103676645, guid: f1b7f0159c122454dbcfd1c4594b8f35, type: 3}
+        _pickupPrefab: {fileID: 8334465637382370220, guid: db842945bf6c9c645933dd82926c9e34, type: 3}
