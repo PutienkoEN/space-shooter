@@ -5,13 +5,13 @@ namespace Game.Modules.Scores
     public class ScoreManager
     {
         public event Action<long> OnScoreUpdate;
-        
-        private long currentScore;
 
-        public void AddScore(int score)
+        private long _currentScore;
+
+        public void AddScore(long score)
         {
-            currentScore += score;
-            OnScoreUpdate?.Invoke(currentScore);
+            _currentScore += score;
+            OnScoreUpdate?.Invoke(_currentScore);
         }
     }
 }
