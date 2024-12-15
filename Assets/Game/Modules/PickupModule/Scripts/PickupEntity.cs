@@ -19,7 +19,7 @@ namespace Game.PickupModule.Scripts
             
         }
 
-        public void Update(float deltaTime)
+        public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(Vector3.down, deltaTime);
         }

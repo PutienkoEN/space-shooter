@@ -22,9 +22,10 @@ namespace Game.PickupModule.Scripts
 
         public void Tick(float deltaTime)
         {
-            foreach (var pickup in _pickupItems)
+            for (var index = _pickupItems.Count -1 ; index >= 0; index--)
             {
-               pickup.Update(deltaTime); 
+                var pickup = _pickupItems[index];
+                pickup.OnUpdate(deltaTime);
             }
         }
     }
