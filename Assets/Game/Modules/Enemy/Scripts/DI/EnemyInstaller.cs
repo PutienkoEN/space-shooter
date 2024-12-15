@@ -60,7 +60,7 @@ namespace SpaceShooter.Game.Enemy
                 .WithArguments(weaponConfig.GetData(), transform);
 
             Container
-                .BindInterfacesTo<PlayerTargetStrategy>()
+                .BindInterfacesTo<PlayerAsTargetStrategy>()
                 .AsSingle();
         }
     }

@@ -55,8 +55,8 @@ namespace Game.Modules.ShootingModule.Scripts
         {
             foreach (Transform firePoint in _firePoints)
             {
-                var launch = CreateLaunchBulletData(firePoint);
-                _bulletSpawner.LaunchBullet(launch);
+                var launchData = CreateLaunchBulletData(firePoint);
+                _bulletSpawner.LaunchBullet(launchData);
             }
 
             OnShoot?.Invoke();

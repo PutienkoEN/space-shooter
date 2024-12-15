@@ -4,26 +4,26 @@ using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public class PlayerTargetStrategy : ITargetStrategy
+    public class PlayerAsTargetStrategy : ITargetStrategy
     {
         private readonly IPlayerPositionProvider _playerManager;
 
-        private Transform _transform;
+        private Transform _target;
 
         [Inject]
-        public PlayerTargetStrategy(IPlayerPositionProvider playerManager)
+        public PlayerAsTargetStrategy(IPlayerPositionProvider playerManager)
         {
             _playerManager = playerManager;
         }
 
         public Vector3 GetShootDirection(Transform shootPoint)
         {
-            if (_transform == null)
+            if (_target == null)
             {
                 SetPlayerTransform();
             }
 
-            if (_transform != null)
+            if (_target != null)
             {
                 return GetDirection(shootPoint);
             }
@@ -40,12 +40,12 @@ namespace Game.Modules.ShootingModule.Scripts
                 return;
             }
 
-            _transform = playerShipEntity;
+            _target = playerShipEntity;
         }
 
         private Vector3 GetDirection(Transform shootPoint)
         {
-            var direction = _transform.position - shootPoint.position;
+            var direction = _target.position - shootPoint.position;
             return direction.normalized;
         }
     }

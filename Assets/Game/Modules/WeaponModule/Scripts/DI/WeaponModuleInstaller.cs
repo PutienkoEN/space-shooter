@@ -25,7 +25,7 @@ namespace Game.Modules.ShootingModule
                 .AsSingle();
 
             container
-                .Bind<UpTargetStrategy>()
+                .Bind<UpAsTargetStrategy>()
                 .AsSingle();
         }
     }

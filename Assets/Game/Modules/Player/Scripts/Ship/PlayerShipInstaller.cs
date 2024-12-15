@@ -56,7 +56,7 @@ namespace SpaceShooter.Game.Player.Ship
                 .WithArguments(weaponConfig.GetData(), transform);
 
             Container
-                .BindInterfacesTo<UpTargetStrategy>()
+                .BindInterfacesTo<UpAsTargetStrategy>()
                 .AsSingle();
         }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Modules.WeaponModule
 {
-    public class UpTargetStrategy : ITargetStrategy
+    public class UpAsTargetStrategy : ITargetStrategy
     {
         public Vector3 GetShootDirection(Transform shootPoint)
         {
