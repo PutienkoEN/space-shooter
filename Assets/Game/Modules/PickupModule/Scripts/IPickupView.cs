@@ -5,6 +5,6 @@ namespace Game.PickupModule.Scripts
 {
     public interface IPickupView : IEntityView, ICollidable
     {
-        public event Action<PickupItem> OnPickupTaken;
+        public event Action OnPickupTaken;
     }
 }

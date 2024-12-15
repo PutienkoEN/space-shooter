@@ -25,7 +25,7 @@ namespace Game.PickupModule.Scripts
             _pickupView.OnPickupTaken += HandlePickupTaken;
         }
         
-        private void HandlePickupTaken(PickupItem pickupItem)
+        private void HandlePickupTaken()
         {
             //pass the item to Player's pickup processor
             //destroy the pickup

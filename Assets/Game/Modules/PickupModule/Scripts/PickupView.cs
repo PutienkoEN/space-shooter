@@ -7,7 +7,7 @@ namespace Game.PickupModule.Scripts
 {
     public sealed class PickupView : MonoBehaviour, IPickupView
     {
-        public event Action<> OnPickupTaken;
+        public event Action OnPickupTaken;
         
         private void Awake()
         {

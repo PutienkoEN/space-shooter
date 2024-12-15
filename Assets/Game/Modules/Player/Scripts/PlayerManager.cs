@@ -10,7 +10,7 @@ namespace SpaceShooter.Game.Player
     {
         public event Action OnPlayerDeath;
 
-        private PlayerShipEntity.Factory _shipEntityFactory;
+        private readonly PlayerShipEntity.Factory _shipEntityFactory;
         private PlayerShipEntity _playerShipEntity;
 
         [Inject]
