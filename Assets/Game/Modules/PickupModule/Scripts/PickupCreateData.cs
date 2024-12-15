@@ -7,17 +7,17 @@ namespace Game.PickupModule.Scripts
         public readonly float Speed;
         public Vector3 SpawnPosition;
         public Quaternion SpawnRotation;
-        public readonly PickupView PickupPrefab;
+        public readonly IPickupViewView IPickupPrefab;
 
         public PickupCreateData(
             Vector3 spawnPosition, 
             Quaternion spawnRotation, 
-            PickupView pickupPrefab, 
+            IPickupViewView iPickupPrefab, 
             float speed)
         {
             SpawnPosition = spawnPosition;
             SpawnRotation = spawnRotation;
-            PickupPrefab = pickupPrefab;
+            IPickupPrefab = iPickupPrefab;
             Speed = speed;
         }
     }

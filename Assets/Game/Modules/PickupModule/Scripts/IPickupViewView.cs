@@ -1,14 +1,18 @@
 ﻿using System;
-using Game.Modules.Common.Interfaces;
 using Game.Modules.Common.Scripts;
+using SpaceShooter.Game.Player.Ship;
 using UnityEngine;
 
-namespace Game.Modules.BulletModule
+namespace Game.PickupModule.Scripts
 {
-    public sealed class BulletView : MonoBehaviour, IBulletView
+    public sealed class IPickupViewView : MonoBehaviour, IPickupView
     {
-        public event Action<IDamageable> OnDealDamage;
-
+        public event Action OnPickupTaken;
+        public int MoveSpeed => moveSpeed;
+        
+        [SerializeField] private int moveSpeed;
+        [SerializeField] private PickupItem pickupItem;
+        
         private void Awake()
         {
             var colliderHandler = GetComponentInChildren<ChildColliderHandler>();
@@ -20,23 +24,13 @@ namespace Game.Modules.BulletModule
 
         public void HandleTriggerEnter(Collider other)
         {
-            var damagable = other.GetComponentInParent<IDamageable>();
-            if (damagable != null)
+            var player = other.GetComponentInParent<IPlayerShipView>();
+            if (player != null)
             {
-                OnDealDamage?.Invoke(damagable);
+                OnPickupTaken?.Invoke();
             }
         }
-
-        public Collider GetCollider()
-        {
-            return GetComponentInChildren<Collider>();
-        }
-
-        public Transform GetTransform()
-        {
-            return transform;
-        }
-
+        
         public void SetActive(bool value)
         {
             throw new NotImplementedException();

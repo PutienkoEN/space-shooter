@@ -16,15 +16,15 @@ namespace Game.PickupModule.Scripts
             _parent = parent;
         }
 
-        public PickupView Create(PickupCreateData data)
+        public IPickupViewView Create(PickupCreateData data)
         { 
             var subContainer = _container.CreateSubContainer();
 
             subContainer.Bind<PickupCreateData>().FromInstance(data).AsSingle();
             subContainer.BindInstance(data.Speed).WhenInjectedInto<PickupInstaller>();
 
-            return subContainer.InstantiatePrefabForComponent<PickupView>(
-                data.PickupPrefab,
+            return subContainer.InstantiatePrefabForComponent<IPickupViewView>(
+                data.IPickupPrefab,
                 data.SpawnPosition,
                 data.SpawnRotation,
                 _parent);

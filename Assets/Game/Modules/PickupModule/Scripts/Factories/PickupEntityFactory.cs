@@ -13,8 +13,8 @@ namespace Game.PickupModule.Scripts
 
         public PickupEntity CreatePickupEntity(PickupCreateData data)
         {
-            PickupView pickupView = _pickupViewFactory.Create(data);
-            PickupEntity pickupEntity = pickupView.GetComponent<GameObjectContext>().Container.Resolve<PickupEntity>();
+            IPickupViewView iPickupViewView = _pickupViewFactory.Create(data);
+            PickupEntity pickupEntity = iPickupViewView.GetComponent<GameObjectContext>().Container.Resolve<PickupEntity>();
             return pickupEntity;
         }
     }

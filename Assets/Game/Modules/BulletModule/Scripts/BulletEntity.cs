@@ -11,7 +11,7 @@ namespace Game.Modules.BulletModule
     {
         public event Action<BulletEntity> OnDestroy;
 
-        private readonly BulletView _bulletView;
+        private readonly IBulletView _bulletView;
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
@@ -29,7 +29,7 @@ namespace Game.Modules.BulletModule
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
             _damage = damage;
-            _collider = _bulletView.GetComponentInChildren<Collider>();
+            _collider = _bulletView.GetCollider();
 
             _bulletView.OnDealDamage += HandleOnDealDamage;
         }
@@ -37,7 +37,7 @@ namespace Game.Modules.BulletModule
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
             _direction = direction;
-            _bulletView.transform.SetPositionAndRotation(position, rotation);
+            _bulletView.GetTransform().SetPositionAndRotation(position, rotation);
         }
 
         public void OnUpdate(float deltaTime)
@@ -64,7 +64,7 @@ namespace Game.Modules.BulletModule
             //The check required for the unit test to work correctly.
             // Destroying in Edit Mode is not allowed.
             if (Application.isPlaying)
-                _bulletView.DestroyBullet();
+                _bulletView.Dispose();
         }
     }
 }

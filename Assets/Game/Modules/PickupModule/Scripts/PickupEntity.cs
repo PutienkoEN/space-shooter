@@ -8,11 +8,22 @@ namespace Game.PickupModule.Scripts
     {
         
         private readonly MoveComponent _moveComponent;
+        private readonly IPickupView _iPickupViewView;
 
         [Inject]
-        public PickupEntity(MoveComponent moveComponent)
+        public PickupEntity(
+            MoveComponent moveComponent, 
+            IPickupViewView iPickupViewView)
         {
             _moveComponent = moveComponent;
+            _iPickupViewView = iPickupViewView;
+
+            _iPickupViewView.OnPickupTaken += HandlePickupTaken;
+        }
+
+        private void HandlePickupTaken()
+        {
+            
         }
 
         public void Update(float deltaTime)
