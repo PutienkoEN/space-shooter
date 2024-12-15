@@ -7,9 +7,9 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         private readonly IWeaponComponent _activeWeapon;
 
-        public WeaponController(IWeaponCreator weaponCreator, WeaponData weaponData, Transform parentTransform)
+        public WeaponController(IWeaponCreator weaponCreator, ITargetStrategy targetStrategy, WeaponData weaponData, Transform parentTransform)
         {
-            _activeWeapon = weaponCreator.CreateWeapon(weaponData, parentTransform);
+            _activeWeapon = weaponCreator.CreateWeapon(targetStrategy, weaponData, parentTransform);
         }
 
         public void Tick(float deltaTime)

@@ -4,7 +4,6 @@ using Game.Modules.AnimationModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using ModestTree;
 using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -18,7 +17,7 @@ namespace SpaceShooter.Game.Enemy
 
         [Inject]
         public EnemyManager(
-            EnemyEntityFactory enemyFactory, 
+            EnemyEntityFactory enemyFactory,
             EffectsAnimator effectsAnimator)
         {
             _enemyFactory = enemyFactory;

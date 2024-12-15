@@ -2,6 +2,7 @@
 using Game.Modules.Common.Interfaces;
 using Game.Modules.ShootingModule.Scripts;
 using SpaceShooter.Game.Components;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
@@ -15,8 +16,6 @@ namespace SpaceShooter.Game.Player.Ship
         private readonly WeaponController _weaponController;
         private bool _isAlive;
 
-
-
         [Inject]
         public PlayerShipEntity(
             IPlayerShipView playerShipView,
@@ -28,8 +27,11 @@ namespace SpaceShooter.Game.Player.Ship
             _weaponController = weaponController;
         }
 
+        public Transform GetTransform()
+        {
+            return _playerShipView.GetTransform();
+        }
         
-
         public void Initialize()
         {
             SetIsAlive(true);

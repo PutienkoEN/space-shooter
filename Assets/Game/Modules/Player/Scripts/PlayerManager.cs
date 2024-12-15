@@ -1,12 +1,12 @@
 ﻿using System;
-using Game.Modules.AnimationModule.Scripts;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player.Ship;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player
 {
-    public class PlayerManager : IGameTickable
+    public class PlayerManager : IGameTickable, IPlayerPositionProvider
     {
         public event Action OnPlayerDeath;
 
@@ -20,13 +20,22 @@ namespace SpaceShooter.Game.Player
             _shipEntityFactory = shipEntityFactory;
         }
 
-
         public PlayerShipEntity CreatePlayer()
         {
             _playerShipEntity = _shipEntityFactory.Create();
             _playerShipEntity.Initialize();
 
             return _playerShipEntity;
+        }
+
+        public PlayerShipEntity GetPlayer()
+        {
+            return _playerShipEntity;
+        }
+
+        public Transform GetTransform()
+        {
+            return _playerShipEntity?.GetTransform();
         }
 
         public void DestroyPlayer()

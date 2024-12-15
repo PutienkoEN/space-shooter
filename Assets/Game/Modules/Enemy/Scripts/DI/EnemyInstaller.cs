@@ -2,6 +2,7 @@
 using Game.Modules.Components;
 using Game.Modules.ShootingModule.Scripts;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using Game.Modules.WeaponModule;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -57,6 +58,10 @@ namespace SpaceShooter.Game.Enemy
             Container.Bind<WeaponController>()
                 .AsSingle()
                 .WithArguments(weaponConfig.GetData(), transform);
+
+            Container
+                .BindInterfacesTo<PlayerAsTargetStrategy>()
+                .AsSingle();
         }
     }
 }

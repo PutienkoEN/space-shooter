@@ -1,5 +1,6 @@
 ﻿using Game.Modules.ShootingModule.Scripts;
 using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
+using Game.Modules.WeaponModule;
 using SpaceShooter.Game.Components;
 using UnityEngine;
 using Zenject;
@@ -53,6 +54,10 @@ namespace SpaceShooter.Game.Player.Ship
             Container.Bind<WeaponController>()
                 .AsSingle()
                 .WithArguments(weaponConfig.GetData(), transform);
+
+            Container
+                .BindInterfacesTo<UpAsTargetStrategy>()
+                .AsSingle();
         }
     }
 }
