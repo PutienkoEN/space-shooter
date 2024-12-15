@@ -9,7 +9,7 @@ namespace SpaceShooter.Game.Level.Events
         [Header("Movement and Coordinates")] [SerializeReference]
         private Transform _spawnPoint;
 
-        [Header("Enemy Data")] [SerializeField]
+        [Header("Pickup Data")] [SerializeField]
         private PickupView _pickupPrefab;
         
         public PickupSpawnLevelEventData GetData()
