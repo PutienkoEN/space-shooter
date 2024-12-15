@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using Game.Modules.ShootingModule;
 
 namespace Game.Modules.BulletModule
 {
@@ -13,10 +13,11 @@ namespace Game.Modules.BulletModule
             _bulletBulletEntityFactory = bulletBulletEntityFactory;
         }
 
-        public void LaunchBullet(Transform firePoint, BulletView bulletView, BulletData bulletData)
+        public void LaunchBullet(LaunchBulletData launchData)
         {
-            var bulletEntity = _bulletBulletEntityFactory.Create(bulletView, bulletData);
-            bulletEntity.LaunchBullet(firePoint.position, firePoint.rotation, firePoint.up);
+            var bulletEntity = _bulletBulletEntityFactory.Create(launchData.BulletPrefab, launchData.BulletData);
+            bulletEntity.LaunchBullet(launchData.SpawnPosition, launchData.Rotation, launchData.TargetPosition);
+
             OnNewBullet?.Invoke(bulletEntity);
         }
     }
