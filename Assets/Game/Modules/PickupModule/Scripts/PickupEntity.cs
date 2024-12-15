@@ -1,4 +1,5 @@
 ﻿using SpaceShooter.Game.Components;
+using SpaceShooter.Game.Player;
 using UnityEngine;
 using Zenject;
 
@@ -8,22 +9,26 @@ namespace Game.PickupModule.Scripts
     {
         
         private readonly MoveComponent _moveComponent;
-        private readonly IPickupView _iPickupViewView;
+        private readonly IPickupView _pickupView;
+        private readonly PlayerManager _playerManager;
 
         [Inject]
         public PickupEntity(
             MoveComponent moveComponent, 
-            IPickupViewView iPickupViewView)
+            IPickupView pickupView, 
+            PlayerManager playerManager)
         {
             _moveComponent = moveComponent;
-            _iPickupViewView = iPickupViewView;
+            _pickupView = pickupView;
+            _playerManager = playerManager;
 
-            _iPickupViewView.OnPickupTaken += HandlePickupTaken;
+            _pickupView.OnPickupTaken += HandlePickupTaken;
         }
 
-        private void HandlePickupTaken()
+        private void HandlePickupTaken(PickupItem pickupItem)
         {
-            
+            //pass the item to Player's pickup processor
+            //destroy the pickup
         }
 
         public void Update(float deltaTime)

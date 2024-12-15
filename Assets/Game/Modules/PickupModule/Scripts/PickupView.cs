@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Game.PickupModule.Scripts
 {
-    public sealed class IPickupViewView : MonoBehaviour, IPickupView
+    public sealed class PickupView : MonoBehaviour, IPickupView
     {
-        public event Action OnPickupTaken;
+        public event Action<PickupItem> OnPickupTaken;
         public int MoveSpeed => moveSpeed;
         
         [SerializeField] private int moveSpeed;
@@ -27,7 +27,7 @@ namespace Game.PickupModule.Scripts
             var player = other.GetComponentInParent<IPlayerShipView>();
             if (player != null)
             {
-                OnPickupTaken?.Invoke();
+                OnPickupTaken?.Invoke(pickupItem);
             }
         }
         

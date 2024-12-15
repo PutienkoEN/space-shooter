@@ -1,6 +1,7 @@
 ﻿using Game.PickupModule.Scripts;
 using GSpaceShooter.Game.Level.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceShooter.Game.Level.Events
 {
@@ -10,14 +11,14 @@ namespace SpaceShooter.Game.Level.Events
         private Transform _spawnPoint;
 
         [Header("Pickup Data")] [SerializeField]
-        private IPickupViewView iPickupPrefab;
+        private PickupView pickupPrefab;
         
         public PickupSpawnLevelEventData GetData()
         {
             return new PickupSpawnLevelEventData(
                 _spawnPoint.position,
                 _spawnPoint.rotation,
-                iPickupPrefab);
+                pickupPrefab);
         }
     }
 
@@ -28,13 +29,13 @@ namespace SpaceShooter.Game.Level.Events
         public PickupSpawnLevelEventData(
             Vector3 spawnPosition, 
             Quaternion spawnRotation, 
-            IPickupViewView iPickupPrefab)
+            PickupView pickupPrefab)
         {
             PickupCreateData = new PickupCreateData(
                 spawnPosition, 
                 spawnRotation, 
-                iPickupPrefab,
-                iPickupPrefab.MoveSpeed);
+                pickupPrefab,
+                pickupPrefab.MoveSpeed);
         }
     }
 }

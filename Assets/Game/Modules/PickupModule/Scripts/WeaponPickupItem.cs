@@ -1,11 +1,15 @@
 ﻿using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.PickupModule.Scripts
 {
-    public class TestPickupItem : PickupItem
+    public class WeaponPickupItem : PickupItem
     {
         [SerializeField] private WeaponConfig weaponConfig;
+
+        public WeaponConfig GetWeaponConfig()
+        {
+            return weaponConfig;
+        }
     }
 }
