@@ -6,7 +6,7 @@ namespace Game.Modules.Scores.DI
 {
     public class ScoreManagerInstaller : GameModuleInstaller
     {
-        [SerializeReference] private ScoreView scoreView;
+        [SerializeField] private ScoreView inGameScoreView;
 
         public override void Install(DiContainer container)
         {
@@ -21,7 +21,7 @@ namespace Game.Modules.Scores.DI
 
             container
                 .Bind<IScoreView>()
-                .FromInstance(scoreView)
+                .FromInstance(inGameScoreView)
                 .AsSingle();
         }
     }

@@ -13,5 +13,10 @@ namespace Game.Modules.Scores
             _currentScore += score;
             OnScoreUpdate?.Invoke(_currentScore);
         }
+
+        public long GetScore()
+        {
+            return _currentScore;
+        }
     }
 }

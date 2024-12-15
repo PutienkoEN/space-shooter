@@ -4,5 +4,6 @@
 		"Game.Modules.Game", 
 		"Game.LifeCycle.Common", 
 		"Zenject", 
-		"Game.Modules.SceneManagement" ]
+		"Game.Modules.SceneManagement", 
+		"Game.Modules.Scores" ]
 }

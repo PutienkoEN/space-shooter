@@ -6,12 +6,12 @@ namespace Game.Modules.Scores
     public class ScoreViewController : IInitializable, IDisposable
     {
         private readonly ScoreManager _scoreManager;
-        private readonly IScoreView _scoreView;
+        private readonly IScoreView _inGameScoreView;
 
-        public ScoreViewController(ScoreManager scoreManager, IScoreView scoreView)
+        public ScoreViewController(ScoreManager scoreManager, IScoreView inGameScoreView)
         {
             _scoreManager = scoreManager;
-            _scoreView = scoreView;
+            _inGameScoreView = inGameScoreView;
         }
 
         public void Initialize()
@@ -27,7 +27,7 @@ namespace Game.Modules.Scores
 
         private void UpdateScoreView(long score)
         {
-            _scoreView.SetScoreText(score.ToString());
+            _inGameScoreView.SetScoreText(score.ToString());
         }
     }
 }
