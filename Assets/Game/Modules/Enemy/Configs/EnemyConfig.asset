@@ -16,3 +16,4 @@ MonoBehaviour:
   health: 15
   speed: 5
   collisionDamage: 5
+  scoreAward: 100

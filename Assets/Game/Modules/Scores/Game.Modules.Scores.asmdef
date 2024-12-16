@@ -1,0 +1,8 @@
+﻿{
+  "name": "Game.Modules.Scores",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common",
+    "Unity.TextMeshPro"
+  ]
+}
