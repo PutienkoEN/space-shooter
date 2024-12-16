@@ -74,5 +74,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816c1065843d448284400d5ab70c49ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialLevel: {fileID: 11400000, guid: f373de6f080e5674fabe74228c89f81c, type: 2}
+  levelsConfiguration: {fileID: 11400000, guid: d0a863e846267834eb2e6366ad99cfce, type: 2}
   enableAutonomousGameScene: 1

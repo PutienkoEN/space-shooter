@@ -7,19 +7,18 @@ namespace SpaceShooter.Game.Level
     public class LevelGameStartListener : IGameStartListener
     {
         private readonly LevelEventManager _levelEventManager;
-        private readonly ILevelProvider _levelProvider;
+        private readonly LevelManager _levelManager;
 
-        [Inject]
-        public LevelGameStartListener(LevelEventManager levelEventManager, ILevelProvider levelProvider)
+        public LevelGameStartListener(LevelEventManager levelEventManager, LevelManager levelManager)
         {
             _levelEventManager = levelEventManager;
-            _levelProvider = levelProvider;
+            _levelManager = levelManager;
         }
 
         public void OnGameStart()
         {
-            var levelConfig = _levelProvider.GetLevelConfig();
-            _levelEventManager.StartLevel(levelConfig.GetData());
+            var levelConfig = _levelManager.GetLevel();
+            _levelEventManager.StartLevel(levelConfig);
         }
     }
 }

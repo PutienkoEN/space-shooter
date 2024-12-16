@@ -8,7 +8,7 @@ namespace SpaceShooter.Game.Level
 {
     [CreateAssetMenu(
         fileName = "LevelConfiguration",
-        menuName = "SpaceShooter/Level/Configuration")]
+        menuName = "SpaceShooter/Level/LevelConfiguration")]
     public class LevelConfig : ScriptableObject, ILevelConfig
     {
         [SerializeReference] private List<ILevelEventConfig<ILevelEventData>> gameLeveEvents = new();

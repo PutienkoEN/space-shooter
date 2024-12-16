@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
   m_Name: 0. Empy Level
   m_EditorClassIdentifier: 
-  gameLeveEvents: []
+  gameLeveEvents:
+  - rid: 262483490357903428
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 262483490357903428
+      type: {class: EnemySpawnLevelEventConfig, ns: SpaceShooter.Game.Level.Events, asm: Game.Modules.Level}
+      data:
+        spawnPoint: {fileID: 7353488387103676645, guid: f1b7f0159c122454dbcfd1c4594b8f35, type: 3}
+        splineContainer: {fileID: 214746717916704567, guid: 87a232daeea78ad4b8365674380b5894, type: 3}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 1
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}

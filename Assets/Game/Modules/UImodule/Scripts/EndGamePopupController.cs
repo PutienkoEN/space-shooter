@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Game.Modules.MainMenu.Scripts
 {
-    public sealed class EndGamePopupController : IInitializable, IDisposable, IGameFinishListener
+    public sealed class EndGamePopupController : IInitializable, IDisposable, IGameStartListener, IGameFinishListener
     {
         private readonly EndGamePopupView _endGamePopupView;
 
@@ -24,6 +24,25 @@ namespace Game.Modules.MainMenu.Scripts
             _scoreManager = scoreManager;
         }
 
+        public void Initialize()
+        {
+            _endGamePopupView.RestartButton.onClick.AddListener(OnRestartButtonClicked);
+            _endGamePopupView.ExitButton.onClick.AddListener(OnMainMenuButtonClicked);
+            _endGamePopupView.NextLevelButton.onClick.AddListener(NextLevelButtonClicked);
+        }
+
+        public void Dispose()
+        {
+            _endGamePopupView.RestartButton.onClick.RemoveListener(OnRestartButtonClicked);
+            _endGamePopupView.ExitButton.onClick.RemoveListener(OnMainMenuButtonClicked);
+            _endGamePopupView.NextLevelButton.onClick.RemoveListener(NextLevelButtonClicked);
+        }
+
+        public void OnGameStart()
+        {
+            _endGamePopupView.SetActive(false);
+        }
+
         public void OnGameFinish()
         {
             UpdateScoreText();
@@ -36,18 +55,6 @@ namespace Game.Modules.MainMenu.Scripts
             _endGamePopupView.SetScore(score.ToString());
         }
 
-        public void Initialize()
-        {
-            _endGamePopupView.RestartButton.onClick.AddListener(OnRestartButtonClicked);
-            _endGamePopupView.ExitButton.onClick.AddListener(OnMainMenuButtonClicked);
-        }
-
-        public void Dispose()
-        {
-            _endGamePopupView.RestartButton.onClick.RemoveListener(OnRestartButtonClicked);
-            _endGamePopupView.ExitButton.onClick.RemoveListener(OnMainMenuButtonClicked);
-        }
-
         private void OnMainMenuButtonClicked()
         {
             _sceneManager.LoadMenuScene();
@@ -56,6 +63,10 @@ namespace Game.Modules.MainMenu.Scripts
         private void OnRestartButtonClicked()
         {
             _sceneManager.LoadGameScene();
+        }
+
+        private void NextLevelButtonClicked()
+        {
         }
     }
 }

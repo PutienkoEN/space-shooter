@@ -16,19 +16,19 @@ namespace SpaceShooter.Game.Level
         [BoxGroup("ENEMY")] [SerializeField] private SplineContainer splineAnimate;
 
         private IEnemyManager _enemyManager;
-        private ILevelProvider _levelProvider;
+        private LevelManager _levelManager;
         private LevelEventManager _levelEventManager;
         private IGameContext _gameContext;
 
         [Inject]
         public void Construct(
             IEnemyManager enemyManager,
-            ILevelProvider levelProvider,
+            LevelManager levelManager,
             LevelEventManager levelEventManager,
             IGameContext gameContext)
         {
             _enemyManager = enemyManager;
-            _levelProvider = levelProvider;
+            _levelManager = levelManager;
             _levelEventManager = levelEventManager;
             _gameContext = gameContext;
         }
@@ -53,7 +53,7 @@ namespace SpaceShooter.Game.Level
                 _enemyManager.DestroyEnemy(enemy);
             }
         }
-        
+
         [BoxGroup("GAME")]
         [Button]
         public void StartGame()
@@ -65,10 +65,8 @@ namespace SpaceShooter.Game.Level
         [Button]
         public void StartCurrentLevel()
         {
-            var levelConfig = _levelProvider.GetLevelConfig();
-            var levelData = levelConfig.GetData();
-
-            _levelEventManager.StartLevel(levelData);
+            var levelConfig = _levelManager.GetLevel();
+            _levelEventManager.StartLevel(levelConfig);
         }
 
         [BoxGroup("GAME")]
