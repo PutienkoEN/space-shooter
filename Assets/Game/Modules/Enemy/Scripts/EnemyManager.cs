@@ -13,7 +13,7 @@ namespace SpaceShooter.Game.Enemy
         public event Action<bool> OnEnemyChange;
 
         private readonly EnemyEntityFactory _enemyFactory;
-        private readonly List<IEntity> _enemies = new();
+        private readonly List<IEnemyEntity> _enemies = new();
 
         [Inject]
         public EnemyManager(
@@ -28,11 +28,11 @@ namespace SpaceShooter.Game.Enemy
             for (var enemyIndex = _enemies.Count - 1; enemyIndex >= 0; enemyIndex--)
             {
                 var enemyEntity = _enemies[enemyIndex];
-                enemyEntity.Update(deltaTime);
+                enemyEntity.OnUpdate(deltaTime);
             }
         }
 
-        public EnemyEntity CreateEnemy(EnemyCreateData enemyCreateData)
+        public IEnemyEntity CreateEnemy(EnemyCreateData enemyCreateData)
         {
             var enemyEntity = SetupEnemy(enemyCreateData);
 

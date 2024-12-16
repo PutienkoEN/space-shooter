@@ -2,7 +2,7 @@
 
 namespace Game.Modules.Common.Interfaces
 {
-    public interface IEnemyEntity : IEntity
+    public interface IEnemyEntity : IComplexEntity
     {
         public event Action<IEnemyEntity> OnLeftGameArea;
         public event Action<bool> OnStateChanged;

@@ -43,6 +43,10 @@ namespace SpaceShooter.Game.Enemy
 
         public Collider GetCollider()
         {
+            if (_collider == null)
+            {
+                _collider = GetComponentInChildren<Collider>();
+            }
             return _collider;
         }
 

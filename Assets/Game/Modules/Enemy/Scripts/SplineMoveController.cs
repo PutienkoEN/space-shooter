@@ -8,14 +8,14 @@ namespace SpaceShooter.Game.Enemy
     public class SplineMoveController : IDisposable
     {
         private readonly SplineAnimate _splineAnimate;
-        private readonly IEnemyEntity _entity;
+        private readonly EnemyEntity _entity;
 
         [Inject]
         public SplineMoveController(
             SplineAnimate splineAnimate, 
             SplineContainer splineContainer, 
             float speed,
-            IEnemyEntity entity)
+            EnemyEntity entity)
         {
             _splineAnimate = splineAnimate;
             _entity = entity;

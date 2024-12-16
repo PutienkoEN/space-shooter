@@ -1,6 +1,5 @@
 ﻿using Game.Modules.AnimationModule.Scripts;
 using SpaceShooter.Game.Components;
-using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy

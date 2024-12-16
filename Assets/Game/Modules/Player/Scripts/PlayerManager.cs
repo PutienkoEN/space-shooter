@@ -49,7 +49,7 @@ namespace SpaceShooter.Game.Player
         {
             if (_playerShipEntity != null)
             {
-                _playerShipEntity.Update(deltaTime);
+                _playerShipEntity.OnUpdate(deltaTime);
             }
         }
     }

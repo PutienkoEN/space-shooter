@@ -11,6 +11,7 @@ namespace Game.Modules.AnimationModule.Scripts
     {
         [SerializeField] private bool enableEffects = true;
         [SerializeField] private Effect enemyDeathEffect;
+        [SerializeField] private Effect pickupEffect;
         
         public override void Install(DiContainer container)
         {
@@ -19,10 +20,18 @@ namespace Game.Modules.AnimationModule.Scripts
                 throw new ArgumentNullException(nameof(enemyDeathEffect));
             }
             
+            if (pickupEffect == null)
+            {
+                throw new ArgumentNullException(nameof(pickupEffect));
+            }
+            
             container.Bind<EffectsAnimator>()
                 .AsSingle()
-                .WithArguments(enableEffects, enemyDeathEffect)
+                .WithArguments(enableEffects, enemyDeathEffect, pickupEffect)
                 .NonLazy();
+            
+          
+            
         }
     }
 }

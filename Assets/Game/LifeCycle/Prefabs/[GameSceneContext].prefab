@@ -822,6 +822,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5366562399551866894}
     m_Modifications:
     - target: {fileID: 1673338278093049530, guid: be0538855211ace439db322e6e151c52, type: 3}
+      propertyPath: pickupEffect
+      value: 
+      objectReference: {fileID: 221715414300928103, guid: f366d3c6b85b5c34f973ea9b4cd14f34, type: 3}
+    - target: {fileID: 1673338278093049530, guid: be0538855211ace439db322e6e151c52, type: 3}
       propertyPath: enableEffects
       value: 1
       objectReference: {fileID: 0}

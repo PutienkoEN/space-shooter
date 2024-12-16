@@ -7,7 +7,7 @@ using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public sealed class PlayerShipEntity : IInitializable, IDisposable, IEntity
+    public sealed class PlayerShipEntity : IInitializable, IDisposable, IComplexEntity
     {
         public event Action<bool> OnInGameStateChanged;
         // public event Action<
@@ -49,7 +49,7 @@ namespace SpaceShooter.Game.Player.Ship
             return _playerShipView.GetTransform();
         }
         
-        public void Update(float deltaTime)
+        public void OnUpdate(float deltaTime)
         {
             if (!_isAlive)
                 return;

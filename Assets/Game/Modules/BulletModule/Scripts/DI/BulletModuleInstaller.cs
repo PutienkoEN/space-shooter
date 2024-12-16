@@ -25,7 +25,7 @@ namespace Game.Modules.BulletModule
                 .NonLazy();
 
             container
-                .BindInterfacesAndSelfTo<BulletController>()
+                .BindInterfacesAndSelfTo<BulletManager>()
                 .AsSingle()
                 .NonLazy();
         }

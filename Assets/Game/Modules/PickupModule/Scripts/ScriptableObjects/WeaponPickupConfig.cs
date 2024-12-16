@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.PickupModule.Scripts
 {
     [CreateAssetMenu(fileName = "PickupConfig", menuName = "SpaceShooter/PickupModule/PickupConfig", order = 0)]
-    public class WeaponPickupConfig : PickupConfig
+    public sealed class WeaponPickupConfig : PickupConfig
     {
         [SerializeField] private WeaponConfig weaponConfig;
 

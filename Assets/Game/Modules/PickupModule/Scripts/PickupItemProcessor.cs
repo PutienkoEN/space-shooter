@@ -4,23 +4,32 @@ using UnityEngine;
 
 namespace Game.PickupModule.Scripts
 {
-    public class PickupItemProcessor
+    public sealed class PickupItemProcessor
     {
+        
         private readonly Dictionary<Type, IPickupStrategy> _pickupStrategies = new();
 
-        public PickupItemProcessor(WeaponPickupStrategy weaponPickupStrategy)
+        public PickupItemProcessor(List<IPickupStrategy> pickupStrategies)
         {
-            RegisterStrategy<WeaponPickupConfig>(weaponPickupStrategy);
+            foreach (IPickupStrategy pickupStrategy in pickupStrategies)
+            {
+                RegisterStrategy(pickupStrategy);
+            }
         }
 
-        private void RegisterStrategy<T>(IPickupStrategy strategy) where T : IPickupConfig
+        private void RegisterStrategy(IPickupStrategy strategy)
         {
-            _pickupStrategies[typeof(T)] = strategy;
+            Type configType = strategy.GetConfigType();
+            if (_pickupStrategies.ContainsKey(configType))
+            {
+                return;
+            }
+            _pickupStrategies[configType] = strategy;
         }
         
         public void ProcessPickupItem(IPickupConfig config)
         {
-            var configType = config.GetType();
+            Type configType = config.GetType();
             
             if (_pickupStrategies.TryGetValue(configType, out var handler))
             {

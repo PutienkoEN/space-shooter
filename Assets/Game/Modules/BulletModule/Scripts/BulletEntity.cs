@@ -7,16 +7,16 @@ using Zenject;
 
 namespace Game.Modules.BulletModule
 {
-    public sealed class BulletEntity
+    public sealed class BulletEntity : ISimpleEntity
     {
-        public event Action<BulletEntity> OnDestroy;
+        public event Action<ISimpleEntity> OnDestroy;
 
         private readonly IBulletView _bulletView;
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly Collider _collider;
+        private readonly int _damage;
         private Vector3 _direction;
-        private int _damage;
 
         [Inject]
         public BulletEntity(
@@ -55,7 +55,7 @@ namespace Game.Modules.BulletModule
             Destroy();
         }
 
-        private void Destroy()
+        public void Destroy()
         {
             _bulletView.OnDealDamage -= HandleOnDealDamage;
 

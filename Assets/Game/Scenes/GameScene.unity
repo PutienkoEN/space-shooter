@@ -556,6 +556,10 @@ PrefabInstance:
       propertyPath: pauseButton
       value: 
       objectReference: {fileID: 1305581425}
+    - target: {fileID: 8663002815368222591, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: pickupEffect
+      value: 
+      objectReference: {fileID: 221715414300928103, guid: f366d3c6b85b5c34f973ea9b4cd14f34, type: 3}
     - target: {fileID: 9188649973472735502, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: enableEffects
       value: 1

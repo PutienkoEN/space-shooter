@@ -13,10 +13,10 @@ namespace SpaceShooter.Game.Components
         private bool _isInGame;
 
         private readonly IDamageable _entityView;
-        private readonly IEntity _entity;
+        private readonly IComplexEntity _entity;
 
         [Inject]
-        public HealthComponent(int health, IDamageable entityView, IEntity entity)
+        public HealthComponent(int health, IDamageable entityView, IComplexEntity entity)
         {
             _health = health;
             _entityView = entityView;

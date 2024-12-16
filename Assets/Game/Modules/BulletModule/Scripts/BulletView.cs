@@ -37,11 +37,6 @@ namespace Game.Modules.BulletModule
             return transform;
         }
 
-        public void SetActive(bool value)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
             Destroy(gameObject);

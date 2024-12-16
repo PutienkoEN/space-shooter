@@ -9,8 +9,11 @@ namespace Game.PickupModule.Scripts
     {
         public event Action OnPickupTaken;
         
+        private Collider _collider;
+        
         private void Awake()
         {
+            _collider = GetComponentInChildren<Collider>();   
             var colliderHandler = GetComponentInChildren<ChildColliderHandler>();
             if (colliderHandler != null)
             {
@@ -26,10 +29,19 @@ namespace Game.PickupModule.Scripts
                 OnPickupTaken?.Invoke();
             }
         }
+
+        public Collider GetCollider()
+        {
+            if (_collider == null)
+            {
+                _collider = GetComponentInChildren<Collider>();
+            }
+            return _collider;
+        }
         
         public void SetActive(bool value)
         {
-            throw new NotImplementedException();
+            gameObject.SetActive(value);
         }
 
         public void Dispose()

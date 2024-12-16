@@ -3,17 +3,17 @@
 namespace Effects.Explosion
 {
     [RequireComponent(typeof(Animator))]
-    public class ExplosionEffect : Effect
+    public class PickupEffect : Effect
     {
-        private const string ANIMATION_NAME = "Explosion";
-        private int _explosion;
+        private const string ANIMATION_NAME = "Pickup";
+        private int _pickup;
         private Animator _animator;
         
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _explosion = Animator.StringToHash(ANIMATION_NAME);
-            _animator.Play(_explosion);
+            _pickup = Animator.StringToHash(ANIMATION_NAME);
+            _animator.Play(_pickup);
         }
 
         protected override float GetDuration()

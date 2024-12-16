@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using SpaceShooter.Game.Enemy;
 using SpaceShooter.Game.LifeCycle.Common;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Splines;
 using Zenject;
 
@@ -12,7 +13,7 @@ namespace SpaceShooter.Game.Level
     public class DebugLevelManager : MonoBehaviour
     {
         [BoxGroup("ENEMY")] [SerializeField] private EnemyConfig enemyConfig;
-        [BoxGroup("ENEMY")] [SerializeField] private EnemyEntity enemyEntity;
+        [SerializeField] private IEnemyEntity enemyEntity;
         [BoxGroup("ENEMY")] [SerializeField] private SplineContainer splineAnimate;
 
         private IEnemyManager _enemyManager;
@@ -48,7 +49,7 @@ namespace SpaceShooter.Game.Level
         [Button]
         public void DestroyEnemy()
         {
-            if (enemyEntity is IEnemyEntity enemy)
+            if (enemyEntity is EnemyEntity enemy)
             {
                 _enemyManager.DestroyEnemy(enemy);
             }

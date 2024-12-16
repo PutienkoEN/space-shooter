@@ -6,5 +6,6 @@
     "Game.LifeCycle.Common", 
     "Game.Modules.Common", 
     "Game.Modules.Components", 
-    "Game.Modules.Player"]
+    "Game.Modules.Player", 
+    "Game.Modules.AnimationModule"]
 }
