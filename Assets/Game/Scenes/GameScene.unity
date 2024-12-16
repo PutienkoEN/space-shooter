@@ -624,6 +624,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 992858452883333118, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+      propertyPath: worldTransform
+      value: 
+      objectReference: {fileID: 1264921088}
     - target: {fileID: 2392383588111297772, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: m_Name
       value: '[GameSceneContext]'
@@ -713,7 +717,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1305581425}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5022229333194071438, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}

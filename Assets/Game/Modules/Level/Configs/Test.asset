@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  gameLeveEvents:
+  - rid: 5470158638544060506
+  references:
+    version: 2
+    RefIds:
+    - rid: 5470158638544060506
+      type: {class: PickupSpawnLevelEventConfig, ns: SpaceShooter.Game.Level.Events, asm: Game.Modules.Level}
+      data:
+        spawnPoint: {fileID: 7353488387103676645, guid: f1b7f0159c122454dbcfd1c4594b8f35, type: 3}
+        pickupPrefab: {fileID: 8334465637382370220, guid: db842945bf6c9c645933dd82926c9e34, type: 3}

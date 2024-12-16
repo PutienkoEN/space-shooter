@@ -8,7 +8,8 @@
     "Game.LifeCycle.Common",
     "Game.Modules.LevelInterfaces",
     "Unity.Splines",
-    "Game.Modules.Common"
+    "Game.Modules.Common",
+    "Game.Modules.PickupModule"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
