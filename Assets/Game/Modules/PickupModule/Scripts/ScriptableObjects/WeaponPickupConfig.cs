@@ -15,16 +15,34 @@ namespace Game.PickupModule.Scripts
         }
     }
     
-    public class WeaponPickupConfigData : IPickupConfigData
+    public struct WeaponPickupConfigData : IPickupConfigData
     {
-        public WeaponConfig WeaponConfig { get; private set; }
+        public WeaponData WeaponData { get; private set; }
 
         public WeaponPickupConfigData(WeaponConfig weaponConfig)
         {
-            WeaponConfig = weaponConfig;
+            WeaponData = weaponConfig.GetData();
         }
         
     }
     
+    public class HealthPickupConfig : PickupConfig
+    {
+        [SerializeField] private int health;
+        public override IPickupConfigData GetPickupData()
+        {
+            return new HealthData(
+                health);
+        }
+    }
 
+    public struct HealthData : IPickupConfigData
+    {
+        public HealthData(int health)
+        {
+            Health = health;
+        }
+
+        public int Health { get; private set; }
+    }
 }

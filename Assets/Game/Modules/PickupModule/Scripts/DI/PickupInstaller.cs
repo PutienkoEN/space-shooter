@@ -14,13 +14,14 @@ namespace Game.PickupModule.Scripts
         public override void InstallBindings()
         {
             Container
-                .Bind<IPickupConfig>()
-                .FromInstance(pickupConfig)
+                .Bind<IPickupConfigData>()
+                .FromInstance(pickupConfig.GetPickupData())
                 .AsSingle();
             
             Container
                 .BindInterfacesAndSelfTo<PickupEntity>()
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
             
             Container
                 .BindInterfacesAndSelfTo<PickupView>()

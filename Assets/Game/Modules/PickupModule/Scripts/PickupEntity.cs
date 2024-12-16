@@ -12,7 +12,7 @@ namespace Game.PickupModule.Scripts
         public event Action<bool> OnInGameStateChanged;
         public event Action<IPickupEntity> OnDestroy;
         
-        private readonly IPickupConfig _config;
+        private readonly IPickupConfigData _pickupData;
         private readonly IPickupView _pickupView;
         private readonly MoveComponent _moveComponent;
         private readonly PickupItemProcessor _pickupItemProcessor;
@@ -25,14 +25,14 @@ namespace Game.PickupModule.Scripts
         [Inject]
         public PickupEntity(
             MoveComponent moveComponent, 
-            IPickupConfig config,
+            IPickupConfigData pickupData,
             IPickupView pickupView, 
             PickupItemProcessor pickupItemProcessor, 
             BoundsCheckComponent boundsCheckComponent, 
             EffectsAnimator effectsAnimator)
         {
             _moveComponent = moveComponent;
-            _config = config;
+            _pickupData = pickupData;
             _pickupView = pickupView;
             _pickupItemProcessor = pickupItemProcessor;
             _boundsCheckComponent = boundsCheckComponent;
@@ -45,7 +45,7 @@ namespace Game.PickupModule.Scripts
 
         private void HandlePickupTaken()
         {
-            _pickupItemProcessor.ProcessPickupItem(_config);
+            _pickupItemProcessor.ProcessPickupItem(_pickupData);
             _pickupView.SetActive(false);
             _IsActive = false;
             _effectsAnimator.PlayPickup(_pickupView.GetCollider().transform, Destroy);

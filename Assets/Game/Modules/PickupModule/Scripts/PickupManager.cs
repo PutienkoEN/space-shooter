@@ -17,19 +17,9 @@ namespace Game.PickupModule.Scripts
         public PickupEntity CreatePickupItem(PickupCreateData pickupData)
         {
             PickupEntity pickupEntity = _pickupEntityFactory.CreatePickupEntity(pickupData);
-            _pickupItems.Add(pickupEntity);
             pickupEntity.OnDestroy += DestroyPickup;
+            _pickupItems.Add(pickupEntity);
             return pickupEntity;
-        }
-
-        private void DestroyPickup(IPickupEntity pickupEntity)
-        {
-            if (!_pickupItems.Contains(pickupEntity))
-            {
-                return;
-            }
-            _pickupItems.Remove(pickupEntity);
-            pickupEntity.OnDestroy -= DestroyPickup;
         }
 
         public void Tick(float deltaTime)
@@ -40,5 +30,16 @@ namespace Game.PickupModule.Scripts
                 pickup.OnUpdate(deltaTime);
             }
         }
+        private void DestroyPickup(IPickupEntity pickupEntity)
+        {
+            if (!_pickupItems.Contains(pickupEntity))
+            {
+                return;
+            }
+            _pickupItems.Remove(pickupEntity);
+            pickupEntity.OnDestroy -= DestroyPickup;
+        }
+
+       
     }
 }

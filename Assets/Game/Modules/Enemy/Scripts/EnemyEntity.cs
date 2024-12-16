@@ -32,6 +32,7 @@ namespace SpaceShooter.Game.Enemy
             _boundsCheckComponent = boundsCheckComponent;
             _weaponController = weaponController;
             _enemyView = enemyView;
+       
         }
 
         public void Initialize()

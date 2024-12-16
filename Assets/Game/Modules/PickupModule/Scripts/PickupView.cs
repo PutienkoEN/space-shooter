@@ -32,10 +32,6 @@ namespace Game.PickupModule.Scripts
 
         public Collider GetCollider()
         {
-            if (_collider == null)
-            {
-                _collider = GetComponentInChildren<Collider>();
-            }
             return _collider;
         }
         

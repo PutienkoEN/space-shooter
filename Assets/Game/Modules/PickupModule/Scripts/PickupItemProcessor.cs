@@ -27,17 +27,17 @@ namespace Game.PickupModule.Scripts
             _pickupStrategies[configType] = strategy;
         }
         
-        public void ProcessPickupItem(IPickupConfig config)
+        public void ProcessPickupItem(IPickupConfigData data)
         {
-            Type configType = config.GetType();
+            Type dataType = data.GetType();
             
-            if (_pickupStrategies.TryGetValue(configType, out var handler))
+            if (_pickupStrategies.TryGetValue(dataType, out var handler))
             {
-                handler.ProcessPickup(config.GetPickupData());
+                handler.ProcessPickup(data);
             }
             else
             {
-                Debug.LogWarning($"No handler registered for pickup config type: {configType}");
+                Debug.LogWarning($"No handler registered for pickup config type: {dataType}");
             }
         }
     }
