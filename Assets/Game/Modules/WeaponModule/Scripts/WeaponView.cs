@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
@@ -6,21 +7,29 @@ namespace Game.Modules.ShootingModule.Scripts
     {
         public AudioSource audioSource;
         public Transform[] firePoints;
+        
+        private IWeaponDestructible _destructible;
 
         public Transform[] GetFirePoints()
         {
             return firePoints;
         }
 
+        public void SubscribeToOnDestroy(IWeaponDestructible destructible)
+        {
+            _destructible = destructible;
+            _destructible.OnDestroy += Destroy;
+        }
+
         public void PlayShootSound()
         {
             audioSource.Play();
         }
-    }
 
-    public interface IWeaponView
-    {
-        public void PlayShootSound();
-        public Transform[] GetFirePoints();
+        private void Destroy()
+        {
+            _destructible.OnDestroy -= Destroy;
+            Destroy(gameObject);
+        }
     }
 }

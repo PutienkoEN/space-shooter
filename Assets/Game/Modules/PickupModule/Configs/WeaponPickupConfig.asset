@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee1a55013944eeab2370cd2199e2c0b, type: 3}
   m_Name: WeaponPickupConfig
   m_EditorClassIdentifier: 
-  weaponConfig: {fileID: 11400000, guid: 18b379e7fee98624dbb6fd5566647702, type: 2}
+  weaponConfig: {fileID: 11400000, guid: e4d8106bbac4fa1448f95cd5dc7bfc1d, type: 2}

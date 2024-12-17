@@ -18,16 +18,18 @@ namespace Game.Modules.ShootingModule.Scripts
 
         public IWeaponComponent CreateWeapon(
             ITargetStrategy targetStrategy,
-            WeaponData weaponConfig,
+            WeaponData weaponData,
             Transform parentTransform)
         {
-            IWeaponView weaponView = CreateWeaponView(weaponConfig, parentTransform);
+            IWeaponView weaponView = CreateWeaponView(weaponData, parentTransform);
 
-            IWeaponComponent weaponComponent = _weaponComponentFactory.Create(
+            WeaponComponent weaponComponent = _weaponComponentFactory.Create(
                 targetStrategy,
-                weaponConfig,
+                weaponData,
                 weaponView.GetFirePoints());
-
+            
+            weaponView.SubscribeToOnDestroy(weaponComponent);
+            
             weaponComponent.OnShoot += weaponView.PlayShootSound;
             return weaponComponent;
         }

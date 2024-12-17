@@ -1,27 +1,25 @@
 ﻿using System;
-using Game.Modules.Common.Interfaces;
 using Game.Modules.ShootingModule.Scripts;
-using SpaceShooter.Game.Components;
+using Game.Modules.ShootingModule.Scripts.ScriptableObjects;
 using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public sealed class PlayerShipEntity : IInitializable, IDisposable, IComplexEntity
+    public sealed class PlayerShipEntity : IInitializable, IDisposable, IPlayerShipEntity
     {
         public event Action<bool> OnInGameStateChanged;
-        // public event Action<
         
         private readonly IPlayerShipView _playerShipView;
         private readonly PlayerMoveController _playerMoveController;
-        private readonly WeaponController _weaponController;
+        private readonly IWeaponController _weaponController;
         private bool _isAlive;
 
         [Inject]
         public PlayerShipEntity(
             IPlayerShipView playerShipView,
             PlayerMoveController playerMoveController,
-            WeaponController weaponController)
+            IWeaponController weaponController)
         {
             _playerShipView = playerShipView;
             _playerMoveController = playerMoveController;
@@ -31,7 +29,6 @@ namespace SpaceShooter.Game.Player.Ship
         public void Initialize()
         {
             SetIsAlive(true);
-            
         }
         
         public void SetIsAlive(bool value)
@@ -47,6 +44,11 @@ namespace SpaceShooter.Game.Player.Ship
         public Transform GetTransform()
         {
             return _playerShipView.GetTransform();
+        }
+
+        public void ChangeWeapon(WeaponData weaponData)
+        {
+            _weaponController.ChangeWeapon(weaponData);
         }
         
         public void OnUpdate(float deltaTime)

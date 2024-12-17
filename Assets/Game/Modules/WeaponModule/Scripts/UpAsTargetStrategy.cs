@@ -7,7 +7,7 @@ namespace Game.Modules.WeaponModule
     {
         public Vector3 GetShootDirection(Transform shootPoint)
         {
-            return Vector3.up;
+            return shootPoint.up;
         }
     }
 }

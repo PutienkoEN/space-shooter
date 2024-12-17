@@ -52,7 +52,7 @@ namespace SpaceShooter.Game.Player.Ship
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<WeaponController>()
+            Container.BindInterfacesAndSelfTo<WeaponController>()
                 .AsSingle()
                 .WithArguments(weaponConfig.GetData(), transform);
 
