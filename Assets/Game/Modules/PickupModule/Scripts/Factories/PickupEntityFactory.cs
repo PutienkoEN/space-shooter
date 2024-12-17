@@ -12,11 +12,10 @@ namespace Game.PickupModule.Scripts
             _pickupViewFactory = pickupViewFactory;
         }
 
-        public PickupEntity CreatePickupEntity(PickupCreateData data)
+        public IPickupEntity CreatePickupEntity(PickupCreateData data)
         {
             PickupView pickupView = _pickupViewFactory.Create(data);
-            PickupEntity pickupEntity = pickupView.GetComponent<GameObjectContext>().Container.Resolve<PickupEntity>();
-            return pickupEntity;
+            return pickupView.GetComponent<GameObjectContext>().Container.Resolve<PickupEntity>();
         }
     }
 }

@@ -17,11 +17,10 @@ namespace Game.PickupModule.Scripts
                 .Bind<IPickupConfigData>()
                 .FromInstance(pickupConfig.GetPickupData())
                 .AsSingle();
-            
+
             Container
                 .BindInterfacesAndSelfTo<PickupEntity>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
             
             Container
                 .BindInterfacesAndSelfTo<PickupView>()

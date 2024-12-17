@@ -10,8 +10,7 @@ namespace Game.PickupModule.Scripts
 
         public override IPickupConfigData GetPickupData()
         {
-            return new WeaponPickupConfigData(
-                weaponConfig);
+            return new WeaponPickupConfigData(weaponConfig.GetData());
         }
     }
     
@@ -19,9 +18,9 @@ namespace Game.PickupModule.Scripts
     {
         public WeaponData WeaponData { get; private set; }
 
-        public WeaponPickupConfigData(WeaponConfig weaponConfig)
+        public WeaponPickupConfigData(WeaponData weaponData)
         {
-            WeaponData = weaponConfig.GetData();
+            WeaponData = weaponData;
         }
         
     }

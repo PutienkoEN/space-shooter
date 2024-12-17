@@ -8,9 +8,12 @@ namespace Game.Modules.BulletModule
     public sealed class BulletView : MonoBehaviour, IBulletView
     {
         public event Action<IDamageable> OnDealDamage;
+        
+        private Collider _collider;
 
         private void Awake()
         {
+            _collider = GetComponentInChildren<Collider>();
             var colliderHandler = GetComponentInChildren<ChildColliderHandler>();
             if (colliderHandler != null)
             {
@@ -29,7 +32,7 @@ namespace Game.Modules.BulletModule
 
         public Collider GetCollider()
         {
-            return GetComponentInChildren<Collider>();
+            return _collider;
         }
 
         public Transform GetTransform()

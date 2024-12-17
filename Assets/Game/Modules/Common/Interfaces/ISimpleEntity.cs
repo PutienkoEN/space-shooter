@@ -6,6 +6,5 @@ namespace Game.Modules.Common.Interfaces
     {
         public event Action<ISimpleEntity> OnDestroy;
         public void OnUpdate(float deltaTime);
-        public void Destroy();
     }
 }

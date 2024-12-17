@@ -14,7 +14,6 @@ namespace Game.Modules.BulletModule
         private readonly IBulletView _bulletView;
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
-        private readonly Collider _collider;
         private readonly int _damage;
         private Vector3 _direction;
 
@@ -29,7 +28,6 @@ namespace Game.Modules.BulletModule
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
             _damage = damage;
-            _collider = _bulletView.GetCollider();
 
             _bulletView.OnDealDamage += HandleOnDealDamage;
         }
@@ -43,7 +41,7 @@ namespace Game.Modules.BulletModule
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (!_boundsCheckComponent.OnScreen(_collider))
+            if (!_boundsCheckComponent.OnScreen(_bulletView.GetCollider()))
             {
                 Destroy();
             }
