@@ -13,6 +13,11 @@ namespace SpaceShooter.Game.Level
             _levelConfigListData = levelConfigListData;
         }
 
+        public void FirstLevel()
+        {
+            _currentLevel = 0;
+        }
+
         public bool NextLevel()
         {
             if (HasNextLevel())
