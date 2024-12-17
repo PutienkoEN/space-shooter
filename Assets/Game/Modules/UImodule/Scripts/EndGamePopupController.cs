@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Modules.Game;
 using Game.Modules.Scores;
 using Game.Modules.UImodule;
 using SpaceShooter.Game.Level;
@@ -16,16 +17,20 @@ namespace Game.Modules.MainMenu.Scripts
         private readonly ScoreManager _scoreManager;
         private readonly LevelManager _levelManager;
 
+        private readonly LevelProgressContext _levelProgressContext;
+
         public EndGamePopupController(
             EndGamePopupView endGamePopupView,
             GameSceneManager sceneManager,
             ScoreManager scoreManager,
-            LevelManager levelManager)
+            LevelManager levelManager,
+            LevelProgressContext levelProgressContext)
         {
             _endGamePopupView = endGamePopupView;
             _sceneManager = sceneManager;
             _scoreManager = scoreManager;
             _levelManager = levelManager;
+            _levelProgressContext = levelProgressContext;
         }
 
         public void Initialize()
@@ -51,8 +56,13 @@ namespace Game.Modules.MainMenu.Scripts
 
         private void UpdateNextLevelButton()
         {
-            var hasNextLevel = _levelManager.HasNextLevel();
-            _endGamePopupView.ToggleNextLevelButton(hasNextLevel);
+            var showNextLevelButton = ShouldShowNextLevelButton();
+            _endGamePopupView.ToggleNextLevelButton(showNextLevelButton);
+        }
+
+        private bool ShouldShowNextLevelButton()
+        {
+            return _levelProgressContext.IsLevelSuccess() && _levelManager.HasNextLevel();
         }
 
         private void UpdateScoreText()
