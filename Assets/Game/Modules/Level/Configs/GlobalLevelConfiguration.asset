@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelConfigs:
   - {fileID: 11400000, guid: a1bcbc7f1fd7ad146a5cf213378cadf6, type: 2}
-  - {fileID: 11400000, guid: a1bcbc7f1fd7ad146a5cf213378cadf6, type: 2}
+  - {fileID: 11400000, guid: 83217151ec463b84bae73d4e99acf244, type: 2}
