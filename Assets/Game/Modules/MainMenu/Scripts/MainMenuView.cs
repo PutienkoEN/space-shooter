@@ -12,5 +12,10 @@ namespace Game.Modules.MainMenu.Scripts
         public Button ContinueButton => continueButton;
         public Button StartButton => startButton;
         public Button ExitButton => exitButton;
+
+        public void ToggleContinueButton(bool value)
+        {
+            continueButton.gameObject.SetActive(value);
+        }
     }
 }

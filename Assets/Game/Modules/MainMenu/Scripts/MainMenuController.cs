@@ -34,6 +34,9 @@ namespace Game.Modules.Manager.Scripts
             _mainMenuView.ContinueButton.onClick.AddListener(HandleContinueButtonClicked);
             _mainMenuView.StartButton.onClick.AddListener(HandleStartGameClicked);
             _mainMenuView.ExitButton.onClick.AddListener(HandleQuitGameClicked);
+
+            var shouldToggleContinue = !_levelManager.IsFirstLevel();
+            _mainMenuView.ToggleContinueButton(shouldToggleContinue);
         }
 
         public void Dispose()
