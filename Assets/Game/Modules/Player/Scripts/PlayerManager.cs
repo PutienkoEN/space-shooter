@@ -10,7 +10,7 @@ namespace SpaceShooter.Game.Player
     {
         public event Action OnPlayerDeath;
 
-        private PlayerShipEntity.Factory _shipEntityFactory;
+        private readonly PlayerShipEntity.Factory _shipEntityFactory;
         private PlayerShipEntity _playerShipEntity;
 
         [Inject]
@@ -49,7 +49,7 @@ namespace SpaceShooter.Game.Player
         {
             if (_playerShipEntity != null)
             {
-                _playerShipEntity.Update(deltaTime);
+                _playerShipEntity.OnUpdate(deltaTime);
             }
         }
     }

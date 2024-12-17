@@ -4,6 +4,6 @@ namespace Game.PickupModule.Scripts
 {
     public class PickupItem : MonoBehaviour
     {
-        
+       
     }
 }

@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Enemy
 {
-    public interface IEnemyView : IEntityView, ICollidable, IDamageDealer, IDamageable
+    public interface IEnemyView : IEntityView, ICollidable, IDamageDealer, IDamageable, IBoundsCheckable
     {
+        public void SetActive(bool value);
         public void PlayDeathSound();
-        public Collider GetCollider();
+        
     }
 }

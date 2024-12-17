@@ -3,6 +3,7 @@ using Game.Modules.BulletModule.Scripts;
 using Game.Modules.Common.Interfaces;
 using Game.Modules.Components;
 using Game.Modules.ShootingModule.Scripts;
+using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Enemy
@@ -31,6 +32,7 @@ namespace SpaceShooter.Game.Enemy
             _boundsCheckComponent = boundsCheckComponent;
             _weaponController = weaponController;
             _enemyView = enemyView;
+       
         }
 
         public void Initialize()
@@ -43,7 +45,7 @@ namespace SpaceShooter.Game.Enemy
             _enemyView.Dispose();
         }
 
-        public void Update(float deltaTime)
+        public void OnUpdate(float deltaTime)
         {
             if (_isActive)
             {

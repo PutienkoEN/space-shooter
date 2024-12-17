@@ -7,9 +7,10 @@ using Zenject;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public sealed class PlayerShipEntity : IInitializable, IDisposable, IEntity
+    public sealed class PlayerShipEntity : IInitializable, IDisposable, IComplexEntity
     {
         public event Action<bool> OnInGameStateChanged;
+        // public event Action<
         
         private readonly IPlayerShipView _playerShipView;
         private readonly PlayerMoveController _playerMoveController;
@@ -27,17 +28,12 @@ namespace SpaceShooter.Game.Player.Ship
             _weaponController = weaponController;
         }
 
-        public Transform GetTransform()
-        {
-            return _playerShipView.GetTransform();
-        }
-        
         public void Initialize()
         {
             SetIsAlive(true);
             
         }
-
+        
         public void SetIsAlive(bool value)
         {
             if (_isAlive == value)
@@ -47,18 +43,23 @@ namespace SpaceShooter.Game.Player.Ship
             _isAlive = value;
             OnInGameStateChanged?.Invoke(value);
         }
-
-        public void Dispose()
+        
+        public Transform GetTransform()
         {
-            _playerShipView.Dispose();
+            return _playerShipView.GetTransform();
         }
-
-        public void Update(float deltaTime)
+        
+        public void OnUpdate(float deltaTime)
         {
             if (!_isAlive)
                 return;
             _playerMoveController.Move(deltaTime);
             _weaponController.Tick(deltaTime);
+        }
+        
+        public void Dispose()
+        {
+            _playerShipView.Dispose();
         }
         
         public class Factory : PlaceholderFactory<PlayerShipEntity>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Effects.Explosion
 {
@@ -14,7 +12,7 @@ namespace Effects.Explosion
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            Animator.StringToHash(ANIMATION_NAME);
+            _explosion = Animator.StringToHash(ANIMATION_NAME);
             _animator.Play(_explosion);
         }
 

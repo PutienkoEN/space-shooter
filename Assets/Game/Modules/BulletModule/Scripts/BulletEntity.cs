@@ -7,16 +7,15 @@ using Zenject;
 
 namespace Game.Modules.BulletModule
 {
-    public sealed class BulletEntity
+    public sealed class BulletEntity : ISimpleEntity
     {
-        public event Action<BulletEntity> OnDestroy;
+        public event Action<ISimpleEntity> OnDestroy;
 
-        private readonly BulletView _bulletView;
+        private readonly IBulletView _bulletView;
         private readonly MoveComponent _moveComponent;
         private readonly BoundsCheckComponent _boundsCheckComponent;
-        private readonly Collider _collider;
+        private readonly int _damage;
         private Vector3 _direction;
-        private int _damage;
 
         [Inject]
         public BulletEntity(
@@ -29,7 +28,6 @@ namespace Game.Modules.BulletModule
             _moveComponent = moveComponent;
             _boundsCheckComponent = boundsCheckComponent;
             _damage = damage;
-            _collider = _bulletView.GetComponentInChildren<Collider>();
 
             _bulletView.OnDealDamage += HandleOnDealDamage;
         }
@@ -37,13 +35,13 @@ namespace Game.Modules.BulletModule
         public void LaunchBullet(Vector3 position, Quaternion rotation, Vector3 direction)
         {
             _direction = direction;
-            _bulletView.transform.SetPositionAndRotation(position, rotation);
+            _bulletView.GetTransform().SetPositionAndRotation(position, rotation);
         }
 
         public void OnUpdate(float deltaTime)
         {
             _moveComponent.MoveToDirection(_direction, deltaTime);
-            if (!_boundsCheckComponent.OnScreen(_collider))
+            if (!_boundsCheckComponent.OnScreen(_bulletView.GetCollider()))
             {
                 Destroy();
             }
@@ -55,7 +53,7 @@ namespace Game.Modules.BulletModule
             Destroy();
         }
 
-        private void Destroy()
+        public void Destroy()
         {
             _bulletView.OnDealDamage -= HandleOnDealDamage;
 
@@ -64,7 +62,7 @@ namespace Game.Modules.BulletModule
             //The check required for the unit test to work correctly.
             // Destroying in Edit Mode is not allowed.
             if (Application.isPlaying)
-                _bulletView.DestroyBullet();
+                _bulletView.Dispose();
         }
     }
 }

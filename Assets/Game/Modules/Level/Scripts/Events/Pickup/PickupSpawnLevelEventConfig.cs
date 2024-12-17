@@ -1,6 +1,7 @@
 ﻿using Game.PickupModule.Scripts;
 using GSpaceShooter.Game.Level.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceShooter.Game.Level.Events
 {

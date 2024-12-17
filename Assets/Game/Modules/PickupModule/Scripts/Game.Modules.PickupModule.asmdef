@@ -1,4 +1,11 @@
 ﻿{
   "name": "Game.Modules.PickupModule",
-  "references":[ "GUID:62e3c9e01d1046a890992c3ea7de89bd", "GUID:0d8beb7f090555447a6cf5ce9e54dbb4", "GUID:efdd616bd324540bab8c316dbfba7c02", "GUID:77e51d1c00d34785bdecc91f1b6bf421", "GUID:0712c349d3e24e8d8e25048a0b08f7fa" ]
+  "references":[ 
+    "Game.Modules.Weapon", 
+    "Zenject", 
+    "Game.LifeCycle.Common", 
+    "Game.Modules.Common", 
+    "Game.Modules.Components", 
+    "Game.Modules.Player", 
+    "Game.Modules.AnimationModule"]
 }

@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
+using Game.Modules.Common.Interfaces;
 using SpaceShooter.Game.LifeCycle.Common;
 
 namespace Game.Modules.BulletModule
 {
-    public sealed class BulletController : IGameTickable, IDisposable
+    public sealed class BulletManager : IGameTickable, IDisposable
     {
-        public IReadOnlyList<BulletEntity> Bullets =>
+        public IReadOnlyList<ISimpleEntity> Bullets =>
             _bullets; //ToDo: consider removing it later. Used only in Tests for now;
 
-        private readonly List<BulletEntity> _bullets = new();
+        private readonly List<ISimpleEntity> _bullets = new();
         private readonly BulletSpawner _bulletSpawner;
         private int _counter = -1;
 
-        public BulletController(
+        public BulletManager(
             BulletSpawner bulletSpawner)
         {
             _bulletSpawner = bulletSpawner;
@@ -30,10 +31,12 @@ namespace Game.Modules.BulletModule
             }
         }
 
-        private void RemoveBullet(BulletEntity bulletEntity)
+        private void RemoveBullet(ISimpleEntity bulletEntity)
         {
             if (!_bullets.Contains(bulletEntity))
+            {
                 return;
+            }
             int bulletIndex = _bullets.IndexOf(bulletEntity);
             if (_counter >= bulletIndex)
             {
@@ -48,10 +51,9 @@ namespace Game.Modules.BulletModule
         {
             for (_counter = 0; _counter < _bullets.Count; _counter++)
             {
-                BulletEntity bullet = _bullets[_counter];
+                ISimpleEntity bullet = _bullets[_counter];
                 bullet.OnUpdate(deltaTime);
             }
-
             _counter = -1;
         }
 

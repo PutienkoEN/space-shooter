@@ -1,11 +1,11 @@
-﻿using Game.Modules.ShootingModule.Scripts;
-using SpaceShooter.Game.LifeCycle.Common;
+﻿using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player.Ship;
 using UnityEngine;
 using Zenject;
 
 namespace SpaceShooter.Game.Player
 {
+
     public class PlayerManagerInstaller : GameModuleInstaller
     {
         [SerializeField] private Transform playerContainer;

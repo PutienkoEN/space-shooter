@@ -2,9 +2,9 @@
 
 namespace Game.Modules.Common.Interfaces
 {
-    public interface IEntity
+    public interface IComplexEntity
     {
         public event Action<bool> OnInGameStateChanged;
-        public void Update(float deltaTime);
+        public void OnUpdate(float deltaTime);
     }
 }

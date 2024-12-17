@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceShooter.Game.Player.Ship
 {
-    public sealed class PlayerShipView : MonoBehaviour, IPlayerShipView, IEntityView
+    public sealed class PlayerShipView : MonoBehaviour, IPlayerShipView
     {
         public event Action<IDamageable> OnDealDamage;
 

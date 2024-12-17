@@ -5,12 +5,15 @@ using UnityEngine;
 
 namespace Game.Modules.BulletModule
 {
-    public sealed class BulletView : MonoBehaviour, ICollidable
+    public sealed class BulletView : MonoBehaviour, IBulletView
     {
         public event Action<IDamageable> OnDealDamage;
+        
+        private Collider _collider;
 
         private void Awake()
         {
+            _collider = GetComponentInChildren<Collider>();
             var colliderHandler = GetComponentInChildren<ChildColliderHandler>();
             if (colliderHandler != null)
             {
@@ -27,11 +30,19 @@ namespace Game.Modules.BulletModule
             }
         }
 
-        public void DestroyBullet()
+        public Collider GetCollider()
+        {
+            return _collider;
+        }
+
+        public Transform GetTransform()
+        {
+            return transform;
+        }
+
+        public void Dispose()
         {
             Destroy(gameObject);
         }
-
-
     }
 }
