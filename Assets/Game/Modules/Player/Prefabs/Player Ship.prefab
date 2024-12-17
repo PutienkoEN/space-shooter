@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb5588422d24ef39846c601b0bfdb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 35
   health: 5
   weaponConfig: {fileID: 11400000, guid: 18b379e7fee98624dbb6fd5566647702, type: 2}
 --- !u!114 &7792327859899704942

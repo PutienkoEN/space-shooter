@@ -6,8 +6,10 @@ using Zenject;
 
 namespace Game.Modules.ShootingModule.Scripts
 {
-    public sealed class WeaponComponent : IWeaponComponent
+    public sealed class WeaponComponent : IWeaponComponent, IWeaponDestructible, IDisposable
     {
+        public event Action OnDestroy;
+
         public event Action OnShoot;
 
         private readonly BulletSpawner _bulletSpawner;
@@ -72,7 +74,18 @@ namespace Game.Modules.ShootingModule.Scripts
                 firePoint.rotation,
                 bulletData);
         }
+        
+        public void Destroy()
+        {
+            OnDestroy?.Invoke();
+            Dispose();
+        }
 
+        public void Dispose()
+        {
+            OnDestroy = null;
+        }
+        
         public class Factory : PlaceholderFactory<ITargetStrategy, WeaponData, Transform[], WeaponComponent>
         {
         }

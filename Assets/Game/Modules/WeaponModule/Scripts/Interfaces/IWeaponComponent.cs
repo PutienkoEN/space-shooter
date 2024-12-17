@@ -8,4 +8,10 @@ namespace Game.Modules.ShootingModule.Scripts
 
         public void Fire(float deltaTime);
     }
+
+    public interface IWeaponDestructible
+    {
+        public event Action OnDestroy;
+        public void Destroy();
+    }
 }

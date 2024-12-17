@@ -1,10 +1,17 @@
 ﻿using System;
-using UnityEngine;
+using SpaceShooter.Game.Player;
 
 namespace Game.PickupModule.Scripts
 {
     public sealed class WeaponPickupStrategy : IPickupStrategy
     {
+        private readonly PlayerManager _playerManager;
+
+        public WeaponPickupStrategy(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
         public Type GetConfigType()
         {
             return typeof(WeaponPickupConfigData);
@@ -14,7 +21,11 @@ namespace Game.PickupModule.Scripts
         {
             if (pickupData is WeaponPickupConfigData weaponData)
             {
-                Debug.Log("Processing weapon pickup from " + weaponData);
+                var player = _playerManager.GetPlayer();
+                if (player != null)
+                {
+                    player.ChangeWeapon(weaponData.WeaponData);
+                }
             }
         }
     }
