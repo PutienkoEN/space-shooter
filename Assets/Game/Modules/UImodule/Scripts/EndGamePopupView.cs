@@ -7,10 +7,13 @@ namespace Game.Modules.UImodule
     {
         [SerializeField] private Button restartButton;
         [SerializeField] private Button exitButton;
+        [SerializeField] private Button nextLevelButton;
+
         [SerializeField] private Text endGameScoreText;
 
         public Button RestartButton => restartButton;
         public Button ExitButton => exitButton;
+        public Button NextLevelButton => nextLevelButton;
 
         public void SetScore(string endGameScore)
         {
@@ -20,6 +23,11 @@ namespace Game.Modules.UImodule
         public void SetActive(bool value)
         {
             gameObject.SetActive(value);
+        }
+
+        public void ToggleNextLevelButton(bool value)
+        {
+            nextLevelButton.gameObject.SetActive(value);
         }
     }
 }

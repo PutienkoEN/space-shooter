@@ -1,9 +1,11 @@
 {
-	"name": "Game.Modules.UImodule",
-	"references":[ 
-		"Game.Modules.Game", 
-		"Game.LifeCycle.Common", 
-		"Zenject", 
-		"Game.Modules.SceneManagement", 
-		"Game.Modules.Scores" ]
+  "name": "Game.Modules.UImodule",
+  "references": [
+    "Game.Modules.Game",
+    "Game.LifeCycle.Common",
+    "Zenject",
+    "Game.Modules.SceneManagement",
+    "Game.Modules.Scores",
+    "Game.Modules.Level"
+  ]
 }

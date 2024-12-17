@@ -3,9 +3,11 @@
   "rootNamespace": "",
   "references": [
     "Zenject",
+    "UniTask",
     "Game.LifeCycle.Common",
     "Game.Modules.LevelInterfaces",
-    "UniTask"
+    "Game.Modules.Level"
+    
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

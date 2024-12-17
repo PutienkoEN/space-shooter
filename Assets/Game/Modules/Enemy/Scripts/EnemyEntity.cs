@@ -14,12 +14,12 @@ namespace SpaceShooter.Game.Enemy
         public event Action<IEnemyEntity> OnLeftGameArea;
         public event Action<bool> OnStateChanged;
         public event Action<bool> OnInGameStateChanged;
-        
+
         private readonly BoundsCheckComponent _boundsCheckComponent;
         private readonly CollisionDamageComponent _collisionDamageComponent;
         private readonly WeaponController _weaponController;
         private readonly IEnemyView _enemyView;
-        
+
         private bool _isActive;
         private bool _isInGame;
 
@@ -39,7 +39,7 @@ namespace SpaceShooter.Game.Enemy
         {
             SetIsActive(true);
         }
-        
+
         public void Dispose()
         {
             _enemyView.Dispose();
@@ -49,19 +49,19 @@ namespace SpaceShooter.Game.Enemy
         {
             if (_isActive)
             {
-                _boundsCheckComponent.IsInGame(
-                    _enemyView.GetCollider(), 
-                    SetIsInGame,
-                    InvokeOnLeftGameArea);
             }
+
+            _boundsCheckComponent.IsInGame(
+                _enemyView.GetCollider(),
+                SetIsInGame,
+                InvokeOnLeftGameArea);
 
             if (!_isInGame)
             {
                 return;
-            }
-            
-            _weaponController.Tick(deltaTime);
+            } 
 
+            _weaponController.Tick(deltaTime);
         }
 
         public void SetIsActive(bool value)
@@ -70,6 +70,7 @@ namespace SpaceShooter.Game.Enemy
             {
                 return;
             }
+
             _isActive = value;
             OnStateChanged?.Invoke(_isActive);
         }
@@ -80,6 +81,7 @@ namespace SpaceShooter.Game.Enemy
             {
                 return;
             }
+
             _isInGame = value;
             OnInGameStateChanged?.Invoke(value);
         }

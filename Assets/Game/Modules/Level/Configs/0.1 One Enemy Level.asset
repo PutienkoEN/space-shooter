@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
+  m_Name: 0.1 One Enemy Level
+  m_EditorClassIdentifier: 
+  gameLeveEvents:
+  - rid: 262483490357903428
+  references:
+    version: 2
+    RefIds:
+    - rid: 262483490357903428
+      type: {class: EnemySpawnLevelEventConfig, ns: SpaceShooter.Game.Level.Events, asm: Game.Modules.Level}
+      data:
+        spawnPoint: {fileID: 7353488387103676645, guid: f1b7f0159c122454dbcfd1c4594b8f35, type: 3}
+        splineContainer: {fileID: 214746717916704567, guid: 87a232daeea78ad4b8365674380b5894, type: 3}
+        spawnIntervalInSeconds: 1
+        numberOfEnemiesToSpawn: 1
+        enemyConfig: {fileID: 11400000, guid: caa483f2dd69a4a42b4db296f353489d, type: 2}

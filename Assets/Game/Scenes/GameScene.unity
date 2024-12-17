@@ -685,21 +685,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5528804229768865427, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: scoreView
-      value: 
-      objectReference: {fileID: 390102983}
-    - target: {fileID: 5528804229768865427, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: inGameScoreView
       value: 
       objectReference: {fileID: 390102983}
-    - target: {fileID: 5528804229768865427, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: settings.InGameScoreView
-      value: 
-      objectReference: {fileID: 390102983}
-    - target: {fileID: 5528804229768865427, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
-      propertyPath: settings.EndGameScoreView
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6565996445967182722, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
       propertyPath: container
       value: 
@@ -729,8 +717,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5316887582960864342, guid: 8b102760b21d5454195fc00abb7208b4, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5022229333194071438, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db7595a9dbed04ae9a6d9c1e22872cd6, type: 3}

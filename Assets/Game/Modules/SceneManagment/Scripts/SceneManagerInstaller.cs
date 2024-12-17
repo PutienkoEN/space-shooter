@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.SceneManagement;
+﻿using SpaceShooter.Game.Level;
+using SpaceShooter.Game.SceneManagement;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +7,7 @@ namespace SpaceShooter.Game.SceneManagementSceneManagement
 {
     public class SceneManagerInstaller : MonoInstaller
     {
-        [SerializeField] private ScriptableObject initialLevel;
+        [SerializeField] private LevelConfigList levelsConfiguration;
         [SerializeField] private bool enableAutonomousGameScene;
 
         public override void InstallBindings()
@@ -14,12 +15,6 @@ namespace SpaceShooter.Game.SceneManagementSceneManagement
             Container
                 .Bind<GameSceneManager>()
                 .AsSingle()
-                .NonLazy();
-
-            Container
-                .BindInterfacesTo<LevelProvider>()
-                .AsSingle()
-                .WithArguments(initialLevel)
                 .NonLazy();
 
             Container
@@ -31,6 +26,15 @@ namespace SpaceShooter.Game.SceneManagementSceneManagement
             Container
                 .Bind<DebugSceneManager>()
                 .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<LevelConfigListData>()
+                .FromInstance(levelsConfiguration.GetData())
+                .AsSingle();
+
+            Container
+                .Bind<LevelManager>()
                 .AsSingle();
         }
     }
