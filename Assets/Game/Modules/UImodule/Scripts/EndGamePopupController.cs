@@ -1,27 +1,31 @@
 ﻿using System;
 using Game.Modules.Scores;
 using Game.Modules.UImodule;
+using SpaceShooter.Game.Level;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.SceneManagement;
 using Zenject;
 
 namespace Game.Modules.MainMenu.Scripts
 {
-    public sealed class EndGamePopupController : IInitializable, IDisposable, IGameStartListener, IGameFinishListener
+    public sealed class EndGamePopupController : IInitializable, IDisposable, IGameFinishListener
     {
         private readonly EndGamePopupView _endGamePopupView;
 
         private readonly GameSceneManager _sceneManager;
         private readonly ScoreManager _scoreManager;
+        private readonly LevelManager _levelManager;
 
         public EndGamePopupController(
             EndGamePopupView endGamePopupView,
             GameSceneManager sceneManager,
-            ScoreManager scoreManager)
+            ScoreManager scoreManager,
+            LevelManager levelManager)
         {
             _endGamePopupView = endGamePopupView;
             _sceneManager = sceneManager;
             _scoreManager = scoreManager;
+            _levelManager = levelManager;
         }
 
         public void Initialize()
@@ -38,15 +42,17 @@ namespace Game.Modules.MainMenu.Scripts
             _endGamePopupView.NextLevelButton.onClick.RemoveListener(NextLevelButtonClicked);
         }
 
-        public void OnGameStart()
-        {
-            _endGamePopupView.SetActive(false);
-        }
-
         public void OnGameFinish()
         {
             UpdateScoreText();
+            UpdateNextLevelButton();
             _endGamePopupView.SetActive(true);
+        }
+
+        private void UpdateNextLevelButton()
+        {
+            var hasNextLevel = _levelManager.HasNextLevel();
+            _endGamePopupView.ToggleNextLevelButton(hasNextLevel);
         }
 
         private void UpdateScoreText()
@@ -67,6 +73,11 @@ namespace Game.Modules.MainMenu.Scripts
 
         private void NextLevelButtonClicked()
         {
+            var nextLevel = _levelManager.NextLevel();
+            if (nextLevel)
+            {
+                _sceneManager.LoadGameScene();
+            }
         }
     }
 }

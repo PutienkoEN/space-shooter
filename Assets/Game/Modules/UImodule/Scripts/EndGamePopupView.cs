@@ -24,5 +24,10 @@ namespace Game.Modules.UImodule
         {
             gameObject.SetActive(value);
         }
+
+        public void ToggleNextLevelButton(bool value)
+        {
+            nextLevelButton.gameObject.SetActive(value);
+        }
     }
 }
