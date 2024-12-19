@@ -35,7 +35,7 @@ namespace Game.Modules.Manager.Scripts
             _mainMenuView.StartButton.onClick.AddListener(HandleStartGameClicked);
             _mainMenuView.ExitButton.onClick.AddListener(HandleQuitGameClicked);
 
-            var shouldToggleContinue = _levelManager.HasPassedLevels();
+            var shouldToggleContinue = _levelManager.HasFinishedLevels();
             _mainMenuView.ToggleContinueButton(shouldToggleContinue);
         }
 

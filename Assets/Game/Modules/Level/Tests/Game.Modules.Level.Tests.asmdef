@@ -1,0 +1,18 @@
+﻿{
+  "name": "Game.Modules.Level.Tests",
+  "references": [
+    "Game.Modules.Level",
+    "Game.Modules.LevelInterfaces"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

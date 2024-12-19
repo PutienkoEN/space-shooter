@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.Modules.Level.Scripts;
+using Game.Modules.Level;
 using Game.Modules.LevelInterfaces.Scripts;
 
 namespace SpaceShooter.Game.Level
@@ -15,16 +15,6 @@ namespace SpaceShooter.Game.Level
             _levelConfigListData = levelConfigListData;
         }
 
-        public void LoadFirstLevel()
-        {
-            _levelData.currentLevel = 0;
-        }
-
-        public void LoadMaxLevel()
-        {
-            _levelData.currentLevel = _levelData.maxReachedLevel;
-        }
-
         public void SetLevelData(LevelData levelData)
         {
             _levelData = levelData;
@@ -35,28 +25,72 @@ namespace SpaceShooter.Game.Level
             return _levelData;
         }
 
-        public void NextLevel()
+        public void LoadFirstLevel()
         {
-            _levelData.currentLevel = GetNextLevel();
+            if (GetLevelsCount() == 0)
+            {
+                throw new ArgumentException("There is no available levels!");
+            }
+
+            _levelData.currentLevel = 0;
         }
 
-        public void FinishCurrentLevel()
+        public void LoadMaxLevel()
         {
-            var nextLevel = GetNextLevel();
-            _levelData.maxReachedLevel = Math.Max(nextLevel, _levelData.maxReachedLevel);
+            _levelData.currentLevel = Math.Min(_levelData.maxReachedLevel, GetLevelsCount());
         }
 
-        private int GetNextLevel()
+        public bool NextLevel()
         {
-            return Math.Min(_levelData.currentLevel + 1, _levelConfigListData.LevelConfigData.Count - 1);
+            if (!TryGetNextLevel(out var nextLevel))
+            {
+                return false;
+            }
+
+            _levelData.currentLevel = nextLevel;
+            return true;
         }
 
         public bool HasNextLevel()
         {
-            return _levelData.currentLevel + 1 < _levelConfigListData.LevelConfigData.Count;
+            return TryGetNextLevel(out _);
         }
 
-        public bool HasPassedLevels()
+        public void FinishCurrentLevel()
+        {
+            var maxLevelReached = GetMaxLevelReached();
+            _levelData.maxReachedLevel = Math.Max(maxLevelReached, _levelData.maxReachedLevel);
+        }
+
+        private int GetMaxLevelReached()
+        {
+            if (TryGetNextLevel(out var nextLevel))
+            {
+                return nextLevel;
+            }
+
+            return _levelData.currentLevel;
+        }
+
+        private bool TryGetNextLevel(out int nextLevel)
+        {
+            var potentiallyNextLevel = _levelData.currentLevel + 1;
+            if (potentiallyNextLevel >= GetLevelsCount())
+            {
+                nextLevel = default;
+                return false;
+            }
+
+            nextLevel = potentiallyNextLevel;
+            return true;
+        }
+
+        private int GetLevelsCount()
+        {
+            return _levelConfigListData.LevelConfigData.Count;
+        }
+
+        public bool HasFinishedLevels()
         {
             return _levelData.maxReachedLevel > 0;
         }

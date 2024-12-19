@@ -85,10 +85,9 @@ namespace Game.Modules.MainMenu.Scripts
         private void NextLevelButtonClicked()
         {
             
-            var nextLevel = _levelManager.HasNextLevel();
+            var nextLevel = _levelManager.NextLevel();
             if (nextLevel)
             {
-                _levelManager.NextLevel();
                 _sceneManager.LoadGameScene();
             }
             else
