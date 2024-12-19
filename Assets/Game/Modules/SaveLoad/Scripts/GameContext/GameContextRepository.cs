@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Game.Modules.SaveLoad
 {
@@ -16,7 +16,7 @@ namespace Game.Modules.SaveLoad
 
         public void SetData<T>(T value)
         {
-            var serializedData = JsonUtility.ToJson(value);
+            var serializedData = JsonConvert.SerializeObject(value);
             _context[typeof(T).Name] = serializedData;
         }
 
@@ -24,7 +24,7 @@ namespace Game.Modules.SaveLoad
         {
             if (_context.TryGetValue(typeof(T).Name, out var serializedData))
             {
-                value = JsonUtility.FromJson<T>(serializedData);
+                value = JsonConvert.DeserializeObject<T>(serializedData);
                 return true;
             }
 
@@ -45,7 +45,7 @@ namespace Game.Modules.SaveLoad
                 return;
             }
 
-            _context = JsonUtility.FromJson<Dictionary<string, string>>(loadedContext);
+            _context = JsonConvert.DeserializeObject<Dictionary<string, string>>(loadedContext);
         }
 
         public void Clear()
@@ -56,7 +56,7 @@ namespace Game.Modules.SaveLoad
 
         private void SaveAsJson(Dictionary<string, string> context)
         {
-            var serializedContext = JsonUtility.ToJson(context);
+            var serializedContext = JsonConvert.SerializeObject(context);
             _persistingStrategy.Save(serializedContext);
         }
     }
