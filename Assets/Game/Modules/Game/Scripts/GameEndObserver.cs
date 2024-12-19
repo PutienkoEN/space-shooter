@@ -3,35 +3,33 @@ using SpaceShooter.Game.Enemy;
 using SpaceShooter.Game.Level;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.Player;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Game
 {
     public class GameEndObserver : IInitializable, IDisposable
     {
-     
         private readonly IGameManager _gameManager;
 
         private readonly LevelEventManager _levelEventManager;
         private readonly IEnemyManager _enemyManager;
         private readonly PlayerManager _playerManager;
 
-        private bool _playerIsDead;
-        private bool _enemiesExist;
-        private bool _levelEventsExists;
+        private LevelProgressContext _levelProgressContext;
 
         [Inject]
         public GameEndObserver(
             IGameManager gameManager,
             LevelEventManager levelEventManager,
             IEnemyManager enemyManager,
-            PlayerManager playerManager)
+            PlayerManager playerManager,
+            LevelProgressContext levelProgressContext)
         {
             _gameManager = gameManager;
             _levelEventManager = levelEventManager;
             _enemyManager = enemyManager;
             _playerManager = playerManager;
+            _levelProgressContext = levelProgressContext;
         }
 
         public void Initialize()
@@ -50,49 +48,28 @@ namespace Game.Modules.Game
 
         private void CheckGameEndOnEnemyChange(bool enemiesExist)
         {
-            _enemiesExist = enemiesExist;
+            _levelProgressContext.EnemiesExist = enemiesExist;
             CheckGameEnd();
         }
 
         private void CheckGameEndOnLevelEventChange(bool levelEventsExist)
         {
-            _levelEventsExists = levelEventsExist;
+            _levelProgressContext.LevelEventsExists = levelEventsExist;
             CheckGameEnd();
         }
 
         private void CheckGameEndPlayerDead()
         {
-            _playerIsDead = true;
+            _levelProgressContext.PlayerIsDead = true;
             CheckGameEnd();
         }
 
         private void CheckGameEnd()
         {
-            var shouldStopGame = ShouldStopGame();
-            if (shouldStopGame)
+            if (_levelProgressContext.IsLevelFinished())
             {
                 _gameManager.FinishGame();
             }
-        }
-
-        private bool ShouldStopGame()
-        {
-            if (_playerIsDead)
-            {
-                return true;
-            }
-
-            if (_levelEventsExists)
-            {
-                return false;
-            }
-
-            if (_enemiesExist)
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }

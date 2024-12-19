@@ -1,7 +1,6 @@
 ﻿using System;
 using Game.Modules.GameSpeed;
 using SpaceShooter.Game.LifeCycle.Common;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.Game
@@ -13,7 +12,7 @@ namespace Game.Modules.Game
 
         [Inject]
         public PauseGameFinishListener(
-            IGameSpeedManager gameSpeedManager, 
+            IGameSpeedManager gameSpeedManager,
             IGameTimeScaleManager gameTimeScaleManager)
         {
             _gameSpeedManager = gameSpeedManager;

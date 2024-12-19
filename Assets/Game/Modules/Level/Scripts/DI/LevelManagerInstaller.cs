@@ -1,4 +1,5 @@
-﻿using SpaceShooter.Game.Level.Events;
+﻿using Game.Modules.Game;
+using SpaceShooter.Game.Level.Events;
 using SpaceShooter.Game.LifeCycle.Common;
 using Zenject;
 
@@ -26,6 +27,10 @@ namespace SpaceShooter.Game.Level
                 .BindInterfacesAndSelfTo<LevelGameStartListener>()
                 .AsSingle()
                 .NonLazy();
+
+            container
+                .Bind<LevelProgressContext>()
+                .AsSingle();
         }
     }
 }

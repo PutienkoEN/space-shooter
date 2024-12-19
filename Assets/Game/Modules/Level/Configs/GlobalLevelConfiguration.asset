@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c8eea45c2f342df8c35586ab9e37461, type: 3}
-  m_Name: 0. Empy Level
+  m_Script: {fileID: 11500000, guid: df25e4e8ac604c6e92a59d512181c926, type: 3}
+  m_Name: GlobalLevelConfiguration
   m_EditorClassIdentifier: 
-  gameLeveEvents: []
-  references:
-    version: 2
-    RefIds: []
+  levelConfigs:
+  - {fileID: 11400000, guid: a1bcbc7f1fd7ad146a5cf213378cadf6, type: 2}
+  - {fileID: 11400000, guid: 83217151ec463b84bae73d4e99acf244, type: 2}
