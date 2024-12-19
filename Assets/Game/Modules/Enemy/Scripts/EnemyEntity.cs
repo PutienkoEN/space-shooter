@@ -45,8 +45,9 @@ namespace SpaceShooter.Game.Enemy
 
         public void Update(float deltaTime)
         {
-            if (_isActive)
+            if (!_isActive)
             {
+                return;
             }
 
             _boundsCheckComponent.IsInGame(
