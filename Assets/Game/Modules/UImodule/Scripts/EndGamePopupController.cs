@@ -5,6 +5,7 @@ using Game.Modules.UImodule;
 using SpaceShooter.Game.Level;
 using SpaceShooter.Game.LifeCycle.Common;
 using SpaceShooter.Game.SceneManagement;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Modules.MainMenu.Scripts
@@ -83,10 +84,15 @@ namespace Game.Modules.MainMenu.Scripts
 
         private void NextLevelButtonClicked()
         {
+            
             var nextLevel = _levelManager.NextLevel();
             if (nextLevel)
             {
                 _sceneManager.LoadGameScene();
+            }
+            else
+            {
+                Debug.LogWarning("There is no next level.");
             }
         }
     }

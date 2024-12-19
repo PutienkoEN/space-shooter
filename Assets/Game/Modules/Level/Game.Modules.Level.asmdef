@@ -9,7 +9,8 @@
     "Game.Modules.LevelInterfaces",
     "Unity.Splines",
     "Game.Modules.Common",
-    "Game.Modules.PickupModule"
+    "Game.Modules.PickupModule",
+    "Game.Modules.SaveLoad"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

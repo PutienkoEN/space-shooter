@@ -1,0 +1,7 @@
+﻿{
+  "name": "Game.Modules.SaveLoad",
+  "references": [
+    "Zenject",
+    "Game.LifeCycle.Common"
+  ]
+}
