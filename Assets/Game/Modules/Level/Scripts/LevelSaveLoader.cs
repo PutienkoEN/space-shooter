@@ -1,4 +1,5 @@
-﻿using Game.Modules.SaveLoad;
+﻿using Game.Modules.Level.Scripts;
+using Game.Modules.SaveLoad;
 using SpaceShooter.Game.Level;
 using UnityEngine;
 
@@ -15,20 +16,18 @@ namespace Game.Modules.Level
 
         protected override LevelData GetDataToSave()
         {
-            return new LevelData()
-            {
-                MaxLevel = 0
-            };
+            return _levelManager.GetLevelData();
         }
 
-        protected override void HandleDataLoad(LevelData savedData)
+        protected override void HandleDataLoad(LevelData levelData)
         {
-            Debug.Log("Loading save data");
+            _levelManager.SetLevelData(levelData);
         }
-    }
 
-    public class LevelData
-    {
-        public int MaxLevel { get; set; }
+        protected override void HandleDataLoadMissing()
+        {
+            Debug.LogWarning("There is no saved level data, creating new one.");
+            _levelManager.SetLevelData(new LevelData());
+        }
     }
 }

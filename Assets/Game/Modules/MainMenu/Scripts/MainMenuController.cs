@@ -35,7 +35,7 @@ namespace Game.Modules.Manager.Scripts
             _mainMenuView.StartButton.onClick.AddListener(HandleStartGameClicked);
             _mainMenuView.ExitButton.onClick.AddListener(HandleQuitGameClicked);
 
-            var shouldToggleContinue = !_levelManager.IsFirstLevel();
+            var shouldToggleContinue = _levelManager.HasPassedLevels();
             _mainMenuView.ToggleContinueButton(shouldToggleContinue);
         }
 
@@ -48,12 +48,13 @@ namespace Game.Modules.Manager.Scripts
 
         private void HandleContinueButtonClicked()
         {
+            _levelManager.LoadMaxLevel();
             DelaySceneLoad().Forget();
         }
 
         private void HandleStartGameClicked()
         {
-            _levelManager.FirstLevel();
+            _levelManager.LoadFirstLevel();
             DelaySceneLoad().Forget();
         }
 

@@ -34,18 +34,30 @@ namespace Game.Modules.SaveLoad
 
         public void Save()
         {
-            var serializedContext = JsonUtility.ToJson(_context);
-            _persistingStrategy.Save(serializedContext);
+            SaveAsJson(_context);
         }
 
         public void Load()
         {
             if (!_persistingStrategy.TryLoad(out var loadedContext))
             {
+                Clear();
                 return;
             }
 
             _context = JsonUtility.FromJson<Dictionary<string, string>>(loadedContext);
+        }
+
+        public void Clear()
+        {
+            var emptyContext = new Dictionary<string, string>();
+            SaveAsJson(emptyContext);
+        }
+
+        private void SaveAsJson(Dictionary<string, string> context)
+        {
+            var serializedContext = JsonUtility.ToJson(context);
+            _persistingStrategy.Save(serializedContext);
         }
     }
 }

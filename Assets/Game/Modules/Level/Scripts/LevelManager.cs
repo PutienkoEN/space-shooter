@@ -1,48 +1,69 @@
-﻿using Game.Modules.LevelInterfaces.Scripts;
-using UnityEngine;
+﻿using System;
+using Game.Modules.Level.Scripts;
+using Game.Modules.LevelInterfaces.Scripts;
 
 namespace SpaceShooter.Game.Level
 {
     public class LevelManager
     {
         private readonly LevelConfigListData _levelConfigListData;
-        private int _currentLevel;
+
+        private LevelData _levelData;
 
         public LevelManager(LevelConfigListData levelConfigListData)
         {
             _levelConfigListData = levelConfigListData;
         }
 
-        public bool IsFirstLevel()
+        public void LoadFirstLevel()
         {
-            return _currentLevel == 0;
+            _levelData.currentLevel = 0;
         }
 
-        public void FirstLevel()
+        public void LoadMaxLevel()
         {
-            _currentLevel = 0;
+            _levelData.currentLevel = _levelData.maxReachedLevel;
         }
 
-        public bool NextLevel()
+        public void SetLevelData(LevelData levelData)
         {
-            if (HasNextLevel())
-            {
-                _currentLevel++;
-                return true;
-            }
+            _levelData = levelData;
+        }
 
-            Debug.LogWarning("Can't next level because there is no more levels in the list");
-            return false;
+        public LevelData GetLevelData()
+        {
+            return _levelData;
+        }
+
+        public void NextLevel()
+        {
+            _levelData.currentLevel = GetNextLevel();
+        }
+
+        public void FinishCurrentLevel()
+        {
+            var nextLevel = GetNextLevel();
+            _levelData.maxReachedLevel = Math.Max(nextLevel, _levelData.maxReachedLevel);
+        }
+
+        private int GetNextLevel()
+        {
+            return Math.Min(_levelData.currentLevel + 1, _levelConfigListData.LevelConfigData.Count - 1);
         }
 
         public bool HasNextLevel()
         {
-            return _currentLevel + 1 < _levelConfigListData.LevelConfigData.Count;
+            return _levelData.currentLevel + 1 < _levelConfigListData.LevelConfigData.Count;
         }
 
-        public ILevelData GetLevel()
+        public bool HasPassedLevels()
         {
-            return _levelConfigListData.LevelConfigData[_currentLevel];
+            return _levelData.maxReachedLevel > 0;
+        }
+
+        public ILevelConfigData GetLevelConfig()
+        {
+            return _levelConfigListData.LevelConfigData[_levelData.currentLevel];
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Game.Modules.SaveLoad
         public void Save(string data)
         {
             PlayerPrefs.SetString(GameContextKey, data);
+            PlayerPrefs.Save();
         }
 
         public bool TryLoad(out string data)

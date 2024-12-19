@@ -13,18 +13,18 @@ namespace SpaceShooter.Game.Level
     {
         [SerializeReference] private List<ILevelEventConfig<ILevelEventData>> gameLeveEvents = new();
 
-        public ILevelData GetData()
+        public ILevelConfigData GetData()
         {
             var gameEvents = gameLeveEvents.ConvertAll(gameEvent => gameEvent.GetData());
-            return new LevelData(gameEvents);
+            return new LevelConfigConfigData(gameEvents);
         }
     }
 
-    public class LevelData : ILevelData
+    public class LevelConfigConfigData : ILevelConfigData
     {
         public List<ILevelEventData> GameLevelEvents { get; }
 
-        public LevelData(List<ILevelEventData> gameLevelEvents)
+        public LevelConfigConfigData(List<ILevelEventData> gameLevelEvents)
         {
             GameLevelEvents = gameLevelEvents;
         }

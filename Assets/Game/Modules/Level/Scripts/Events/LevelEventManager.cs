@@ -24,9 +24,9 @@ namespace SpaceShooter.Game.Level
             _levelEventResolver = levelEventResolver;
         }
 
-        public async void StartLevel(ILevelData levelData)
+        public async void StartLevel(ILevelConfigData levelConfigData)
         {
-            var gameEventHandlers = GetHandlers(levelData.GameLevelEvents);
+            var gameEventHandlers = GetHandlers(levelConfigData.GameLevelEvents);
 
             var hasEvents = !gameEventHandlers.IsEmpty();
             OnLevelEventChange?.Invoke(hasEvents);

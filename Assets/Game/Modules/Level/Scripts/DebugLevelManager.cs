@@ -65,7 +65,7 @@ namespace SpaceShooter.Game.Level
         [Button]
         public void StartCurrentLevel()
         {
-            var levelConfig = _levelManager.GetLevel();
+            var levelConfig = _levelManager.GetLevelConfig();
             _levelEventManager.StartLevel(levelConfig);
         }
 

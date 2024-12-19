@@ -49,7 +49,7 @@ namespace SpaceShooter.Game.SceneManagementSceneManagement
                 .BindInterfacesTo<LevelSaveLoader>()
                 .AsSingle();
             
-            SaveLoadManagerInstaller.Install(Container, encryptionKey);
+            SaveLoadInstaller.Install(Container, encryptionKey);
         }
     }
 }

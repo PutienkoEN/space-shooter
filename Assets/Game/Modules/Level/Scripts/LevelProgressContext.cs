@@ -39,11 +39,6 @@
             return _levelProgressState == LevelProgressState.Success;
         }
 
-        public bool IsLevelFailed()
-        {
-            return _levelProgressState == LevelProgressState.Failed;
-        }
-
         public bool IsLevelFinished()
         {
             return _levelProgressState != LevelProgressState.InProgress;

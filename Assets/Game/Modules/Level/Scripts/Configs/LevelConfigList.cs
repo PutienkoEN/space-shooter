@@ -24,9 +24,9 @@ namespace SpaceShooter.Game.Level
 
     public struct LevelConfigListData
     {
-        public List<ILevelData> LevelConfigData { get; private set; }
+        public List<ILevelConfigData> LevelConfigData { get; private set; }
 
-        public LevelConfigListData(List<ILevelData> levelConfigData)
+        public LevelConfigListData(List<ILevelConfigData> levelConfigData)
         {
             LevelConfigData = levelConfigData;
         }
