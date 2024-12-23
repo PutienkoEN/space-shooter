@@ -1,4 +1,6 @@
-﻿using SpaceShooter.Game.Level;
+﻿using Game.Modules.Level;
+using Game.Modules.SaveLoad;
+using SpaceShooter.Game.Level;
 using SpaceShooter.Game.SceneManagement;
 using UnityEngine;
 using Zenject;
@@ -9,6 +11,7 @@ namespace SpaceShooter.Game.SceneManagementSceneManagement
     {
         [SerializeField] private LevelConfigList levelsConfiguration;
         [SerializeField] private bool enableAutonomousGameScene;
+        [SerializeField] private string encryptionKey;
 
         public override void InstallBindings()
         {
@@ -36,6 +39,17 @@ namespace SpaceShooter.Game.SceneManagementSceneManagement
             Container
                 .Bind<LevelManager>()
                 .AsSingle();
+
+            SaveLoadConfiguration();
+        }
+
+        private void SaveLoadConfiguration()
+        {
+            Container
+                .BindInterfacesTo<LevelSaveLoader>()
+                .AsSingle();
+            
+            SaveLoadInstaller.Install(Container, encryptionKey);
         }
     }
 }

@@ -1,48 +1,103 @@
-﻿using Game.Modules.LevelInterfaces.Scripts;
-using UnityEngine;
+﻿using System;
+using Game.Modules.Level;
+using Game.Modules.LevelInterfaces.Scripts;
 
 namespace SpaceShooter.Game.Level
 {
     public class LevelManager
     {
         private readonly LevelConfigListData _levelConfigListData;
-        private int _currentLevel;
+
+        private LevelData _levelData;
 
         public LevelManager(LevelConfigListData levelConfigListData)
         {
             _levelConfigListData = levelConfigListData;
         }
 
-        public bool IsFirstLevel()
+        public void SetLevelData(LevelData levelData)
         {
-            return _currentLevel == 0;
+            _levelData = levelData;
         }
 
-        public void FirstLevel()
+        public LevelData GetLevelData()
         {
-            _currentLevel = 0;
+            return _levelData;
+        }
+
+        public void LoadFirstLevel()
+        {
+            if (GetLevelsCount() == 0)
+            {
+                throw new ArgumentException("There is no available levels!");
+            }
+
+            _levelData.currentLevel = 0;
+        }
+
+        public void LoadMaxLevel()
+        {
+            _levelData.currentLevel = Math.Min(_levelData.maxReachedLevel, GetLevelsCount());
         }
 
         public bool NextLevel()
         {
-            if (HasNextLevel())
+            if (!TryGetNextLevel(out var nextLevel))
             {
-                _currentLevel++;
-                return true;
+                return false;
             }
 
-            Debug.LogWarning("Can't next level because there is no more levels in the list");
-            return false;
+            _levelData.currentLevel = nextLevel;
+            return true;
         }
 
         public bool HasNextLevel()
         {
-            return _currentLevel + 1 < _levelConfigListData.LevelConfigData.Count;
+            return TryGetNextLevel(out _);
         }
 
-        public ILevelData GetLevel()
+        public void FinishCurrentLevel()
         {
-            return _levelConfigListData.LevelConfigData[_currentLevel];
+            var maxLevelReached = GetMaxLevelReached();
+            _levelData.maxReachedLevel = Math.Max(maxLevelReached, _levelData.maxReachedLevel);
+        }
+
+        private int GetMaxLevelReached()
+        {
+            if (TryGetNextLevel(out var nextLevel))
+            {
+                return nextLevel;
+            }
+
+            return _levelData.currentLevel;
+        }
+
+        private bool TryGetNextLevel(out int nextLevel)
+        {
+            var potentiallyNextLevel = _levelData.currentLevel + 1;
+            if (potentiallyNextLevel >= GetLevelsCount())
+            {
+                nextLevel = default;
+                return false;
+            }
+
+            nextLevel = potentiallyNextLevel;
+            return true;
+        }
+
+        private int GetLevelsCount()
+        {
+            return _levelConfigListData.LevelConfigData.Count;
+        }
+
+        public bool HasFinishedLevels()
+        {
+            return _levelData.maxReachedLevel > 0;
+        }
+
+        public ILevelConfigData GetLevelConfig()
+        {
+            return _levelConfigListData.LevelConfigData[_levelData.currentLevel];
         }
     }
 }
